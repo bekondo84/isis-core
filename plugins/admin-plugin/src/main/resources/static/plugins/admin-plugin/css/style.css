@@ -1,0 +1,46 @@
+/* Style de test pour le plugin Admin */
+body {
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+}
+
+.card-plugin {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid #2ca58d; /* Ligne verte distinctive */
+}
+
+.titre-plugin {
+    color: #0a2342;
+    margin-bottom: 15px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #2ca58d;
+    color: white;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+#btn-test {
+    background-color: #0a2342;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+#btn-test:hover {
+    background-color: #1d3f66;
+}

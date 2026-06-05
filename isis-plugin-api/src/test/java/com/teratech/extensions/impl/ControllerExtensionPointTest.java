@@ -8,13 +8,11 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class RestExtensionPointTest extends AbstractRestExtensionPoint{
+public class ControllerExtensionPointTest extends AbstractControllerExtensionPoint {
 
     private JAXBService jaxbService;
     private ApplicationContext context ;

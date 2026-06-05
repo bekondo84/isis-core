@@ -1,6 +1,6 @@
 package com.teratech.isis.config;
 
-import com.teratech.extensions.RestExtensionPoint;
+import com.teratech.extensions.ControllerExtensionPoint;
 import com.teratech.isis.utils.Utils;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
@@ -13,14 +13,14 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 @Component
-public class PluginControllerManager {
+public class RestPluginManager {
 
     private final PluginManager pluginManager;
     private final RequestMappingHandlerMapping requestMappingHandlerMapping;
 
 
     @Autowired
-    public PluginControllerManager(PluginManager pluginManager, RequestMappingHandlerMapping handlerMapping) {
+    public RestPluginManager(PluginManager pluginManager, RequestMappingHandlerMapping handlerMapping) {
         this.pluginManager = pluginManager;
         this.requestMappingHandlerMapping = handlerMapping;
     }
@@ -31,10 +31,10 @@ public class PluginControllerManager {
         List<PluginWrapper> plugins = pluginManager.getPlugins();
 
         for (PluginWrapper wrapper : plugins) {
-            List<RestExtensionPoint> extensions =  pluginManager.getExtensions(RestExtensionPoint.class, wrapper.getPluginId());
+            List<ControllerExtensionPoint> extensions =  pluginManager.getExtensions(ControllerExtensionPoint.class, wrapper.getPluginId());
             System.out.println("[Core-Web] Recherche de contrôleurs REST dans les plugins... Trouvé(s) : " + extensions.size()+"    "+wrapper.getPluginId());
 
-            for (RestExtensionPoint extension : extensions) {
+            for (ControllerExtensionPoint extension : extensions) {
                 registerExtensionController(extension, wrapper);
             }
         }
@@ -46,9 +46,9 @@ public class PluginControllerManager {
      * @param extension
      * @throws JAXBException
      */
-    private void registerExtensionController(RestExtensionPoint extension, PluginWrapper wrapper) throws JAXBException {
-        System.out.println("-----registerExtensionController -----------------");
+    private void registerExtensionController(ControllerExtensionPoint extension, PluginWrapper wrapper) throws JAXBException {
         List controllers = extension.getRestController(wrapper);
+        System.out.println("-----registerExtensionController ----------------- : "+controllers.size()+" ---- "+controllers);
 
         for (Object controller: controllers) {
             Class<?> beanType = controller.getClass();

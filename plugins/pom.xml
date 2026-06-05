@@ -13,7 +13,7 @@
     <name>plugins</name>
     <url>http://maven.apache.org</url>
     <modules>
-        <module>plugins-extension</module>
+        <module>admin-plugin</module>
     </modules>
 
     <properties>

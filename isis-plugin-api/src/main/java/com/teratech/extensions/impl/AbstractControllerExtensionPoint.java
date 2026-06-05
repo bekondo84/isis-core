@@ -1,20 +1,19 @@
 package com.teratech.extensions.impl;
 
-import com.teratech.extensions.RestExtensionPoint;
+import com.teratech.extensions.ControllerExtensionPoint;
 import com.teratech.jaxb.controller.Controllers;
 import com.teratech.services.JAXBService;
 import com.teratech.services.impl.JAXBServiceImpl;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginWrapper;
 import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public abstract class AbstractRestExtensionPoint implements RestExtensionPoint {
+public abstract class AbstractControllerExtensionPoint implements ControllerExtensionPoint {
 
     private JAXBService jaxbService;
 
@@ -22,7 +21,7 @@ public abstract class AbstractRestExtensionPoint implements RestExtensionPoint {
     /**
      *
      */
-    public AbstractRestExtensionPoint() {
+    public AbstractControllerExtensionPoint() {
         jaxbService = new JAXBServiceImpl();
     }
 
@@ -30,7 +29,7 @@ public abstract class AbstractRestExtensionPoint implements RestExtensionPoint {
      *
      * @param jaxbService
      */
-    public AbstractRestExtensionPoint(JAXBService jaxbService) {
+    public AbstractControllerExtensionPoint(JAXBService jaxbService) {
         this.jaxbService = jaxbService;
     }
 
@@ -67,7 +66,7 @@ public abstract class AbstractRestExtensionPoint implements RestExtensionPoint {
     public List getRestController(PluginWrapper wrapper) throws JAXBException {
         //Get Controller declares
         Controllers controllers = jaxbService.getControllerFromResources(wrapper);
-        System.out.println("-----getRestController -----------------");
+        System.out.println("-----getRestController ----------------- : "+controllers.getController().size());
         return controllers.getController().stream().map(ctr -> {
                     Object bean = null ;
                     try {
@@ -80,7 +79,8 @@ public abstract class AbstractRestExtensionPoint implements RestExtensionPoint {
                     }
                     return bean;
                 }).filter(Objects::nonNull)
-                .filter(bean -> bean.getClass().isAnnotationPresent(RestController.class)).collect(Collectors.toList());
+                /*.filter(bean -> bean.getClass().isAnnotationPresent(RestController.class) || bean.getClass().isAnnotationPresent(CON.class))*/
+                .collect(Collectors.toList());
     }
 
     /**

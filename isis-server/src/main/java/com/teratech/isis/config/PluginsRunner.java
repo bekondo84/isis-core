@@ -9,11 +9,12 @@ import org.springframework.context.annotation.Configuration;
 public class PluginsRunner implements CommandLineRunner {
 
     private final PluginManager pluginManager;
-    private final PluginControllerManager pluginControllerManager;
-
-    public PluginsRunner(PluginManager pluginManager, PluginControllerManager pluginControllerManager) {
+    private final RestPluginManager restPluginManager;
+    private final org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping requestMappingHandlerMapping;
+    public PluginsRunner(PluginManager pluginManager, RestPluginManager restPluginManager, org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping requestMappingHandlerMapping) {
         this.pluginManager = pluginManager;
-        this.pluginControllerManager = pluginControllerManager;
+        this.restPluginManager = restPluginManager;
+        this.requestMappingHandlerMapping = requestMappingHandlerMapping;
     }
 
 
@@ -25,6 +26,13 @@ public class PluginsRunner implements CommandLineRunner {
           pluginManager.loadPlugins();
           pluginManager.startPlugins();
         // /!\ AJOUT : Enregistrement des endpoints HTTP des plugins
-        pluginControllerManager.registerPluginControllers();
+        restPluginManager.registerPluginControllers();
+
+        // 2. LE TEST : Affichage de TOUTES les routes connues par Spring
+        System.out.println("\n========== [DIAGNOSTIC : CATALOGUE DES ROUTES SPRING] ==========");
+        requestMappingHandlerMapping.getHandlerMethods().forEach((key, value) -> {
+            System.out.println("[Route Active] -> " + key + " | Associée au composant : " + value.getShortLogMessage());
+        });
+        System.out.println("=================================================================\n");
     }
 }

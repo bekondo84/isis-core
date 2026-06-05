@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Test - Plugin</title>
+
+    <link rel="stylesheet" th:href="@{/plugins-assets/admin-plugin/css/style.css}">
+</head>
+<body>
+
+<div class="card-plugin">
+    <h1 class="titre-plugin">Interface de Test Modulaire</h1>
+    <p class="status-badge">Plugin ID : Admin-Plugin (Actif)</p>
+
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
+    <p>Message du Core : <strong th:text="${message}">Texte de secours si Java échoue</strong></p>
+
+    <p>Si la page a un fond gris clair, un encadré blanc et une ligne supérieure verte, c'est que le <strong>CSS est chargé</strong> !</p>
+
+    <button id="btn-test">Tester le JavaScript</button>
+</div>
+
+<script th:src="@{/plugins-assets/admin-plugin/js/main.js}"></script>
+</body>
+</html>

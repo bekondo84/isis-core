@@ -7,10 +7,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>plugins-extension</artifactId>
+    <artifactId>admin-plugin</artifactId>
     <packaging>jar</packaging>
 
-    <name>plugins-extension</name>
+    <name>admin-plugin</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -101,7 +101,7 @@
                 </executions>
             </plugin>
         </plugins>-->
-        <finalName>plugins-extensions</finalName>
+        <finalName>admin-plugin</finalName>
     </build>
 
 </project>

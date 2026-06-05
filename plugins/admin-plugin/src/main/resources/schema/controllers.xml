@@ -4,5 +4,6 @@
              xsi:schemaLocation="http://www.isis.cm/config/controllers controllers.xsd">
 
     <controller name="com.teratech.controller.HelloController"/>
+    <controller name="com.teratech.controller.WelcomeUiController"/>
 
 </controllers>

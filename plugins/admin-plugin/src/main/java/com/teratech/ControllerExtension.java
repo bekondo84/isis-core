@@ -1,13 +1,13 @@
 package com.teratech;
 
-import com.teratech.extensions.impl.AbstractRestExtensionPoint;
+import com.teratech.extensions.impl.AbstractControllerExtensionPoint;
 import org.pf4j.Extension;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 @Extension
-public class RestExtension extends AbstractRestExtensionPoint {
+public class ControllerExtension extends AbstractControllerExtensionPoint {
 
 
 
@@ -17,7 +17,7 @@ public class RestExtension extends AbstractRestExtensionPoint {
      *
      * @param applicationContext
      */
-    public RestExtension(ApplicationContext applicationContext) {
+    public ControllerExtension(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
