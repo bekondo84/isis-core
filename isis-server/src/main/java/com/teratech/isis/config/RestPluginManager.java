@@ -32,7 +32,7 @@ public class RestPluginManager {
 
         for (PluginWrapper wrapper : plugins) {
             List<ControllerExtensionPoint> extensions =  pluginManager.getExtensions(ControllerExtensionPoint.class, wrapper.getPluginId());
-            System.out.println("[Core-Web] Recherche de contrôleurs REST dans les plugins... Trouvé(s) : " + extensions.size()+"    "+wrapper.getPluginId());
+            //System.out.println("[Core-Web] Recherche de contrôleurs REST dans les plugins... Trouvé(s) : " + extensions.size()+"    "+wrapper.getPluginId());
 
             for (ControllerExtensionPoint extension : extensions) {
                 registerExtensionController(extension, wrapper);
@@ -48,7 +48,6 @@ public class RestPluginManager {
      */
     private void registerExtensionController(ControllerExtensionPoint extension, PluginWrapper wrapper) throws JAXBException {
         List controllers = extension.getRestController(wrapper);
-        System.out.println("-----registerExtensionController ----------------- : "+controllers.size()+" ---- "+controllers);
 
         for (Object controller: controllers) {
             Class<?> beanType = controller.getClass();
@@ -63,12 +62,12 @@ public class RestPluginManager {
                 if (mappingInfo != null) {
                     // 3. Injection dynamique de la route dans le routeur de Spring Boot
                     requestMappingHandlerMapping.registerMapping(mappingInfo, controller, method);
-                    System.out.println("[Core-Web] Route enregistrée dynamiquement : " + mappingInfo);
 
 // LIGNE DE TEST : Affiche toutes les routes actuellement connues par le routeur de Spring
+                    /**
                     this.requestMappingHandlerMapping.getHandlerMethods().forEach((key, value) -> {
                         System.out.println("[Routeur Verif] " + key + " -> " + value);
-                    });
+                    }); **/
                 }
             }
         }

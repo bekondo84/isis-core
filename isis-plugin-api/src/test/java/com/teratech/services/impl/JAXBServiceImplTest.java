@@ -1,12 +1,9 @@
 package com.teratech.services.impl;
 
-import com.teratech.jaxb.controller.Controllers;
+import com.teratech.jaxb.entities.Controllers;
 import com.teratech.services.JAXBService;
 import jakarta.xml.bind.JAXBException;
 import junit.framework.TestCase;
-
-import java.io.InputStream;
-import java.util.Objects;
 
 public class JAXBServiceImplTest extends TestCase {
 

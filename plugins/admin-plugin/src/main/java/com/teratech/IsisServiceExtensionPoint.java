@@ -1,24 +1,18 @@
 package com.teratech;
 
-import com.teratech.extensions.impl.AbstractControllerExtensionPoint;
+import com.teratech.extensions.ServiceExtensionPoint;
 import org.pf4j.Extension;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-@Component
 @Extension
-public class ControllerExtension extends AbstractControllerExtensionPoint {
+@Component
+public class IsisServiceExtensionPoint implements ServiceExtensionPoint {
 
+    private final ApplicationContext context;
 
-
-    private final ApplicationContext applicationContext;
-
-    /**
-     *
-     * @param applicationContext
-     */
-    public ControllerExtension(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
+    public IsisServiceExtensionPoint(ApplicationContext context) {
+        this.context = context;
     }
 
     /**
@@ -36,6 +30,6 @@ public class ControllerExtension extends AbstractControllerExtensionPoint {
      */
     @Override
     public ApplicationContext getContext() {
-        return applicationContext;
+        return context;
     }
 }

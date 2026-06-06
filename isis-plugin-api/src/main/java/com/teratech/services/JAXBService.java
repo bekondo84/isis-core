@@ -1,17 +1,28 @@
 package com.teratech.services;
 
-import com.teratech.jaxb.controller.Controllers;
+import com.teratech.jaxb.entities.Controllers;
+import com.teratech.jaxb.entities.Services;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.pf4j.PluginWrapper;
 
-import java.io.File;
 import java.io.InputStream;
 
 public interface JAXBService {
 
     String SCHEMA_CONTROLLERS_XML = "schema/controllers.xml";
+    String SCHEMA_SERVICES_XML = "schema/services.xml";
+
+    default Services getServiceFromResources(PluginWrapper wrapper) throws JAXBException {
+        ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
+        InputStream inputStream = pluginClassLoader.getResourceAsStream(SCHEMA_SERVICES_XML);
+        //System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
+        JAXBContext context = JAXBContext.newInstance(Services.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Services services = (Services) unmarshaller.unmarshal(inputStream);
+        return services;
+    }
 
     default Controllers getControllerFromResources(PluginWrapper wrapper) throws JAXBException {
         ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();

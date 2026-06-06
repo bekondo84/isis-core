@@ -2,6 +2,7 @@ package com.teratech.isis.config;
 
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -15,9 +16,16 @@ import java.io.IOException;
 public class PluginStaticResourceConfig implements WebMvcConfigurer {
 
     private final PluginManager pluginManager;
+    private final Logger logger;
 
-    public PluginStaticResourceConfig(PluginManager pluginManager) {
+    /**
+     *
+     * @param pluginManager
+     * @param logger
+     */
+    public PluginStaticResourceConfig(PluginManager pluginManager, Logger logger) {
         this.pluginManager = pluginManager;
+        this.logger = logger;
     }
 
     @Override
@@ -57,6 +65,6 @@ public class PluginStaticResourceConfig implements WebMvcConfigurer {
                     }
                 });
 
-        System.out.println("[Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.");
+        logger.info("[Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.");
     }
 }

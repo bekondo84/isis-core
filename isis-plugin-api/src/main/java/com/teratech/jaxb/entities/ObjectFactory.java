@@ -2,11 +2,11 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.05.29 à 12:19:36 PM WAT 
+// Généré le : 2026.06.05 à 09:28:58 PM WAT 
 //
 
 
-package com.teratech.jaxb.controller;
+package com.teratech.jaxb.entities;
 
 import jakarta.xml.bind.annotation.XmlRegistry;
 
@@ -45,11 +45,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Services }
+     * 
+     */
+    public Services createServices() {
+        return new Services();
+    }
+
+    /**
      * Create an instance of {@link Controllers.Controller }
      * 
      */
     public Controllers.Controller createControllersController() {
         return new Controllers.Controller();
+    }
+
+    /**
+     * Create an instance of {@link Services.Service }
+     * 
+     */
+    public Services.Service createServicesService() {
+        return new Services.Service();
     }
 
 }

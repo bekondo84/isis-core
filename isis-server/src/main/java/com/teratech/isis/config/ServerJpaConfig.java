@@ -45,7 +45,7 @@ public class ServerJpaConfig {
         for (PluginWrapper wrapper : pluginManager.getPlugins()) {
             final String pluginPackage = wrapper.getPlugin().getClass().getPackageName();
             packagesToScan.add(pluginPackage);
-            LOG.info(String.format("[ISIS-SERVER] Le package %s enregistré pour le plugin %s", pluginPackage, wrapper.getPluginId()));
+            //LOG.info(String.format("[ISIS-SERVER] Le package %s enregistré pour le plugin %s", pluginPackage, wrapper.getPluginId()));
         }
         entityManagerFactoryBean.setPackagesToScan(packagesToScan.toArray(new String[0]));
 

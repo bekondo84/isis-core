@@ -3,10 +3,12 @@ package com.teratech.isis.utils;
 import org.pf4j.PluginWrapper;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 public class Utils {
 
@@ -38,7 +40,8 @@ public class Utils {
 
         // 5. CRUCIAL : Injection du Plugin ID comme préfixe global de la route
         // On s'assure que le préfixe ressemble à "/pluginId"
-        String prefix = "/api/" + wrapper.getPluginId().toLowerCase().trim();
+        String prefix = isRestController(beanType)  ? "/api/" + wrapper.getPluginId().toLowerCase().trim() : "/"+wrapper.getPluginId().toLowerCase().trim();
+
 
         finalInfo = RequestMappingInfo.paths(prefix)
                 .options(mapping.getBuilderConfiguration())
@@ -49,4 +52,12 @@ public class Utils {
         //return builder.build();
     }
 
+    /**
+     * Check if BeanType is a rest controller
+     * @param beanType
+     * @return
+     */
+    private static boolean isRestController (Class<?> beanType) {
+        return Objects.nonNull(beanType) && beanType.isAnnotationPresent(RestController.class);
+    }
 }

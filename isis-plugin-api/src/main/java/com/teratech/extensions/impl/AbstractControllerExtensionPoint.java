@@ -1,7 +1,7 @@
 package com.teratech.extensions.impl;
 
 import com.teratech.extensions.ControllerExtensionPoint;
-import com.teratech.jaxb.controller.Controllers;
+import com.teratech.jaxb.entities.Controllers;
 import com.teratech.services.JAXBService;
 import com.teratech.services.impl.JAXBServiceImpl;
 import jakarta.xml.bind.JAXBException;
@@ -43,8 +43,7 @@ public abstract class AbstractControllerExtensionPoint implements ControllerExte
 
         //Get Controller declares
         Controllers controllers = jaxbService.getControllerFromResources();
-        System.out.println("-----getRestController -----------------");
-       return controllers.getController().stream().map(ctr -> {
+        return controllers.getController().stream().map(ctr -> {
             Object bean = null ;
             try {
                 bean = getContext().getBean(ctr.getName())   ;
@@ -66,14 +65,11 @@ public abstract class AbstractControllerExtensionPoint implements ControllerExte
     public List getRestController(PluginWrapper wrapper) throws JAXBException {
         //Get Controller declares
         Controllers controllers = jaxbService.getControllerFromResources(wrapper);
-        System.out.println("-----getRestController ----------------- : "+controllers.getController().size());
         return controllers.getController().stream().map(ctr -> {
                     Object bean = null ;
                     try {
                         Class clazz =  wrapper.getPluginClassLoader().loadClass(ctr.getName());
-                        System.out.println("-----------------Bean def list -------------------- "+getContext().getBeanDefinitionNames());
                         bean = getContext().getBean(clazz)   ;
-                        //System.out.println(bean);
                     } catch (BeansException | ClassNotFoundException ex) {
                         ex.printStackTrace();
                     }

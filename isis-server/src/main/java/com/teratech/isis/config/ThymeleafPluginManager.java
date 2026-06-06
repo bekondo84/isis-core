@@ -2,6 +2,7 @@ package com.teratech.isis.config;
 
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.IEngineConfiguration;
@@ -19,10 +20,18 @@ public class ThymeleafPluginManager {
 
     private final SpringTemplateEngine templateEngine;
     private final PluginManager pluginManager;
+    private final Logger logger ;
 
-    public ThymeleafPluginManager(SpringTemplateEngine templateEngine, PluginManager pluginManager) {
+    /**
+     *
+     * @param templateEngine
+     * @param pluginManager
+     * @param logger
+     */
+    public ThymeleafPluginManager(SpringTemplateEngine templateEngine, PluginManager pluginManager, Logger logger) {
         this.templateEngine = templateEngine;
         this.pluginManager = pluginManager;
+        this.logger = logger;
         System.out.println("[Core-UI] Initialisation Beans.");
     }
 
@@ -45,7 +54,7 @@ public class ThymeleafPluginManager {
 
         // Injection du nouveau résolveur dans le moteur Thymeleaf central
         templateEngine.addTemplateResolver(pluginResolver);
-        System.out.println("[Core-UI] Moteur Thymeleaf configuré pour accepter les templates des plugins.");
+        logger.info("[Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.");
         return true;
     }
 
@@ -69,16 +78,16 @@ public class ThymeleafPluginManager {
         @Override
         protected ITemplateResource computeTemplateResource(IEngineConfiguration configuration, String ownerTemplate, String template, String resourceName, String characterEncoding, Map<String, Object> templateResolutionAttributes) {
             // Exemple de 'resourceName' reçu : "templates/plugins/welcome/dashboard.html"
-            System.out.println("[Thymeleaf Démo] Demande de ressource reçue : " + resourceName);
+           // System.out.println("[Thymeleaf Démo] Demande de ressource reçue : " + resourceName);
             // On va extraire dynamiquement l'ID du plugin depuis le chemin de la vue !
             if (resourceName.startsWith("templates/plugins/")) {
                 String remainingPath = resourceName.substring("templates/plugins/".length());
                 int firstSlash = remainingPath.indexOf('/');
-                System.out.println("[Thymeleaf Démo] remainingPath : " + remainingPath);
+                //System.out.println("[Thymeleaf Démo] remainingPath : " + remainingPath);
                 if (firstSlash != -1) {
                     // On récupère le premier dossier après "plugins/" -> c'est l'ID du plugin !
                     String pluginId = remainingPath.substring(0, firstSlash);
-                    System.out.println("[Thymeleaf Démo] pluginId : " + pluginId);
+                    //System.out.println("[Thymeleaf Démo] pluginId : " + pluginId);
                     // On demande à PF4J le wrapper du plugin en question
                     PluginWrapper pluginWrapper = pluginManager.getPlugin(pluginId);
 

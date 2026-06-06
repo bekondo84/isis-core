@@ -2,20 +2,16 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.05.29 à 12:19:36 PM WAT 
+// Généré le : 2026.06.05 à 09:28:58 PM WAT 
 //
 
 
-package com.teratech.jaxb.controller;
+package com.teratech.jaxb.entities;
+
+import jakarta.xml.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlType;
 
 
 /**
@@ -49,11 +45,11 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "controller"
 })
-@XmlRootElement(name = "controllers")
+@XmlRootElement(name = "controllers", namespace = "http://www.isis.cm/config/controllers")
 public class Controllers {
 
-    @XmlElement(required = true)
-    protected List<Controllers.Controller> controller;
+    @XmlElement(namespace = "http://www.isis.cm/config/controllers", required = true)
+    protected List<Controller> controller;
 
     /**
      * Gets the value of the controller property.
@@ -73,13 +69,13 @@ public class Controllers {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Controllers.Controller }
+     * {@link Controller }
      * 
      * 
      */
-    public List<Controllers.Controller> getController() {
+    public List<Controller> getController() {
         if (controller == null) {
-            controller = new ArrayList<Controllers.Controller>();
+            controller = new ArrayList<Controller>();
         }
         return this.controller;
     }

@@ -1,6 +1,6 @@
 package com.teratech.extensions.impl;
 
-import com.teratech.jaxb.controller.Controllers;
+import com.teratech.jaxb.entities.Controllers;
 import com.teratech.services.JAXBService;
 import jakarta.xml.bind.JAXBException;
 import org.junit.Before;

@@ -1,5 +1,7 @@
 package com.teratech.isis.services;
 
+import jakarta.xml.bind.JAXBException;
+
 import java.lang.reflect.InvocationTargetException;
 
 public interface PluginService {
@@ -12,5 +14,5 @@ public interface PluginService {
      * @param args
      * @return
      */
-    Object execute(final String plugin, final String beanName, final String methodName, Object...args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException;
+    Object execute(final String plugin, final String beanName, final String methodName, Object...args) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException, JAXBException, ClassNotFoundException;
 }
