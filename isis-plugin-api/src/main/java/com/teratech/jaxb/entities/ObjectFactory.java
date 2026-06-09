@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.06.05 à 09:28:58 PM WAT 
+// Généré le : 2026.06.08 à 11:41:27 AM WAT 
 //
 
 
@@ -58,6 +58,54 @@ public class ObjectFactory {
      */
     public Controllers.Controller createControllersController() {
         return new Controllers.Controller();
+    }
+
+    /**
+     * Create an instance of {@link Plugin }
+     * 
+     */
+    public Plugin createPlugin() {
+        return new Plugin();
+    }
+
+    /**
+     * Create an instance of {@link ContactType }
+     * 
+     */
+    public ContactType createContactType() {
+        return new ContactType();
+    }
+
+    /**
+     * Create an instance of {@link MediasType }
+     * 
+     */
+    public MediasType createMediasType() {
+        return new MediasType();
+    }
+
+    /**
+     * Create an instance of {@link DependsType }
+     * 
+     */
+    public DependsType createDependsType() {
+        return new DependsType();
+    }
+
+    /**
+     * Create an instance of {@link MediaType }
+     * 
+     */
+    public MediaType createMediaType() {
+        return new MediaType();
+    }
+
+    /**
+     * Create an instance of {@link DependType }
+     * 
+     */
+    public DependType createDependType() {
+        return new DependType();
     }
 
     /**

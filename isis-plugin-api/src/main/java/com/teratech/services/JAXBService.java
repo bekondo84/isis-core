@@ -1,6 +1,7 @@
 package com.teratech.services;
 
 import com.teratech.jaxb.entities.Controllers;
+import com.teratech.jaxb.entities.Plugin;
 import com.teratech.jaxb.entities.Services;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -13,7 +14,31 @@ public interface JAXBService {
 
     String SCHEMA_CONTROLLERS_XML = "schema/controllers.xml";
     String SCHEMA_SERVICES_XML = "schema/services.xml";
+    String SCHEMA_PLUGIN_XML = "schema/plugin.xml";
 
+
+    /**
+     *
+     * @param wrapper
+     * @return plugin informations
+     * @throws JAXBException
+     */
+    default Plugin getPluginFromResources(PluginWrapper wrapper) throws JAXBException {
+        ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
+        InputStream inputStream = pluginClassLoader.getResourceAsStream(SCHEMA_PLUGIN_XML);
+        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
+        JAXBContext context = JAXBContext.newInstance(Plugin.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        Plugin plugin = (Plugin) unmarshaller.unmarshal(inputStream);
+        return plugin;
+    }
+
+    /**
+     *
+     * @param wrapper
+     * @return declare serives from services.xml
+     * @throws JAXBException
+     */
     default Services getServiceFromResources(PluginWrapper wrapper) throws JAXBException {
         ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
         InputStream inputStream = pluginClassLoader.getResourceAsStream(SCHEMA_SERVICES_XML);
@@ -24,6 +49,12 @@ public interface JAXBService {
         return services;
     }
 
+    /**
+     *
+     * @param wrapper
+     * @return Controllers from controllers.xml file
+     * @throws JAXBException
+     */
     default Controllers getControllerFromResources(PluginWrapper wrapper) throws JAXBException {
         ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
         InputStream inputStream = pluginClassLoader.getResourceAsStream(SCHEMA_CONTROLLERS_XML);
@@ -31,6 +62,11 @@ public interface JAXBService {
         return getFrom(inputStream);
     }
 
+    /**
+     *
+     * @return
+     * @throws JAXBException
+     */
     default Controllers getControllerFromResources() throws JAXBException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(SCHEMA_CONTROLLERS_XML);

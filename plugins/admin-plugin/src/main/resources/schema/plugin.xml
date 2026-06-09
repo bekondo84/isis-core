@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.isis.cm/config/plugin"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.isis.cm/config/plugin  plugin.xsd">
+
+    <name>Administration</name>
+    <author>Tera Tech Inc.</author>
+    <sequence>10</sequence>
+    <auto_install>true</auto_install>
+    <summary></summary>
+    <description></description>
+    <category>system</category>
+    <contact>
+        <website>http://www.teratech.cm</website>
+        <email>teratech@gmail.com</email>
+        <phone>+237695427879</phone>
+    </contact>
+    <medias>
+        <media name="admin.png" path="/static/images/admin.png" />
+    </medias>
+    <depends> </depends>
+</plugin>

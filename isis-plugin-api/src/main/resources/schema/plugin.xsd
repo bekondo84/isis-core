@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.isis.cm/config/plugin"
+        xmlns="http://www.isis.cm/config/plugin"
+        elementFormDefault="qualified">
+
+    <!-- ========================= -->
+    <!-- Contact                   -->
+    <!-- ========================= -->
+
+    <xsd:complexType name="contactType">
+        <xsd:sequence>
+            <xsd:element name="website" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="email" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="phone" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- ========================= -->
+    <!-- Media                     -->
+    <!-- ========================= -->
+
+    <xsd:complexType name="mediaType">
+        <xsd:attribute name="name"
+                       type="xsd:string"
+                       use="required"/>
+
+        <xsd:attribute name="path"
+                       type="xsd:string"
+                       use="required"/>
+
+        <xsd:attribute name="logo"
+                       type="xsd:boolean"
+                       use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="mediasType">
+        <xsd:sequence>
+            <xsd:element name="media"
+                         type="mediaType"
+                         minOccurs="0"
+                         maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- ========================= -->
+    <!-- Dependencies              -->
+    <!-- ========================= -->
+
+    <xsd:complexType name="dependType">
+        <xsd:attribute name="id"
+                       type="xsd:string"
+                       use="required"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="dependsType">
+        <xsd:sequence>
+            <xsd:element name="depend"
+                         type="dependType"
+                         minOccurs="0"
+                         maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <!-- ========================= -->
+    <!-- Plugin                     -->
+    <!-- ========================= -->
+
+    <xsd:element name="plugin">
+
+        <xsd:complexType>
+
+            <xsd:sequence>
+
+                <xsd:element name="name"
+                             type="xsd:string"/>
+
+                <xsd:element name="author"
+                             type="xsd:string"/>
+
+                <xsd:element name="sequence"
+                             type="xsd:int"/>
+
+                <xsd:element name="auto_install"
+                             type="xsd:boolean" default="false"/>
+                <xsd:element name="summary"
+                             type="xsd:string"
+                             minOccurs="0"/>
+
+                <xsd:element name="description"
+                             type="xsd:string"
+                             minOccurs="0"/>
+
+                <xsd:element name="category"
+                             type="xsd:string"
+                             minOccurs="0"/>
+
+                <xsd:element name="contact"
+                             type="contactType"
+                             minOccurs="0"/>
+
+                <xsd:element name="medias"
+                             type="mediasType"
+                             minOccurs="0"/>
+
+                <xsd:element name="depends"
+                             type="dependsType"
+                             minOccurs="0"/>
+
+            </xsd:sequence>
+
+        </xsd:complexType>
+
+    </xsd:element>
+
+</xsd:schema>
