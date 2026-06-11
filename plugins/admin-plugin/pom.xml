@@ -54,9 +54,16 @@
             <artifactId>spring-beans</artifactId>
             <version>5.3.22</version>
             <scope>provided</scope>
-        </dependency><dependency>
+        </dependency>
+        <dependency>
             <groupId>com.teratech</groupId>
             <artifactId>isis-plugin-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.teratech</groupId>
+            <artifactId>commondata</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

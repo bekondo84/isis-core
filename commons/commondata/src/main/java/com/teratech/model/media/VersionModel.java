@@ -1,4 +1,4 @@
-package com.teratech.isis.model.media;
+package com.teratech.model.media;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,14 +8,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "adm_catalog")
-public class CatalogModel implements Serializable {
+@Table(name = "adm_version")
+public class VersionModel implements Serializable {
 
     @Id
     private String id;
     private String name ;
 
-    public CatalogModel() {
+    public VersionModel() {
     }
 
     public String getId() {
@@ -38,7 +38,7 @@ public class CatalogModel implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CatalogModel that = (CatalogModel) o;
+        VersionModel that = (VersionModel) o;
         return Objects.equals(id, that.id);
     }
 

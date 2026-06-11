@@ -1,9 +1,8 @@
 package com.teratech.isis.dao;
 
-import com.teratech.isis.model.PluginId;
-import com.teratech.isis.model.PluginModel;
+import com.teratech.model.PluginId;
+import com.teratech.model.PluginModel;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 

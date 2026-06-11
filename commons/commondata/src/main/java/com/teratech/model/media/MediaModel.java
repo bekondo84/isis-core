@@ -1,4 +1,4 @@
-package com.teratech.isis.model.media;
+package com.teratech.model.media;
 
 import jakarta.persistence.*;
 

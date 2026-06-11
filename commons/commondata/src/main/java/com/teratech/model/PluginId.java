@@ -1,4 +1,4 @@
-package com.teratech.isis.model;
+package com.teratech.model;
 
 import java.io.Serializable;
 import java.util.Objects;

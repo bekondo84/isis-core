@@ -40,7 +40,7 @@ public class ServerJpaConfig {
         LocalEntityManagerFactoryBean entityManagerFactoryBean = new LocalEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        packagesToScan.add("com.teratech.isis");
+        packagesToScan.add("com.teratech");
         //2. Dynamic read package to scan for each plugin
         for (PluginWrapper wrapper : pluginManager.getPlugins()) {
             final String pluginPackage = wrapper.getPlugin().getClass().getPackageName();

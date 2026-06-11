@@ -24,7 +24,7 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
      * @return
      */
     @Override
-    public boolean install(PluginWrapper wrapper) throws IOException {
+    public boolean install(PluginWrapper wrapper)  {
 
         ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
         final String[] sqlFiles = sqlFilesPath();
@@ -32,7 +32,14 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
              for (String sqlFile : sqlFiles) {
                  populator.addScript(new ClassPathResource("/sql/"+sqlFile, wrapper.getPluginClassLoader()));
              }
-             populator.execute(dataSource);
+
+             try {
+                 populator.execute(dataSource);
+                 return true;
+             } catch (Exception ex) {
+                 ex.printStackTrace();
+                 return false;
+             }
         }
        // populator.
         return false;

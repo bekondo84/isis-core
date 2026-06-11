@@ -23,7 +23,7 @@
   </properties>
 
   <modules>
-    <module>isis-plugin-api</module>
+    <module>commons</module>
     <module>plugins</module>
     <module>isis-server</module>
   </modules>

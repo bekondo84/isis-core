@@ -1,6 +1,6 @@
 package com.teratech.isis.popultor;
 
-import com.teratech.isis.model.PluginModel;
+import com.teratech.model.PluginModel;
 import com.teratech.jaxb.entities.Plugin;
 import com.teratech.populator.Populator;
 import org.springframework.stereotype.Component;

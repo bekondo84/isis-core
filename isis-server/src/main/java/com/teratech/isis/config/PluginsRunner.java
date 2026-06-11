@@ -1,7 +1,7 @@
 package com.teratech.isis.config;
 
 import com.teratech.isis.dao.PluginDao;
-import com.teratech.isis.model.PluginModel;
+import com.teratech.model.PluginModel;
 import org.apache.commons.lang.BooleanUtils;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginState;
@@ -10,7 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
