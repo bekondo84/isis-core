@@ -72,12 +72,17 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-
+		<dependency>
+			<groupId>com.teratech</groupId>
+			<artifactId>commondata</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>com.teratech</groupId>
 			<artifactId>isis-plugin-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
-			<scope>runtime</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.pf4j</groupId>
@@ -111,13 +116,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.teratech</groupId>
-			<artifactId>commondata</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.teratech</groupId>
-			<artifactId>isis-plugin-api</artifactId>
+			<artifactId>commonservice</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>

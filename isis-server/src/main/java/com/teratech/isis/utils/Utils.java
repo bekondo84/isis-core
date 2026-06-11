@@ -1,5 +1,6 @@
 package com.teratech.isis.utils;
 
+import com.teratech.annotation.Open;
 import org.pf4j.PluginWrapper;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,10 @@ public class Utils {
         // 2. On cherche le @RequestMapping sur la CLASSE (ex: @RequestMapping("/api/v1"))
         RequestMapping classMapping = AnnotatedElementUtils.findMergedAnnotation(beanType, RequestMapping.class);
 
-        // 3. Configuration de base de Spring pour l'objet de mapping
+        //3. On recherche le @Open sur la classe : ceci permet de determiner si l'api est public ou private
+        Open classOpen = AnnotatedElementUtils.findMergedAnnotation(beanType, Open.class);
+
+        // 4. Configuration de base de Spring pour l'objet de mapping
         RequestMappingInfo.Builder builder = RequestMappingInfo
                 .paths(methodMapping.path().length > 0 ? methodMapping.path() : methodMapping.value())
                 .methods(methodMapping.method())
@@ -28,7 +32,7 @@ public class Utils {
 
         RequestMappingInfo finalInfo =  builder.build();
 
-        // 4. S'il y a un préfixe sur la classe, on le fusionne de force !
+        // 5. S'il y a un préfixe sur la classe, on le fusionne de force !
         if (classMapping != null) {
             String[] classPaths = classMapping.path().length > 0 ? classMapping.path() : classMapping.value();
             if (classPaths.length > 0) {
@@ -38,10 +42,14 @@ public class Utils {
             }
         }
 
-        // 5. CRUCIAL : Injection du Plugin ID comme préfixe global de la route
+        // 6. CRUCIAL : Injection du Plugin ID comme préfixe global de la route
         // On s'assure que le préfixe ressemble à "/pluginId"
         String prefix = isRestController(beanType)  ? "/api/" + wrapper.getPluginId().toLowerCase().trim() : "/"+wrapper.getPluginId().toLowerCase().trim();
 
+        //7. Position public si la classe est annoté @Open
+        if (Objects.nonNull(classOpen)) {
+            prefix = "/public"+prefix;
+        }
 
         finalInfo = RequestMappingInfo.paths(prefix)
                 .options(mapping.getBuilderConfiguration())
