@@ -13,7 +13,7 @@
     <name>plugins</name>
     <url>http://maven.apache.org</url>
     <modules>
-        <module>admin-plugin</module>
+        <module>backoffice</module>
     </modules>
 
     <properties>

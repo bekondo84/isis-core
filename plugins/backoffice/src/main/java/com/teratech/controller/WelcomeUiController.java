@@ -16,6 +16,6 @@ public class WelcomeUiController {
         System.out.println("-------------------- showDashboard(Model model) ----------------");
         // Le chemin correspond EXACTEMENT à l'arborescence dans les ressources du plugin
         // (Sans le préfixe "templates/" et sans le suffixe ".html")
-        return "plugins/admin-plugin/dashboard";
+        return "plugins/backoffice/dashboard";
     }
 }

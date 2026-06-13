@@ -1,15 +1,19 @@
 package com.teratech.model;
 
+import com.teratech.model.generic.ItemModel;
+import com.teratech.model.media.MediaModel;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @IdClass(PluginId.class)
 @Table(name = "adm_plugin")
-public class PluginModel implements Serializable {
+public class PluginModel extends ItemModel implements Serializable {
 
     @Id
     private String id ;
@@ -27,6 +31,25 @@ public class PluginModel implements Serializable {
     private boolean install = false;
     @Temporal(TemporalType.TIMESTAMP)
     private Date instaldate;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(
+            name = "adm_plugin_depend",
+            joinColumns ={
+                    @JoinColumn(name = "plugin_id", referencedColumnName = "id"),
+                    @JoinColumn(name = "plugin_version", referencedColumnName = "version")
+            }
+    )
+    @Column(name = "name")
+    private List<String> dependencies = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "adm_plugin_media",
+          joinColumns = {
+                  @JoinColumn(name = "plugin_id" , referencedColumnName = "id"),
+                  @JoinColumn (name = "plugin_version", referencedColumnName = "version")
+          },
+    inverseJoinColumns = @JoinColumn(name = "media_id", referencedColumnName = "id"))
+    private List<MediaModel> medias = new ArrayList<>();
+
 
     public PluginModel() {
     }
@@ -143,6 +166,14 @@ public class PluginModel implements Serializable {
 
     public void setInstaldate(Date instaldate) {
         this.instaldate = instaldate;
+    }
+
+    public List<String> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List<String> dependencies) {
+        this.dependencies = dependencies;
     }
 
     @Override

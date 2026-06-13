@@ -63,7 +63,7 @@ public class PluginsRunner implements CommandLineRunner {
     }
 
     private void startInstallPlugins() {
-        List<PluginModel> installPlugins = pluginDao.getInstallPlugins();
+        List<PluginModel> installPlugins = pluginDao.getInstallPlugins(0, -1);
 
         if (installPlugins != null && !installPlugins.isEmpty()) {
 

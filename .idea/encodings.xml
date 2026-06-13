@@ -12,8 +12,8 @@
     <file url="file://$PROJECT_DIR$/isis-plugin-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/isis-plugin-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/isis-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/plugins/admin-plugin/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/plugins/admin-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plugins/backoffice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/plugins/backoffice/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/plugins/plugins-extension/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/plugins/plugins-extension/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/plugins/src/main/java" charset="UTF-8" />

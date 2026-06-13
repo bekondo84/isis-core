@@ -1,5 +1,6 @@
 package com.teratech.model.media;
 
+import com.teratech.model.generic.ItemModel;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -7,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "adm_catalogversion")
-public class CatalogVersionModel implements Serializable {
+public class CatalogVersionModel extends ItemModel implements Serializable {
 
     @EmbeddedId
     private CatalogVersionId id = new CatalogVersionId();

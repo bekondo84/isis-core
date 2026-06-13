@@ -5,6 +5,8 @@ import com.teratech.jaxb.entities.Plugin;
 import com.teratech.populator.Populator;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -21,6 +23,7 @@ public class PluginPopulator implements Populator<Plugin, PluginModel> {
          target.setName(source.getName());
          target.setCategory(source.getCategory());
          target.setDescription(source.getDescription());
+         target.setSummary(source.getSummary());
          if (Objects.nonNull(source.getContact())) {
              target.setEmail(source.getContact().getEmail());
              target.setWebsite(source.getContact().getWebsite());
@@ -28,5 +31,11 @@ public class PluginPopulator implements Populator<Plugin, PluginModel> {
          }
          target.setAutoInstall(source.isAutoInstall());
          target.setSequence(source.getSequence());
+
+        final List<String> depends = new ArrayList<>();
+        if (Objects.nonNull(source.getDepends())) {
+            source.getDepends().getDepend().forEach(dependType -> depends.add(dependType.getId()));
+        }
+        target.setDependencies(depends);
     }
 }
