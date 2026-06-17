@@ -35,7 +35,7 @@ public class PluginController {
     }
 
     @GetMapping("/plugins")
-    public ResponseEntity<List<PluginModel>> getAllPlugins(@RequestParam int start, @RequestParam int max)  {
+    public ResponseEntity<List<PluginModel>> getAllPlugins(@RequestParam int start, @RequestParam int max) throws IllegalAccessException {
         return ResponseEntity.ok(pluginService.getPlugins(start, max));
     }
 }

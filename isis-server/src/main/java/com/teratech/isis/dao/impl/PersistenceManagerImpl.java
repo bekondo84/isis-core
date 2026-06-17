@@ -3,19 +3,16 @@ package com.teratech.isis.dao.impl;
 import com.teratech.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
-import com.teratech.model.generic.ItemModel;
+import com.teratech.model.generic.AbstractTenant;
+import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.pf4j.PluginManager;
-import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 import java.util.Objects;
 
 @Repository
@@ -33,22 +30,37 @@ public class PersistenceManagerImpl implements PersistenceManager {
      * @param entity
      */
     @Override
-    public  <T extends ItemModel, S extends ItemModel>S save(T entity) throws IllegalAccessException, NoSuchFieldException {
-        if (Objects.isNull(entity.getCreatedAt())) {
-            //Check if the class inherit from ItemModel
-
-            if (!ItemModel.class.isAssignableFrom(entity.getClass())) {
-                throw new IllegalAccessException(String.format("Class %s don't inherited from %s", entity.getClass().getName(), ItemModel.class.getName()));
+    public  <T extends AbstractItem, S extends AbstractItem>S save(T entity) throws ModelServiceException {
+        //Check if the class inherit from ItemModel
+        try {
+            //Check if entity extends AbstractItem class and throw exception if not
+            if (isAssignableFrom(entity, AbstractItem.class) )
+                throw new IllegalAccessException(String.format("Class %s don't inherited from %s", entity.getClass().getName(), AbstractItem.class.getName()));
+            //Check if entity extends AbstractTenant and set the tenantId field
+            if (isAssignableFrom(entity, AbstractTenant.class)) {
+                //TODO
             }
-            Class itemClass = getItemModelClass(entity.getClass());
-            Field creatAt = itemClass.getDeclaredField("createdAt");
-            creatAt.setAccessible(true);
-            creatAt.set(entity, new Date());
-            em.merge(entity);
-        } else  {
-            em.persist(entity);
+            if (Objects.isNull(entity.getCreatedAt())) {
+                setManagedField(entity, "createdAt", new Date());
+                em.merge(entity);
+            } else  {
+                setManagedField(entity, "lastModif", new Date());
+                em.persist(entity);
+            }
+            return (S) flexibleSearch.find(entity);
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            throw new ModelServiceException(e);
         }
-        return (S) flexibleSearch.find(entity);
+
+    }
+
+    private <T extends AbstractItem> void setManagedField(T entity, String fieldname, Object value) throws NoSuchFieldException, IllegalAccessException {
+        Field field = getItemModelField(entity.getClass(), fieldname);
+
+        if (Objects.nonNull(field)) {
+            field.setAccessible(true);
+            field.set(entity, value);
+        }
     }
 
     /**
@@ -56,14 +68,15 @@ public class PersistenceManagerImpl implements PersistenceManager {
      * @param entityClazz
      * @return
      */
-    private Class getItemModelClass(Class entityClazz) {
+    private Field getItemModelField(Class entityClazz, String fieldname) throws NoSuchFieldException {
         Class itemClass = entityClazz ;
 
         while (!itemClass.equals(Object.class)) {
+            Field field = itemClass.getField(fieldname);
+            if (Objects.nonNull(field)) {
+                return field;
+            }
             itemClass = itemClass.getSuperclass();
-
-            if (itemClass.equals(ItemModel.class))
-                return itemClass;
         }
         return null;
     }
@@ -72,7 +85,7 @@ public class PersistenceManagerImpl implements PersistenceManager {
      * @param entities
      */
     @Override
-    public <T extends ItemModel> void save(T... entities) throws IllegalAccessException, NoSuchFieldException {
+    public <T extends AbstractItem> void save(T... entities) throws ModelServiceException {
           for (T entity : entities) {
               save(entity);
           }
@@ -85,7 +98,11 @@ public class PersistenceManagerImpl implements PersistenceManager {
      */
     @Override
     public void delete(Object entity) throws ModelServiceException {
-
+        try {
+            em.remove(flexibleSearch.find(entity));
+        } catch (IllegalAccessException e) {
+            throw new ModelServiceException(e);
+        }
     }
 
     /**
@@ -95,7 +112,9 @@ public class PersistenceManagerImpl implements PersistenceManager {
      */
     @Override
     public void delete(Object... entities) throws ModelServiceException {
-
+            for (Object entity : entities) {
+                delete(entity);
+            }
     }
 
     /**
@@ -107,44 +126,11 @@ public class PersistenceManagerImpl implements PersistenceManager {
      */
     @Override
     public Object create(Class<?> entityClass) throws ModelServiceException {
-        return null;
-    }
-
-    /**
-     * Retrieve the entity instance base on the field mark as unique
-     * So you must initialiwe those fields
-     *
-     * @param entity
-     * @return
-     */
-    @Override
-    public Object find(Object entity) throws ModelServiceException {
-        return null;
-    }
-
-    /**
-     * Retrieve the entity instance base on the field mark as unique
-     * and return it as Json representation
-     * So you must initialiwe those fields
-     *
-     * @param entity
-     * @return
-     */
-    @Override
-    public String findAndConvertToJson(Object entity) throws ModelServiceException {
-        return "";
-    }
-
-    /**
-     * Execute update and delete aueries
-     *
-     * @param query
-     * @param parameters
-     * @return
-     */
-    @Override
-    public int executeUpdate(String query, Map<String, Object> parameters) {
-        return 0;
+        try {
+            return entityClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new ModelServiceException(e);
+        }
     }
 
     /**
@@ -162,5 +148,15 @@ public class PersistenceManagerImpl implements PersistenceManager {
     @Override
     public void clear() {
 
+    }
+
+    /**
+     *
+     * @param entity
+     * @param <T>
+     * @throws IllegalAccessException
+     */
+    private static <T extends AbstractItem> boolean isAssignableFrom(T entity, Class type) throws IllegalAccessException {
+        return type.isAssignableFrom(entity.getClass()) ;
     }
 }

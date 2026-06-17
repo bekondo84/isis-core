@@ -1,6 +1,6 @@
 package com.teratech.model.media;
 
-import com.teratech.model.generic.ItemModel;
+import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "adm_version")
-public class VersionModel extends ItemModel implements Serializable {
+public class VersionModel extends AbstractItem implements Serializable {
 
     @Id
     private String id;

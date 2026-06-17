@@ -1,22 +1,52 @@
 package com.teratech.services;
 
-import com.teratech.jaxb.entities.Controllers;
-import com.teratech.jaxb.entities.Plugin;
-import com.teratech.jaxb.entities.Services;
+import com.teratech.jaxb.entities.*;
+import com.teratech.utils.ApplicationConstans;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
 import org.pf4j.PluginWrapper;
 
 import java.io.InputStream;
+import java.util.Objects;
+
+import static com.teratech.utils.ApplicationConstans.CMS.*;
 
 public interface JAXBService {
 
-    String SCHEMA_CONTROLLERS_XML = "schema/controllers.xml";
-    String SCHEMA_SERVICES_XML = "schema/services.xml";
-    String SCHEMA_PLUGIN_XML = "schema/plugin.xml";
 
+    /**
+     *
+     * @param wrapper
+     * @return plugin informations
+     * @throws JAXBException
+     */
+    default Context getTemplateFromResources(PluginWrapper wrapper, String template) throws JAXBException {
+        ClassLoader pluginClassLoader = Thread.currentThread().getContextClassLoader();
+        if (Objects.nonNull(wrapper)) {
+            pluginClassLoader = wrapper.getPluginClassLoader();
+        }
+        InputStream inputStream = pluginClassLoader.getResourceAsStream(ApplicationConstans.CMS.SCHEMA_TEMPLATE_XML +template);
+        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_TEMPLATE_XML+template)));
+        JAXBContext context = JAXBContext.newInstance(Context.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        return (Context) unmarshaller.unmarshal(inputStream);
+    }
 
+    /**
+     *
+     * @param wrapper
+     * @return plugin informations
+     * @throws JAXBException
+     */
+    default ExplorerTree getExplorerFromResources(PluginWrapper wrapper) throws JAXBException {
+        ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
+        InputStream inputStream = pluginClassLoader.getResourceAsStream(ApplicationConstans.CMS.SCHEMA_EXPLORER_XML);
+        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
+        JAXBContext context = JAXBContext.newInstance(ExplorerTree.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        return (ExplorerTree) unmarshaller.unmarshal(inputStream);
+    }
     /**
      *
      * @param wrapper
@@ -26,11 +56,10 @@ public interface JAXBService {
     default Plugin getPluginFromResources(PluginWrapper wrapper) throws JAXBException {
         ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
         InputStream inputStream = pluginClassLoader.getResourceAsStream(SCHEMA_PLUGIN_XML);
-        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
+        //System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
         JAXBContext context = JAXBContext.newInstance(Plugin.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Plugin plugin = (Plugin) unmarshaller.unmarshal(inputStream);
-        return plugin;
+        return (Plugin) unmarshaller.unmarshal(inputStream);
     }
 
     /**
@@ -45,8 +74,7 @@ public interface JAXBService {
         //System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
         JAXBContext context = JAXBContext.newInstance(Services.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        Services services = (Services) unmarshaller.unmarshal(inputStream);
-        return services;
+        return (Services) unmarshaller.unmarshal(inputStream);
     }
 
     /**

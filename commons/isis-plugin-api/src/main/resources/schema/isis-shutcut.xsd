@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.isis.cm/config/isis-shutcut"
+        xmlns:tns="http://www.isis.cm/config/isis-shutcut"
+        elementFormDefault="qualified">
+    <element name="shutcuts" type="tns:shutcuts" />
+    <complexType name="shutcuts">
+        <sequence>
+            <element name="shutcut" type="tns:shutcut" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+    <complexType name="shutcut">
+        <attribute name="name" type="string" />
+        <attribute name="code" type="string" />
+        <attribute name="counter" type="string" />
+        <attribute name="icon" type="string" default="" />
+        <attribute name="type" type="string" />
+        <attribute name="viewMode" type="string" default="list,view" />
+    </complexType>
+</schema>

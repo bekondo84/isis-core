@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.isis.cm/config/isis-actions"
+        xmlns:tns="http://www.isis.cm/config/isis-actions"
+        xmlns:position="http://www.isis.cm/config/isis-positionvalue"
+        xmlns:color="http://www.isis.cm/config/isis-color"
+        xmlns:operation="http://www.isis.cm/config/isis-typeoperation"
+        elementFormDefault="qualified">
+    <import namespace="http://www.isis.cm/config/isis-typeoperation" schemaLocation="isis-type-operation.xsd"/>
+    <import namespace="http://www.isis.cm/config/isis-color" schemaLocation="isis-color.xsd"/>
+    <import namespace="http://www.isis.cm/config/isis-positionvalue" schemaLocation="isis-position-value.xsd"/>
+
+    <element name="actions" type="tns:actions"> </element>
+    <!-- Create context type represented configuration of item -->
+    <complexType name="actions">
+        <sequence>
+           <element name="action" type="tns:action" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+    <complexType name="action">
+        <attribute name="name" type="string"  />
+        <attribute name="code" type="string"/>
+        <attribute name="redirect" type="boolean" default="false" />
+        <attribute name="type" type="string" default="" />
+        <attribute name="modal" type="boolean" default="false" />
+        <attribute name="icon" type="string" default="" />
+        <attribute name="dynamic" type="boolean" default="false" />
+        <attribute name="viewMode" type="string" default="list,view" />
+        <attribute name="counter" type="string" default=""/>
+        <attribute name="typeOp"   type="operation:TypeOperation" default="none" />
+        <attribute name="position" type="position:positionValueType" default="actions" />
+        <attribute name="badge-color" type="color:colorType" default="bg-primary" />
+    </complexType>
+</schema>

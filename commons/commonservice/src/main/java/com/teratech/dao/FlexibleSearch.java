@@ -17,7 +17,7 @@ public interface FlexibleSearch {
      * @param container
      * @return
      */
-    Object find(Class clazz, RestrictionsContainer container) ;
+    Object find(Class clazz, RestrictionsContainer container, Set<String> properties) ;
     /**
      * Find Object base on the entity unique field
      * @param entity
@@ -34,7 +34,7 @@ public interface FlexibleSearch {
      * @param maxResult : max result
      * @return
      */
-    List doSearch(final Class<? extends Object> entityClass , final RestrictionsContainer container , final Map<String , DAOUtilis.OrderType> orders , final Set<String> properties , int firstResult , int maxResult);
+    List doSearch(final Class<? extends Object> entityClass , final RestrictionsContainer container , final Map<String , DAOUtilis.OrderType> orders , final Set<String> properties , int firstResult , int maxResult) throws IllegalAccessException;
 
     /**
      *  Return Entities which macth the criteria set in the restriction container
@@ -46,7 +46,7 @@ public interface FlexibleSearch {
      * @param maxResult : max result
      * @return
      */
-    List doSearch(final Class<? extends Object> entityClass , final RestrictionsContainer container , final Map<String , DAOUtilis.OrderType> orders , final Set<String> properties , final Map<String , Object> hints , int firstResult , int maxResult);
+    List doSearch(final Class<? extends Object> entityClass , final RestrictionsContainer container , final Map<String , DAOUtilis.OrderType> orders , final Set<String> properties , final Map<String , Object> hints , int firstResult , int maxResult) throws IllegalAccessException;
 
     /**
      * Execute criteriq Query
@@ -54,7 +54,7 @@ public interface FlexibleSearch {
      * @param parameters : Map of parameters
      * @return
      */
-    List doSearch(final CriteriaQuery<? extends Object> criteriaQuery , final Map<String , Object> parameters);
+    List doSearch(final CriteriaQuery<? extends Object> criteriaQuery , final Map<String , Object> parameters) throws IllegalAccessException;
 
     /**
      * Execute Query base on Query
@@ -62,7 +62,7 @@ public interface FlexibleSearch {
      * @param parameters : Map of parameters
      * @return
      */
-    List doSearch(final String queryString ,  final Map<String , Object> parameters);
+    List doSearch(final String queryString ,  final Map<String , Object> parameters) throws IllegalAccessException;
     /**
      * Number of entities which match the criteria
      * @param container

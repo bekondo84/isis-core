@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.isis.cm/config/list-view"
+           xmlns:tns="http://www.isis.cm/config/list-view"
+           xmlns:actions="http://www.isis.cm/config/isis-actions"
+           xmlns:search="http://www.isis.cm/config/isis-search"
+           xmlns:widget="http://www.isis.cm/config/isis-widget">
+    <xs:import namespace="http://www.isis.cm/config/isis-actions" schemaLocation="isis-actions.xsd" />
+    <xs:import namespace="http://www.isis.cm/config/isis-search" schemaLocation="isis-search.xsd" />
+    <xs:import namespace="http://www.isis.cm/config/isis-widget" schemaLocation="isis-widget.xsd" />
+
+    <xs:element name="list-view">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="list" type="tns:listViewType" minOccurs="0" maxOccurs="1" />
+                <xs:element name="kanban" type="tns:templateType" minOccurs="0" maxOccurs="1" />
+                <xs:element name="calendar" type="tns:templateType" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="actions:actions" maxOccurs="1" minOccurs="0" xmlns:actions="http://www.isis.cm/config/isis-actions"/>
+                <xs:element ref="search:search" minOccurs="0" maxOccurs="1" xmlns:search="http://www.isis.cm/config/isis-search"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="listViewType">
+        <xs:choice>
+            <xs:element name="column" type="tns:columnType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="template" type="tns:templateType" minOccurs="0" maxOccurs="1" />
+        </xs:choice>
+        <xs:attribute name="create" type="xs:boolean" default="true" />
+        <xs:attribute name="delete" type="xs:boolean" default="true" />
+        <xs:attribute name="viewable" type="xs:boolean" default="true" />
+    </xs:complexType>
+    <xs:complexType name="templateType">
+        <xs:sequence>
+            <xs:element name="template" type="xs:string" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="columnType">
+        <xs:sequence>
+            <xs:element type="tns:pattern" name="pattern" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="qualifier" type="xs:string" />
+        <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+        <xs:attribute name="widget" type="widget:widgetType" />
+        <xs:attribute name="editable" type="xs:boolean" default="true" />
+        <xs:attribute name="updatable" type="xs:boolean" default="true" />
+        <xs:attribute name="search"  type="xs:boolean" default="false" />
+        <xs:attribute name="show" type="xs:boolean" default="true"/>
+    </xs:complexType>
+    <xs:complexType name="pattern">
+       <xs:sequence>
+            <xs:element name="field" type="tns:PatternField" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="separator" type="xs:string" />
+    </xs:complexType>
+    <xs:complexType name="PatternField">
+        <xs:attribute name="name" />
+    </xs:complexType>
+</xs:schema>

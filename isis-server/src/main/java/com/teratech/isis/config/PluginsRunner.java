@@ -62,7 +62,7 @@ public class PluginsRunner implements CommandLineRunner {
         }
     }
 
-    private void startInstallPlugins() {
+    private void startInstallPlugins() throws IllegalAccessException {
         List<PluginModel> installPlugins = pluginDao.getInstallPlugins(0, -1);
 
         if (installPlugins != null && !installPlugins.isEmpty()) {

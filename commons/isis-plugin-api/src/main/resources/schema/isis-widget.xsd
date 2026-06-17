@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.isis.cm/config/isis-widget"
+        xmlns:tns="http://www.isis.cm/config/isis-widget"
+        elementFormDefault="qualified">
+
+    <!-- <xs:element name="widget" type="tns:widgetType"> </xs:element>
+    Create context type represented configuration of item -->
+    <xs:simpleType name="widgetType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="media" />
+            <xs:enumeration value="image" />
+            <xs:enumeration value="file" />
+            <xs:enumeration value="text" />
+            <xs:enumeration value="time" />
+            <xs:enumeration value="number" />
+            <xs:enumeration value="date" />
+            <xs:enumeration value="password" />
+            <xs:enumeration value="datetime-local" />
+            <xs:enumeration value="select"/>
+            <xs:enumeration value="combobox" />
+            <xs:enumeration value="checkbox" />
+            <xs:enumeration value="switch"/>
+            <xs:enumeration value="textarea" />
+            <xs:enumeration value="onetomany" />
+            <xs:enumeration value="manytoone" />
+            <xs:enumeration value="manytomany" />
+            <xs:enumeration value="manytomanylist" />
+            <xs:enumeration value="localized" />
+            <xs:enumeration value="localized-editor" />
+            <xs:enumeration value="localized-area" />
+            <xs:enumeration value="editor" />
+            <xs:enumeration value="texteditor" />
+            <xs:enumeration value="card" />
+            <xs:enumeration value="pie" />
+            <xs:enumeration value="doughnut" />
+            <xs:enumeration value="line" />
+            <xs:enumeration value="bar" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

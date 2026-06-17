@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.isis.cm/config/explorer-tree"
+           xmlns:tns="http://www.isis.cm/config/explorer-tree">
+
+    <xs:element name="explorer-tree" type="tns:explorer-tree" />
+    <xs:complexType name="explorer-tree" >
+        <xs:sequence>
+            <xs:element name="navigation-node" type="tns:navigation-node"  minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="merge" type="xs:string" default="merge"/>
+    </xs:complexType>
+
+    <xs:complexType  name="navigation-node">
+        <xs:sequence>
+            <xs:element name="navigation-node" type="tns:navigation-node" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" />
+        <xs:attribute name="code" type="xs:string" />
+        <xs:attribute name="action" type="xs:string" default="defaultAction"/>
+        <xs:attribute name="modal" type="xs:boolean" default="false"/>
+        <xs:attribute name="viewMode" type="xs:string" default="list,view"/>
+        <xs:attribute name="icon" type="xs:string"/>
+        <xs:attribute name="position" type="xs:unsignedByte" default="0"/>
+        <xs:attribute name="template" type="xs:string" />
+        <xs:attribute name="counter" type="xs:string" default="" />
+        <xs:attribute name="badge-color" type="tns:BadgeColor" default="bg-primary" />
+    </xs:complexType>
+    <xs:simpleType name="BadgeColor">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="bg-primary" />
+            <xs:enumeration value="bg-secondary" />
+            <xs:enumeration value="bg-success" />
+            <xs:enumeration value="bg-danger" />
+            <xs:enumeration value="bg-warning" />
+            <xs:enumeration value="bg-info" />
+            <xs:enumeration value="bg-light" />
+            <xs:enumeration value="bg-dark" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

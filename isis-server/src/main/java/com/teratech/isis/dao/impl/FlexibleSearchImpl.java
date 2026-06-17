@@ -32,7 +32,7 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public Object find(Class clazz, RestrictionsContainer container) {
+    public Object find(Class clazz, RestrictionsContainer container, Set<String> properties) {
         final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         final CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(clazz);
         final Root<?> root = criteriaQuery.from(clazz);
@@ -54,33 +54,20 @@ public class FlexibleSearchImpl implements FlexibleSearch {
     public Object find(Object entity) throws IllegalAccessException {
         RestrictionsContainer container = RestrictionsContainer.newInstance();
         Field[] fields = entity.getClass().getDeclaredFields();
+        final Set<String> properties = new HashSet<>();
 
         for (Field field : fields) {
             field.setAccessible(true);
-            if (field.isAnnotationPresent(Id.class)) {
-                if (String.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (String)field.get(entity));
-                } else if (Integer.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (Integer)field.get(entity));
-                } else if (Short.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (Short)field.get(entity));
-                } else if (Long.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (Long)field.get(entity));
-                } else if (Float.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (Float)field.get(entity));
-                } else if (Double.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (Double)field.get(entity));
-                } else if (BigInteger.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (BigInteger)field.get(entity));
-                } else if (BigDecimal.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (BigDecimal)field.get(entity));
-                } else if (Character.class.isAssignableFrom(field.getType())) {
-                    container.addEq(field.getName(), (Character)field.get(entity));
-                }
+            buildPrimaryKeysRestriction(entity, field, container);
+            if (field.isAnnotationPresent(ElementCollection.class) && field.getAnnotation(ElementCollection.class).fetch()==FetchType.LAZY
+              || field.isAnnotationPresent(ManyToMany.class) && field.getAnnotation(ManyToMany.class).fetch()==FetchType.LAZY
+              || field.isAnnotationPresent(OneToMany.class) && field.getAnnotation(OneToMany.class).fetch()==FetchType.LAZY) {
+                  properties.add(field.getName());
             }
         }
-        return find(entity.getClass(), container);
+        return find(entity.getClass(), container, properties);
     }
+
 
     /**
      * Return Entities which macth the criteria set in the restriction container
@@ -94,16 +81,16 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public List doSearch(Class<?> entityClass, RestrictionsContainer container, Map<String, OrderType> orders, Set<String> properties, int firstResult, int maxResult) {
+    public List doSearch(Class<?> entityClass, RestrictionsContainer container, Map<String, OrderType> orders, Set<String> properties, int firstResult, int maxResult) throws IllegalAccessException {
         assert Objects.nonNull(container):"Restriction Container can't be null";
         assert Objects.nonNull(entityClass): "Entity Class can't be null";
 
         TypedQuery query = buildTypedQueryFrom(entityClass, container, orders, properties, firstResult, maxResult);
 
-        return query.getResultList();
+        return  resetLazyFields(properties, query.getResultList());
     }
 
-    /**
+     /**
      * Return Entities which macth the criteria set in the restriction container
      *
      * @param entityClass
@@ -116,7 +103,7 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public List doSearch(Class<?> entityClass, RestrictionsContainer container, Map<String, OrderType> orders, Set<String> properties, Map<String, Object> hints, int firstResult, int maxResult) {
+    public List doSearch(Class<?> entityClass, RestrictionsContainer container, Map<String, OrderType> orders, Set<String> properties, Map<String, Object> hints, int firstResult, int maxResult) throws IllegalAccessException {
         assert Objects.nonNull(container):"Restriction Container can't be null";
         assert Objects.nonNull(entityClass): "Entity Class can't be null";
 
@@ -125,7 +112,7 @@ public class FlexibleSearchImpl implements FlexibleSearch {
         if (CollectionUtils.isEmpty(hints)) {
             hints.keySet().forEach(entry  -> query.setHint(entry , hints.get(entry)));
         }
-        return query.getResultList();
+        return resetLazyFields(properties, query.getResultList());
     }
 
     /**
@@ -136,13 +123,13 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public List doSearch(CriteriaQuery<?> criteriaQuery, Map<String, Object> parameters) {
+    public List doSearch(CriteriaQuery<?> criteriaQuery, Map<String, Object> parameters) throws IllegalAccessException {
         assert Objects.nonNull(criteriaQuery):"Criteria Query can't be null";
 
         TypedQuery<?> query =  em.createQuery(criteriaQuery);
         addQueryParameters(query , parameters);
 
-        return query.getResultList();
+        return resetLazyFields(new HashSet<>(), query.getResultList());
     }
 
     /**
@@ -153,13 +140,13 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public List doSearch(String queryString, Map<String, Object> parameters) {
+    public List doSearch(String queryString, Map<String, Object> parameters) throws IllegalAccessException {
         assert StringUtils.isNotBlank(queryString):"Query can't be null";
 
         final Query query = em.createQuery(queryString);
         addQueryParameters(query , parameters);
-
-        return query.getResultList();
+        Set properties = new HashSet<>();
+        return resetLazyFields(properties, query.getResultList());
     }
 
     /**
@@ -216,6 +203,61 @@ public class FlexibleSearchImpl implements FlexibleSearch {
             query.setMaxResults(maxResult);
         }
         return query;
+    }
+
+    /**
+     *Put to null all field maked Lazy and not fetch explicitly
+     * @param properties
+     * @param result
+     * @throws IllegalAccessException
+     */
+    private static List resetLazyFields(Set<String> properties, List result) throws IllegalAccessException {
+        //Set to Null All Fetch Lazy Field without parameter
+        for (Object entity : result) {
+            Field[] fields = entity.getClass().getDeclaredFields();
+            for (Field field : fields) {
+                if (field.isAnnotationPresent(ElementCollection.class) && field.getAnnotation(ElementCollection.class).fetch()==FetchType.LAZY
+                        || field.isAnnotationPresent(ManyToMany.class) && field.getAnnotation(ManyToMany.class).fetch()==FetchType.LAZY
+                        || field.isAnnotationPresent(OneToMany.class) && field.getAnnotation(OneToMany.class).fetch()==FetchType.LAZY) {
+                    if (!properties.contains(field.getName())) {
+                        field.setAccessible(true);
+                        field.set(entity, null);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param entity
+     * @param field
+     * @param container
+     * @throws IllegalAccessException
+     */
+    private static void buildPrimaryKeysRestriction(Object entity, Field field, RestrictionsContainer container) throws IllegalAccessException {
+        if (field.isAnnotationPresent(Id.class)) {
+            if (String.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (String) field.get(entity));
+            } else if (Integer.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (Integer) field.get(entity));
+            } else if (Short.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (Short) field.get(entity));
+            } else if (Long.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (Long) field.get(entity));
+            } else if (Float.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (Float) field.get(entity));
+            } else if (Double.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (Double) field.get(entity));
+            } else if (BigInteger.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (BigInteger) field.get(entity));
+            } else if (BigDecimal.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (BigDecimal) field.get(entity));
+            } else if (Character.class.isAssignableFrom(field.getType())) {
+                container.addEq(field.getName(), (Character) field.get(entity));
+            }
+        }
     }
 
 }

@@ -59,5 +59,5 @@ public interface PluginService {
      * @param max
      * @return
      */
-    List  getPlugins(int start, int max) ;
+    List  getPlugins(int start, int max) throws IllegalAccessException;
 }

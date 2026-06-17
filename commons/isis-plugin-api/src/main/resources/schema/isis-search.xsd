@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.isis.cm/config/isis-search"
+        xmlns:tns="http://www.isis.cm/config/isis-search"
+        elementFormDefault="qualified">
+
+    <element name="search" type="tns:search"> </element>
+    <!-- Create context type represented configuration of item -->
+    <complexType name="search">
+        <sequence>
+            <element name="field" type="tns:SearchField" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+    </complexType>
+    <complexType name="SearchField">
+        <attribute name="name" type="string"  />
+        <attribute name="selected" type="boolean" default="false" />
+        <attribute name="operator" type="tns:operator" default="content"/>
+    </complexType>
+    <simpleType name="operator">
+        <restriction base="string">
+            <enumeration value="startWith" />
+            <enumeration value="endWith" />
+            <enumeration value="content" />
+            <enumeration value="isNull" />
+            <enumeration value="eq" />
+            <enumeration value="neq" />
+            <enumeration value="gt" />
+            <enumeration value="ge"/>
+            <enumeration value="lt"/>
+            <enumeration value="le"/>
+        </restriction>
+    </simpleType>
+</schema>

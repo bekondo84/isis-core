@@ -20,7 +20,7 @@ public interface PluginDao {
      * @param max
      * @return
      */
-   default List<PluginModel> getPlugins(int start, int max) {
+   default List<PluginModel> getPlugins(int start, int max) throws IllegalAccessException {
        return getFlexibleSearch().doSearch(PluginModel.class, RestrictionsContainer.newInstance(), new HashMap<>(), new HashSet<>(), start, max);//getEm().createQuery("SELECT m FROM PluginModel m", PluginModel.class).getResultList();
    }
 
@@ -30,7 +30,7 @@ public interface PluginDao {
      * @param max
      * @return
      */
-   default List<PluginModel> getInstallPlugins(int startAt, int  max) {
+   default List<PluginModel> getInstallPlugins(int startAt, int  max) throws IllegalAccessException {
        RestrictionsContainer container = RestrictionsContainer.newInstance();
        container.addEq("install", Boolean.TRUE);
        return getFlexibleSearch().doSearch(PluginModel.class, container, new HashMap<>(), new HashSet<>(), startAt, max);
@@ -42,7 +42,7 @@ public interface PluginDao {
      * @param max
      * @return
      */
-   default List<PluginModel> getAutoInstallPluginsNotYetInstall(int startAt, int max) {
+   default List<PluginModel> getAutoInstallPluginsNotYetInstall(int startAt, int max) throws IllegalAccessException {
         RestrictionsContainer container = RestrictionsContainer.newInstance();
         container.addEq("install", Boolean.FALSE);
         container.addEq("autoInstall", Boolean.TRUE);

@@ -8,19 +8,19 @@ import java.util.Date;
 
 
 @MappedSuperclass
-public abstract class ItemModel implements Serializable {
+public abstract class AbstractItem implements Serializable {
+
+   // private String tenantid;
+
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
     private Date createdAt;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModif;
 
     public Date getCreatedAt() {
         return createdAt;
-    }
-
-    protected void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
     }
 
     public Date getLastModif() {
@@ -30,4 +30,6 @@ public abstract class ItemModel implements Serializable {
     public void setLastModif(Date lastModif) {
         this.lastModif = lastModif;
     }
+
+
 }

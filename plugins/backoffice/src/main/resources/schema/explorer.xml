@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<explorer-tree xmlns="http://www.isis.cm/config/explorer-tree">
+    <navigation-node id="backoffice.security" position="97" icon="fa-solid fa-brain">
+        <navigation-node id="isischatbot.kbs.kwnonledgetype" code="KnowledgeType" position="90" icon="fa-solid fa-layer-group" viewMode="list,view" />
+        <navigation-node id="isischatbot.kbs.kwnonledgelabel" code="KnowlegeLabel" position="91" icon="fa-solid fa-registered" viewMode="list,view" />
+    </navigation-node>
+</explorer-tree>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.isis.cm/config/isis-typeoperation"
+           xmlns:tns="http://www.isis.cm/config/isis-typeoperation"
+           elementFormDefault="qualified">
+
+    <!--  <xs:element name="typeOperation" type="tns:TypeOperation"> </xs:element>
+         Create context type represented configuration of item -->
+    <xs:simpleType name="TypeOperation">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="create" />
+            <xs:enumeration value="edit" />
+            <xs:enumeration value="delete" />
+            <xs:enumeration value="print" />
+            <xs:enumeration value="import" />
+            <xs:enumeration value="none" />
+        </xs:restriction>
+     </xs:simpleType>
+</xs:schema>

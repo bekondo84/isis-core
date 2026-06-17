@@ -1,6 +1,6 @@
 package com.teratech.model;
 
-import com.teratech.model.generic.ItemModel;
+import com.teratech.model.generic.AbstractItem;
 import com.teratech.model.media.MediaModel;
 import jakarta.persistence.*;
 
@@ -13,7 +13,7 @@ import java.util.Objects;
 @Entity
 @IdClass(PluginId.class)
 @Table(name = "adm_plugin")
-public class PluginModel extends ItemModel implements Serializable {
+public class PluginModel extends AbstractItem implements Serializable {
 
     @Id
     private String id ;

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.isis.cm/config/dashboard"
+           xmlns:tns="http://www.isis.cm/config/dashboard"
+           xmlns:actions="http://www.isis.cm/config/isis-actions">
+    <xs:import namespace="http://www.isis.cm/config/isis-actions" schemaLocation="isis-actions.xsd"/>
+    <xs:element name="dashbord">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="section" type="tns:DashboardSectionType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="DashboardSubSectionType">
+        <xs:sequence>
+            <xs:element name="field" type="tns:DashboardItem" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+        <xs:attribute name="columns"  type="xs:integer" />
+        <xs:attribute name="header" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    <!--Section on the Editor Area -->
+    <xs:complexType name="DashboardSectionType">
+        <xs:choice>
+            <xs:sequence>
+                <xs:element name="field" type="tns:DashboardItem" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:sequence>
+                <xs:element name="section" type="tns:DashboardSubSectionType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:choice>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+        <xs:attribute name="columns"  type="xs:integer" default="1"/>
+        <xs:attribute name="header" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    <xs:complexType name="DashboardItem">
+        <xs:sequence>
+            <xs:element name="actions" type="actions:actions" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" />
+        <xs:attribute name="action" type="xs:string" />
+        <xs:attribute name="type" type="tns:DashboardType" />
+        <xs:attribute name="refresh" type="xs:integer"  />
+    </xs:complexType>
+    <xs:simpleType name="DashboardType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="card" />
+            <xs:enumeration value="pie" />
+            <xs:enumeration value="line" />
+            <xs:enumeration value="doughnut" />
+            <xs:enumeration value="bar" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

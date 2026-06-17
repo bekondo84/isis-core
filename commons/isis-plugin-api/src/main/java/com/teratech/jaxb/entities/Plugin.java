@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.06.08 à 11:41:27 AM WAT 
+// Généré le : 2026.06.17 à 01:13:57 PM WAT 
 //
 
 
@@ -52,21 +52,28 @@ import jakarta.xml.bind.annotation.*;
     "medias",
     "depends"
 })
-@XmlRootElement(name = "plugin")
+@XmlRootElement(name = "plugin", namespace = "http://www.isis.cm/config/plugin")
 public class Plugin {
 
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin", required = true)
     protected String name;
-    @XmlElement(required = true)
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin", required = true)
     protected String author;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected int sequence;
-    @XmlElement(name = "auto_install", defaultValue = "false")
+    @XmlElement(name = "auto_install", namespace = "http://www.isis.cm/config/plugin", defaultValue = "false")
     protected boolean autoInstall;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected String summary;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected String description;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected String category;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected ContactType contact;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected MediasType medias;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected DependsType depends;
 
     /**

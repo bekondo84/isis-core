@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.isis.cm/config/isis-color"
+           xmlns:tns="http://www.isis.cm/config/isis-color"
+           elementFormDefault="qualified">
+
+    <!--  <xs:element name="color" type="tns:colorType"> </xs:element>
+         Create context type represented configuration of item -->
+    <xs:simpleType name="colorType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="bg-primary" />
+            <xs:enumeration value="bg-secondary" />
+            <xs:enumeration value="bg-success" />
+            <xs:enumeration value="bg-danger" />
+            <xs:enumeration value="bg-warning" />
+            <xs:enumeration value="bg-info" />
+            <xs:enumeration value="bg-light" />
+            <xs:enumeration value="bg-dark" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

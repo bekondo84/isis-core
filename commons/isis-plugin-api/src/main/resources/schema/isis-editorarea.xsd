@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="http://www.isis.cm/config/editor-area"
+           xmlns:tns="http://www.isis.cm/config/editor-area"
+           xmlns:actions="http://www.isis.cm/config/isis-actions"
+           xmlns:shutcuts="http://www.isis.cm/config/isis-shutcut"
+           xmlns:widget="http://www.isis.cm/config/isis-widget">
+    <xs:import namespace="http://www.isis.cm/config/isis-actions" schemaLocation="isis-actions.xsd"/>
+    <xs:import namespace="http://www.isis.cm/config/isis-shutcut" schemaLocation="isis-shutcut.xsd"/>
+    <xs:import namespace="http://www.isis.cm/config/isis-widget" schemaLocation="isis-widget.xsd"/>
+
+    <xs:element name="editor-area">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="component" type="tns:editorAreaType" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="actions:actions" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="create" type="xs:boolean" default="true" />
+            <xs:attribute name="update" type="xs:boolean" default="true" />
+            <xs:attribute name="delete" type="xs:boolean" default="true" />
+            <xs:attribute name="createOnField" type="xs:boolean" default="true" />
+            <xs:attribute name="follower" type="xs:boolean" default="true" />
+            <xs:attribute name="filelink" type="xs:boolean" default="false" />
+            <xs:attribute name="searchKey" type="xs:string" default="" />
+            <xs:attribute name="searchTitle" type="xs:string" default="" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="editorAreaType">
+        <xs:sequence>
+            <xs:element name="common" type="tns:commonType" minOccurs="0" maxOccurs="1" />
+            <xs:element name="tab" type="tns:tabType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--Tab pane component for grouping field -->
+    <xs:complexType name="commonType">
+        <xs:sequence>
+            <xs:element name="form" type="tns:formType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="formType">
+        <xs:choice>
+            <xs:element name="section" type="tns:sectionType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="tabType">
+        <xs:sequence>
+           <xs:element name="form" type="tns:formType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+    </xs:complexType>
+
+    <xs:complexType name="subSectionType">
+        <xs:sequence>
+            <xs:element name="field" type="tns:fieldType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:sequence>
+                <xs:element name="shutcuts" type="shutcuts:shutcuts" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+        <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+        <xs:attribute name="columns"  type="xs:integer" default="2"/>
+        <xs:attribute name="header" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    <!--Section on the Editor Area -->
+    <xs:complexType name="sectionType">
+        <xs:complexContent>
+            <xs:extension base="tns:subSectionType">
+                <xs:choice>
+                    <xs:sequence>
+                        <xs:element name="section" type="tns:subSectionType" minOccurs="0" maxOccurs="unbounded" />
+                    </xs:sequence>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="fieldType">
+        <xs:sequence>
+            <xs:element ref="actions:actions" minOccurs="0" maxOccurs="1" />
+            <xs:element name="filters" maxOccurs="1" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="filter" maxOccurs="unbounded" minOccurs="0" type="tns:filterType" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute name="qualifier" type="xs:string" />
+        <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+        <xs:attribute name="widget" type="widget:widgetType" />
+        <xs:attribute name="editable" type="xs:boolean" default="true" />
+        <xs:attribute name="updatable" type="xs:boolean" default="true" />
+        <xs:attribute name="deletable" type="xs:boolean" default="true" />
+        <xs:attribute name="search"  type="xs:boolean" default="false" />
+        <xs:attribute name="observable" type="xs:boolean" default="false" />
+        <xs:attribute name="observe" type="xs:string" default="" />
+        <xs:attribute name="handler"  type="xs:string" default="" />
+    </xs:complexType>
+    <xs:complexType name="filterType">
+        <xs:attribute name="source" type="xs:string" />
+        <!-- when prefix with # value refered current object field -->
+        <xs:attribute name="value" type="xs:string" />
+        <xs:attribute name="operator" type="tns:FilterOperator" default="eq" />
+    </xs:complexType>
+    <xs:simpleType name="FilterOperator">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="eq" />
+            <xs:enumeration value="neq" />
+            <xs:enumeration value="gt" />
+            <xs:enumeration value="ge" />
+            <xs:enumeration value="lt" />
+            <xs:enumeration value="le" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -89,7 +89,7 @@ public class PluginServiceImpl implements PluginService {
             RestrictionsContainer container = RestrictionsContainer.newInstance();
             container.addEq("id", wrapper.getPluginId());
             container.addEq("version", wrapper.getDescriptor().getVersion());
-            PluginModel pluginModel = (PluginModel) flexibleSearch.find(PluginModel.class, container);
+            PluginModel pluginModel = (PluginModel) flexibleSearch.find(PluginModel.class, container, new HashSet<>());
 
             if (Objects.isNull(pluginModel)) {//Plugin not yet register
                 Plugin plugin = jaxbService.getPluginFromResources(wrapper);
@@ -171,7 +171,9 @@ public class PluginServiceImpl implements PluginService {
         RestrictionsContainer container = RestrictionsContainer.newInstance();
         container.addEq("id", plugin);
         container.addEq("version", plugin);
-        PluginModel pluginModel = (PluginModel) flexibleSearch.find(PluginModel.class, container);
+        //Set<String> properties = new HashSet<>();
+       // properties.add("dependencies");
+        PluginModel pluginModel = (PluginModel) flexibleSearch.find(PluginModel.class, container, new HashSet<>());
         return pluginModel!= null && pluginModel.isInstall() ? true : false;
     }
 
@@ -194,7 +196,7 @@ public class PluginServiceImpl implements PluginService {
      * @return
      */
     @Override
-    public List getPlugins(int start, int max) {
+    public List getPlugins(int start, int max) throws IllegalAccessException {
         return pluginDao.getPlugins(start, max);
     }
 }

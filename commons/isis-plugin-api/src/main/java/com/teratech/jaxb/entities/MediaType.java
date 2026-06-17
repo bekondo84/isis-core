@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.06.08 à 11:41:27 AM WAT 
+// Généré le : 2026.06.17 à 01:13:57 PM WAT 
 //
 
 
@@ -34,7 +34,7 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaType")
+@XmlType(name = "mediaType", namespace = "http://www.isis.cm/config/plugin")
 public class MediaType {
 
     @XmlAttribute(name = "name", required = true)

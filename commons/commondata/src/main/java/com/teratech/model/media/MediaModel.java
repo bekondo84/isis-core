@@ -1,6 +1,6 @@
 package com.teratech.model.media;
 
-import com.teratech.model.generic.ItemModel;
+import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "adm_media")
-public class MediaModel extends ItemModel implements Serializable {
+public class MediaModel extends AbstractItem implements Serializable {
 
     @Id
     private String id ;
