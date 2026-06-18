@@ -1,5 +1,7 @@
 package com.teratech.metadata;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.lang.annotation.*;
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -8,4 +10,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface WCMS {
     String template();
+    String plugin() default StringUtils.EMPTY;
 }

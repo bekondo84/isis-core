@@ -5,6 +5,7 @@ import com.teratech.utils.ApplicationConstans;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Unmarshaller;
+import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginWrapper;
 
 import java.io.InputStream;
@@ -22,11 +23,19 @@ public interface JAXBService {
      * @throws JAXBException
      */
     default Context getTemplateFromResources(PluginWrapper wrapper, String template) throws JAXBException {
+
+        if (StringUtils.isBlank(template))
+            return null;
+
         ClassLoader pluginClassLoader = Thread.currentThread().getContextClassLoader();
         if (Objects.nonNull(wrapper)) {
             pluginClassLoader = wrapper.getPluginClassLoader();
         }
+
         InputStream inputStream = pluginClassLoader.getResourceAsStream(ApplicationConstans.CMS.SCHEMA_TEMPLATE_XML +template);
+
+        if (Objects.isNull(inputStream))
+            return null;
         System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_TEMPLATE_XML+template)));
         JAXBContext context = JAXBContext.newInstance(Context.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();

@@ -8,13 +8,17 @@ import com.teratech.services.impl.JAXBServiceImpl;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.xml.bind.JAXBException;
+import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,22 +27,29 @@ public class MetaDataServiceImpl implements MetaDataService {
 
     //private static final Logger LOG = LoggerFactory.getLogger(MetaDataServiceImpl.class);
 
+    private final PluginManager pluginManager;
     private JAXBService jaxbService;
 
-    public MetaDataServiceImpl() {
+    @Autowired
+    public MetaDataServiceImpl(PluginManager pluginManager) {
+        this.pluginManager = pluginManager;
         jaxbService = new JAXBServiceImpl();
     }
 
     /**
      * Build MetaData From Navigation Node
      * @param navNode
-     * @param wrapper
+     * @param pluginid
      * @return
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
     @Override
-    public MetaData buildMetaDataFrom(NavigationLinkData navNode, PluginWrapper wrapper) throws ClassNotFoundException, JAXBException {
+    public MetaData buildMetaDataFrom(NavigationLinkData navNode, String pluginid) throws ClassNotFoundException, JAXBException {
+        PluginWrapper wrapper = null ;
+        if (StringUtils.isNotBlank(pluginid)) {
+            wrapper = pluginManager.getPlugin(pluginid);
+        }
         MetaData metaData = null ;
         if (StringUtils.isEmpty(navNode.getTemplate())) {//Use Class to build metadata
             Class clazz =  null;
@@ -73,12 +84,93 @@ public class MetaDataServiceImpl implements MetaDataService {
 
         //Extract all declared fields of this class and it superclass
         List<Field> fields = getDeclaredFieldsFrom(clazz);
-        //Build ListView Data
-        buildListView(template, metaData, fields);
-        //Build EditorArea Data
-        buildEditorArea(wrapper, template, metaData, fields, principal);
+
+        if (Objects.nonNull(template)) {
+            //Build ListView Data
+            buildListView(wrapper, template, metaData, fields);
+            //Build EditorArea Data
+            buildEditorArea(wrapper, template, metaData, fields, principal);
+
+            buildKabanView(template, metaData);
+        } else  {
+            //Build ListView Data
+            buildListView(wrapper, clazz, metaData, fields, principal);
+            //Build Editor Area
+            buildEditorArea(wrapper, clazz, metaData, fields, principal);
+        }
 
         return metaData;
+    }
+
+    private void buildKabanView(Context template, MetaData metaData) {
+        if (Objects.isNull(template)
+                || Objects.isNull(template.getListView())
+                || Objects.isNull(template.getListView().getKanban())
+                || StringUtils.isBlank(template.getListView().getKanban().getTemplate()))
+            return;
+        KabanViewData kabanViewData = new KabanViewData(template.getListView().getKanban().getTemplate());
+        metaData.setKabanView(kabanViewData);
+    }
+
+    private void buildEditorArea(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, boolean principal) throws JAXBException {
+         FormData formData = new FormData();
+        List<Field> simpleFields = fields.stream().filter(field -> !Collection.class.isAssignableFrom(field.getType())).collect(Collectors.toUnmodifiableList());
+        List<Field> collectionsFields = fields.stream().filter(field -> Collection.class.isAssignableFrom(field.getType())).collect(Collectors.toUnmodifiableList());
+        SectionData commonSection = new SectionData("hac.commons.section", "hac.commons.section", -1);
+
+        for (Field field : simpleFields) {
+            MetaColumn column = new MetaColumn(field.getType().getName(), field.getName());
+            commonSection.addField(column);
+            setDefaultWidget(field, column);
+
+            //Case of ManyToOne
+            if (field.isAnnotationPresent(ManyToOne.class)) {
+                setComplexTypeField(wrapper, field, column);
+            }
+        }
+        //Process List fields
+        for (Field field : collectionsFields) {
+            SectionData sectionData = new SectionData(field.getName(), field.getName(), 1);
+            formData.addSection(sectionData);
+            Class<?> elementType = getCollectionDeclaredType(field);
+            MetaColumn column = new MetaColumn(elementType.getName(), field.getName());
+            sectionData.addField(column);
+            setDefaultWidget(field, column);
+            setComplexTypeField(wrapper, field, column);
+        }
+
+    }
+
+    private static Class<?> getCollectionDeclaredType(Field field) {
+       // System.out.println("Field name : "+field.getName());
+        ParameterizedType type = (ParameterizedType) field.getGenericType();
+        Class<?> elementType = (Class<?>) type.getActualTypeArguments()[0];
+        return elementType;
+    }
+
+    /**
+     *
+     * @param metaData
+     * @param fields
+     */
+    private void buildListView(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, boolean principal) throws JAXBException {
+        final ListViewData listViewData = metaData.getListView();
+
+        List<Field> managedFields = fields.stream().filter(field -> !Collection.class.isAssignableFrom(field.getType()))
+                .collect(Collectors.toUnmodifiableList());
+
+        for (Field field : managedFields) {
+            MetaColumn column = new MetaColumn(field.getType().getName(), field.getName());
+            SearchColumn searchColumn = new SearchColumn(field.getType().getName(), field.getName(), null);
+            listViewData.addColumn(column);
+            listViewData.addSearch(searchColumn);
+            //TODO Set th field title and description
+            setDefaultWidget(field, column);
+
+            if (field.getType().isAssignableFrom(ManyToOne.class)) {
+                setComplexTypeField(wrapper, field, column);
+            }
+        }
     }
 
     /**
@@ -197,6 +289,10 @@ public class MetaDataServiceImpl implements MetaDataService {
 
         for (Field field : managedFields) {
             final MetaColumn column = new MetaColumn(field.getType().getName(), field.getName());
+
+            if(Collection.class.isAssignableFrom(field.getType()))
+                column.setType(getCollectionDeclaredType(field).getName());
+
             sectionData.addField(column);
             setDefaultWidget(field, column);
             FieldType fieldType = fieldTypeMap.get(field.getName());
@@ -222,9 +318,9 @@ public class MetaDataServiceImpl implements MetaDataService {
             if (principal) {//This is done just for the principal
                 if (field.isAnnotationPresent(ManyToOne.class)
                         || field.isAnnotationPresent(OneToMany.class)
-                        || field.isAnnotationPresent(ManyToMany.class)) {
-                    String templatename = field.getType().isAnnotationPresent(WCMS.class) ? field.getType().getAnnotation(WCMS.class).template() : field.getType().getSimpleName();
-                    //buildMetaDataFrom(field.getType(), wrapper, templatename.concat(".xml"), false);
+                        || field.isAnnotationPresent(ManyToMany.class)
+                        || field.isAnnotationPresent(OneToOne.class)) {
+                    setComplexTypeField(wrapper, field, column);
                 }
             }
         }
@@ -258,7 +354,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param meta
      * @param fields
      */
-    private void buildListView(Context template, MetaData meta, List<Field> fields) {
+    private void buildListView(PluginWrapper wrapper, Context template, MetaData meta, List<Field> fields) throws JAXBException {
         //Fields use to build Table column
         final List<Field> managedFields = new ArrayList<>();
         Map<String, ColumnType> columnsTypeMap = new HashMap();
@@ -293,6 +389,9 @@ public class MetaDataServiceImpl implements MetaDataService {
             if (column.getSearch()) {
                 listView.addSearch(buildSearchField(field));
             }
+            if (field.isAnnotationPresent(ManyToOne.class)) {
+                setComplexTypeField(wrapper, field, column);
+            }
 
         }
 
@@ -304,6 +403,41 @@ public class MetaDataServiceImpl implements MetaDataService {
             }
         }
 
+    }
+
+    /**
+     *
+     * @param wrapper
+     * @param field
+     * @param column
+     * @throws JAXBException
+     */
+    private void setComplexTypeField(PluginWrapper wrapper, Field field, MetaColumn column) throws JAXBException {
+
+        Class fieldClass = field.getType();
+
+        if (Collection.class.isAssignableFrom(fieldClass))
+            fieldClass = getCollectionDeclaredType(field);
+
+        WCMS wcms = fieldClass.isAnnotationPresent(WCMS.class) ? (WCMS) fieldClass.getAnnotation(WCMS.class) : null;
+
+        String fieldtemplate = Objects.nonNull(wcms) ? wcms.template() : field.getType().getSimpleName();
+        String fieldPluginId = Objects.nonNull(wcms) ? wcms.plugin() : null;
+
+        PluginWrapper fieldWrapper = wrapper;
+        if (StringUtils.isNotBlank(fieldPluginId)) {
+            fieldWrapper = pluginManager.getPlugin(fieldPluginId);
+        }
+        getWcms result = new getWcms(fieldtemplate, fieldWrapper);
+        column.setMeta(buildMetaDataFrom(field.getType(), result.fieldWrapper(), result.templatename().concat(".xml"), false));
+    }
+
+    /**
+     * Record which map wrapper and templatename
+     * @param templatename
+     * @param fieldWrapper
+     */
+    private record getWcms(String templatename, PluginWrapper fieldWrapper) {
     }
 
     /**

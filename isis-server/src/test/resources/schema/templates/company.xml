@@ -23,6 +23,11 @@
             <a:action name="cronJob.start.action" code="cronJob.start.action" icon="fa-regular fa-circle-play" position="workflow"/>
             <a:action name="cronJob.stop.action" code="cronJob.stop.action" icon="fa-regular fa-circle-stop" position="workflow"/>
         </a:actions>
+        <ls:kanban>
+            <ls:template>
+                Test HTML ICI POUR LE KABAN
+            </ls:template>
+        </ls:kanban>
     </ls:list-view>
     <e:editor-area searchKey="code" createOnField="false" >
         <e:component>

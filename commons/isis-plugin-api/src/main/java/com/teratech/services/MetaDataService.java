@@ -20,10 +20,10 @@ public interface MetaDataService {
     /**
      *  Build MetaData From Navigation Node
      * @param navNode
-     * @param wrapper
+     * @param pluginid
      * @return
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
-    MetaData buildMetaDataFrom (NavigationLinkData navNode, PluginWrapper wrapper) throws ClassNotFoundException, JAXBException;
+    MetaData buildMetaDataFrom (NavigationLinkData navNode, String pluginid) throws ClassNotFoundException, JAXBException;
 }
