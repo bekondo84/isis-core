@@ -1,8 +1,6 @@
 package com.teratech.isis.dao.impl;
 
 import com.teratech.dao.FlexibleSearch;
-import com.teratech.tools.persistence.DAOUtilis;
-import com.teratech.tools.persistence.EQ;
 import com.teratech.tools.persistence.Predicat;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import jakarta.persistence.*;
@@ -32,17 +30,9 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public Object find(Class clazz, RestrictionsContainer container, Set<String> properties) {
-        final CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        final CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(clazz);
-        final Root<?> root = criteriaQuery.from(clazz);
-        criteriaQuery.select(root);
-        criteriaQuery.where(criteriaBuilder.and(container.getPredicats().stream().map(pred -> pred.generateJPAPredicat(criteriaBuilder, root)).collect(Collectors.toList())));
-
-        TypedQuery<?> query = em.createQuery(criteriaQuery);
-        return query.getSingleResultOrNull();
+    public Object find(Class clazz, Object pk) {
+            return em.find(clazz, pk);
     }
-
 
     /**
      * Find Object base on the entity unique field
@@ -51,21 +41,31 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public Object find(Object entity) throws IllegalAccessException {
-        RestrictionsContainer container = RestrictionsContainer.newInstance();
-        Field[] fields = entity.getClass().getDeclaredFields();
-        final Set<String> properties = new HashSet<>();
+    public Object find(Object entity) throws IllegalAccessException, InstantiationException, NoSuchFieldException {
+        List<Field> fields = getEntityFields(entity.getClass());
+        System.out.println("---------------- : "+entity.getClass().isAnnotationPresent(IdClass.class)+" ----- "+entity.getClass());
+        Object primaryKey = null;
+        if (entity.getClass().isAnnotationPresent(IdClass.class)) {
+              Class idClass = entity.getClass().getAnnotation(IdClass.class).getClass();
+              primaryKey = idClass.newInstance();
+              List<Field> ids = fields.stream().filter(f -> f.isAnnotationPresent(Id.class)).collect(Collectors.toUnmodifiableList());
 
-        for (Field field : fields) {
-            field.setAccessible(true);
-            buildPrimaryKeysRestriction(entity, field, container);
-            if (field.isAnnotationPresent(ElementCollection.class) && field.getAnnotation(ElementCollection.class).fetch()==FetchType.LAZY
-              || field.isAnnotationPresent(ManyToMany.class) && field.getAnnotation(ManyToMany.class).fetch()==FetchType.LAZY
-              || field.isAnnotationPresent(OneToMany.class) && field.getAnnotation(OneToMany.class).fetch()==FetchType.LAZY) {
-                  properties.add(field.getName());
+            for (Field id : ids) {
+                Field fd = idClass.getDeclaredField(id.getName());
+                fd.setAccessible(true);
+                id.setAccessible(true);
+                fd.set(primaryKey, id.get(entity));
+            }
+
+        } else {
+            Field field =  fields.stream().filter(f -> f.isAnnotationPresent(Id.class)).findAny().orElse(null);
+            if (Objects.nonNull(field)) {
+                field.setAccessible(true);
+                primaryKey = field.get(entity);
             }
         }
-        return find(entity.getClass(), container, properties);
+
+        return find(entity.getClass(), primaryKey);
     }
 
 
@@ -259,5 +259,22 @@ public class FlexibleSearchImpl implements FlexibleSearch {
             }
         }
     }
+
+    /**
+     *
+     * @param clazz
+     * @return
+     */
+    private List<Field> getEntityFields(Class clazz) {
+        List<Field> fields  = new ArrayList<>();
+        Class current = clazz;
+
+        while (!current.equals(Object.class)) {
+            fields.addAll(Arrays.asList(current.getDeclaredFields()));
+            current = current.getSuperclass();
+        }
+        return fields;
+    }
+
 
 }

@@ -48,7 +48,7 @@ public class PersistenceManagerImpl implements PersistenceManager {
                 em.persist(entity);
             }
             return (S) flexibleSearch.find(entity);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
+        } catch (IllegalAccessException | NoSuchFieldException | InstantiationException e) {
             throw new ModelServiceException(e);
         }
 
@@ -100,7 +100,7 @@ public class PersistenceManagerImpl implements PersistenceManager {
     public void delete(Object entity) throws ModelServiceException {
         try {
             em.remove(flexibleSearch.find(entity));
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | InstantiationException | NoSuchFieldException e) {
             throw new ModelServiceException(e);
         }
     }

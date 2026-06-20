@@ -23,20 +23,20 @@ public interface PluginService {
      * Refesh the list of available plugins
      * @return
      */
-    String refresh() throws JAXBException, ModelServiceException;
+    String refresh() throws JAXBException, ModelServiceException, NoSuchFieldException, IllegalAccessException, InstantiationException;
     /**
      *
      * @return
      * @throws JAXBException
      */
-    String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException;
+    String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException;
 
     /**
      * Install the plugnid
      * @param pluginid
      * @return
      */
-    boolean install (final String pluginid, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException;
+    boolean install (final String pluginid, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException;
 
     /**
      *
@@ -44,14 +44,14 @@ public interface PluginService {
      * @param version
      * @return
      */
-    boolean isInstall(final String plugin, String version);
+    boolean isInstall(final String plugin, String version) throws NoSuchFieldException, IllegalAccessException, InstantiationException;
 
     /**
      *
      * @param plugin
      * @return
      */
-    boolean isInstall(final String plugin);
+    boolean isInstall(final String plugin) throws NoSuchFieldException, IllegalAccessException, InstantiationException;
 
     /**
      *

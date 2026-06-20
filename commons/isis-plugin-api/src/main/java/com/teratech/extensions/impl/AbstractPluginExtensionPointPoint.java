@@ -36,7 +36,7 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
      * @return
      */
     @Override
-    public boolean install(PluginWrapper wrapper) throws JAXBException {
+    public boolean install(PluginWrapper wrapper) throws JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException {
         //get the projet declaration
         Plugin plugin = jaxbService.getPluginFromResources(wrapper);
         //List of uninstall plugin

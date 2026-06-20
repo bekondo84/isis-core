@@ -1,5 +1,7 @@
 package com.teratech.isis.services.impl;
 
+import com.teratech.dao.FlexibleSearch;
+import com.teratech.isis.dao.impl.FlexibleSearchImpl;
 import com.teratech.metadata.MetaData;
 import com.teratech.services.MetaDataService;
 import jakarta.xml.bind.JAXBException;
@@ -15,11 +17,13 @@ class MetaDataServiceImplTest {
 
     private MetaDataService metaDataService ;
     private PluginManager pluginManager;
+    private FlexibleSearch flexibleSearch;
 
     @BeforeEach
     void setUp() {
         pluginManager = Mockito.mock(PluginManager.class);
-        metaDataService = new MetaDataServiceImpl(pluginManager);
+        flexibleSearch = Mockito.mock(FlexibleSearchImpl.class);
+        metaDataService = new MetaDataServiceImpl(pluginManager, flexibleSearch);
     }
 
     @Test

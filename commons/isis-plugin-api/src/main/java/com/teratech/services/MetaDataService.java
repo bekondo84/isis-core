@@ -2,6 +2,7 @@ package com.teratech.services;
 
 import com.teratech.metadata.MetaData;
 import com.teratech.metadata.NavigationLinkData;
+import com.teratech.model.cms.MenuItemModel;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginWrapper;
 
@@ -19,11 +20,10 @@ public interface MetaDataService {
 
     /**
      *  Build MetaData From Navigation Node
-     * @param navNode
-     * @param pluginid
+     * @param menuItem
      * @return
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
-    MetaData buildMetaDataFrom (NavigationLinkData navNode, String pluginid) throws ClassNotFoundException, JAXBException;
+    MetaData buildMetaDataFrom (MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException;
 }

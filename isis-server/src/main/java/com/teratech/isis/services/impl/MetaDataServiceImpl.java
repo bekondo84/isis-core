@@ -1,7 +1,10 @@
 package com.teratech.isis.services.impl;
 
+import com.teratech.dao.FlexibleSearch;
 import com.teratech.jaxb.entities.*;
 import com.teratech.metadata.*;
+import com.teratech.model.cms.MenuItemModel;
+import com.teratech.model.cms.MetaTypeModel;
 import com.teratech.services.JAXBService;
 import com.teratech.services.MetaDataService;
 import com.teratech.services.impl.JAXBServiceImpl;
@@ -29,38 +32,44 @@ public class MetaDataServiceImpl implements MetaDataService {
 
     private final PluginManager pluginManager;
     private JAXBService jaxbService;
+    private final FlexibleSearch flexibleSearch;
 
     @Autowired
-    public MetaDataServiceImpl(PluginManager pluginManager) {
+    public MetaDataServiceImpl(PluginManager pluginManager, FlexibleSearch flexibleSearch) {
         this.pluginManager = pluginManager;
+        this.flexibleSearch = flexibleSearch;
         jaxbService = new JAXBServiceImpl();
     }
 
     /**
      * Build MetaData From Navigation Node
-     * @param navNode
-     * @param pluginid
+     * @param menuItem
      * @return
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
     @Override
-    public MetaData buildMetaDataFrom(NavigationLinkData navNode, String pluginid) throws ClassNotFoundException, JAXBException {
+    public MetaData buildMetaDataFrom(MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException {
+
+        //Get Type code
+        MetaTypeModel metaType = (MetaTypeModel) flexibleSearch.find(new MetaTypeModel(menuItem.getType()));
+        if (Objects.isNull(metaType))
+            throw new IllegalArgumentException(String.format("No MetaType found for type code %s", menuItem.getType()));
+
         PluginWrapper wrapper = null ;
+        final String pluginid = Objects.nonNull(metaType.getPlugin()) ? metaType.getPlugin().getId() : null;
         if (StringUtils.isNotBlank(pluginid)) {
             wrapper = pluginManager.getPlugin(pluginid);
         }
         MetaData metaData = null ;
-        if (StringUtils.isEmpty(navNode.getTemplate())) {//Use Class to build metadata
-            Class clazz =  null;
-            if (Objects.isNull(wrapper)) {
-                clazz = Class.forName(navNode.getType());
-            } else {
-                clazz = wrapper.getPluginClassLoader().loadClass(navNode.getType());
-            }
-            metaData =  buildMetaDataFrom(clazz, wrapper, navNode.getTemplate(), true);
+        Class clazz =  null;
+
+        if (Objects.isNull(wrapper)) {
+            clazz = Class.forName(metaType.getClassName());
+        } else {
+            clazz = wrapper.getPluginClassLoader().loadClass(metaType.getClassName());
         }
-        return metaData;
+        return buildMetaDataFrom(clazz, wrapper, metaType.getTemplate(), true);
     }
 
     /**
@@ -114,10 +123,11 @@ public class MetaDataServiceImpl implements MetaDataService {
 
     private void buildEditorArea(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, boolean principal) throws JAXBException {
          FormData formData = new FormData();
+        metaData.getEditorarea().setForm(formData);
         List<Field> simpleFields = fields.stream().filter(field -> !Collection.class.isAssignableFrom(field.getType())).collect(Collectors.toUnmodifiableList());
         List<Field> collectionsFields = fields.stream().filter(field -> Collection.class.isAssignableFrom(field.getType())).collect(Collectors.toUnmodifiableList());
         SectionData commonSection = new SectionData("hac.commons.section", "hac.commons.section", -1);
-
+        formData.addSection(commonSection);
         for (Field field : simpleFields) {
             MetaColumn column = new MetaColumn(field.getType().getName(), field.getName());
             commonSection.addField(column);
@@ -167,7 +177,7 @@ public class MetaDataServiceImpl implements MetaDataService {
             //TODO Set th field title and description
             setDefaultWidget(field, column);
 
-            if (field.getType().isAssignableFrom(ManyToOne.class)) {
+            if (field.isAnnotationPresent(ManyToOne.class)) {
                 setComplexTypeField(wrapper, field, column);
             }
         }
@@ -285,7 +295,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         Map<String, FieldType> fieldTypeMap = sectionType.getField().stream().collect(Collectors.toMap(FieldType::getQualifier, fieldType -> fieldType));
         final Set<String> managedFieldNames = fieldTypeMap.keySet();
         List<Field> managedFields =  fields.stream().filter(field -> managedFieldNames.contains(field.getName())).collect(Collectors.toUnmodifiableList());
-        System.out.println("buildSubsectionType "+" section name : "+sectionData.getName()+"  : "+managedFields.size());
+        //System.out.println("buildSubsectionType "+" section name : "+sectionData.getName()+"  : "+managedFields.size());
 
         for (Field field : managedFields) {
             final MetaColumn column = new MetaColumn(field.getType().getName(), field.getName());

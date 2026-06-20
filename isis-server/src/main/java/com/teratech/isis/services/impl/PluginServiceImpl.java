@@ -77,7 +77,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Transactional
     @Override
-    public String refresh() throws JAXBException, ModelServiceException {
+    public String refresh() throws JAXBException, ModelServiceException, NoSuchFieldException, IllegalAccessException, InstantiationException {
         //Unload all plugin
         pluginManager.unloadPlugins();
         //Reload all the plugins
@@ -86,10 +86,7 @@ public class PluginServiceImpl implements PluginService {
         List<PluginWrapper> wrappers = pluginManager.getPlugins();
 
         for (PluginWrapper wrapper : wrappers) {
-            RestrictionsContainer container = RestrictionsContainer.newInstance();
-            container.addEq("id", wrapper.getPluginId());
-            container.addEq("version", wrapper.getDescriptor().getVersion());
-            PluginModel pluginModel = (PluginModel) flexibleSearch.find(PluginModel.class, container, new HashSet<>());
+            PluginModel pluginModel = (PluginModel) flexibleSearch.find(new PluginModel(wrapper.getPluginId(), wrapper.getDescriptor().getVersion()));
 
             if (Objects.isNull(pluginModel)) {//Plugin not yet register
                 Plugin plugin = jaxbService.getPluginFromResources(wrapper);
@@ -110,7 +107,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Override
     @Transactional
-    public String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException {
+    public String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException {
         List<PluginModel> records = pluginDao.getAutoInstallPluginsNotYetInstall(0, -1);List<PluginWrapper> wrappers = pluginManager.getPlugins();
 
         for (PluginModel record : records) {
@@ -134,7 +131,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Transactional
     @Override
-    public boolean install(String plugin, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException {
+    public boolean install(String plugin, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException {
         //Start the Plugin
         PluginState pluginState = pluginManager.startPlugin(plugin);
 
@@ -166,14 +163,9 @@ public class PluginServiceImpl implements PluginService {
      * @return
      */
     @Override
-    public boolean isInstall(String plugin, String version) {
+    public boolean isInstall(String plugin, String version) throws NoSuchFieldException, IllegalAccessException, InstantiationException {
 
-        RestrictionsContainer container = RestrictionsContainer.newInstance();
-        container.addEq("id", plugin);
-        container.addEq("version", plugin);
-        //Set<String> properties = new HashSet<>();
-       // properties.add("dependencies");
-        PluginModel pluginModel = (PluginModel) flexibleSearch.find(PluginModel.class, container, new HashSet<>());
+        PluginModel pluginModel = (PluginModel) flexibleSearch.find(new PluginModel(plugin, version));
         return pluginModel!= null && pluginModel.isInstall() ? true : false;
     }
 
@@ -182,7 +174,7 @@ public class PluginServiceImpl implements PluginService {
      * @return
      */
     @Override
-    public boolean isInstall(String plugin) {
+    public boolean isInstall(String plugin) throws NoSuchFieldException, IllegalAccessException, InstantiationException {
         PluginWrapper wrapper = pluginManager.getPlugin(plugin);
 
         if (Objects.isNull(wrapper))

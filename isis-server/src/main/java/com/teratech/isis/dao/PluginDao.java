@@ -56,7 +56,7 @@ public interface PluginDao {
      * @return
      * @throws IllegalAccessException
      */
-   default PluginModel getPlugin(String id, String version) throws IllegalAccessException {
+   default PluginModel getPlugin(String id, String version) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
        return (PluginModel) getFlexibleSearch().find(new PluginModel(id, version));
    }
 

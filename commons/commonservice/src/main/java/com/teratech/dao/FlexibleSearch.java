@@ -14,16 +14,16 @@ public interface FlexibleSearch {
     /**
      * Find entity of class clazz base
      * @param clazz
-     * @param container
+     * @param pk
      * @return
      */
-    Object find(Class clazz, RestrictionsContainer container, Set<String> properties) ;
+    Object find(Class clazz, Object pk) ;
     /**
      * Find Object base on the entity unique field
      * @param entity
      * @return
      */
-    Object find(final Object entity) throws IllegalAccessException;
+    Object find(final Object entity) throws IllegalAccessException, InstantiationException, NoSuchFieldException;
 
     /**
      * Return Entities which macth the criteria set in the restriction container
