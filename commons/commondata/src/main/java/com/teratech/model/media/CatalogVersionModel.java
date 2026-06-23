@@ -15,11 +15,11 @@ public class CatalogVersionModel extends AbstractItem implements Serializable {
 
     @MapsId("catalogid")
     @ManyToOne
-    @JoinColumn(name = "catalog_id")
+    @JoinColumn(name = "catalogid")
     private CatalogModel catalog;
     @MapsId("versionid")
     @ManyToOne
-    @JoinColumn(name = "version_id")
+    @JoinColumn(name = "versionid")
     private VersionModel version;
 
     public CatalogVersionModel() {

@@ -19,8 +19,8 @@ public class MediaModel extends AbstractItem implements Serializable {
     private Short height ;
     @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "catalogid", referencedColumnName = "catalog_id"),
-            @JoinColumn(name = "versionid", referencedColumnName = "version_id")
+            @JoinColumn(name = "catalogid", referencedColumnName = "catalogid"),
+            @JoinColumn(name = "versionid", referencedColumnName = "versionid")
     })
     private CatalogVersionModel catalogVersion;
 

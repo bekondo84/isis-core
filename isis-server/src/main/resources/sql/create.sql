@@ -29,6 +29,7 @@
      id VARCHAR(50),
      url VARCHAR (255),
      format VARCHAR (4),
+     confidential BOOLEAN DEFAULT 'true',
      width SMALLINT,
      height SMALLINT,
      catalogid VARCHAR (50),
@@ -99,8 +100,7 @@ CREATE TABLE IF NOT EXISTS cms_page_template (
 CREATE TABLE IF NOT EXISTS cms_action (
     code VARCHAR (50) NOT NULL,
     descrip VARCHAR (255),
-    bean VARCHAR (50),
-    method VARCHAR (50),
+    bean VARCHAR (50) NOT NULL,
     plugin_id VARCHAR (50),
     plugin_version VARCHAR (50),
     createdAt TIMESTAMPTZ NOT NULL,

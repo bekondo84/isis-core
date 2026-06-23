@@ -12,5 +12,15 @@ public class ApplicationConstans {
 
     public static class API {
         public static final String API_PREFIX = "api";
+
+    }
+    public static class Actions {
+        public static final String DEFAULT_ACTION ="defaultAction";
+        public static final String DATA = "data";
+        public static final String TYPE = "class";
+        public static final String PLUGIN = "plugin";
+        public static final String SEARCH_PREDICAT = "predicates";
+        public static final String START_INDEX = "startIndex";
+        public static final String NBREOFITEMS ="size";
     }
 }

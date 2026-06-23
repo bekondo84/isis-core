@@ -26,9 +26,9 @@ public class MetaData implements Serializable {
     //Unable update action if true
     private Boolean canUpdate = Boolean.TRUE;
     //Activate the follower component if true
-    private Boolean activeFollower = Boolean.TRUE;
+    private Boolean activeFollower = Boolean.FALSE;
     //Activate the widget of file load in the header
-    private Boolean activeFileLink = Boolean.TRUE;
+    private Boolean activeFileLink = Boolean.FALSE;
     //if true informe that we need to load this metadata
     private Boolean partial = false;
     private EditorAreaData editorarea;

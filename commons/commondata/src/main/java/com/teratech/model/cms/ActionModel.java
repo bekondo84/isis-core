@@ -15,7 +15,9 @@ public class ActionModel extends AbstractItem {
     private String code ;
     private String descrip;
     private String bean;
-    private String method;
+   // private String method;
+    //@Enumerated(EnumType.STRING)
+    //private ActionType type;
 
     @ManyToOne
     @JoinColumns({
@@ -25,6 +27,10 @@ public class ActionModel extends AbstractItem {
     private PluginModel plugin;
 
     public ActionModel() {
+    }
+
+    public ActionModel(String code) {
+        this.code = code;
     }
 
     public PluginModel getPlugin() {
@@ -59,13 +65,6 @@ public class ActionModel extends AbstractItem {
         this.bean = bean;
     }
 
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
-    }
 
     @Override
     public boolean equals(Object o) {

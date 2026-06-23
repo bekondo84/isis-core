@@ -1,5 +1,6 @@
 package com.teratech.actions.annotations;
 
+import com.teratech.model.cms.ActionType;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.lang.annotation.*;
@@ -10,5 +11,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface ActionMethod {
     String value() ;
-    RequestMethod scope() default RequestMethod.GET;
+    ActionType scope() default ActionType.GET;
 }

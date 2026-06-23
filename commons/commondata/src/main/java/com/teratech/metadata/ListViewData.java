@@ -31,7 +31,7 @@ public class ListViewData implements Serializable {
         this.columns =columns;
     }
 
-    public List<MetaColumn> getSearch() {
+    public List<SearchColumn> getSearch() {
         return Collections.unmodifiableList(search);
     }
 
