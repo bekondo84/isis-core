@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 @MappedSuperclass
@@ -12,24 +12,19 @@ public abstract class AbstractItem implements Serializable {
 
    // private String tenantid;
 
-    @Temporal(TemporalType.TIMESTAMP)
+    //@Temporal(TemporalType.TIMESTAMP)
     @NotNull
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModif;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime lastModif;
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Date getLastModif() {
+    public LocalDateTime getLastModif() {
         return lastModif;
     }
-
-    public void setLastModif(Date lastModif) {
-        this.lastModif = lastModif;
-    }
-
 
 }

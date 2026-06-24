@@ -5,6 +5,7 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.model.generic.AbstractTenant;
 import com.teratech.model.generic.AbstractItem;
+import com.teratech.utils.ClassUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.pf4j.PluginManager;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Field;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -34,18 +36,18 @@ public class PersistenceManagerImpl implements PersistenceManager {
         //Check if the class inherit from ItemModel
         try {
             //Check if entity extends AbstractItem class and throw exception if not
-            if (isAssignableFrom(entity, AbstractItem.class) )
+            if (!AbstractItem.class.isAssignableFrom(entity.getClass()))
                 throw new IllegalAccessException(String.format("Class %s don't inherited from %s", entity.getClass().getName(), AbstractItem.class.getName()));
             //Check if entity extends AbstractTenant and set the tenantId field
             if (isAssignableFrom(entity, AbstractTenant.class)) {
                 //TODO
             }
             if (Objects.isNull(entity.getCreatedAt())) {
-                setManagedField(entity, "createdAt", new Date());
-                em.merge(entity);
-            } else  {
-                setManagedField(entity, "lastModif", new Date());
+                setManagedField(AbstractItem.class, entity, "createdAt", LocalDateTime.now());
                 em.persist(entity);
+            } else  {
+                setManagedField(AbstractItem.class, entity, "lastModif", LocalDateTime.now());
+                em.merge(entity);
             }
             return (S) flexibleSearch.find(entity);
         } catch (IllegalAccessException | NoSuchFieldException | InstantiationException e) {
@@ -54,8 +56,8 @@ public class PersistenceManagerImpl implements PersistenceManager {
 
     }
 
-    private <T extends AbstractItem> void setManagedField(T entity, String fieldname, Object value) throws NoSuchFieldException, IllegalAccessException {
-        Field field = getItemModelField(entity.getClass(), fieldname);
+    private <T extends AbstractItem> void setManagedField(Class clazz, T entity, String fieldname, Object value) throws NoSuchFieldException, IllegalAccessException {
+        Field field = ClassUtils.getFieldFrom(clazz, fieldname);
 
         if (Objects.nonNull(field)) {
             field.setAccessible(true);
@@ -63,23 +65,7 @@ public class PersistenceManagerImpl implements PersistenceManager {
         }
     }
 
-    /**
-     * Get the IteùModel class
-     * @param entityClazz
-     * @return
-     */
-    private Field getItemModelField(Class entityClazz, String fieldname) throws NoSuchFieldException {
-        Class itemClass = entityClazz ;
 
-        while (!itemClass.equals(Object.class)) {
-            Field field = itemClass.getField(fieldname);
-            if (Objects.nonNull(field)) {
-                return field;
-            }
-            itemClass = itemClass.getSuperclass();
-        }
-        return null;
-    }
     /**
      * Save or update a list of entites in the same transactional model
      * @param entities

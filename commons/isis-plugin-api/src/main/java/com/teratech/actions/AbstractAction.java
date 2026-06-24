@@ -14,6 +14,7 @@ import com.teratech.utils.ClassUtils;
 import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.CollectionUtils;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
@@ -31,18 +32,20 @@ public abstract class AbstractAction implements ActionService{
     public static final String NOT_DATA_IN_CONTEXT_ERROR = String.format("No Data found in the action context data");
     public static final String NO_TYPE_FOUND_IN_CONTEXT_ERROR = String.format("No class name found in the action context data");
     public static final String NO_PLUGIN_FOUND_CONTEXT_ERROR = "No plugin found with ID %s in the action context data";
-    private final PluginManager pluginManager;
-    private final FlexibleSearch flexibleSearch;
-    private final PersistenceManager persistenceManager;
+    protected final PluginManager pluginManager;
+    protected final FlexibleSearch flexibleSearch;
+    protected final PersistenceManager persistenceManager;
+    protected final TransactionTemplate transactionTemplate;
 
     /**
      *
      * @param pluginManager
      */
-    protected AbstractAction(PluginManager pluginManager, FlexibleSearch flexibleSearch, PersistenceManager persistenceManager) {
+    protected AbstractAction(PluginManager pluginManager, FlexibleSearch flexibleSearch, PersistenceManager persistenceManager, TransactionTemplate transactionTemplate) {
         this.pluginManager = pluginManager;
         this.flexibleSearch = flexibleSearch;
         this.persistenceManager = persistenceManager;
+        this.transactionTemplate = transactionTemplate;
     }
 
     /** Execute action Node
@@ -93,7 +96,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "save", scope = ActionType.POST)
-     ActionContextData saveOrUpdate(final ActionContextData context) throws ClassNotFoundException, ModelServiceException, NoSuchFieldException, IllegalAccessException {
+     ActionContextData saveOrUpdate(final ActionContextData context) throws ClassNotFoundException, ModelServiceException {
          final Object object =  context.get(DATA);
 
         assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
@@ -108,11 +111,22 @@ public abstract class AbstractAction implements ActionService{
        final ObjectMapper mapper = new ObjectMapper();
        Object entity = mapper.convertValue(object, clazz);
 
-        Object result =  persistenceManager.save((AbstractItem) entity);
-        //Update data context
-        context.put(DATA, result);
+       try {
+           return transactionTemplate.execute(status -> {
 
-        return context;
+               Object result = null;
+               try {
+                   result = persistenceManager.save((AbstractItem) entity);
+               } catch (ModelServiceException | IllegalAccessException | NoSuchFieldException e) {
+                   throw new RuntimeException(e);
+               }
+               //Update data context
+               context.put(DATA, result);
+               return context;
+           });
+       } catch (RuntimeException e) {
+           throw new ModelServiceException(e);
+       }
      }
 
     /**
@@ -122,10 +136,6 @@ public abstract class AbstractAction implements ActionService{
      */
      @ActionMethod(value = "fetchitems", scope = ActionType.POST)
     public ActionContextData getItems (final ActionContextData context) throws ClassNotFoundException, ParseException, IllegalAccessException {
-
-         final Object object =  context.get(DATA);
-
-         assert Objects.nonNull(object) :  NOT_DATA_IN_CONTEXT_ERROR;
 
          final String pluginId = (String) context.get(PLUGIN);
          final String className = (String) context.get(TYPE);
@@ -238,24 +248,32 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
    @ActionMethod(value = "delete", scope = ActionType.DELETE)
-    public ActionContextData delete (final ActionContextData context) throws ModelServiceException, ClassNotFoundException {
-       final Object object =  context.get(DATA);
+    public ActionContextData delete (final ActionContextData context) throws ModelServiceException {
 
-       assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
+       try {
+           final Object object = context.get(DATA);
 
-        final String pluginId = (String) context.get(PLUGIN);
-       final String className = (String) context.get(TYPE);
+           assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
 
-       assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR;
+           final String pluginId = (String) context.get(PLUGIN);
+           final String className = (String) context.get(TYPE);
 
-       final Class clazz = getClassType(pluginId, className);
-       //Convert Json String to instance of clazz
-       final ObjectMapper mapper = new ObjectMapper();
-       Object entity = mapper.convertValue(object, clazz);
+           assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR;
 
-       persistenceManager.delete(entity);
-
-       return context;
+           return transactionTemplate.execute(status -> {
+               try {
+                   final Class clazz = getClassType(pluginId, className);
+                   //Convert Json String to instance of clazz
+                   final ObjectMapper mapper = new ObjectMapper();
+                   persistenceManager.delete(mapper.convertValue(object, clazz));
+               } catch (ModelServiceException | ClassNotFoundException e) {
+                   throw new RuntimeException(e);
+               }
+               return context;
+           });
+       } catch (RuntimeException ex) {
+           throw  new ModelServiceException(ex);
+       }
    }
 
     /**
