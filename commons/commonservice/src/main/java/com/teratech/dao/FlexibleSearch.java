@@ -1,9 +1,11 @@
 package com.teratech.dao;
 
+import com.teratech.model.generic.AbstractItem;
 import com.teratech.tools.persistence.DAOUtilis;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import jakarta.persistence.criteria.CriteriaQuery;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -17,13 +19,13 @@ public interface FlexibleSearch {
      * @param pk
      * @return
      */
-    Object find(Class clazz, Object pk) ;
+    <T extends AbstractItem> T find(Class clazz, Object pk) ;
     /**
      * Find Object base on the entity unique field
      * @param entity
      * @return
      */
-    Object find(final Object entity) throws IllegalAccessException, InstantiationException, NoSuchFieldException;
+    <T extends AbstractItem> T find(final T entity) throws IllegalAccessException, InstantiationException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException;
 
     /**
      * Return Entities which macth the criteria set in the restriction container

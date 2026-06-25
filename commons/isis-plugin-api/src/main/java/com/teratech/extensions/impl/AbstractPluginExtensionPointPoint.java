@@ -14,6 +14,7 @@ import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
      * @return
      */
     @Override
-    public boolean install(PluginWrapper wrapper) throws JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException {
+    public boolean install(PluginWrapper wrapper) throws JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         //get the projet declaration
         Plugin plugin = jaxbService.getPluginFromResources(wrapper);
         //List of uninstall plugin

@@ -27,4 +27,11 @@ public abstract class AbstractItem implements Serializable {
         return lastModif;
     }
 
+
+    /**
+     * Retour the primary key object
+     * @return
+     */
+    public abstract Object getPk();
+
 }

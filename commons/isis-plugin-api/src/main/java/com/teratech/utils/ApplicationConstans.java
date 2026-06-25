@@ -22,5 +22,6 @@ public class ApplicationConstans {
         public static final String SEARCH_PREDICAT = "predicates";
         public static final String START_INDEX = "startIndex";
         public static final String NBREOFITEMS ="size";
+        public static final String STATUS = "status";
     }
 }

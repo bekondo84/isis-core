@@ -250,4 +250,13 @@ public class CompanyTest
     }
 
 
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return code;
+    }
 }

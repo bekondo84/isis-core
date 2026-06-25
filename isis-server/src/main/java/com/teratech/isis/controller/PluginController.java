@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.List;
 
@@ -32,18 +33,18 @@ public class PluginController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<String> refresh() throws ModelServiceException, JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException {
+    public ResponseEntity<String> refresh() throws ModelServiceException, JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
        return ResponseEntity.ok(pluginService.refresh());
     }
 
     @PostMapping("/initialize")
-    public ResponseEntity<String> initialize() throws ModelServiceException, JAXBException, IOException, IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public ResponseEntity<String> initialize() throws ModelServiceException, JAXBException, IOException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
         return ResponseEntity.ok(pluginService.initialize());
     }
 
     @PostMapping ("/install")
-    public ResponseEntity<Boolean> sayHello(@RequestParam String plugin, @RequestParam(required = false) String version) throws IOException, JAXBException, ModelServiceException, IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public ResponseEntity<Boolean> sayHello(@RequestParam String plugin, @RequestParam(required = false) String version) throws IOException, JAXBException, ModelServiceException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         return ResponseEntity.ok(pluginService.install(plugin, version));
     }
 

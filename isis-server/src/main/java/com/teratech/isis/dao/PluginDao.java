@@ -8,6 +8,7 @@ import com.teratech.model.PluginModel;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import jakarta.persistence.EntityManager;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +57,7 @@ public interface PluginDao {
      * @return
      * @throws IllegalAccessException
      */
-   default PluginModel getPlugin(String id, String version) throws IllegalAccessException, NoSuchFieldException, InstantiationException {
+   default PluginModel getPlugin(String id, String version) throws IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
        return (PluginModel) getFlexibleSearch().find(new PluginModel(id, version));
    }
 

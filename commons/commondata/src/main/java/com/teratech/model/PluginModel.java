@@ -188,4 +188,14 @@ public class PluginModel extends AbstractItem implements Serializable {
     public int hashCode() {
         return Objects.hash(id, version);
     }
+
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return new PluginId(id, version);
+    }
 }

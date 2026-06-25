@@ -91,4 +91,14 @@ public class MetaTypeModel extends AbstractItem {
     public void setFields(List<MetaFieldModel> fields) {
         this.fields = fields;
     }
+
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return code;
+    }
 }

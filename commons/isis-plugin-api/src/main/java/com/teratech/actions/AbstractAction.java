@@ -221,7 +221,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "fetchitem", scope = ActionType.POST)
-    public ActionContextData getItem (final ActionContextData context) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException {
+    public ActionContextData getItem (final ActionContextData context) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         final Object object =  context.get(DATA);
 
         assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
@@ -238,7 +238,7 @@ public abstract class AbstractAction implements ActionService{
         //System.out.println(String.format("Fetch instance --------------------- : %s", entity.getClass()));
 
         //Update the data context with the entity data fetch from database
-        context.put(DATA, flexibleSearch.find(entity));
+        context.put(DATA, flexibleSearch.find((AbstractItem) entity));
         return context;
     }
 

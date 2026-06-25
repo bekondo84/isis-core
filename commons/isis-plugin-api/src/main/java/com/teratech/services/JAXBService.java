@@ -51,7 +51,7 @@ public interface JAXBService {
     default ExplorerTree getExplorerFromResources(PluginWrapper wrapper) throws JAXBException {
         ClassLoader pluginClassLoader = wrapper.getPluginClassLoader();
         InputStream inputStream = pluginClassLoader.getResourceAsStream(ApplicationConstans.CMS.SCHEMA_EXPLORER_XML);
-        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
+        //System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_CONTROLLERS_XML)));
         JAXBContext context = JAXBContext.newInstance(ExplorerTree.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (ExplorerTree) unmarshaller.unmarshal(inputStream);

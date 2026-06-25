@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
@@ -50,7 +51,8 @@ public class PersistenceManagerImpl implements PersistenceManager {
                 em.merge(entity);
             }
             return (S) flexibleSearch.find(entity);
-        } catch (IllegalAccessException | NoSuchFieldException | InstantiationException e) {
+        } catch (IllegalAccessException | NoSuchFieldException | InstantiationException | NoSuchMethodException |
+                 InvocationTargetException e) {
             throw new ModelServiceException(e);
         }
 
@@ -85,8 +87,9 @@ public class PersistenceManagerImpl implements PersistenceManager {
     @Override
     public void delete(Object entity) throws ModelServiceException {
         try {
-            em.remove(flexibleSearch.find(entity));
-        } catch (IllegalAccessException | InstantiationException | NoSuchFieldException e) {
+            em.remove(flexibleSearch.find((AbstractItem) entity));
+        } catch (IllegalAccessException | InstantiationException | NoSuchFieldException | NoSuchMethodException |
+                 InvocationTargetException e) {
             throw new ModelServiceException(e);
         }
     }

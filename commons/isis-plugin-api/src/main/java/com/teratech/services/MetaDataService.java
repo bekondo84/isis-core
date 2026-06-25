@@ -7,6 +7,8 @@ import com.teratech.model.cms.MetaTypeModel;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginWrapper;
 
+import java.lang.reflect.InvocationTargetException;
+
 public interface MetaDataService {
 
     /**
@@ -26,7 +28,7 @@ public interface MetaDataService {
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
-    MetaData buildMetaDataFrom (MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException;
+    MetaData buildMetaDataFrom (MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
 
     /**
      *  Build MetaData From Navigation Node

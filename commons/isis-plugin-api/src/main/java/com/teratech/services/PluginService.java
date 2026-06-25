@@ -23,20 +23,20 @@ public interface PluginService {
      * Refesh the list of available plugins
      * @return
      */
-    String refresh() throws JAXBException, ModelServiceException, NoSuchFieldException, IllegalAccessException, InstantiationException;
+    String refresh() throws JAXBException, ModelServiceException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException;
     /**
      *
      * @return
      * @throws JAXBException
      */
-    String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException;
+    String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
 
     /**
      * Install the plugnid
      * @param pluginid
      * @return
      */
-    boolean install (final String pluginid, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException;
+    boolean install (final String pluginid, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
 
     /**
      *
@@ -44,14 +44,14 @@ public interface PluginService {
      * @param version
      * @return
      */
-    boolean isInstall(final String plugin, String version) throws NoSuchFieldException, IllegalAccessException, InstantiationException;
+    boolean isInstall(final String plugin, String version) throws NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException;
 
     /**
      *
      * @param plugin
      * @return
      */
-    boolean isInstall(final String plugin) throws NoSuchFieldException, IllegalAccessException, InstantiationException;
+    boolean isInstall(final String plugin) throws NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException;
 
     /**
      *

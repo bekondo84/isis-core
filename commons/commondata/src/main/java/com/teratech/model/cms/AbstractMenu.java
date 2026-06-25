@@ -8,6 +8,7 @@ import java.util.Objects;
 
 @MappedSuperclass
 public class AbstractMenu extends AbstractItem {
+
     @Id
     private String code;
     private boolean actif;
@@ -88,6 +89,16 @@ public class AbstractMenu extends AbstractItem {
 
     public void setPlugin(PluginModel plugin) {
         this.plugin = plugin;
+    }
+
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return code;
     }
 
     @Override

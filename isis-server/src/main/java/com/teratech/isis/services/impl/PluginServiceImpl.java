@@ -2,7 +2,6 @@ package com.teratech.isis.services.impl;
 
 import com.teratech.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
-import com.teratech.extensions.ControllerExtensionPoint;
 import com.teratech.extensions.PluginExtensionPoint;
 import com.teratech.extensions.ServiceExtensionPoint;
 import com.teratech.isis.dao.PluginDao;
@@ -12,7 +11,6 @@ import com.teratech.services.PluginService;
 import com.teratech.jaxb.entities.Plugin;
 import com.teratech.services.JAXBService;
 import com.teratech.services.impl.JAXBServiceImpl;
-import com.teratech.tools.persistence.RestrictionsContainer;
 import jakarta.transaction.Transactional;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
@@ -77,7 +75,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Transactional
     @Override
-    public String refresh() throws JAXBException, ModelServiceException, NoSuchFieldException, IllegalAccessException, InstantiationException {
+    public String refresh() throws JAXBException, ModelServiceException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         //Unload all plugin
         pluginManager.unloadPlugins();
         //Reload all the plugins
@@ -107,7 +105,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Override
     @Transactional
-    public String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException {
+    public String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         List<PluginModel> records = pluginDao.getAutoInstallPluginsNotYetInstall(0, -1);List<PluginWrapper> wrappers = pluginManager.getPlugins();
 
         for (PluginModel record : records) {
@@ -131,7 +129,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Transactional
     @Override
-    public boolean install(String plugin, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException {
+    public boolean install(String plugin, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         //Start the Plugin
         PluginState pluginState = pluginManager.startPlugin(plugin);
 
@@ -163,7 +161,7 @@ public class PluginServiceImpl implements PluginService {
      * @return
      */
     @Override
-    public boolean isInstall(String plugin, String version) throws NoSuchFieldException, IllegalAccessException, InstantiationException {
+    public boolean isInstall(String plugin, String version) throws NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
         PluginModel pluginModel = (PluginModel) flexibleSearch.find(new PluginModel(plugin, version));
         return pluginModel!= null && pluginModel.isInstall() ? true : false;
@@ -174,7 +172,7 @@ public class PluginServiceImpl implements PluginService {
      * @return
      */
     @Override
-    public boolean isInstall(String plugin) throws NoSuchFieldException, IllegalAccessException, InstantiationException {
+    public boolean isInstall(String plugin) throws NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
         PluginWrapper wrapper = pluginManager.getPlugin(plugin);
 
         if (Objects.isNull(wrapper))

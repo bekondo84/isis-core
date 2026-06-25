@@ -34,6 +34,7 @@ public class MetaData implements Serializable {
     private EditorAreaData editorarea;
     private ListViewData listView;
     private KabanViewData kabanView;
+    private DashboardMeta dashboardView;
     private String searchKey;
     private String searchTitle;
 
@@ -47,6 +48,7 @@ public class MetaData implements Serializable {
         this.typeCode = typeCode;
         this.editorarea = new EditorAreaData();
         this.listView = new ListViewData();
+        this.dashboardView = new DashboardMeta();
         this.action = "defaultAction";
     }
 
@@ -194,5 +196,11 @@ public class MetaData implements Serializable {
         this.module = module;
     }
 
+    public DashboardMeta getDashboardView() {
+        return dashboardView;
+    }
 
+    public void setDashboardView(DashboardMeta dashboardView) {
+        this.dashboardView = dashboardView;
+    }
 }

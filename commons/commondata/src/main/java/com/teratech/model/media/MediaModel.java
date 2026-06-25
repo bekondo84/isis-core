@@ -83,6 +83,16 @@ public class MediaModel extends AbstractItem implements Serializable {
         this.catalogVersion = catalogVersion;
     }
 
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return id;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

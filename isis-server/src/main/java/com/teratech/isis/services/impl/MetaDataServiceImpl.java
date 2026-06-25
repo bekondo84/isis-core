@@ -22,6 +22,7 @@ import org.springframework.util.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @throws JAXBException
      */
     @Override
-    public MetaData buildMetaDataFrom(MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public MetaData buildMetaDataFrom(MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
         //Get Type code
         MetaTypeModel metaType = (MetaTypeModel) flexibleSearch.find(new MetaTypeModel(menuItem.getType()));
@@ -112,12 +113,18 @@ public class MetaDataServiceImpl implements MetaDataService {
         List<Field> fields = getDeclaredFieldsFrom(clazz);
 
         if (Objects.nonNull(template)) {
-            //Build ListView Data
-            buildListView(wrapper, template, metaData, fields);
-            //Build EditorArea Data
-            buildEditorArea(wrapper, template, metaData, fields, principal);
 
-            buildKabanView(template, metaData);
+            if (Objects.isNull(template.getDashbord())) {
+                //Build ListView Data
+                buildListView(wrapper, template, metaData, fields);
+                //Build EditorArea Data
+                buildEditorArea(wrapper, template, metaData, fields, principal);
+                //Build Kaban View
+                buildKabanView(template, metaData);
+            } else {
+                //Build Dashbord View
+                buildDashboard(wrapper, template, metaData);
+            }
         } else  {
             //Build ListView Data
             buildListView(wrapper, clazz, metaData, fields, principal);
@@ -126,6 +133,57 @@ public class MetaDataServiceImpl implements MetaDataService {
         }
 
         return metaData;
+    }
+
+    /**
+     *
+     * @param wrapper
+     * @param template
+     * @param metaData
+     */
+    private void buildDashboard(PluginWrapper wrapper, Context template, MetaData metaData) {
+
+        DashboardMeta dashboardMeta = new DashboardMeta();
+        metaData.setDashboardView(dashboardMeta);
+        Dashbord dashbord = template.getDashbord();
+        dashboardMeta.setName(dashbord.getName());
+        dashboardMeta.setTitle(i18NService.getMessage(wrapper, dashbord.getName(), Locale.getDefault()));
+
+        if (CollectionUtils.isEmpty(dashbord.getSection()))
+             return;
+
+        for (DashboardSectionType sectionType : dashbord.getSection()) {
+            SectionData sectionData = new SectionData(sectionType.getName(), i18NService.getMessage(wrapper, sectionType.getName(), Locale.getDefault()), sectionType.getColumns().intValue(), sectionType.isHeader());
+            dashboardMeta.addSection(sectionData);
+            processDashbordFields(wrapper, sectionType.getField(), sectionData);
+            //Process SubType
+             if (CollectionUtils.isEmpty(sectionType.getSection()))
+                 continue;
+             for (DashboardSubSectionType subSectionType : sectionType.getSection()) {
+                  SectionData subSectionData = new SectionData(subSectionType.getName(), i18NService.getMessage(wrapper, subSectionType.getName(), Locale.getDefault()), subSectionType.getColumns().intValue(), subSectionType.isHeader());
+                  sectionData.addSection(subSectionData);
+                  processDashbordFields(wrapper, subSectionType.getField(), subSectionData);
+             }
+        }
+    }
+
+    /**
+     *
+     * @param wrapper
+     * @param items
+     * @param sectionData
+     */
+    private void processDashbordFields(PluginWrapper wrapper, List<DashboardItem> items, SectionData sectionData) {
+        for (DashboardItem dashboardItem : items) {
+            MetaColumn column = new MetaColumn("Dashbord", dashboardItem.getName());
+            sectionData.addField(column);
+            column.setHandler(dashboardItem.getAction());
+            column.setLabel(i18NService.getMessage(wrapper, dashboardItem.getName(), Locale.getDefault()));
+            column.setWidget(dashboardItem.getType().value());
+            int refresh = Objects.nonNull(dashboardItem.getRefresh()) ? dashboardItem.getRefresh().intValue() : 0 ;
+            column.setMax(refresh);
+            column.setMin(refresh);
+        }
     }
 
     private void buildKabanView(Context template, MetaData metaData) {

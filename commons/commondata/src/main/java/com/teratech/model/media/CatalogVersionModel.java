@@ -67,4 +67,14 @@ public class CatalogVersionModel extends AbstractItem implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return new CatalogVersionId(catalog.getId(), version.getId());
+    }
 }

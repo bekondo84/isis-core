@@ -44,7 +44,7 @@ public class ActionsController {
      * @return
      */
       @GetMapping("/navigation/meta/{name}")
-      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws IllegalAccessException, JAXBException, ClassNotFoundException, NoSuchFieldException, InstantiationException {
+      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws IllegalAccessException, JAXBException, ClassNotFoundException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
               final MenuItemModel menuItem = (MenuItemModel) flexibleSearch.find(new MenuItemModel(name));
 
@@ -61,7 +61,7 @@ public class ActionsController {
      * @return
      */
       @GetMapping("/entity/meta/{name}")
-      public ResponseEntity<MetaData> getMetaForTypeCode(@PathVariable final String name, final Principal principal) throws NoSuchFieldException, IllegalAccessException, InstantiationException, JAXBException, ClassNotFoundException {
+      public ResponseEntity<MetaData> getMetaForTypeCode(@PathVariable final String name, final Principal principal) throws NoSuchFieldException, IllegalAccessException, InstantiationException, JAXBException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException {
           final MetaTypeModel metaType = (MetaTypeModel) flexibleSearch.find(new MetaTypeModel(name));
           return ResponseEntity.ok(metaDataService.buildMetaDataFrom(metaType));
       }
@@ -75,7 +75,7 @@ public class ActionsController {
      * @return
      */
       @PostMapping("execute/{action}/{method}")
-      public ResponseEntity<ActionContextData> executePostAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable final String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException {
+      public ResponseEntity<ActionContextData> executePostAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable final String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
           return executeAction(context, action, method, ActionType.POST);
       }
 
@@ -88,7 +88,7 @@ public class ActionsController {
      * @return
      */
     @PutMapping("execute/{action}/{method}")
-    public ResponseEntity<ActionContextData> executePutAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException {
+    public ResponseEntity<ActionContextData> executePutAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         return executeAction(context, action, method, ActionType.PUT);
     }
 
@@ -101,7 +101,7 @@ public class ActionsController {
      * @return
      */
     @DeleteMapping("execute/{action}/{method}")
-    public ResponseEntity<ActionContextData> executeDeleteAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException {
+    public ResponseEntity<ActionContextData> executeDeleteAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         return executeAction(context, action, method, ActionType.DELETE);
     }
 
@@ -115,7 +115,7 @@ public class ActionsController {
      * @throws NoSuchFieldException
      * @throws InvocationTargetException
      */
-    private ResponseEntity<ActionContextData> executeAction(ActionContextData context, String actionId, String method, ActionType type) throws IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException {
+    private ResponseEntity<ActionContextData> executeAction(ActionContextData context, String actionId, String method, ActionType type) throws IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
         final ActionModel action = (ActionModel) flexibleSearch.find(new ActionModel(actionId));
         //Check if the action exists
         assert Objects.nonNull(action) : String.format("No action found with ID %s", actionId);

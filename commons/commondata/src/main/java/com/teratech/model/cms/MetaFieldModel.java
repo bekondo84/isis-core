@@ -78,4 +78,14 @@ public class MetaFieldModel extends AbstractItem {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return id;
+    }
 }

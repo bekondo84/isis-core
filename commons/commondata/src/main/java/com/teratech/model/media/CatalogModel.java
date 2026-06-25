@@ -11,6 +11,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "adm_catalog")
 public class CatalogModel extends AbstractItem implements Serializable {
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return id;
+    }
 
     @Id
     private String id;

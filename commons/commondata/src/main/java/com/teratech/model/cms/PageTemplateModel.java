@@ -67,4 +67,14 @@ public class PageTemplateModel extends AbstractItem  implements Serializable{
     public int hashCode() {
         return Objects.hashCode(code);
     }
+
+    /**
+     * Retour the primary key object
+     *
+     * @return
+     */
+    @Override
+    public Object getPk() {
+        return code;
+    }
 }

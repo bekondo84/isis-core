@@ -1,6 +1,7 @@
 package com.teratech.isis.dao.impl;
 
 import com.teratech.dao.FlexibleSearch;
+import com.teratech.model.generic.AbstractItem;
 import com.teratech.tools.persistence.Predicat;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import jakarta.persistence.*;
@@ -12,10 +13,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.teratech.tools.persistence.DAOUtilis.*;
 
@@ -30,8 +31,8 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public Object find(Class clazz, Object pk) {
-            return em.find(clazz, pk);
+    public <T extends AbstractItem> T find(Class clazz, Object pk) {
+            return (T) em.find(clazz, pk);
     }
 
     /**
@@ -41,31 +42,8 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public Object find(Object entity) throws IllegalAccessException, InstantiationException, NoSuchFieldException {
-        List<Field> fields = getEntityFields(entity.getClass());
-        System.out.println("---------------- : "+entity.getClass().isAnnotationPresent(IdClass.class)+" ----- "+entity.getClass());
-        Object primaryKey = null;
-        if (entity.getClass().isAnnotationPresent(IdClass.class)) {
-              Class idClass = entity.getClass().getAnnotation(IdClass.class).getClass();
-              primaryKey = idClass.newInstance();
-              List<Field> ids = fields.stream().filter(f -> f.isAnnotationPresent(Id.class)).collect(Collectors.toUnmodifiableList());
-
-            for (Field id : ids) {
-                Field fd = idClass.getDeclaredField(id.getName());
-                fd.setAccessible(true);
-                id.setAccessible(true);
-                fd.set(primaryKey, id.get(entity));
-            }
-
-        } else {
-            Field field =  fields.stream().filter(f -> f.isAnnotationPresent(Id.class)).findAny().orElse(null);
-            if (Objects.nonNull(field)) {
-                field.setAccessible(true);
-                primaryKey = field.get(entity);
-            }
-        }
-
-        return find(entity.getClass(), primaryKey);
+    public <T extends AbstractItem> T find(T entity) throws IllegalAccessException, InstantiationException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException {
+        return find(entity.getClass(), entity.getPk());
     }
 
 
