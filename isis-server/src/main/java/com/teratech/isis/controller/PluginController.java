@@ -1,6 +1,8 @@
 package com.teratech.isis.controller;
 
 import com.teratech.ModelServiceException;
+import com.teratech.isis.actions.DefaultAction;
+import com.teratech.metadata.ActionContextData;
 import com.teratech.model.PluginModel;
 import com.teratech.services.PluginService;
 import com.teratech.utils.ApplicationConstans;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -18,6 +21,15 @@ public class PluginController {
 
     @Autowired
     private PluginService pluginService;
+    @Autowired
+    private DefaultAction defaultAction;
+
+
+    @PostMapping
+    public ResponseEntity<List<PluginModel>> getPlugins(@RequestBody ActionContextData context) throws ParseException, ClassNotFoundException, IllegalAccessException {
+        context =  defaultAction.getItems(context);
+        return ResponseEntity.ok((List<PluginModel>) context.get(ApplicationConstans.Actions.DATA));
+    }
 
     @PostMapping("/refresh")
     public ResponseEntity<String> refresh() throws ModelServiceException, JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException {
