@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<explorer-tree xmlns="http://www.isis.cm/config/explorer-tree">
+<explorer-tree xmlns="http://www.isis.cm/config/explorer-tree"
+>
     <navigation-node id="dashbord.node" position="95" icon="fa-solid fa-chart-line" >
         <navigation-node id="system.dashbord" position="100" code="Dashboard"  icon="fa-solid fa-chart-line" viewMode="dashboard" />
     </navigation-node>

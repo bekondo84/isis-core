@@ -1,6 +1,7 @@
 package com.teratech.isis.controller;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ApplicationException;
+import com.teratech.exceptions.ModelServiceException;
 import com.teratech.isis.actions.DefaultAction;
 import com.teratech.metadata.ActionContextData;
 import com.teratech.model.PluginModel;
@@ -44,8 +45,8 @@ public class PluginController {
     }
 
     @PostMapping ("/install")
-    public ResponseEntity<Boolean> sayHello(@RequestParam String plugin, @RequestParam(required = false) String version) throws IOException, JAXBException, ModelServiceException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-        return ResponseEntity.ok(pluginService.install(plugin, version));
+    public ResponseEntity<Boolean> sayHello(@RequestParam String plugin, @RequestParam(required = false) String version) throws ApplicationException {
+        return ResponseEntity.ok(pluginService.install(plugin));
     }
 
     @GetMapping

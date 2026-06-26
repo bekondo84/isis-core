@@ -1,6 +1,6 @@
 package com.teratech.isis.dao.impl;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.model.generic.AbstractTenant;
@@ -8,6 +8,7 @@ import com.teratech.model.generic.AbstractItem;
 import com.teratech.utils.ClassUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 import org.pf4j.PluginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.Map;
 import java.util.Objects;
 
 @Repository
@@ -104,6 +105,23 @@ public class PersistenceManagerImpl implements PersistenceManager {
             for (Object entity : entities) {
                 delete(entity);
             }
+    }
+
+    /**
+     * Execute JPQL Queries
+     *
+     * @param query
+     * @param parameters
+     * @return
+     */
+    @Override
+    public int executeUpdate(String query, Map<String, Object> parameters) {
+        Query jPQLQuery = em.createQuery(query);
+
+        if (Objects.nonNull(parameters)) {
+            parameters.keySet().forEach(key -> jPQLQuery.setParameter(key, parameters.get(key)));
+        }
+        return jPQLQuery.executeUpdate();
     }
 
     /**

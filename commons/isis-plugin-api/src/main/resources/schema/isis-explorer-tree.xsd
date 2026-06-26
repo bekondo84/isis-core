@@ -22,7 +22,7 @@
         <xs:attribute name="modal" type="xs:boolean" default="false"/>
         <xs:attribute name="viewMode" type="xs:string" default="list,view"/>
         <xs:attribute name="icon" type="xs:string"/>
-        <xs:attribute name="position" type="xs:unsignedByte" default="0"/>
+        <xs:attribute name="position" type="xs:int" default="0"/>
         <!--<xs:attribute name="template" type="xs:string" />-->
         <xs:attribute name="counter" type="xs:string" default="" />
         <xs:attribute name="badge-color" type="tns:BadgeColor" default="bg-primary" />

@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.06.17 à 01:13:57 PM WAT 
+// Généré le : 2026.06.26 à 06:03:28 PM WAT 
 //
 
 
@@ -32,8 +32,7 @@ import java.util.List;
  *       &lt;attribute name="modal" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
  *       &lt;attribute name="viewMode" type="{http://www.w3.org/2001/XMLSchema}string" default="list,view" /&gt;
  *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}unsignedByte" default="0" /&gt;
- *       &lt;attribute name="template" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" default="0" /&gt;
  *       &lt;attribute name="counter" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
  *       &lt;attribute name="badge-color" type="{http://www.isis.cm/config/explorer-tree}BadgeColor" default="bg-primary" /&gt;
  *     &lt;/restriction&gt;
@@ -64,10 +63,7 @@ public class NavigationNode {
     @XmlAttribute(name = "icon")
     protected String icon;
     @XmlAttribute(name = "position")
-    @XmlSchemaType(name = "unsignedByte")
-    protected Short position;
-    @XmlAttribute(name = "template")
-    protected String template;
+    protected Integer position;
     @XmlAttribute(name = "counter")
     protected String counter;
     @XmlAttribute(name = "badge-color")
@@ -263,12 +259,12 @@ public class NavigationNode {
      * 
      * @return
      *     possible object is
-     *     {@link Short }
+     *     {@link Integer }
      *     
      */
-    public short getPosition() {
+    public int getPosition() {
         if (position == null) {
-            return ((short) 0);
+            return  0;
         } else {
             return position;
         }
@@ -279,35 +275,11 @@ public class NavigationNode {
      * 
      * @param value
      *     allowed object is
-     *     {@link Short }
+     *     {@link Integer }
      *     
      */
-    public void setPosition(Short value) {
+    public void setPosition(Integer value) {
         this.position = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété template.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTemplate() {
-        return template;
-    }
-
-    /**
-     * Définit la valeur de la propriété template.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTemplate(String value) {
-        this.template = value;
     }
 
     /**

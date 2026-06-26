@@ -118,19 +118,24 @@ public class ActionsController {
     private ResponseEntity<ActionContextData> executeAction(ActionContextData context, String actionId, String method, ActionType type) throws IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
         final ActionModel action = (ActionModel) flexibleSearch.find(new ActionModel(actionId));
         //Check if the action exists
-        assert Objects.nonNull(action) : String.format("No action found with ID %s", actionId);
+        if (Objects.isNull(action))
+            throw new IllegalStateException(String.format("No action found with ID %s", actionId));
 
         //Case where action it is a global action
         if (Objects.isNull(action.getPlugin())) {
             Object bean = applicationContext.getBean(action.getBean());
             //Check that bean implement ActionService interface
-            assert ActionService.class.isAssignableFrom(bean.getClass()) : String.format("Bean with name %s don't implement Service interface. Please make sure it implement ActionService interface", action.getBean());
+            if (!ActionService.class.isAssignableFrom(bean.getClass()))
+              throw new IllegalStateException(String.format("Bean with name %s don't implement Service interface. Please make sure it implement ActionService interface", action.getBean()));
 
             return ResponseEntity.ok(((ActionService) bean).invoke(action, method, type, context));
         }
         //The Action is link to specific plugin
         List actionExtensions = pluginManager.getExtensions(ActionExtension.class, action.getPlugin().getId());
-        assert !CollectionUtils.isEmpty(actionExtensions) : String.format("Plugin Gonfiguration : No ActionExtension implementation found for plugin %s", action.getPlugin().getId());
+
+        if (CollectionUtils.isEmpty(actionExtensions))
+            throw new IllegalStateException(String.format("Plugin Configuration Error : No ActionExtension implementation found for plugin %s", action.getPlugin().getId()));
+
         ActionExtension actionExtension = (ActionExtension) actionExtensions.get(0);
 
         return ResponseEntity.ok(actionExtension.invoke(context, action, method, type));

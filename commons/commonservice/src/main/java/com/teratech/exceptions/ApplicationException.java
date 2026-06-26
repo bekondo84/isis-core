@@ -1,15 +1,15 @@
-package com.teratech;
+package com.teratech.exceptions;
 
 import java.security.PrivilegedActionException;
 
-public class ModelServiceException extends Exception{
+public class ApplicationException extends Exception {
 
     /**
      * Constructs a new exception with {@code null} as its detail message.
      * The cause is not initialized, and may subsequently be initialized by a
      * call to {@link #initCause}.
      */
-    public ModelServiceException() {
+    public ApplicationException() {
     }
 
     /**
@@ -20,7 +20,7 @@ public class ModelServiceException extends Exception{
      * @param message the detail message. The detail message is saved for
      *                later retrieval by the {@link #getMessage()} method.
      */
-    public ModelServiceException(String message) {
+    public ApplicationException(String message) {
         super(message);
     }
 
@@ -38,7 +38,7 @@ public class ModelServiceException extends Exception{
      *                unknown.)
      * @since 1.4
      */
-    public ModelServiceException(String message, Throwable cause) {
+    public ApplicationException(String message, Throwable cause) {
         super(message, cause);
     }
 
@@ -56,7 +56,7 @@ public class ModelServiceException extends Exception{
      *              unknown.)
      * @since 1.4
      */
-    public ModelServiceException(Throwable cause) {
+    public ApplicationException(Throwable cause) {
         super(cause);
     }
 
@@ -74,7 +74,7 @@ public class ModelServiceException extends Exception{
      *                           be writable
      * @since 1.7
      */
-    public ModelServiceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public ApplicationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

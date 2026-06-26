@@ -1,6 +1,6 @@
 package com.teratech.actions;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ModelServiceException;
 import com.teratech.actions.annotations.ActionMethod;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;

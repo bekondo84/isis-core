@@ -1,11 +1,12 @@
 package com.teratech.model.cms;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table (name = "cms_menuitem")
+@DiscriminatorValue("ITEM")
 public class MenuItemModel extends AbstractMenu {
 
     @Column(name = "act_name")
@@ -16,6 +17,7 @@ public class MenuItemModel extends AbstractMenu {
     private String template;
     @Column(name = "badge_color")
     private String badgeColor;
+    private boolean modal ;
 
     public MenuItemModel(String code) {
         super(code);
@@ -62,6 +64,14 @@ public class MenuItemModel extends AbstractMenu {
 
     public void setBadgeColor(String badgeColor) {
         this.badgeColor = badgeColor;
+    }
+
+    public boolean isModal() {
+        return modal;
+    }
+
+    public void setModal(boolean modal) {
+        this.modal = modal;
     }
 
     @Override

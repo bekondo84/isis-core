@@ -6,7 +6,10 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@MappedSuperclass
+@Entity
+@Table(name = "cms_menu")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "menu_type", discriminatorType = DiscriminatorType.STRING)
 public class AbstractMenu extends AbstractItem {
 
     @Id
@@ -15,7 +18,7 @@ public class AbstractMenu extends AbstractItem {
     private String icon;
     private String label;
     @Column(name = "sequence")
-    private Short position;
+    private int position;
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name = "plugin_id", referencedColumnName = "id"),
@@ -27,6 +30,9 @@ public class AbstractMenu extends AbstractItem {
     @JoinColumn(name = "parent_id")
     private MenuModel parent;
 
+    @Column(name = "menu_level")
+    @Enumerated(EnumType.STRING)
+    private MenuLevel level;
 
     public AbstractMenu(String code) {
         this.code = code;
@@ -75,11 +81,11 @@ public class AbstractMenu extends AbstractItem {
         this.label = label;
     }
 
-    public Short getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(Short position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
@@ -89,6 +95,14 @@ public class AbstractMenu extends AbstractItem {
 
     public void setPlugin(PluginModel plugin) {
         this.plugin = plugin;
+    }
+
+    public MenuLevel getLevel() {
+        return level;
+    }
+
+    public void setLevel(MenuLevel level) {
+        this.level = level;
     }
 
     /**

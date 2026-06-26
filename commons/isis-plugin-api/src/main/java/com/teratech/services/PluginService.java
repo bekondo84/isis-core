@@ -1,6 +1,8 @@
 package com.teratech.services;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ApplicationException;
+import com.teratech.exceptions.ModelServiceException;
+import com.teratech.model.PluginModel;
 import jakarta.xml.bind.JAXBException;
 
 import java.io.IOException;
@@ -8,6 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public interface PluginService {
+
+    static final String GET_DEPENDS = "SELECT p FROM PluginModel p WHERE :pluginId MEMBER OF p.dependencies";
 
     /**
      * Execute plugin service
@@ -36,8 +40,15 @@ public interface PluginService {
      * @param pluginid
      * @return
      */
-    boolean install (final String pluginid, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
+    boolean install (final String pluginid) throws ApplicationException;
 
+    /**
+     *
+     * @param pluginId
+     * @return
+     * @throws ApplicationException
+     */
+    boolean uninstall (final String pluginId) throws ApplicationException, IllegalAccessException;
     /**
      *
      * @param plugin
@@ -60,4 +71,20 @@ public interface PluginService {
      * @return
      */
     List  getPlugins(int start, int max) throws IllegalAccessException;
+
+    /**
+     *
+     * @param pluginid
+     * @return
+     * @throws IllegalAccessException
+     */
+    List<PluginModel> getDependesOf (String pluginid) throws IllegalAccessException;
+
+    /**
+     *
+     * @param id
+     * @param version
+     * @return
+     */
+    PluginModel getPlugin (String id, String version) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException;
 }

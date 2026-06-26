@@ -1,7 +1,9 @@
 package com.teratech.dao;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ModelServiceException;
 import com.teratech.model.generic.AbstractItem;
+
+import java.util.Map;
 
 public interface PersistenceManager {
     /**
@@ -28,7 +30,13 @@ public interface PersistenceManager {
      */
     void delete(Object ... entities) throws ModelServiceException;
 
-
+    /**
+     * Execute JPQL Queries
+     * @param query
+     * @param parameters
+     * @return
+     */
+     int executeUpdate(String query, Map<String, Object> parameters);
     /**
      * Create new instance and attach it to the persistence context
      * so you can

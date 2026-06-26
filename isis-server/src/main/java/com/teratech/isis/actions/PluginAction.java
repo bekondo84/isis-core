@@ -1,6 +1,8 @@
-package com.teratech.actions;
+package com.teratech.isis.actions;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ApplicationException;
+import com.teratech.exceptions.ModelServiceException;
+import com.teratech.actions.AbstractAction;
 import com.teratech.actions.annotations.Action;
 import com.teratech.actions.annotations.ActionMethod;
 import com.teratech.dao.FlexibleSearch;
@@ -8,8 +10,6 @@ import com.teratech.dao.PersistenceManager;
 import com.teratech.metadata.ActionContextData;
 import com.teratech.model.cms.ActionType;
 import com.teratech.services.PluginService;
-import com.teratech.utils.ApplicationConstans;
-import com.teratech.utils.ApplicationConstans.Actions;
 import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginManager;
@@ -22,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 import static com.teratech.utils.ApplicationConstans.Actions.*;
 
 @Action
-public class PluginAction extends AbstractAction{
+public class PluginAction extends AbstractAction {
 
     private final PluginService pluginService ;
     /**
@@ -62,17 +62,39 @@ public class PluginAction extends AbstractAction{
         }
     }
 
+    /**
+     * Install
+     * @param context
+     * @return
+     * @throws ModelServiceException
+     */
     @ActionMethod(value = "install", scope = ActionType.POST)
-    public ActionContextData install (ActionContextData context) throws ModelServiceException {
-        final String pluginId = (String) context.get(DATA);
-        assert  StringUtils.isNotBlank(pluginId) : String.format("No plugin found in the action context data");
-        try {
-            Boolean status =  pluginService.isInstall(pluginId);
-            context.put(STATUS, status.toString());
-            return context;
-        } catch (NoSuchFieldException | IllegalAccessException | InstantiationException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new ModelServiceException(e);
+    public ActionContextData install (ActionContextData context) throws ApplicationException {
+        final String pluginId = (String) context.get(PLUGIN);
+
+        if (StringUtils.isBlank(pluginId)) {
+            throw new ApplicationException(String.format("No plugin found in the action context data"));
         }
+        Boolean status =  pluginService.install(pluginId);
+        context.put(STATUS, status.toString());
+        return context;
+    }
+
+    /**
+     *
+     * @param context
+     * @return
+     * @throws ApplicationException
+     */
+    @ActionMethod(value = "uninstall", scope = ActionType.POST)
+    public ActionContextData uninstall (ActionContextData context) throws ApplicationException, IllegalAccessException {
+        final String pluginId = (String) context.get(PLUGIN);
+
+        if (StringUtils.isBlank(pluginId)) {
+            throw new ApplicationException(String.format("No plugin found in the action context data"));
+        }
+        Boolean status = pluginService.uninstall(pluginId);
+        context.put(STATUS, status.toString());
+        return context;
     }
 }

@@ -1,16 +1,21 @@
 package com.teratech.isis.services.impl;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ApplicationException;
+import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.extensions.PluginExtensionPoint;
 import com.teratech.extensions.ServiceExtensionPoint;
 import com.teratech.isis.dao.PluginDao;
 import com.teratech.isis.popultor.PluginPopulator;
 import com.teratech.model.PluginModel;
+import com.teratech.services.MenuNodeService;
 import com.teratech.services.PluginService;
 import com.teratech.jaxb.entities.Plugin;
 import com.teratech.services.JAXBService;
 import com.teratech.services.impl.JAXBServiceImpl;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ScanResult;
 import jakarta.transaction.Transactional;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
@@ -18,10 +23,12 @@ import org.pf4j.PluginState;
 import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PluginServiceImpl implements PluginService {
@@ -30,17 +37,19 @@ public class PluginServiceImpl implements PluginService {
     private final PluginDao pluginDao;
     private final PluginPopulator pluginPopulator;
     private final FlexibleSearch flexibleSearch;
+    private final MenuNodeService menuNodeService;
     private JAXBService jaxbService = new JAXBServiceImpl();
     /**
      *
      * @param pluginManager
      */
     @Autowired
-    public PluginServiceImpl(PluginManager pluginManager, PluginDao pluginDao, PluginPopulator pluginPopulator, FlexibleSearch flexibleSearch) {
+    public PluginServiceImpl(PluginManager pluginManager, PluginDao pluginDao, PluginPopulator pluginPopulator, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService) {
         this.pluginManager = pluginManager;
         this.pluginDao = pluginDao;
         this.pluginPopulator = pluginPopulator;
         this.flexibleSearch = flexibleSearch;
+        this.menuNodeService = menuNodeService;
     }
 
     /**
@@ -115,10 +124,35 @@ public class PluginServiceImpl implements PluginService {
                 throw new IllegalStateException(String.format("No plugin found with ID plugin %s, please check if the plugin exists and try again", wrapper.getPluginId()));
             }
             //Install the plugin feature
-            install(wrapper.getPluginId(), wrapper.getDescriptor().getVersion());
+            //install(wrapper.getPluginId());
         }
 
         return "SUCCES";
+    }
+
+    /**
+     * @param pluginId
+     * @return
+     * @throws ApplicationException
+     */
+    @Override
+    public boolean uninstall(String pluginId) throws ApplicationException, IllegalAccessException {
+        List<PluginModel> depends = getDependesOf(pluginId);
+
+        if (!CollectionUtils.isEmpty(depends)) {
+            List<String> installdepends = depends.stream().filter(plug -> plug.isInstall()).map(plug -> plug.getId()).collect(Collectors.toUnmodifiableList());
+            if (!CollectionUtils.isEmpty(installdepends))
+                throw new ApplicationException(String.format("These plugins %s depends on %s, Please uninstall it and try again", installdepends, pluginId));
+        }
+        //Get the PluginExtension
+        List<PluginExtensionPoint>  pluginExtensionPoints =  pluginManager.getExtensions(PluginExtensionPoint.class, pluginId);
+        //System.out.println(pluginManager.getExtensions(plugin));
+        if (pluginExtensionPoints == null || pluginExtensionPoints.isEmpty()) {
+            throw new IllegalArgumentException(String.format("No extension point of type PluginExtensionPoint found for plugin with id : %s", pluginId));
+        }
+        PluginExtensionPoint extensionPoint = pluginExtensionPoints.get(0);
+
+        return extensionPoint.uninstall(pluginManager.getPlugin(pluginId));
     }
 
     /**
@@ -127,32 +161,43 @@ public class PluginServiceImpl implements PluginService {
      * @param plugin
      * @return
      */
-    @Transactional
+    //@Transactional
     @Override
-    public boolean install(String plugin, String version) throws IOException, JAXBException, IllegalAccessException, ModelServiceException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+    public boolean install(String plugin) throws ApplicationException {
         //Start the Plugin
         PluginState pluginState = pluginManager.startPlugin(plugin);
+        PluginWrapper wrapper = pluginManager.getPlugin(plugin);
+
 
         if (pluginState.isFailed()) {
             throw new IllegalStateException(String.format("Failed to start plugin with id %s", pluginState));
         }
+
+        //*******************************
+        ClassLoader loader =
+                wrapper.getPluginClassLoader();
+
+        try (ScanResult scan =
+                     new ClassGraph()
+                             .overrideClassLoaders(loader)
+                             .enableClassInfo()
+                             .scan()) {
+
+            for (ClassInfo ci :
+                    scan.getAllClasses()) {
+
+                System.out.println(ci.getName());
+            }
+        }
         //Get the PluginExtension
         List<PluginExtensionPoint>  pluginExtensionPoints =  pluginManager.getExtensions(PluginExtensionPoint.class, plugin);
-       // System.out.println(pluginManager.getExtensions(ControllerExtensionPoint.class, plugin));
+       //System.out.println(pluginManager.getExtensions(plugin));
         if (pluginExtensionPoints == null || pluginExtensionPoints.isEmpty()) {
             throw new IllegalArgumentException(String.format("No extension point of type PluginExtensionPoint found for plugin with id : %s", plugin));
         }
         PluginExtensionPoint extensionPoint = pluginExtensionPoints.get(0);
-        boolean status = extensionPoint.install(pluginManager.getPlugin(plugin));
 
-        if (status) {
-            //Fetch the pluginModel record
-            PluginModel pluginModel = (PluginModel) flexibleSearch.find(new PluginModel(plugin, version));
-            pluginModel.setInstall(true);
-            pluginModel.setInstaldate(new Date());
-            pluginDao.saveORUpdate(pluginModel);
-        }
-        return status;
+        return extensionPoint.install(pluginManager.getPlugin(plugin));
     }
 
     /**
@@ -188,6 +233,26 @@ public class PluginServiceImpl implements PluginService {
     @Override
     public List getPlugins(int start, int max) throws IllegalAccessException {
         return pluginDao.getPlugins(start, max);
+    }
+
+    /**
+     * @param pluginid
+     * @return
+     * @throws IllegalAccessException
+     */
+    @Override
+    public List<PluginModel> getDependesOf(String pluginid) throws IllegalAccessException {
+        return flexibleSearch.doSearch(GET_DEPENDS, Collections.singletonMap("pluginId", pluginid));
+    }
+
+    /**
+     * @param id
+     * @param version
+     * @return
+     */
+    @Override
+    public PluginModel getPlugin(String id, String version) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+        return flexibleSearch.find(new PluginModel(id, version));
     }
 }
 

@@ -110,9 +110,11 @@ CREATE TABLE IF NOT EXISTS cms_action (
     CONSTRAINT fk_cms_action_adm_plugin FOREIGN KEY (plugin_id, plugin_version)
       REFERENCES adm_plugin (id, version) ON DELETE CASCADE
 );
----Menu Table
+
+----Create table cms_menu
 CREATE TABLE IF NOT EXISTS cms_menu (
     code VARCHAR (50) NOT NULL,
+    menu_type VARCHAR(50) NOT NULL,
     actif BOOLEAN DEFAULT 'true',
     icon VARCHAR (50),
     label VARCHAR (255) NOT NULL,
@@ -120,38 +122,21 @@ CREATE TABLE IF NOT EXISTS cms_menu (
     plugin_id VARCHAR (50),
     plugin_version VARCHAR (50),
     parent_id VARCHAR (50),
-    createdAt TIMESTAMPTZ NOT NULL,
-    lastModif TIMESTAMPTZ,
-
-    CONSTRAINT pk_cms_menu PRIMARY KEY (code),
-    CONSTRAINT fk_cms_menu_on_adm_plugin FOREIGN KEY (plugin_id, plugin_version)
-     REFERENCES adm_plugin (id, version) ON DELETE CASCADE,
-    CONSTRAINT fk_cms_menu_on_cms_menu FOREIGN KEY (parent_id)
-     REFERENCES cms_menu (code) ON DELETE CASCADE
-);
-----Create table cms_menuitem
-CREATE TABLE IF NOT EXISTS cms_menuitem (
-    code VARCHAR (50) NOT NULL,
-    actif BOOLEAN DEFAULT 'true',
-    icon VARCHAR (50),
-    label VARCHAR (255) NOT NULL,
-    sequence SMALLINT NOT NULL,
-    plugin_id VARCHAR (50),
-    plugin_version VARCHAR (50),
-    parent_id VARCHAR (50),
+    menu_level VARCHAR (50) NOT NULL,
     act_name VARCHAR (50),
     type VARCHAR (255),
     view_type VARCHAR (20),
     template VARCHAR (50),
     badge_color VARCHAR (50),
+    modal BOOLEAN DEFAULT 'false',
     createdAt TIMESTAMPTZ NOT NULL,
     lastModif TIMESTAMPTZ,
 
     CONSTRAINT pk_cms_menuitem PRIMARY KEY (code),
-    CONSTRAINT fk_cms_menuitem_on_adm_plugin FOREIGN KEY (plugin_id, plugin_version)
-     REFERENCES adm_plugin (id, version) ON DELETE CASCADE,
-    CONSTRAINT fk_cms_menuitem_on_cms_menu FOREIGN KEY (parent_id)
-     REFERENCES cms_menu (code) ON DELETE CASCADE
+    CONSTRAINT fk_csm_menu_adm_plugin FOREIGN KEY (plugin_id, plugin_version)
+      REFERENCES adm_plugin (id, version),
+    CONSTRAINT fk_cms_menu_cms_menu FOREIGN KEY (parent_id)
+     REFERENCES cms_menu (code)
 );
 ------CREATE cms_metatype
 CREATE TABLE IF NOT EXISTS cms_metatype (

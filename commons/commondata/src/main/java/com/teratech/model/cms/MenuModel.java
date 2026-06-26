@@ -5,7 +5,7 @@ import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cms_menu")
+@DiscriminatorValue("MENU")
 public class MenuModel extends AbstractMenu {
 
 

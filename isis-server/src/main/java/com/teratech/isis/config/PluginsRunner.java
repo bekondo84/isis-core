@@ -45,8 +45,9 @@ public class PluginsRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         logger.info("DEMARRAGE DES PLUGINS EN COURS !!!!!!!!");
           pluginManager.loadPlugins();
-          pluginManager.getPlugins().forEach(wrapper -> System.out.println(wrapper.getPluginId()));
-          startInstallPlugins();
+          pluginManager.startPlugins();
+          pluginManager.getExtensions("backoffice").forEach(wrapper -> System.out.println(wrapper));
+          //startInstallPlugins();
           //pluginManager.startPlugins();
           // /!\ AJOUT : Enregistrement des endpoints HTTP des plugins
           restPluginManager.registerPluginControllers();

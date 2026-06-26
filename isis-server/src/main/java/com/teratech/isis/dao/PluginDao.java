@@ -1,19 +1,20 @@
 package com.teratech.isis.dao;
 
-import com.teratech.ModelServiceException;
+import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
-import com.teratech.model.PluginId;
 import com.teratech.model.PluginModel;
 import com.teratech.tools.persistence.RestrictionsContainer;
-import jakarta.persistence.EntityManager;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public interface PluginDao {
+
+    static final String GET_DEPENDS = "SELECT p FROM PluginModel p WHERE :pluginId MEMBER OF p.dependencies";
 
     /**
      *
@@ -74,6 +75,16 @@ public interface PluginDao {
            throw new ModelServiceException(e);
        }
        return plugin;
+   }
+
+    /**
+     *
+     * @param pluginid
+     * @return
+     * @throws IllegalAccessException
+     */
+   default  List<PluginModel> getDependesOf (String pluginid) throws IllegalAccessException {
+       return getFlexibleSearch().doSearch(GET_DEPENDS, Collections.singletonMap("pluginId", pluginid));
    }
 
    FlexibleSearch getFlexibleSearch();
