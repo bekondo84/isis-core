@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-//@Component
+@Component
 public class SchemaMultiTenantConnectionProvider implements MultiTenantConnectionProvider<String> {
 
     private static final Logger log = LoggerFactory.getLogger(SchemaMultiTenantConnectionProvider.class);

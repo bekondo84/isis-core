@@ -1,17 +1,15 @@
 package com.teratech.isis.services.impl;
 
-import com.teratech.model.generic.AbstractTenant;
-import com.teratech.model.generic.AbstractTenant;
+import com.teratech.model.generic.AbstractBusinessEntity;
 import com.teratech.model.media.MediaModel;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.*;
 
 
 @Entity
 public class CompanyTest
-    extends AbstractTenant
+    extends AbstractBusinessEntity
 {
     /**
      * Name of the Entity Without Model

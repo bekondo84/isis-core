@@ -44,12 +44,23 @@ public class Utils {
 
         // 6. CRUCIAL : Injection du Plugin ID comme préfixe global de la route
         // On s'assure que le préfixe ressemble à "/pluginId"
-        String prefix = isRestController(beanType)  ? "/api/" + wrapper.getPluginId().toLowerCase().trim() : "/"+wrapper.getPluginId().toLowerCase().trim();
+          String prefix = "" ;
+          if (isRestController(beanType)) {
+               prefix = "/api" ;
+              if (Objects.nonNull(classOpen)) {
+                  prefix = "/api/public";
+              }
+              prefix+= "/"+wrapper.getPluginId().toLowerCase().trim();
+          } else {
+              prefix = "web";
+              if (Objects.nonNull(classOpen)) {
+                  prefix = "/web/public";
+              }
+              prefix +="/"+wrapper.getPluginId().toLowerCase().trim();
+          }
+        //isRestController(beanType)  ? "/api/" +  : ;
 
         //7. Position public si la classe est annoté @Open
-        if (Objects.nonNull(classOpen)) {
-            prefix = "/public"+prefix;
-        }
 
         finalInfo = RequestMappingInfo.paths(prefix)
                 .options(mapping.getBuilderConfiguration())

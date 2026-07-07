@@ -38,7 +38,11 @@
                             <e:field qualifier="logo" widget="media" />
                         </e:section>
                         <e:section name="hac.commons-002" position="99" columns="1">
-                            <e:field qualifier="code" />
+                            <e:field qualifier="code" >
+                                <e:filters>
+                                    <e:filter source="nui" operator="eq" value="1000" />
+                                </e:filters>
+                            </e:field>
                             <e:field qualifier="nui" />
                         </e:section>
                     </e:section>

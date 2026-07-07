@@ -53,6 +53,7 @@ public class MetaColumn implements Serializable {
         observable = false ;
         this.actions = new ArrayList<>();
         filters = new ArrayList<>();
+        this.values = new ArrayList<>();
     }
 
     /**
@@ -66,6 +67,7 @@ public class MetaColumn implements Serializable {
         observable = false ;
         this.actions = new ArrayList<>();
         this.values = new ArrayList<>();
+        this.filters = new ArrayList<>();
     }
 
     public String getType() {
@@ -256,7 +258,11 @@ public class MetaColumn implements Serializable {
     }
 
     public List<FilterData> getFilters() {
-        return filters;
+        return Collections.unmodifiableList(filters);
+    }
+
+    public void  addFilter(FilterData filter) {
+        filters.add(filter);
     }
 
     public void setFilters(List<FilterData> filters) {

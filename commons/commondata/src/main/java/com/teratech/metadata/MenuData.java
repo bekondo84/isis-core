@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class NavigationNodeData extends NavigationComponentData{
+public class MenuData extends AbstractMenuData {
 
-    private List<NavigationComponentData> navigations = new ArrayList<>();
+    private List<AbstractMenuData> navigations = new ArrayList<>();
 
-    public NavigationNodeData() {
+    public MenuData() {
 
     }
 
-    public List<NavigationComponentData> getNavigations() {
+    public List<AbstractMenuData> getNavigations() {
         return Collections.unmodifiableList(navigations);
     }
 
-    public void setNavigations(List<NavigationComponentData> navigations) {
+    public void setNavigations(List<AbstractMenuData> navigations) {
         this.navigations = navigations;
     }
 
-    public void add(NavigationComponentData node){
+    public void add(AbstractMenuData node){
         this.navigations.add(node);
     }
 
-    public  void  remove(NavigationComponentData node) {
+    public  void  remove(AbstractMenuData node) {
        int index = -1 ;
        for (int i = 0 ; i < getNavigations().size(); i++) {
              if (getNavigations().get(i).getCode().equalsIgnoreCase(node.getCode())){

@@ -21,8 +21,8 @@ import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class ServerJpaConfig {
 
     private static final Logger LOG = LoggerFactory.getLogger(ServerJpaConfig.class);

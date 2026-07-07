@@ -1,7 +1,6 @@
 package com.teratech.services;
 
 import com.teratech.metadata.MetaData;
-import com.teratech.metadata.NavigationLinkData;
 import com.teratech.model.cms.MenuItemModel;
 import com.teratech.model.cms.MetaTypeModel;
 import jakarta.xml.bind.JAXBException;

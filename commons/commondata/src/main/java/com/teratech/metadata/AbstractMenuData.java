@@ -3,7 +3,7 @@ package com.teratech.metadata;
 
 import java.io.Serializable;
 
-public class NavigationComponentData implements Serializable {
+public abstract class AbstractMenuData implements Serializable {
     protected String code;
 
     protected Boolean activate;
@@ -12,7 +12,7 @@ public class NavigationComponentData implements Serializable {
 
     protected String label;
 
-    protected Short position;
+    protected int position;
 
     //protected NavigationNodeLevel level;
 
@@ -50,11 +50,11 @@ public class NavigationComponentData implements Serializable {
         this.label = label;
     }
 
-    public Short getPosition() {
+    public int getPosition() {
         return position;
     }
 
-    public void setPosition(Short position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 }

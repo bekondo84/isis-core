@@ -135,7 +135,7 @@ public class MenuNodeServiceImpl implements MenuNodeService {
             menu.setPlugin(plugin);
             menu.setPosition(node.getPosition());
             menu.setLevel(level);
-            menu.setLabel(i18NService.getMessage(wrapper, node.getId(), Locale.getDefault()));
+            menu.setLabel(i18NService.getMessage(wrapper, node.getId()));
             MenuModel currentMenu = persistenceManager.save(menu);
 
             for (NavigationNode child : node.getNavigationNode()) {
@@ -154,7 +154,7 @@ public class MenuNodeServiceImpl implements MenuNodeService {
             menuItem.setLevel(level);
             if (Objects.nonNull(node.getBadgeColor()))
               menuItem.setBadgeColor(node.getBadgeColor().value());
-            menuItem.setLabel(i18NService.getMessage(wrapper, node.getId(), Locale.getDefault()));
+            menuItem.setLabel(i18NService.getMessage(wrapper, node.getId()));
             persistenceManager.save(menuItem);
         }
     }

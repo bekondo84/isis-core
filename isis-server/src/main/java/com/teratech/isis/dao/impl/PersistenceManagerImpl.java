@@ -3,7 +3,7 @@ package com.teratech.isis.dao.impl;
 import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
-import com.teratech.model.generic.AbstractTenant;
+import com.teratech.model.generic.AbstractBusinessEntity;
 import com.teratech.model.generic.AbstractItem;
 import com.teratech.utils.ClassUtils;
 import jakarta.persistence.EntityManager;
@@ -41,7 +41,7 @@ public class PersistenceManagerImpl implements PersistenceManager {
             if (!AbstractItem.class.isAssignableFrom(entity.getClass()))
                 throw new IllegalAccessException(String.format("Class %s don't inherited from %s", entity.getClass().getName(), AbstractItem.class.getName()));
             //Check if entity extends AbstractTenant and set the tenantId field
-            if (isAssignableFrom(entity, AbstractTenant.class)) {
+            if (isAssignableFrom(entity, AbstractBusinessEntity.class)) {
                 //TODO
             }
             if (Objects.isNull(entity.getCreatedAt())) {

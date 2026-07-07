@@ -1,11 +1,13 @@
 package com.teratech.isis.services.impl;
 
+import com.teratech.beans.PluginData;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.extensions.PluginExtensionPoint;
 import com.teratech.extensions.ServiceExtensionPoint;
 import com.teratech.isis.dao.PluginDao;
+import com.teratech.isis.popultor.PluginJAXBPopulator;
 import com.teratech.isis.popultor.PluginPopulator;
 import com.teratech.model.PluginModel;
 import com.teratech.services.MenuNodeService;
@@ -35,21 +37,23 @@ public class PluginServiceImpl implements PluginService {
 
     private final PluginManager pluginManager;
     private final PluginDao pluginDao;
-    private final PluginPopulator pluginPopulator;
+    private final PluginJAXBPopulator pluginJAXBPopulator;
     private final FlexibleSearch flexibleSearch;
     private final MenuNodeService menuNodeService;
+    private final PluginPopulator pluginPopulator;
     private JAXBService jaxbService = new JAXBServiceImpl();
     /**
      *
      * @param pluginManager
      */
     @Autowired
-    public PluginServiceImpl(PluginManager pluginManager, PluginDao pluginDao, PluginPopulator pluginPopulator, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService) {
+    public PluginServiceImpl(PluginManager pluginManager, PluginDao pluginDao, PluginJAXBPopulator pluginJAXBPopulator, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService, PluginPopulator pluginPopulator) {
         this.pluginManager = pluginManager;
         this.pluginDao = pluginDao;
-        this.pluginPopulator = pluginPopulator;
+        this.pluginJAXBPopulator = pluginJAXBPopulator;
         this.flexibleSearch = flexibleSearch;
         this.menuNodeService = menuNodeService;
+        this.pluginPopulator = pluginPopulator;
     }
 
     /**
@@ -102,7 +106,7 @@ public class PluginServiceImpl implements PluginService {
                 if (Objects.isNull(plugin)) {
                     throw new IllegalArgumentException(String.format("No description file found for plugin %s", wrapper.getPluginId()));
                 }
-                pluginPopulator.populate(plugin, pluginModel);
+                pluginJAXBPopulator.populate(plugin, pluginModel);
                 pluginDao.saveORUpdate(pluginModel);
             }
         }
@@ -253,6 +257,28 @@ public class PluginServiceImpl implements PluginService {
     @Override
     public PluginModel getPlugin(String id, String version) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         return flexibleSearch.find(new PluginModel(id, version));
+    }
+
+    /**
+     * Load Plugin informations
+     *
+     * @param pluginId
+     * @return
+     */
+    @Override
+    public PluginData loadPlugin(String pluginId) throws ModelServiceException {
+
+        try {
+            PluginWrapper pluginWrapper = pluginManager.getPlugin(pluginId);
+            PluginModel pluginModel = flexibleSearch.find(new PluginModel(pluginId, pluginWrapper.getDescriptor().getVersion()));
+            final PluginData pluginData = new PluginData();
+            pluginPopulator.populate(pluginModel, pluginData);
+
+            return pluginData;
+        } catch (Exception e) {
+              throw new ModelServiceException(e);
+        }
+        
     }
 }
 

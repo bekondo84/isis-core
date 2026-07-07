@@ -3,7 +3,7 @@ package com.teratech.isis.config;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver<String> {
     private static final String DEFAULT_TENANT = "public";
 

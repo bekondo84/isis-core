@@ -1,5 +1,6 @@
 package com.teratech.services;
 
+import com.teratech.beans.PluginData;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
 import com.teratech.model.PluginModel;
@@ -87,4 +88,11 @@ public interface PluginService {
      * @return
      */
     PluginModel getPlugin (String id, String version) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException;
+
+    /**
+     * Load Plugin informations
+     * @param pluginId
+     * @return
+     */
+    PluginData loadPlugin (final String pluginId) throws ModelServiceException;
 }

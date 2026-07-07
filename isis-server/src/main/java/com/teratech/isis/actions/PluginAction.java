@@ -8,6 +8,7 @@ import com.teratech.actions.annotations.ActionMethod;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.metadata.ActionContextData;
+import com.teratech.metadata.ActionData;
 import com.teratech.model.cms.ActionType;
 import com.teratech.services.PluginService;
 import jakarta.xml.bind.JAXBException;
@@ -96,5 +97,21 @@ public class PluginAction extends AbstractAction {
         Boolean status = pluginService.uninstall(pluginId);
         context.put(STATUS, status.toString());
         return context;
+    }
+
+    @ActionMethod(value = "load", scope = ActionType.POST)
+    public ActionContextData loadPlugin (ActionContextData context) throws ApplicationException {
+
+        try {
+            final String pluginId = (String) context.get(PLUGIN);
+            if (StringUtils.isBlank(pluginId)) {
+                throw new ApplicationException(String.format("No plugin found in the action context data"));
+            }
+            context.put(DATA, pluginService.loadPlugin(pluginId)) ;
+            return context;
+        } catch (ApplicationException | ModelServiceException ex) {
+            throw new ApplicationException(ex);
+        }
+
     }
 }

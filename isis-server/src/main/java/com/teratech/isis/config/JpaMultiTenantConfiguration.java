@@ -1,16 +1,20 @@
 package com.teratech.isis.config;
 
+import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-//@Configuration
+@Configuration
 public class JpaMultiTenantConfiguration {
 
     @Bean
@@ -43,5 +47,19 @@ public class JpaMultiTenantConfiguration {
         em.setJpaPropertyMap(jpaProperties);
         return em;
     }
+
+    @Bean(name = "coreTransactionManager")
+    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory, DataSource dataSource) {
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        txManager.setEntityManagerFactory(entityManagerFactory);
+        txManager.setDataSource(dataSource);
+        return txManager;
+    }
+
+    @Bean(name = "coreTransactionTemplate")
+    public TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager) {
+        return new TransactionTemplate(transactionManager);
+    }
+
 
 }

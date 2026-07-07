@@ -2,7 +2,7 @@ package com.teratech.metadata;
 
 import java.io.Serializable;
 
-public class NavigationLinkData extends NavigationComponentData implements Serializable {
+public class MenuItemData extends AbstractMenuData implements Serializable {
     private String action;
 
     private String type;
@@ -17,7 +17,7 @@ public class NavigationLinkData extends NavigationComponentData implements Seria
 
     private String badgeColor;
 
-    public NavigationLinkData() {
+    public MenuItemData() {
     }
 
     public String getAction() {

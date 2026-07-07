@@ -24,4 +24,8 @@ public class ApplicationConstans {
         public static final String NBREOFITEMS ="size";
         public static final String STATUS = "status";
     }
+
+    public static class Security {
+        public static final String USER_APPLI_ROLE ="USER";
+    }
 }

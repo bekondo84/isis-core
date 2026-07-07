@@ -1,62 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <explorer-tree xmlns="http://www.isis.cm/config/explorer-tree"
 >
-    <navigation-node id="dashbord.node" position="95" icon="fa-solid fa-chart-line" >
-        <navigation-node id="system.dashbord" position="100" code="Dashboard"  icon="fa-solid fa-chart-line" viewMode="dashboard" />
+    <navigation-node id="backoffice.dashbord.node" position="95" icon="fa-solid fa-chart-line" >
+        <navigation-node id="backoffice.system.dashbord" position="100" code="Dashboard"  icon="fa-solid fa-chart-line" viewMode="dashboard" />
     </navigation-node>
-    <navigation-node id="settings.node" position="96"  icon="fa-solid fa-screwdriver-wrench">
-        <navigation-node id="general.settings.node" code="Setting" position="98" icon="fa-solid fa-gear" viewMode="view" action="settingAction" />
-        <navigation-node id="security.company" code="Company" icon="fa-solid fa-landmark" viewMode="list,view"  />
-        <navigation-node id="system.locale" code="Locale" position="99" icon="fa-solid fa-language" viewMode="list,view" />
-        <navigation-node id="system.currency" code="Currency" position="100" icon="fa-solid fa-coins" viewMode="list,view" />
+    <navigation-node id="backoffice.settings.node" position="96"  icon="fa-solid fa-screwdriver-wrench">
+        <navigation-node id="backoffice.general.settings.node" code="Setting" position="98" icon="fa-solid fa-gear" viewMode="view" action="settingAction" />
+        <navigation-node id="backoffice.security.business" code="Business" icon="fa-solid fa-landmark" viewMode="list,view"  />
+        <navigation-node id="backoffice.system.locale" code="Local" position="99" icon="fa-solid fa-language" viewMode="list,view" />
+        <navigation-node id="backoffice.system.currency" code="Currency" position="100" icon="fa-solid fa-coins" viewMode="list,view" />
     </navigation-node>
-    <navigation-node id="security.node" position="97" icon="fa-solid fa-shield">
-        <navigation-node id="security.user" code="Employee" icon="fa-solid fa-user-tie" viewMode="list,kaban,view" action="userAction"/>
-        <navigation-node id="security.usergroup" code="UserGroup" icon="fa-solid fa-user-shield" viewMode="list,view" />
+    <navigation-node id="backoffice.security.node" position="97" icon="fa-solid fa-shield">
+        <navigation-node id="backoffice.security.user" code="User" icon="fa-solid fa-user-tie" viewMode="list,kaban,view" action="userAction"/>
+        <navigation-node id="backoffice.security.usergroup" code="UserGroup" icon="fa-solid fa-user-shield" viewMode="list,view" />
     </navigation-node>
-    <navigation-node id="system.node" position="98" icon="fa-solid fa-gear">
-        <navigation-node id="system.types" code="MetaType" position="100" icon="fa-solid fa-vector-square" viewMode="list,view" />
-        <navigation-node id="system.medias" position="101" icon="fa-solid fa-photo-film">
-            <navigation-node id="system.media" code="Media" position="99" icon="fa-solid fa-image" viewMode="list,view" />
-            <navigation-node id="system.mediacontainer" code="MediaContainer" position="100" icon="fa-solid fa-box-open" viewMode="list,view" />
+    <navigation-node id="backoffice.system.node" position="98" icon="fa-solid fa-gear">
+        <navigation-node id="backoffice.system.types" code="MetaType" position="100" icon="fa-solid fa-vector-square" viewMode="list,view" />
+        <navigation-node id="backoffice.system.medias" position="101" icon="fa-solid fa-photo-film">
+            <navigation-node id="backoffice.system.media" code="Media" position="99" icon="fa-solid fa-image" viewMode="list,view" />
+            <navigation-node id="backoffice.system.mediacontainer" code="MediaContainer" position="100" icon="fa-solid fa-box-open" viewMode="list,view" />
         </navigation-node>
-        <navigation-node id="systems.backprocess" icon="fa-solid fa-server" position="99">
-            <navigation-node id="system.cronjobs" code="CronJob" position="97" icon="fa-solid fa-clock" viewMode="list,view" />
-            <navigation-node id="system.cronjob.status" code="CronJobStatus" position="98"  viewMode="list,view" />
-            <navigation-node id="system.cronjob.result" code="CronJobResult" position="99"  viewMode="list,view" />
+        <navigation-node id="backoffice.systems.backprocess" icon="fa-solid fa-server" position="99">
+            <navigation-node id="backoffice.system.cronjobs" code="CronJob" position="97" icon="fa-solid fa-clock" viewMode="list,view" />
+            <navigation-node id="backoffice.system.cronjob.status" code="CronJobStatus" position="98"  viewMode="list,view" />
+            <navigation-node id="backoffice.system.cronjob.result" code="CronJobResult" position="99"  viewMode="list,view" />
         </navigation-node>
-        <navigation-node id="system.businessrules" code="BusinessRule" position="98" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
-        <navigation-node id="system.businessprocessnode" position="97" icon="fa-solid fa-microchip">
-            <navigation-node id="system.businessprocess" code="BusinessProcess" position="97" viewMode="list,view" icon="fa-solid fa-square-parking"/>
-            <navigation-node id="system.businessprocesscronjobs" code="BusinessProcessCronJob" position="98" viewMode="list,view" icon="fa-solid fa-clock"/>
-            <navigation-node id="system.businessprocestask" code="BusinessProcessTask" position="99" viewMode="list,view" icon="fa-solid fa-list-check"/>
-            <navigation-node id="system.processstate" code="ProcessState" position="100" viewMode="list,view"  />
-        </navigation-node>
-        <navigation-node id="system.workflownode" position="96" icon="fa-brands fa-wordpress">
-            <navigation-node id="system.workflowtemplate" code="WorkflowTemplate" viewMode="list,view" icon="fa-solid fa-arrows-to-circle"/>
-            <navigation-node id="system.workflow" code="Workflow" viewMode="list,view" icon="fa-solid fa-bars-staggered"/>
-            <navigation-node id="system.workflowaction" code="AbstractWorflowAction" viewMode="list,view" />
-            <navigation-node id="system.workflowendaction" code="WorkflowEndAction" viewMode="list,view"  />
-            <navigation-node id="system.workflowsplitaction" code="WorkflowSplitAction" viewMode="list,view"  />
-            <navigation-node id="system.workflowprocedureaction" code="WorkflowProceduralAction" viewMode="list,view"  />
-            <navigation-node id="system.workflowuseraction" code="WorkflowUserAction" viewMode="list,view"  />
-            <navigation-node id="system.workflowdecision" code="WorkflowDecision" viewMode="list,view"  />
-            <navigation-node id="system.workflownodeend.status" code="WorkflowEndNodeStatus" viewMode="list,view"  />
-        </navigation-node>
+        <navigation-node id="backoffice.system.businessrules" code="BusinessRule" position="98" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
     </navigation-node>
-    <navigation-node id="explorer.node" position="99" icon="fa-solid fa-align-center">
-        <navigation-node id="explorer.modules" code="Module" viewMode="list,view" icon="fa-brands fa-google-play"/>
-        <navigation-node id="explorer.navigations" code="NavigationComponent" viewMode="list,view" icon="fa-solid fa-align-center"/>
-        <navigation-node id="explorer.navigations.menu" code="NavigationNode" viewMode="list,view" icon="fa-solid fa-align-justify"/>
-        <navigation-node id="explorer.navigations.link" code="NavigationLink" viewMode="list,view" icon="fa-solid fa-location-arrow"/>
-        <navigation-node id="explorer.actions.node" code="ActionNode" viewMode="list,view" icon="fa-solid fa-bolt"/>
-        <navigation-node id="explorer.navigations.level" code="NavigationNodeLevel" viewMode="list,view" />
-        <navigation-node id="explorer.module.types" code="ExtensionType" viewMode="list,view" />
+    <navigation-node id="backoffice.explorer.node" position="99" icon="fa-solid fa-align-center">
+        <navigation-node id="backoffice.explorer.plugins" code="Plugin" viewMode="list,view" icon="fa-brands fa-google-play"/>
+        <navigation-node id="backoffice.explorer.navigations" code="AbstractMenu" viewMode="list,view" icon="fa-solid fa-align-center"/>
+        <navigation-node id="backoffice.explorer.menus" code="Menu" viewMode="list,view" icon="fa-solid fa-align-justify"/>
+        <navigation-node id="backoffice.explorer.menuitems" code="MenuItem" viewMode="list,view" icon="fa-solid fa-location-arrow"/>
+        <navigation-node id="explorer.actions.node" code="Action" viewMode="list,view" icon="fa-solid fa-bolt"/>
     </navigation-node>
-    <navigation-node id="wbs.node" position="100" icon="fa-brands fa-elementor">
-        <navigation-node id="wbs.catalog" code="Catalog" viewMode="list,view" icon="fa-brands fa-palfed" />
-        <navigation-node id="wbs.version" code="Version" viewMode="list,view" icon="fa-brands fa-palfed" />
-        <navigation-node id="wbs.catalogVersion" code="CatalogVersion" viewMode="list,view" icon="fa-brands fa-palfed" />
-        <navigation-node id="wbs.pages" code="PageTemplate" viewMode="list,view" icon="fa-brands fa-palfed"/>
+    <navigation-node id="backoffice.wbs.node" position="100" icon="fa-brands fa-elementor">
+        <navigation-node id="backoffice.wbs.catalog" code="Catalog" viewMode="list,view" icon="fa-brands fa-palfed" />
+        <navigation-node id="backoffice.wbs.version" code="Version" viewMode="list,view" icon="fa-brands fa-palfed" />
+        <navigation-node id="backoffice.wbs.catalogVersion" code="CatalogVersion" viewMode="list,view" icon="fa-brands fa-palfed" />
+        <navigation-node id="backoffice.wbs.pages" code="PageTemplate" viewMode="list,view" icon="fa-brands fa-palfed"/>
     </navigation-node>
 </explorer-tree>
