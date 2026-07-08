@@ -3,6 +3,7 @@ package com.teratech.isis.security;
 import com.teratech.extensions.SecurityExtensionPoint;
 import com.teratech.utils.ApplicationConstans;
 import org.pf4j.PluginManager;
+import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,11 +34,14 @@ public class SecurityConfig {
     public List<SecurityFilterChain> pluginSecurityFilterChains (HttpSecurity http) throws Exception {
         List<SecurityFilterChain> chains = new ArrayList<>();
 
-        // On récupère tous los plugins qui ont déclaré leur propre référentiel / login
-        List<SecurityExtensionPoint> extensions = pluginManager.getExtensions(SecurityExtensionPoint.class);
-        for (SecurityExtensionPoint ext : extensions) {
-            chains.add(ext.buildSecurityFilterChain(http));
+        for (PluginWrapper wrapper : pluginManager.getPlugins()) {
+            // On récupère tous los plugins qui ont déclaré leur propre référentiel / login
+            List<SecurityExtensionPoint> extensions = pluginManager.getExtensions(SecurityExtensionPoint.class, wrapper.getPluginId());
+            for (SecurityExtensionPoint ext : extensions) {
+                chains.add(ext.buildSecurityFilterChain(http, wrapper.getPluginId()));
+            }
         }
+
 
         return chains;
     }

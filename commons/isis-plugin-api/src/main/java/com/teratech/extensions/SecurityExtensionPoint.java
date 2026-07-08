@@ -11,5 +11,5 @@ public interface SecurityExtensionPoint extends ExtensionPoint {
      * Cette chaîne doit impérativement utiliser un .securityMatcher("/mon-plugin/**")
      * pour ne pas intercepter les requêtes du Core.
      */
-    SecurityFilterChain buildSecurityFilterChain(HttpSecurity http) throws Exception;
+    SecurityFilterChain buildSecurityFilterChain(HttpSecurity http, String pluginId) throws Exception;
 }

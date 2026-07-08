@@ -8,11 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.IEngineConfiguration;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.AbstractConfigurableTemplateResolver;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresource.ClassLoaderTemplateResource;
 import org.thymeleaf.templateresource.ITemplateResource;
 
-import javax.annotation.PostConstruct;
 import java.util.Map;
 
 @Configuration

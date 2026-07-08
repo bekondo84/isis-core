@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class AuthResponse implements Serializable {
     private String access_token;
     private String token_type="bearer";
-    private String expires_in;
+    private Long expires_in;
     private String lang;
     private String user;
 
@@ -27,11 +27,11 @@ public class AuthResponse implements Serializable {
         return this;
     }
 
-    public String getExpires_in() {
+    public Long getExpires_in() {
         return expires_in;
     }
 
-    public AuthResponse setExpires_in(String expires_in) {
+    public AuthResponse setExpires_in(Long expires_in) {
         this.expires_in = expires_in;
         return this;
     }

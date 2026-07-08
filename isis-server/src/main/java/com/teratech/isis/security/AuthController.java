@@ -89,7 +89,9 @@ public class AuthController {
         AuthResponse response = new AuthResponse()
                 .setAccess_token(token)
                 .setToken_type("bearer")
-                .setUser(user.getCode());
+                .setUser(user.getCode())
+                .setExpires_in(jwtService.extractExpireDate(token).getTime())
+                .setLang(Objects.nonNull(user.getLanguage()) ? user.getLanguage().getCode() : "fr");
 
         return ResponseEntity.ok(response);
     }
