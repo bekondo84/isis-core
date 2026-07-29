@@ -21,6 +21,8 @@ public class PluginJAXBPopulator implements Populator<Plugin, PluginModel> {
          assert Objects.nonNull(source) : "Populate source can't be null";
 
          target.setName(source.getName());
+         target.setIcon(source.getIcon());
+         target.setColor(source.getColor());
          target.setCategory(source.getCategory());
          target.setDescription(source.getDescription());
          target.setSummary(source.getSummary());

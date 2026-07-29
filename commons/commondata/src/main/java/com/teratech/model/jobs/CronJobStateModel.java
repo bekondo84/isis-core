@@ -60,6 +60,14 @@ public class CronJobStateModel extends AbstractItem {
         return code;
     }
 
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = code;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

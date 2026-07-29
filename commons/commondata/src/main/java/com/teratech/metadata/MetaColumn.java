@@ -24,6 +24,7 @@ public class MetaColumn implements Serializable {
     //if updatable=false ==> the field is editable just when it is create
     protected Boolean updatable = Boolean.TRUE;
     protected Boolean deletable = Boolean.TRUE;
+    protected Boolean sortable = Boolean.TRUE;
     //if read==false ==> hide = true
     protected Boolean show = Boolean.TRUE;
     //Widget component associate to this field
@@ -269,6 +270,14 @@ public class MetaColumn implements Serializable {
         this.filters = filters;
     }
 
+    public Boolean getSortable() {
+        return sortable;
+    }
+
+    public void setSortable(Boolean sortable) {
+        this.sortable = sortable;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -276,6 +285,7 @@ public class MetaColumn implements Serializable {
         MetaColumn that = (MetaColumn) o;
         return Objects.equals(type, that.type) && Objects.equals(fieldName, that.fieldName);
     }
+
 
     @Override
     public int hashCode() {

@@ -9,6 +9,7 @@ import com.teratech.metadata.SearchColumn;
 import com.teratech.model.cms.ActionModel;
 import com.teratech.model.cms.ActionType;
 import com.teratech.model.generic.AbstractItem;
+import com.teratech.tools.persistence.DAOUtilis;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import com.teratech.utils.ClassUtils;
 import org.apache.commons.lang.StringUtils;
@@ -21,6 +22,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.*;
@@ -143,76 +145,95 @@ public abstract class AbstractAction implements ActionService{
          assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR ;
 
          final Object searchObject =  context.get(SEARCH_PREDICAT);
+         final ObjectMapper mapper = new ObjectMapper();
          List<SearchColumn> searchs = new ArrayList<>();
+         List<String> sortRules = new ArrayList<>();
 
          if (Objects.nonNull(searchObject)) {
-             ObjectMapper mapper = new ObjectMapper();
              searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
              });
+         }
+         final Object sortObject = context.get("sort");
+         if (Objects.nonNull(sortObject)) {
+             sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
+         }
+
+         Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
+         if (Objects.nonNull(sortRules)) {
+             for (String rule : sortRules) {
+                 if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
+                     sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
+                 } else {
+                     sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
+                 }
+             }
          }
          //Initialize restriction container
          final RestrictionsContainer container = RestrictionsContainer.newInstance();
 
-         if (!CollectionUtils.isEmpty(searchs)) {
-            for (SearchColumn search : searchs) {
-                Class type = Class.forName(search.getType());
-                Object value = search.getValue();
+         buildPredicatSearchCriteria(searchs, container);
 
-                if (Number.class.isAssignableFrom(type)) {
-                    value = NumberFormat.getNumberInstance().parse(search.getValue());
-                }
-                switch (search.getCond()) {
-                    case "EQ" :
-                        container.addEq(search.getFieldName(), search.getValue());
-                        break;
-                    case "NOTEQ":
-                        container.addNotEq(search.getFieldName(), search.getValue());
-                        break;
-                    case "GE" :
-                        container.addGe(search.getFieldName(), (Comparable)value);
-                        break;
-                    case "GT" :
-                        container.addGt(search.getFieldName(), (Comparable)value);
-                        break;
-                    case "LT" :
-                        container.addLt(search.getFieldName(), (Comparable)value);
-                        break;
-                    case "LE" :
-                        container.addLe(search.getFieldName(), (Comparable)value);
-                        break;
-                    case "LIKE" :
-                        container.addLike(search.getFieldName(), "%"+search.getValue()+"%");
-                        break;
-                    case "NOTLIKE" :
-                        container.addNotLike(search.getFieldName(), "%"+search.getValue()+"%");
-                        break;
-                    case "ISEMPTY" :
-                        container.addIsEmpty(search.getFieldName(), search.getValue());
-                        break;
-                    case "NOTEMPTY" :
-                        container.addIsNotEmpty(search.getFieldName(), search.getValue());
-                        break;
-                    case "ISFALSE" :
-                        container.addIsFalse(search.getFieldName());
-                        break;
-                    case "ISTRUE" :
-                        container.addIsTrue(search.getFieldName());
-                        break;
-                }
-            }
-         }
          //Load class of entity
          final Class clazz = getClassType(pluginId, className);
           //Extraction des elements de pagination
          int startIndex = Objects.nonNull(context.get(START_INDEX)) ? (int) context.get(START_INDEX) : 0;
-         int nbreOfItems = Objects.nonNull(context.get(NBREOFITEMS)) ? (int) context.get(NBREOFITEMS) : -1 ;
+         int nbreOfItems = Objects.nonNull(context.get(PAGESIZE)) ? (int) context.get(PAGESIZE) : -1 ;
 
          //Fetch all data which map the criteria
-         List datas = flexibleSearch.doSearch(clazz, container, new HashMap<>(), new HashSet<>(), startIndex, nbreOfItems);
+         List datas = flexibleSearch.doSearch(clazz, container, sortCriteria, new HashSet<>(), startIndex, nbreOfItems);
          //Update the application context
          context.put(DATA, datas);
+         //Fetch the number of items
+         context.put(NBREOFITEMS, flexibleSearch.count(clazz, container));
          //Return the context
          return context;
+    }
+
+    @ActionMethod(value = "count", scope = ActionType.POST)
+    public ActionContextData countItems (final ActionContextData context) throws ClassNotFoundException, ParseException, IllegalAccessException {
+
+        final String pluginId = (String) context.get(PLUGIN);
+        final String className = (String) context.get(TYPE);
+
+        assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR ;
+
+        final Object searchObject =  context.get(SEARCH_PREDICAT);
+        final ObjectMapper mapper = new ObjectMapper();
+        List<SearchColumn> searchs = new ArrayList<>();
+        List<String> sortRules = new ArrayList<>();
+
+        if (Objects.nonNull(searchObject)) {
+            searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
+            });
+        }
+        final Object sortObject = context.get("sort");
+        if (Objects.nonNull(sortObject)) {
+            sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
+        }
+
+        Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
+        if (Objects.nonNull(sortRules)) {
+            for (String rule : sortRules) {
+                if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
+                    sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
+                } else {
+                    sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
+                }
+            }
+        }
+        //Initialize restriction container
+        final RestrictionsContainer container = RestrictionsContainer.newInstance();
+
+        buildPredicatSearchCriteria(searchs, container);
+
+        //Load class of entity
+        final Class clazz = getClassType(pluginId, className);
+        //Fetch all data which map the criteria
+        Long nbreItems = flexibleSearch.count(clazz, container);
+        //Update the application context
+        context.put(DATA, nbreItems);
+        //Return the context
+        return context;
     }
 
     /**
@@ -292,6 +313,64 @@ public abstract class AbstractAction implements ActionService{
         //Load class of entity
         final Class clazz = ClassUtils.loadClass(pluginWrapper, className);
         return clazz;
+    }
+
+    /**
+     *
+     * @param searchs
+     * @param container
+     * @throws ClassNotFoundException
+     * @throws ParseException
+     */
+    private static void buildPredicatSearchCriteria(List<SearchColumn> searchs, RestrictionsContainer container) throws ClassNotFoundException, ParseException {
+        if (!CollectionUtils.isEmpty(searchs)) {
+            for (SearchColumn search : searchs) {
+                Class type = Class.forName(search.getType());
+                Object value = search.getValue();
+
+                if (Number.class.isAssignableFrom(type)) {
+                    value = NumberFormat.getNumberInstance().parse(search.getValue());
+                }
+                switch (search.getCond()) {
+                    case "EQ" :
+                        container.addEq(search.getFieldName(), search.getValue());
+                        break;
+                    case "NOTEQ":
+                        container.addNotEq(search.getFieldName(), search.getValue());
+                        break;
+                    case "GE" :
+                        container.addGe(search.getFieldName(), (Comparable)value);
+                        break;
+                    case "GT" :
+                        container.addGt(search.getFieldName(), (Comparable)value);
+                        break;
+                    case "LT" :
+                        container.addLt(search.getFieldName(), (Comparable)value);
+                        break;
+                    case "LE" :
+                        container.addLe(search.getFieldName(), (Comparable)value);
+                        break;
+                    case "LIKE" :
+                        container.addLike(search.getFieldName(), "%"+search.getValue()+"%");
+                        break;
+                    case "NOTLIKE" :
+                        container.addNotLike(search.getFieldName(), "%"+search.getValue()+"%");
+                        break;
+                    case "ISEMPTY" :
+                        container.addIsEmpty(search.getFieldName(), search.getValue());
+                        break;
+                    case "NOTEMPTY" :
+                        container.addIsNotEmpty(search.getFieldName(), search.getValue());
+                        break;
+                    case "ISFALSE" :
+                        container.addIsFalse(search.getFieldName());
+                        break;
+                    case "ISTRUE" :
+                        container.addIsTrue(search.getFieldName());
+                        break;
+                }
+            }
+        }
     }
 
 

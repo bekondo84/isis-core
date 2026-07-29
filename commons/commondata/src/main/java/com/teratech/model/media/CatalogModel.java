@@ -21,6 +21,14 @@ public class CatalogModel extends AbstractItem implements Serializable {
         return id;
     }
 
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = id;
+    }
+
     @Id
     private String id;
     private String name ;

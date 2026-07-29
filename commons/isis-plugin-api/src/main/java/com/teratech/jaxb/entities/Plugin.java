@@ -2,12 +2,15 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.06.26 à 06:03:28 PM WAT 
+// Généré le : 2026.07.13 à 06:55:27 PM WAT 
 //
 
 
 package com.teratech.jaxb.entities;
 
+import com.isis.generated.ContactType;
+import com.isis.generated.DependsType;
+import com.isis.generated.MediasType;
 import jakarta.xml.bind.annotation.*;
 
 
@@ -22,6 +25,8 @@ import jakarta.xml.bind.annotation.*;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="icon" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="color" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="author" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="sequence" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="auto_install" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
@@ -42,6 +47,8 @@ import jakarta.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "name",
+    "icon",
+    "color",
     "author",
     "sequence",
     "autoInstall",
@@ -58,6 +65,10 @@ public class Plugin {
     @XmlElement(namespace = "http://www.isis.cm/config/plugin", required = true)
     protected String name;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin", required = true)
+    protected String icon;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin", required = true)
+    protected String color;
+    @XmlElement(namespace = "http://www.isis.cm/config/plugin", required = true)
     protected String author;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected int sequence;
@@ -70,11 +81,11 @@ public class Plugin {
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected String category;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
-    protected ContactType contact;
+    protected com.isis.generated.ContactType contact;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
-    protected MediasType medias;
+    protected com.isis.generated.MediasType medias;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
-    protected DependsType depends;
+    protected com.isis.generated.DependsType depends;
 
     /**
      * Obtient la valeur de la propriété name.
@@ -98,6 +109,54 @@ public class Plugin {
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété icon.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * Définit la valeur de la propriété icon.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIcon(String value) {
+        this.icon = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété color.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * Définit la valeur de la propriété color.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setColor(String value) {
+        this.color = value;
     }
 
     /**
@@ -233,10 +292,10 @@ public class Plugin {
      * 
      * @return
      *     possible object is
-     *     {@link ContactType }
+     *     {@link com.isis.generated.ContactType }
      *     
      */
-    public ContactType getContact() {
+    public com.isis.generated.ContactType getContact() {
         return contact;
     }
 
@@ -245,7 +304,7 @@ public class Plugin {
      * 
      * @param value
      *     allowed object is
-     *     {@link ContactType }
+     *     {@link com.isis.generated.ContactType }
      *     
      */
     public void setContact(ContactType value) {
@@ -257,10 +316,10 @@ public class Plugin {
      * 
      * @return
      *     possible object is
-     *     {@link MediasType }
+     *     {@link com.isis.generated.MediasType }
      *     
      */
-    public MediasType getMedias() {
+    public com.isis.generated.MediasType getMedias() {
         return medias;
     }
 
@@ -269,7 +328,7 @@ public class Plugin {
      * 
      * @param value
      *     allowed object is
-     *     {@link MediasType }
+     *     {@link com.isis.generated.MediasType }
      *     
      */
     public void setMedias(MediasType value) {
@@ -281,10 +340,10 @@ public class Plugin {
      * 
      * @return
      *     possible object is
-     *     {@link DependsType }
+     *     {@link com.isis.generated.DependsType }
      *     
      */
-    public DependsType getDepends() {
+    public com.isis.generated.DependsType getDepends() {
         return depends;
     }
 
@@ -293,7 +352,7 @@ public class Plugin {
      * 
      * @param value
      *     allowed object is
-     *     {@link DependsType }
+     *     {@link com.isis.generated.DependsType }
      *     
      */
     public void setDepends(DependsType value) {

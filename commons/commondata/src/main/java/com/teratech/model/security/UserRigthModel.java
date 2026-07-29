@@ -99,4 +99,12 @@ public class UserRigthModel extends AbstractItem {
     public Object getPk() {
         return id;
     }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = code;
+    }
 }

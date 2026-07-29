@@ -128,6 +128,14 @@ public class AbstractMenu extends AbstractItem {
         return Objects.hashCode(code);
     }
 
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        this.stringValue = code;
+    }
+
     @Override
     public String toString() {
         return "AbstractMenu{" +

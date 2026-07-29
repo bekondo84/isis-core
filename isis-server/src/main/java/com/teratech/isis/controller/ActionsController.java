@@ -2,6 +2,7 @@ package com.teratech.isis.controller;
 
 import com.teratech.actions.ActionService;
 import com.teratech.dao.FlexibleSearch;
+import com.teratech.exceptions.ApplicationException;
 import com.teratech.extensions.ActionExtension;
 import com.teratech.metadata.ActionContextData;
 import com.teratech.metadata.MetaData;
@@ -43,6 +44,7 @@ public class ActionsController {
      * @param principal
      * @return
      */
+    @CrossOrigin("*")
       @GetMapping("/navigation/meta/{name}")
       public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws IllegalAccessException, JAXBException, ClassNotFoundException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
 
@@ -60,7 +62,8 @@ public class ActionsController {
      * @param principal
      * @return
      */
-      @GetMapping("/entity/meta/{name}")
+    @CrossOrigin("*")
+    @GetMapping("/entity/meta/{name}")
       public ResponseEntity<MetaData> getMetaForTypeCode(@PathVariable final String name, final Principal principal) throws NoSuchFieldException, IllegalAccessException, InstantiationException, JAXBException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException {
           final MetaTypeModel metaType = (MetaTypeModel) flexibleSearch.find(new MetaTypeModel(name));
           return ResponseEntity.ok(metaDataService.buildMetaDataFrom(metaType));
@@ -74,8 +77,9 @@ public class ActionsController {
      * @param principal
      * @return
      */
+      @CrossOrigin("*")
       @PostMapping("execute/{action}/{method}")
-      public ResponseEntity<ActionContextData> executePostAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable final String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+      public ResponseEntity<ActionContextData> executePostAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable final String method, final Principal principal) throws ApplicationException {
           return executeAction(context, action, method, ActionType.POST);
       }
 
@@ -87,8 +91,9 @@ public class ActionsController {
      * @param principal
      * @return
      */
+    @CrossOrigin("*")
     @PutMapping("execute/{action}/{method}")
-    public ResponseEntity<ActionContextData> executePutAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    public ResponseEntity<ActionContextData> executePutAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws ApplicationException {
         return executeAction(context, action, method, ActionType.PUT);
     }
 
@@ -100,8 +105,9 @@ public class ActionsController {
      * @param principal
      * @return
      */
+    @CrossOrigin("*")
     @DeleteMapping("execute/{action}/{method}")
-    public ResponseEntity<ActionContextData> executeDeleteAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    public ResponseEntity<ActionContextData> executeDeleteAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws ApplicationException {
         return executeAction(context, action, method, ActionType.DELETE);
     }
 
@@ -115,30 +121,36 @@ public class ActionsController {
      * @throws NoSuchFieldException
      * @throws InvocationTargetException
      */
-    private ResponseEntity<ActionContextData> executeAction(ActionContextData context, String actionId, String method, ActionType type) throws IllegalAccessException, InstantiationException, NoSuchFieldException, InvocationTargetException, NoSuchMethodException {
-        final ActionModel action = (ActionModel) flexibleSearch.find(new ActionModel(actionId));
-        //Check if the action exists
-        if (Objects.isNull(action))
-            throw new IllegalStateException(String.format("No action found with ID %s", actionId));
+    private ResponseEntity<ActionContextData> executeAction(ActionContextData context, String actionId, String method, ActionType type) throws ApplicationException {
 
-        //Case where action it is a global action
-        if (Objects.isNull(action.getPlugin())) {
-            Object bean = applicationContext.getBean(action.getBean());
-            //Check that bean implement ActionService interface
-            if (!ActionService.class.isAssignableFrom(bean.getClass()))
-              throw new IllegalStateException(String.format("Bean with name %s don't implement Service interface. Please make sure it implement ActionService interface", action.getBean()));
+        try {
+            final ActionModel action = (ActionModel) flexibleSearch.find(new ActionModel(actionId));
+            //Check if the action exists
+            if (Objects.isNull(action))
+                throw new ApplicationException(String.format("No action found with ID %s", actionId));
 
-            return ResponseEntity.ok(((ActionService) bean).invoke(action, method, type, context));
+            //Case where action it is a global action
+            if (Objects.isNull(action.getPlugin())) {
+                Object bean = applicationContext.getBean(action.getBean());
+                //Check that bean implement ActionService interface
+                if (!ActionService.class.isAssignableFrom(bean.getClass()))
+                    throw new IllegalStateException(String.format("Bean with name %s don't implement Service interface. Please make sure it implement ActionService interface", action.getBean()));
+
+                return ResponseEntity.ok(((ActionService) bean).invoke(action, method, type, context));
+            }
+            //The Action is link to specific plugin
+            List actionExtensions = pluginManager.getExtensions(ActionExtension.class, action.getPlugin().getId());
+
+            if (CollectionUtils.isEmpty(actionExtensions))
+                throw new IllegalStateException(String.format("Plugin Configuration Error : No ActionExtension implementation found for plugin %s", action.getPlugin().getId()));
+
+            ActionExtension actionExtension = (ActionExtension) actionExtensions.get(0);
+
+            return ResponseEntity.ok(actionExtension.invoke(context, action, method, type));
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ApplicationException(e);
         }
-        //The Action is link to specific plugin
-        List actionExtensions = pluginManager.getExtensions(ActionExtension.class, action.getPlugin().getId());
-
-        if (CollectionUtils.isEmpty(actionExtensions))
-            throw new IllegalStateException(String.format("Plugin Configuration Error : No ActionExtension implementation found for plugin %s", action.getPlugin().getId()));
-
-        ActionExtension actionExtension = (ActionExtension) actionExtensions.get(0);
-
-        return ResponseEntity.ok(actionExtension.invoke(context, action, method, type));
     }
 
 }

@@ -4,10 +4,12 @@
           xsi:schemaLocation="http://www.isis.cm/config/plugin  plugin.xsd">
 
     <name>Administration</name>
+    <icon>Briefcase</icon>
+    <color>#10b981</color>
     <author>Tera Tech Inc.</author>
     <sequence>10</sequence>
     <auto_install>true</auto_install>
-    <summary></summary>
+    <summary>Administration</summary>
     <description></description>
     <category>system</category>
     <contact>

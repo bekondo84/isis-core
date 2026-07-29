@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             // 4. Si le token est valide, on crée l'objet d'authentification
             if (jwtService.isTokenValid(jwt, userDetails)) {
-                System.out.println("Hi le token est valide ------------------------------- : "+userEmail+"  === jwt : "+jwt);
+                //System.out.println("Hi le token est valide ------------------------------- : "+userEmail+"  === jwt : "+jwt);
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
@@ -76,4 +77,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
+    /**
+     * @param request
+     * @return
+     * @throws ServletException
+     */
+    /*@Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+
+        // 🚀 L'ASTUCE : Si la requête va vers le login ou le public, on désactive ce filtre !
+        return pathMatcher.match("/api/auth/**", path) ||
+                pathMatcher.match("/api/public/**", path);
+    }*/
 }

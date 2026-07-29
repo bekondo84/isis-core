@@ -27,30 +27,52 @@ public class PluginController {
     private DefaultAction defaultAction;
 
 
+    @CrossOrigin("*")
     @PostMapping
-    public ResponseEntity<List<PluginModel>> getPlugins(@RequestBody ActionContextData context) throws ParseException, ClassNotFoundException, IllegalAccessException {
-        context =  defaultAction.getItems(context);
-        return ResponseEntity.ok((List<PluginModel>) context.get(ApplicationConstans.Actions.DATA));
+    public ResponseEntity<List<PluginModel>> getPlugins(@RequestBody ActionContextData context) throws ApplicationException {
+       try {
+           context = defaultAction.getItems(context);
+           return ResponseEntity.ok((List<PluginModel>) context.get(ApplicationConstans.Actions.DATA));
+       } catch (Exception e) {
+           throw new ApplicationException(e);
+       }
     }
 
+    @CrossOrigin("*")
     @PostMapping("/refresh")
-    public ResponseEntity<String> refresh() throws ModelServiceException, JAXBException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-       return ResponseEntity.ok(pluginService.refresh());
+    public ResponseEntity<String> refresh() throws ApplicationException {
+      try {
+          return ResponseEntity.ok(pluginService.refresh());
+      } catch (Exception e) {
+          throw new ApplicationException(e);
+      }
     }
 
+    @CrossOrigin("*")
     @PostMapping("/initialize")
-    public ResponseEntity<String> initialize() throws ModelServiceException, JAXBException, IOException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-
-        return ResponseEntity.ok(pluginService.initialize());
+    public ResponseEntity<String> initialize() throws ApplicationException {
+       try {
+           return ResponseEntity.ok(pluginService.initialize());
+       } catch (Exception e) {
+           throw new ApplicationException(e);
+       }
     }
 
+    @CrossOrigin("*")
     @PostMapping ("/install")
     public ResponseEntity<Boolean> sayHello(@RequestParam String plugin, @RequestParam(required = false) String version) throws ApplicationException {
         return ResponseEntity.ok(pluginService.install(plugin));
     }
 
+    @CrossOrigin("*")
     @GetMapping
-    public ResponseEntity<List<PluginModel>> getAllPlugins(@RequestParam int start, @RequestParam int max) throws IllegalAccessException {
-        return ResponseEntity.ok(pluginService.getPlugins(start, max));
+    public ResponseEntity<List<PluginModel>> getAllPlugins(@RequestParam int start, @RequestParam int max) throws ApplicationException {
+
+        try {
+            return ResponseEntity.ok(pluginService.getPlugins(start, max));
+        } catch (Exception e) {
+            throw new ApplicationException(e);
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,7 @@ public class MetaTypeModel extends AbstractItem {
     private String className;
     private Boolean concrete;
     private String descrip;
+    private String dbtable;
     private String template;
     @ManyToOne
     @JoinColumns({
@@ -24,7 +26,7 @@ public class MetaTypeModel extends AbstractItem {
             @JoinColumn(name = "plugin_version", referencedColumnName = "version")
     })
     private PluginModel plugin;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "metatype_id")
     private List<MetaFieldModel> fields = new ArrayList<>();
 
@@ -36,8 +38,9 @@ public class MetaTypeModel extends AbstractItem {
         return plugin;
     }
 
-    public void setPlugin(PluginModel plugin) {
+    public MetaTypeModel setPlugin(PluginModel plugin) {
         this.plugin = plugin;
+        return this;
     }
 
     public MetaTypeModel(String code) {
@@ -48,48 +51,66 @@ public class MetaTypeModel extends AbstractItem {
         return code;
     }
 
-    public void setCode(String code) {
+    public MetaTypeModel setCode(String code) {
         this.code = code;
+        return this;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public void setClassName(String className) {
+    public MetaTypeModel setClassName(String className) {
         this.className = className;
+        return this;
     }
 
     public Boolean getConcrete() {
         return concrete;
     }
 
-    public void setConcrete(Boolean concrete) {
+    public MetaTypeModel setConcrete(Boolean concrete) {
         this.concrete = concrete;
+        return this;
     }
 
     public String getDescrip() {
         return descrip;
     }
 
-    public void setDescrip(String descrip) {
+    public MetaTypeModel setDescrip(String descrip) {
         this.descrip = descrip;
+        return this;
     }
 
     public String getTemplate() {
         return template;
     }
 
-    public void setTemplate(String template) {
+    public MetaTypeModel setTemplate(String template) {
         this.template = template;
+        return this;
+    }
+
+    public String getDbtable() {
+        return dbtable;
+    }
+
+    public MetaTypeModel setDbtable(String dbtable) {
+        this.dbtable = dbtable;
+        return this;
     }
 
     public List<MetaFieldModel> getFields() {
-        return fields;
+        return Collections.unmodifiableList(fields) ;
     }
 
     public void setFields(List<MetaFieldModel> fields) {
         this.fields = fields;
+    }
+
+    public void addField (MetaFieldModel fied) {
+        this.fields.add(fied);
     }
 
     /**
@@ -100,5 +121,13 @@ public class MetaTypeModel extends AbstractItem {
     @Override
     public Object getPk() {
         return code;
+    }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = code;
     }
 }

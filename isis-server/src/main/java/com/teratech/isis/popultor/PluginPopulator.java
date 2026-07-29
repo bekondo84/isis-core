@@ -48,16 +48,17 @@ public class PluginPopulator implements Populator<PluginModel, PluginData> {
          target.setPhone(source.getPhone());
          target.setInstall(source.isInstall());
          target.setInstaldate(source.getInstaldate());
-
+         target.setIcon(source.getIcon());
+         target.setColor(source.getColor());
          //Build navigation Node
-        buildMenus (target);
+         //buildMenus (target);
     }
 
     /**
      *
      * @param target
      */
-    private void buildMenus(PluginData target) throws Exception {
+    public void buildMenus(PluginData target) throws Exception {
         RestrictionsContainer container = RestrictionsContainer.newInstance();
         container.addEq("plugin.id", target.getId());
         container.addEq("plugin.version", target.getVersion());

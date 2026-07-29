@@ -2,6 +2,7 @@ package com.teratech.model.security;
 
 import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.Objects;
 
@@ -96,5 +97,13 @@ public class BusinessContactModel extends AbstractItem {
     @Override
     public Object getPk() {
         return id;
+    }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = StringUtils.defaultString(surname)+" "+name;
     }
 }

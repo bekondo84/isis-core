@@ -153,6 +153,14 @@ public class BusinessModel extends AbstractItem {
         return code;
     }
 
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

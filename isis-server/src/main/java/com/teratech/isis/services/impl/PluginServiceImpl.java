@@ -1,5 +1,6 @@
 package com.teratech.isis.services.impl;
 
+import com.teratech.beans.PluginCategoryData;
 import com.teratech.beans.PluginData;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
@@ -9,12 +10,14 @@ import com.teratech.extensions.ServiceExtensionPoint;
 import com.teratech.isis.dao.PluginDao;
 import com.teratech.isis.popultor.PluginJAXBPopulator;
 import com.teratech.isis.popultor.PluginPopulator;
+import com.teratech.model.PluginCategoryModel;
 import com.teratech.model.PluginModel;
 import com.teratech.services.MenuNodeService;
 import com.teratech.services.PluginService;
 import com.teratech.jaxb.entities.Plugin;
 import com.teratech.services.JAXBService;
 import com.teratech.services.impl.JAXBServiceImpl;
+import com.teratech.tools.persistence.RestrictionsContainer;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
@@ -101,6 +104,7 @@ public class PluginServiceImpl implements PluginService {
 
             if (Objects.isNull(pluginModel)) {//Plugin not yet register
                 Plugin plugin = jaxbService.getPluginFromResources(wrapper);
+
                 pluginModel = new PluginModel(wrapper.getPluginId(), wrapper.getDescriptor().getVersion());
 
                 if (Objects.isNull(plugin)) {
@@ -117,21 +121,24 @@ public class PluginServiceImpl implements PluginService {
      * @return
      */
     @Override
-    @Transactional
-    public String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-        List<PluginModel> records = pluginDao.getAutoInstallPluginsNotYetInstall(0, -1);List<PluginWrapper> wrappers = pluginManager.getPlugins();
+    //@Transactional
+    public String initialize() throws  ApplicationException{
 
-        for (PluginModel record : records) {
-            PluginWrapper wrapper = pluginManager.getPlugin(record.getId());
+        try {
+            List<PluginModel> records = pluginDao.getAutoInstallPluginsNotYetInstall(0, -1);
 
-            if (Objects.isNull(wrapper)) {
-                throw new IllegalStateException(String.format("No plugin found with ID plugin %s, please check if the plugin exists and try again", wrapper.getPluginId()));
+            for (PluginModel record : records) {
+               if (!isInstall(record.getId(), record.getVersion())) {
+                   //Install the plugin feature
+                   install(record.getId());
+               }
             }
-            //Install the plugin feature
-            //install(wrapper.getPluginId());
-        }
 
-        return "SUCCES";
+            return "SUCCES";
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ApplicationException(e);
+        }
     }
 
     /**
@@ -273,12 +280,59 @@ public class PluginServiceImpl implements PluginService {
             PluginModel pluginModel = flexibleSearch.find(new PluginModel(pluginId, pluginWrapper.getDescriptor().getVersion()));
             final PluginData pluginData = new PluginData();
             pluginPopulator.populate(pluginModel, pluginData);
-
+            pluginPopulator.buildMenus(pluginData);
             return pluginData;
         } catch (Exception e) {
               throw new ModelServiceException(e);
         }
         
+    }
+
+    /**
+     * Return all the plugin categories
+     *
+     * @return
+     * @throws ApplicationException
+     */
+    @Override
+    public List<PluginCategoryData> pluginCategories() throws ApplicationException {
+        RestrictionsContainer container = RestrictionsContainer.newInstance();
+        try {
+            return (List<PluginCategoryData>) flexibleSearch.doSearch(PluginCategoryModel.class, container, new HashMap<>(), new HashSet<>(), 0, -1)
+                    .stream()
+                    .map(category -> new PluginCategoryData((PluginCategoryModel) category))
+                    .collect(Collectors.toUnmodifiableList());
+        } catch (Exception e) {
+            throw new ApplicationException(e);
+        }
+    }
+
+    /**
+     * Get all the install plugins for the current user
+     *
+     * @param currentuser
+     * @return
+     * @throws ApplicationException
+     */
+    @Override
+    public List<PluginData> sessionPlugin(String currentuser) throws ApplicationException {
+
+        try {
+            RestrictionsContainer container = RestrictionsContainer.newInstance();
+            container.addEq("install", Boolean.TRUE);
+            List<PluginModel> dbplugins = flexibleSearch.doSearch(PluginModel.class, container, new HashMap<>(), new HashSet<>(), 0, -1);
+            return dbplugins.stream().map(plug -> {
+                PluginData pluginData = new PluginData();
+                try {
+                    pluginPopulator.populate(plug, pluginData);
+                    return pluginData;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }).collect(Collectors.toUnmodifiableList());
+        } catch (Exception e) {
+            throw new ApplicationException(e);
+        }
     }
 }
 

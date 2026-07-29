@@ -44,6 +44,9 @@ public class PersistenceManagerImpl implements PersistenceManager {
             if (isAssignableFrom(entity, AbstractBusinessEntity.class)) {
                 //TODO
             }
+            //Update stringValue field
+            entity.toStringValue();
+            //Save the change
             if (Objects.isNull(entity.getCreatedAt())) {
                 setManagedField(AbstractItem.class, entity, "createdAt", LocalDateTime.now());
                 em.persist(entity);

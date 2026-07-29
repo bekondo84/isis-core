@@ -11,6 +11,7 @@ import com.teratech.metadata.ActionContextData;
 import com.teratech.metadata.ActionData;
 import com.teratech.model.cms.ActionType;
 import com.teratech.services.PluginService;
+import com.teratech.services.UserService;
 import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginManager;
@@ -26,6 +27,7 @@ import static com.teratech.utils.ApplicationConstans.Actions.*;
 public class PluginAction extends AbstractAction {
 
     private final PluginService pluginService ;
+    private final UserService userService;
     /**
      * @param pluginManager
      * @param flexibleSearch
@@ -33,21 +35,54 @@ public class PluginAction extends AbstractAction {
      * @param transactionTemplate
      */
     @Autowired
-    protected PluginAction(PluginManager pluginManager, FlexibleSearch flexibleSearch, PersistenceManager persistenceManager, TransactionTemplate transactionTemplate, PluginService pluginService) {
+    protected PluginAction(PluginManager pluginManager, FlexibleSearch flexibleSearch, PersistenceManager persistenceManager, TransactionTemplate transactionTemplate, PluginService pluginService, UserService userService) {
         super(pluginManager, flexibleSearch, persistenceManager, transactionTemplate);
         this.pluginService = pluginService;
+        this.userService = userService;
+    }
+
+    /**
+     * Return all the plugin categories availables
+     * @param context
+     * @return
+     * @throws ApplicationException
+     */
+    @ActionMethod(value = "categories", scope = ActionType.POST)
+    public ActionContextData getPluginCategories(ActionContextData context) throws ApplicationException {
+         try {
+             context.put(DATA, pluginService.pluginCategories());
+         } catch (Exception e) {
+             throw new ApplicationException(e);
+         }
+         return context;
+    }
+    /**
+     * Return all the plugins available for the connected user
+     * @param context
+     * @return
+     * @throws ApplicationException
+     */
+    @ActionMethod(value = "session_plugins", scope = ActionType.POST)
+    public ActionContextData getInstallPlugins (ActionContextData context) throws ApplicationException {
+
+        try {
+              // System.out.println("Connected with current-user : "+userService.getCurrentUser().getCode());
+               context.put(DATA, pluginService.sessionPlugin(userService.getCurrentUser().getCode()));
+        } catch (Exception e) {
+            throw new ApplicationException(e);
+        }
+        return context;
     }
 
     @ActionMethod(value = "init", scope = ActionType.POST)
-    public ActionContextData initialize(ActionContextData context) throws ModelServiceException {
+    public ActionContextData initialize(ActionContextData context) throws ApplicationException {
         try {
             String status =  pluginService.initialize();
             context.put(STATUS, status);
 
             return context;
-        } catch (JAXBException | IllegalAccessException | ModelServiceException | IOException | NoSuchFieldException |
-                 InstantiationException | InvocationTargetException | NoSuchMethodException e) {
-            throw new ModelServiceException(e);
+        } catch (Exception e) {
+            throw new ApplicationException(e);
         }
     }
 
@@ -110,6 +145,7 @@ public class PluginAction extends AbstractAction {
             context.put(DATA, pluginService.loadPlugin(pluginId)) ;
             return context;
         } catch (ApplicationException | ModelServiceException ex) {
+            ex.printStackTrace();
             throw new ApplicationException(ex);
         }
 

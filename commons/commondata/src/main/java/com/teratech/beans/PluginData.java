@@ -4,6 +4,7 @@ import com.teratech.metadata.AbstractMenuData;
 import com.teratech.model.cms.AbstractMenu;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -13,6 +14,8 @@ public class PluginData implements Serializable {
     private String id ;
     private String version;
     private String name;
+    private String icon;
+    private String color;
     private int sequence;
     private boolean autoInstall = false;
     private String summary;
@@ -22,7 +25,7 @@ public class PluginData implements Serializable {
     private String website;
     private String phone;
     private boolean install = false;
-    private Date instaldate;
+    private LocalDateTime instaldate;
     private List<String> dependencies = new ArrayList<>();
     private List<MediaData> medias = new ArrayList<>();
 
@@ -124,11 +127,11 @@ public class PluginData implements Serializable {
         this.install = install;
     }
 
-    public Date getInstaldate() {
+    public LocalDateTime getInstaldate() {
         return instaldate;
     }
 
-    public void setInstaldate(Date instaldate) {
+    public void setInstaldate(LocalDateTime instaldate) {
         this.instaldate = instaldate;
     }
 
@@ -151,5 +154,21 @@ public class PluginData implements Serializable {
     public void addMenu(AbstractMenuData menu) {
         this.menus.add(menu);
 
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

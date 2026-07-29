@@ -4,6 +4,7 @@ import com.teratech.model.generic.AbstractBusinessEntity;
 import com.teratech.model.i18n.LocalModel;
 import com.teratech.model.media.MediaModel;
 import jakarta.persistence.*;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -158,5 +159,13 @@ public class UserModel extends AbstractBusinessEntity {
     @Override
     public Object getPk() {
         return code;
+    }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = StringUtils.defaultString(surname, StringUtils.EMPTY)+" "+name;
     }
 }

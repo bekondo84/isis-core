@@ -5,6 +5,7 @@ import com.teratech.model.media.MediaModel;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,8 @@ public class PluginModel extends AbstractItem implements Serializable {
     @Id
     private String version;
     private String name;
+    private String icon;
+    private String color;
     private int sequence;
     private boolean autoInstall = false;
     private String summary;
@@ -29,8 +32,8 @@ public class PluginModel extends AbstractItem implements Serializable {
     private String website;
     private String phone;
     private boolean install = false;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date instaldate;
+    //@Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime instaldate;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
             name = "adm_plugin_depend",
@@ -160,11 +163,11 @@ public class PluginModel extends AbstractItem implements Serializable {
         this.install = install;
     }
 
-    public Date getInstaldate() {
+    public LocalDateTime getInstaldate() {
         return instaldate;
     }
 
-    public void setInstaldate(Date instaldate) {
+    public void setInstaldate(LocalDateTime instaldate) {
         this.instaldate = instaldate;
     }
 
@@ -174,6 +177,22 @@ public class PluginModel extends AbstractItem implements Serializable {
 
     public void setDependencies(List<String> dependencies) {
         this.dependencies = dependencies;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     @Override
@@ -197,5 +216,13 @@ public class PluginModel extends AbstractItem implements Serializable {
     @Override
     public Object getPk() {
         return new PluginId(id, version);
+    }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = id+ " - "+version;
     }
 }

@@ -257,4 +257,12 @@ public class CompanyTest
     public Object getPk() {
         return code;
     }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = code;
+    }
 }

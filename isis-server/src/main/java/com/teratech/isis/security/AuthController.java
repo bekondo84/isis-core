@@ -13,10 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.support.TransactionTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
@@ -42,11 +39,13 @@ public class AuthController {
         this.transactionTemplate = transactionTemplate;
     }
 
+    @CrossOrigin("*")
     @PostMapping("/init")
     public ResponseEntity<String> initialze() throws ApplicationException {
        try {
            transactionTemplate.execute(status -> {
                UserModel admin = null;
+               //UserModel deamon = new UserModel("de")
                try {
                    admin = flexibleSearch.find(new UserModel("admin"));
                    if (Objects.isNull(admin)) {
@@ -61,8 +60,7 @@ public class AuthController {
                    }
                    return status;
                } catch (Exception  e) {
-                  e.printStackTrace();
-                  return "FAILED";
+                  throw new RuntimeException(e);
                }
 
            });
@@ -74,6 +72,7 @@ public class AuthController {
           return ResponseEntity.ok("SUCCES");
     }
 
+    @CrossOrigin("*")
     @PostMapping ("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
         // Déclenche l'authentification Spring Security (vérifie le mot de passe)

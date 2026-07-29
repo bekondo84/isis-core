@@ -37,6 +37,7 @@ public class MetaData implements Serializable {
     private DashboardMeta dashboardView;
     private String searchKey;
     private String searchTitle;
+    private Short pageSize;
 
 
     public MetaData() {
@@ -202,5 +203,13 @@ public class MetaData implements Serializable {
 
     public void setDashboardView(DashboardMeta dashboardView) {
         this.dashboardView = dashboardView;
+    }
+
+    public Short getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Short pageSize) {
+        this.pageSize = pageSize;
     }
 }

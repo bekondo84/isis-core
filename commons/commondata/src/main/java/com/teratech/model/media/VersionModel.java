@@ -45,6 +45,14 @@ public class VersionModel extends AbstractItem implements Serializable {
         return id;
     }
 
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

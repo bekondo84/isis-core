@@ -170,6 +170,14 @@ public class CronJobModel extends AbstractItem {
         return id;
     }
 
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

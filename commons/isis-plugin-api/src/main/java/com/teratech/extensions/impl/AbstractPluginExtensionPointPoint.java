@@ -1,15 +1,16 @@
 package com.teratech.extensions.impl;
 
+import com.isis.generated.DependType;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.extensions.PluginExtensionPoint;
-import com.teratech.jaxb.entities.DependType;
 import com.teratech.jaxb.entities.Plugin;
 import com.teratech.model.PluginModel;
 import com.teratech.services.JAXBService;
 import com.teratech.services.MenuNodeService;
+import com.teratech.services.MetaTypeService;
 import com.teratech.services.impl.JAXBServiceImpl;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
@@ -22,6 +23,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,9 +36,10 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
     protected final PersistenceManager persistenceManager;
     protected final PluginManager pluginManager;
     protected final TransactionTemplate transactionTemplate;
+    protected final MetaTypeService metaTypeService;
     protected final JAXBService jaxbService = new JAXBServiceImpl();
 
-    protected AbstractPluginExtensionPointPoint(DataSource dataSource, ApplicationContext context, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService, PersistenceManager persistenceManager, PluginManager pluginManager, TransactionTemplate transactionTemplate) {
+    protected AbstractPluginExtensionPointPoint(DataSource dataSource, ApplicationContext context, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService, PersistenceManager persistenceManager, PluginManager pluginManager, TransactionTemplate transactionTemplate, MetaTypeService metaTypeService) {
         this.dataSource = dataSource;
         this.context = context;
         this.flexibleSearch = flexibleSearch;
@@ -44,6 +47,7 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
         this.persistenceManager = persistenceManager;
         this.pluginManager = pluginManager;
         this.transactionTemplate = transactionTemplate;
+        this.metaTypeService = metaTypeService;
     }
 
     /***
@@ -60,7 +64,8 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
                     installSteps(wrapper);
                     return true;
                 } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException |
-                         InstantiationException | NoSuchMethodException | JAXBException | ModelServiceException e) {
+                         InstantiationException | NoSuchMethodException | JAXBException | ModelServiceException |
+                         ApplicationException e) {
                     throw new RuntimeException(e);
                 }
             });
@@ -105,6 +110,7 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
 
             });
         } catch (RuntimeException e) {
+            e.printStackTrace();
             throw new ApplicationException(e);
         }
 
@@ -122,9 +128,15 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
      * @throws NoSuchMethodException
      * @throws ModelServiceException
      */
-    private void installSteps(PluginWrapper wrapper) throws JAXBException, IllegalAccessException, NoSuchFieldException, InvocationTargetException, InstantiationException, NoSuchMethodException, ModelServiceException {
+    private void installSteps(PluginWrapper wrapper) throws JAXBException, IllegalAccessException, NoSuchFieldException, InvocationTargetException, InstantiationException, NoSuchMethodException, ModelServiceException, ApplicationException {
         //get the projet declaration
         Plugin plugin = jaxbService.getPluginFromResources(wrapper);
+        // Mark the plugin as install
+        PluginModel pluginModel = flexibleSearch.find(new PluginModel(wrapper.getPluginId(), wrapper.getDescriptor().getVersion()));
+
+        if (Objects.nonNull(pluginModel) && pluginModel.isInstall()) {
+            return;//Stop install the plugin is allready installed
+        }
         //List of uninstall plugin
         List<String> uninstallPlugins = new ArrayList<>();
 
@@ -135,12 +147,12 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
 
                 if (Objects.isNull(dependWrapper))
                     continue;
-                PluginModel pluginModel = flexibleSearch.find(new PluginModel(dependWrapper.getPluginId(), dependWrapper.getDescriptor().getVersion()));
+                PluginModel dependPlugin = flexibleSearch.find(new PluginModel(dependWrapper.getPluginId(), dependWrapper.getDescriptor().getVersion()));
 
-                if (Objects.isNull(pluginModel))
+                if (Objects.isNull(dependPlugin))
                     throw new IllegalStateException(String.format("Plugin Configuration Error : No plugin found with ID %s", depend));
 
-                if (!pluginModel.isInstall()) {
+                if (!dependPlugin.isInstall()) {
                     uninstallPlugins.add(depend.getId());
                 }
             }
@@ -153,11 +165,10 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
         dataPopulator(installSqlFiles(), wrapper) ;
         //Create Plugin nodes
         menuNodeService.buildMenus(wrapper);
-        // Mark the plugin as install
-        PluginModel pluginModel = flexibleSearch.find(new PluginModel(wrapper.getPluginId(), wrapper.getDescriptor().getVersion()));
-        assert Objects.nonNull(pluginModel) : String.format("No plugin found with ID %s and version %s", wrapper.getPluginId(), wrapper.getDescriptor().getVersion());
+        //Create and install Metadata
+        metaTypeService.loadMetaTypeClasses(wrapper);
         pluginModel.setInstall(Boolean.TRUE);
-        pluginModel.setInstaldate(new Date());
+        pluginModel.setInstaldate(LocalDateTime.now());
         persistenceManager.save(pluginModel);
     }
 

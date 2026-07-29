@@ -4,6 +4,7 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.extensions.impl.AbstractPluginExtensionPointPoint;
 import com.teratech.services.MenuNodeService;
+import com.teratech.services.MetaTypeService;
 import com.teratech.services.PluginService;
 import org.pf4j.Extension;
 import org.pf4j.PluginManager;
@@ -19,10 +20,23 @@ import javax.sql.DataSource;
 public class PluginExtension extends AbstractPluginExtensionPointPoint {
 
 
+    /**
+     *
+     * @param dataSource
+     * @param context
+     * @param flexibleSearch
+     * @param menuNodeService
+     * @param persistenceManager
+     * @param pluginManager
+     * @param transactionTemplate
+     * @param metaTypeService
+     */
     @Autowired
-    protected PluginExtension(DataSource dataSource, ApplicationContext context, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService, PersistenceManager persistenceManager, PluginManager pluginManager, TransactionTemplate transactionTemplate) {
-        super(dataSource, context, flexibleSearch, menuNodeService, persistenceManager, pluginManager, transactionTemplate);
+    protected PluginExtension(DataSource dataSource, ApplicationContext context, FlexibleSearch flexibleSearch, MenuNodeService menuNodeService, PersistenceManager persistenceManager, PluginManager pluginManager, TransactionTemplate transactionTemplate, MetaTypeService metaTypeService) {
+        super(dataSource, context, flexibleSearch, menuNodeService, persistenceManager, pluginManager, transactionTemplate, metaTypeService);
     }
+
+
 
     /**
      * List of sql files name in the sub repository sql

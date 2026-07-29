@@ -77,6 +77,12 @@
                 <xsd:element name="name"
                              type="xsd:string"/>
 
+                <xsd:element name="icon"
+                             type="xsd:string"/>
+
+                <xsd:element name="color"
+                             type="xsd:string"/>
+
                 <xsd:element name="author"
                              type="xsd:string"/>
 

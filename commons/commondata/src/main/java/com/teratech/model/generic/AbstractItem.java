@@ -1,7 +1,6 @@
 package com.teratech.model.generic;
 
 import jakarta.persistence.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -10,14 +9,11 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public abstract class AbstractItem implements Serializable {
 
-   // private String tenantid;
-
-    //@Temporal(TemporalType.TIMESTAMP)
-    @NotNull
+    @Column(insertable = false, updatable = false)
+    private Long seqnumber;
     private LocalDateTime createdAt;
-
-    //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastModif;
+    protected String stringValue;
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -27,11 +23,23 @@ public abstract class AbstractItem implements Serializable {
         return lastModif;
     }
 
+    public Long getSeqnumber() {
+        return seqnumber;
+    }
+
+    public String getStringValue() {
+        return stringValue;
+    }
 
     /**
      * Retour the primary key object
      * @return
      */
     public abstract Object getPk();
+
+    /**
+     * Build and convert the entity in String
+     */
+    public abstract void toStringValue();
 
 }

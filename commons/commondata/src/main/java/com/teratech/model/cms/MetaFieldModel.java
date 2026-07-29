@@ -14,6 +14,7 @@ public class MetaFieldModel extends AbstractItem {
     private Long id ;
     private String name;
     private String className;
+    private String bdcolumn;
     private Boolean persist;
     private String defaultValue;
     private boolean primaryKey;
@@ -22,48 +23,63 @@ public class MetaFieldModel extends AbstractItem {
         return id;
     }
 
-    public void setId(Long id) {
+    public MetaFieldModel setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public MetaFieldModel setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public void setClassName(String className) {
+    public MetaFieldModel setClassName(String className) {
         this.className = className;
+        return this;
     }
 
     public Boolean getPersist() {
         return persist;
     }
 
-    public void setPersist(Boolean persist) {
+    public MetaFieldModel setPersist(Boolean persist) {
         this.persist = persist;
+        return this;
     }
 
     public String getDefaultValue() {
         return defaultValue;
     }
 
-    public void setDefaultValue(String defaultValue) {
+    public MetaFieldModel setDefaultValue(String defaultValue) {
         this.defaultValue = defaultValue;
+        return this;
     }
 
     public boolean isPrimaryKey() {
         return primaryKey;
     }
 
-    public void setPrimaryKey(boolean primaryKey) {
+    public MetaFieldModel setPrimaryKey(boolean primaryKey) {
         this.primaryKey = primaryKey;
+        return this;
+    }
+
+    public String getBdcolumn() {
+        return bdcolumn;
+    }
+
+    public MetaFieldModel setBdcolumn(String bdcolumn) {
+        this.bdcolumn = bdcolumn;
+        return this;
     }
 
     @Override
@@ -87,5 +103,13 @@ public class MetaFieldModel extends AbstractItem {
     @Override
     public Object getPk() {
         return id;
+    }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = name;
     }
 }

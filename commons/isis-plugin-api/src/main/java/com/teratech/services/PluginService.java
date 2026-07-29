@@ -1,5 +1,6 @@
 package com.teratech.services;
 
+import com.teratech.beans.PluginCategoryData;
 import com.teratech.beans.PluginData;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
@@ -14,6 +15,20 @@ public interface PluginService {
 
     static final String GET_DEPENDS = "SELECT p FROM PluginModel p WHERE :pluginId MEMBER OF p.dependencies";
 
+    /**
+     * Get all the install plugins for the current user
+     * @param currentuser
+     * @return
+     * @throws ApplicationException
+     */
+    List<PluginData> sessionPlugin (String currentuser) throws ApplicationException ;
+
+    /**
+     * Return all the plugin categories
+     * @return
+     * @throws ApplicationException
+     */
+    List<PluginCategoryData> pluginCategories () throws ApplicationException;
     /**
      * Execute plugin service
      * @param plugin
@@ -34,7 +49,7 @@ public interface PluginService {
      * @return
      * @throws JAXBException
      */
-    String initialize() throws JAXBException, IllegalAccessException, ModelServiceException, IOException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
+    String initialize() throws ApplicationException;
 
     /**
      * Install the plugnid

@@ -123,4 +123,12 @@ public class UserGroupModel extends AbstractItem {
     public Object getPk() {
         return new UserGroupId(pluginId, pluginVersion, userCode);
     }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = name;
+    }
 }

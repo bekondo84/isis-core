@@ -4,6 +4,7 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.model.generic.AbstractItem;
 import com.teratech.tools.persistence.Predicat;
 import com.teratech.tools.persistence.RestrictionsContainer;
+import com.teratech.utils.ReflectionUtils;
 import jakarta.persistence.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -136,7 +137,19 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      */
     @Override
     public long count(Class<?> entityClass, RestrictionsContainer container) {
-        return 0;
+        List<Predicat> predicates = container.getPredicats();
+        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+        final CriteriaQuery<Long> criteriaQuery = criteriaBuilder.createQuery(Long.class);
+        final Root<?> root = criteriaQuery.from(entityClass);
+        root.alias("ROOT");
+        criteriaQuery.select(criteriaBuilder.countDistinct(root));
+
+        if(!CollectionUtils.isEmpty(predicates) ){
+            addPredicates(criteriaBuilder ,root ,criteriaQuery , predicates);
+        }
+        TypedQuery<Long> query = em.createQuery(criteriaQuery);
+
+        return query.getSingleResult();
     }
 
     /**
@@ -189,17 +202,44 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @param result
      * @throws IllegalAccessException
      */
-    private static List resetLazyFields(Set<String> properties, List result) throws IllegalAccessException {
+    private List resetLazyFields(Set<String> properties, List result) throws IllegalAccessException {
         //Set to Null All Fetch Lazy Field without parameter
         for (Object entity : result) {
-            Field[] fields = entity.getClass().getDeclaredFields();
+            //em.detach(entity);
+            List<Field> fields = ReflectionUtils.getDeclaredFields(entity.getClass()) ;
             for (Field field : fields) {
+                field.setAccessible(true);
+                if (Objects.isNull(field.get(entity)))
+                    continue;
+
                 if (field.isAnnotationPresent(ElementCollection.class) && field.getAnnotation(ElementCollection.class).fetch()==FetchType.LAZY
                         || field.isAnnotationPresent(ManyToMany.class) && field.getAnnotation(ManyToMany.class).fetch()==FetchType.LAZY
                         || field.isAnnotationPresent(OneToMany.class) && field.getAnnotation(OneToMany.class).fetch()==FetchType.LAZY) {
                     if (!properties.contains(field.getName())) {
                         field.setAccessible(true);
-                        field.set(entity, null);
+                        if (List.class.isAssignableFrom(field.getType())
+                          || ArrayList.class.isAssignableFrom(field.getType())
+                        || LinkedList.class.isAssignableFrom(field.getType())) {
+                            field.set(entity, new ArrayList<>());
+                        }
+                        if (Set.class.isAssignableFrom(field.getType())
+                          || HashSet.class.isAssignableFrom(field.getType())
+                          || LinkedHashSet.class.isAssignableFrom(field.getType())) {
+                            field.set(entity, new ArrayList<>());
+                        }
+                    }
+                }
+
+                if (field.isAnnotationPresent(ManyToOne.class)) {
+                    List<Field> objectFields = ReflectionUtils.getDeclaredFields(field.getType()) ;
+                    for (Field objField : objectFields) {
+                        //System.out.println(String.format("Object type----------- %s -------------- fieldname : %s", field.getType().getName(), objField.getName()));
+                        if (objField.isAnnotationPresent(ElementCollection.class) && objField.getAnnotation(ElementCollection.class).fetch()==FetchType.LAZY
+                                || objField.isAnnotationPresent(ManyToMany.class) && objField.getAnnotation(ManyToMany.class).fetch()==FetchType.LAZY
+                                || objField.isAnnotationPresent(OneToMany.class) && objField.getAnnotation(OneToMany.class).fetch()==FetchType.LAZY) {
+                            objField.setAccessible(true);
+                            objField.set(field.get(entity), new ArrayList<>());
+                        }
                     }
                 }
             }

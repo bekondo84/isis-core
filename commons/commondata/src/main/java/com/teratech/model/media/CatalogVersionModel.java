@@ -77,4 +77,12 @@ public class CatalogVersionModel extends AbstractItem implements Serializable {
     public Object getPk() {
         return new CatalogVersionId(catalog.getId(), version.getId());
     }
+
+    /**
+     * Build and convert the entity in String
+     */
+    @Override
+    public void toStringValue() {
+        stringValue = catalog.getStringValue()+"-"+catalog.getStringValue();
+    }
 }
