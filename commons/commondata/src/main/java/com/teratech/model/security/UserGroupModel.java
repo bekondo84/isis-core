@@ -27,7 +27,7 @@ public class UserGroupModel extends AbstractItem {
     @Column(name = "user_code")
     private String userCode;
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "code", insertable = false, updatable = false)
+    @JoinColumn(name = "user_code", referencedColumnName = "code", insertable = false, updatable = false)
     private UserModel user ;
     @ManyToOne
     @JoinColumns({
@@ -36,7 +36,7 @@ public class UserGroupModel extends AbstractItem {
     })
     private PluginModel plugin;
 
-    private String name;
+    //private String name;
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumns ({
@@ -84,6 +84,7 @@ public class UserGroupModel extends AbstractItem {
         }
     }
 
+    /*
     public String getName() {
         return name;
     }
@@ -91,7 +92,7 @@ public class UserGroupModel extends AbstractItem {
     public void setName(String name) {
         this.name = name;
     }
-
+*/
     public List<UserRigthModel> getUserRigths() {
         return userRigths;
     }
@@ -129,6 +130,6 @@ public class UserGroupModel extends AbstractItem {
      */
     @Override
     public void toStringValue() {
-        stringValue = name;
+        stringValue = pluginId;
     }
 }

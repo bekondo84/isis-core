@@ -19,7 +19,7 @@ public interface FlexibleSearch {
      * @param pk
      * @return
      */
-    <T extends AbstractItem> T find(Class clazz, Object pk) ;
+    <T extends AbstractItem> T find(Class clazz, Object pk) throws IllegalAccessException;
     /**
      * Find Object base on the entity unique field
      * @param entity

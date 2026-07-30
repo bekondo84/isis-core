@@ -13,10 +13,13 @@ public class MetaFieldModel extends AbstractItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     private String name;
+     @Column(name = "class_name")
     private String className;
     private String bdcolumn;
     private Boolean persist;
+    @Column(name = "default_value")
     private String defaultValue;
+    @Column(name = "primary_key")
     private boolean primaryKey;
 
     public Long getId() {

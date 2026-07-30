@@ -32,8 +32,21 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public <T extends AbstractItem> T find(Class clazz, Object pk) {
-            return (T) em.find(clazz, pk);
+    public <T extends AbstractItem> T find(Class clazz, Object pk) throws IllegalAccessException {
+        EntityGraph<T> graph = em.createEntityGraph(clazz);
+        List<Field> fields = ReflectionUtils.getDeclaredFields(clazz);
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (field.isAnnotationPresent(OneToMany.class)
+                    || field.isAnnotationPresent(ManyToMany.class)
+                    || field.isAnnotationPresent(OneToOne.class)
+                    || field.isAnnotationPresent(ManyToOne.class) ) {
+                graph.addSubgraph(field.getName());
+            }
+        }
+        Map<String, Object> hints = new HashMap<>();
+        hints.put("jakarta.persistence.fetchgraph", graph);
+        return (T) releaseLazyFields (em.find(clazz, pk, hints));
     }
 
     /**
@@ -196,6 +209,34 @@ public class FlexibleSearchImpl implements FlexibleSearch {
         return query;
     }
 
+    /**
+     * Libere tout les liens marqué Lazy des champs associés
+     * @param entity
+     * @return
+     * @throws IllegalAccessException
+     */
+    private Object releaseLazyFields (Object entity) throws IllegalAccessException {
+        List<Field> fields = ReflectionUtils.getDeclaredFields(entity.getClass());
+        for (Field field : fields) {
+            field.setAccessible(true);
+            if (Objects.isNull(field.get(entity)))
+                continue;
+
+            if (field.isAnnotationPresent(ManyToOne.class)) {
+                List<Field> objectFields = ReflectionUtils.getDeclaredFields(field.getType()) ;
+                for (Field objField : objectFields) {
+                    //System.out.println(String.format("Object type----------- %s -------------- fieldname : %s", field.getType().getName(), objField.getName()));
+                    if (objField.isAnnotationPresent(ElementCollection.class) && objField.getAnnotation(ElementCollection.class).fetch()==FetchType.LAZY
+                            || objField.isAnnotationPresent(ManyToMany.class) && objField.getAnnotation(ManyToMany.class).fetch()==FetchType.LAZY
+                            || objField.isAnnotationPresent(OneToMany.class) && objField.getAnnotation(OneToMany.class).fetch()==FetchType.LAZY) {
+                        objField.setAccessible(true);
+                        objField.set(field.get(entity), new ArrayList<>());
+                    }
+                }
+            }
+        }
+        return entity;
+    }
     /**
      *Put to null all field maked Lazy and not fetch explicitly
      * @param properties

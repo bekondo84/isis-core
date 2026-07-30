@@ -27,6 +27,8 @@ import org.apache.commons.lang.StringUtils;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -640,8 +642,10 @@ public class MetaDataServiceImpl implements MetaDataService {
             column.setWidget("number");
         else if (field.getType().isAssignableFrom(String.class))
             column.setWidget("text");
-        else if (field.getType().isAssignableFrom(Date.class))
+        else if (field.getType().isAssignableFrom(LocalDate.class))
             column.setWidget("date");
+        else if (field.getType().isAssignableFrom(LocalDateTime.class))
+            column.setWidget("datetime-local");
     }
 
 
