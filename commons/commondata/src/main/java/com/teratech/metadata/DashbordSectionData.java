@@ -12,8 +12,8 @@ public class DashbordSectionData extends AbstractSection implements Serializable
         sections = new ArrayList<>();
     }
 
-    public DashbordSectionData(String name, String title, int columns, boolean header) {
-        super(name, title, columns, header);
+    public DashbordSectionData(String name, String title, int columns, int position, boolean header) {
+        super(name, title, columns,position, header);
         sections = new ArrayList<>();
     }
 }

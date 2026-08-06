@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.pf4j.PluginManager;
 import tools.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MetaDataServiceImplTest {
@@ -31,7 +33,7 @@ class MetaDataServiceImplTest {
 
     @Test
     void createMetaForCompanyTemplate() throws JAXBException {
-        MetaData meta = metaDataService.buildMetaDataFrom(CompanyTest.class, null, "company.xml", true);
+        MetaData meta = metaDataService.buildMetaDataFrom(CompanyTest.class, null, "company.xml", new ArrayList<>(), true);
         assertNotNull(meta);
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(mapper.writeValueAsString(meta));

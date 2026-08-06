@@ -16,9 +16,12 @@ import java.util.Objects;
 public class UserModel extends AbstractBusinessEntity {
 
     @Id
+    @Column(nullable = false)
     private String code ;
+    @Column(nullable = false)
     private String name ;
     private String surname;
+    @Column(nullable = false)
     private String email;
     private String password;
     @ManyToOne
