@@ -216,6 +216,9 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @throws IllegalAccessException
      */
     private Object releaseLazyFields (Object entity) throws IllegalAccessException {
+        if (Objects.isNull(entity)) {
+            return entity;
+        }
         List<Field> fields = ReflectionUtils.getDeclaredFields(entity.getClass());
         for (Field field : fields) {
             field.setAccessible(true);

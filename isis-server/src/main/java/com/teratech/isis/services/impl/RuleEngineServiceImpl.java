@@ -57,7 +57,7 @@ public class RuleEngineServiceImpl implements RuleEngineService {
                 kieSession.dispose();
             }
         } catch (RuntimeException ex) {
-            throw new  ApplicationException(ex);
+            throw new  ApplicationException("500", ex);
         }
     }
 

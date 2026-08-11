@@ -66,7 +66,7 @@ public class AuthController {
            });
 
        } catch (RuntimeException ex) {
-          throw new ApplicationException(ex);
+          throw new ApplicationException("500", ex);
        }
 
           return ResponseEntity.ok("SUCCES");

@@ -137,7 +137,7 @@ public class PluginServiceImpl implements PluginService {
             return "SUCCES";
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 
@@ -303,7 +303,7 @@ public class PluginServiceImpl implements PluginService {
                     .map(category -> new PluginCategoryData((PluginCategoryModel) category))
                     .collect(Collectors.toUnmodifiableList());
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 
@@ -331,7 +331,7 @@ public class PluginServiceImpl implements PluginService {
                 }
             }).collect(Collectors.toUnmodifiableList());
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 }

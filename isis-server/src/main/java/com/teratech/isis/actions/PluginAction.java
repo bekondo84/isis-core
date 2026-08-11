@@ -52,7 +52,7 @@ public class PluginAction extends AbstractAction {
          try {
              context.put(DATA, pluginService.pluginCategories());
          } catch (Exception e) {
-             throw new ApplicationException(e);
+             throw new ApplicationException("500", e);
          }
          return context;
     }
@@ -69,7 +69,7 @@ public class PluginAction extends AbstractAction {
               // System.out.println("Connected with current-user : "+userService.getCurrentUser().getCode());
                context.put(DATA, pluginService.sessionPlugin(userService.getCurrentUser().getCode()));
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
         return context;
     }
@@ -82,7 +82,7 @@ public class PluginAction extends AbstractAction {
 
             return context;
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 
@@ -146,7 +146,7 @@ public class PluginAction extends AbstractAction {
             return context;
         } catch (ApplicationException | ModelServiceException ex) {
             ex.printStackTrace();
-            throw new ApplicationException(ex);
+            throw new ApplicationException("500", ex);
         }
 
     }

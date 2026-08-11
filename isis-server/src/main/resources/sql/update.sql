@@ -89,6 +89,8 @@ VALUES ('Catalog', 'com.teratech.model.media.CatalogModel', true, '', 'backoffic
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Version', 'com.teratech.model.media.VersionModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('CatalogVersion', 'com.teratech.model.media.CatalogVersionModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('CronJob', 'com.teratech.model.jobs.CronJobModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('CronJobResult', 'com.teratech.model.jobs.CronJobResultModel', true, '', 'backoffice', '1.0.0', now());
@@ -100,6 +102,8 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('Menu', 'com.teratech.model.cms.MenuModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('MenuItem', 'com.teratech.model.cms.MenuItemModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('AbstractMenu', 'com.teratech.model.cms.AbstractMenu', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Action', 'com.teratech.model.cms.ActionModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)

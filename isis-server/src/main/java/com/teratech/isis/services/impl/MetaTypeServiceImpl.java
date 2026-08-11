@@ -105,7 +105,7 @@ public class MetaTypeServiceImpl implements MetaTypeService {
             }
 
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 
@@ -124,7 +124,7 @@ public class MetaTypeServiceImpl implements MetaTypeService {
             List<MetaTypeModel> metaFields = flexibleSearch.doSearch(MetaTypeModel.class, container, new HashMap<>(), new HashSet<>(), 0, -1);
             persistenceManager.delete(metaFields.stream().toArray());
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 }

@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         try {
             return flexibleSearch.find(new UserModel(code));
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 

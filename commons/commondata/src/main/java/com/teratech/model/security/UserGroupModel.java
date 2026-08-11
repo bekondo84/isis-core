@@ -26,6 +26,7 @@ public class UserGroupModel extends AbstractItem {
     @Id
     @Column(name = "user_code")
     private String userCode;
+
     @ManyToOne
     @JoinColumn(name = "user_code", referencedColumnName = "code", insertable = false, updatable = false)
     private UserModel user ;

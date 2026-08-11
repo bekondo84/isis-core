@@ -17,7 +17,7 @@ public class ClassUtils {
      */
     public static Class<?> loadClass (final PluginWrapper wrapper, String classname) throws ClassNotFoundException {
         ClassLoader clazzLoader = Thread.currentThread().getContextClassLoader();
-
+        System.out.println(String.format("ClassUtils.loadClass -------------- %s ----- %s", wrapper, classname));
         if (Objects.nonNull(wrapper)) {
             clazzLoader = wrapper.getPluginClassLoader();
         }

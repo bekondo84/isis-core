@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "cms_template")
+@Table(name = "cms_page_template")
 public class PageTemplateModel extends AbstractItem  implements Serializable{
 
     @Id

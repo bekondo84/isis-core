@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="logo" search="false"  widget="media"/>
+            <ls:column qualifier="code" search="true" />
+            <ls:column qualifier="name" search="false"  widget="localized"/>
+            <ls:column qualifier="nui" search="true" />
+            <ls:column qualifier="adress" search="true" />
+            <ls:column qualifier="city" search="true" show="false"/>
+            <ls:column qualifier="postal" search="true" show="false"/>
+            <ls:column qualifier="slogan" search="true" show="false" widget="localized"/>
+            <ls:column qualifier="website" search="true" show="false"/>
+            <ls:column qualifier="phone" search="true" show="false"/>
+            <ls:column qualifier="fax" search="true" show="false"/>
+            <ls:column qualifier="email" search="true" show="false"/>
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="code" createOnField="false" >
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                        <e:section name="hac.commons-001" position="100" columns="1">
+                            <e:field qualifier="logo" widget="media" />
+                        </e:section>
+                        <e:section name="hac.commons-002" position="99" columns="1">
+                            <e:field qualifier="code" />
+                            <e:field qualifier="nui" />
+                        </e:section>
+                    </e:section>
+                    <e:section name="hac.commons" columns="2" position="99">
+                        <e:field qualifier="name" widget="localized" />
+                        <e:field qualifier="slogan" widget="localized" />
+                    </e:section>
+                    <e:section name="hac.commons" columns="2" position="98">
+                        <e:section name="hac.commons-001" columns="1" position="100">
+                            <e:field qualifier="adress" />
+                            <e:field qualifier="city" />
+                            <e:field qualifier="postal" />
+                        </e:section>
+                        <e:section name="hac.commons-002" columns="1" position="100">
+                            <e:field qualifier="website" />
+                            <e:field qualifier="phone" />
+                            <e:field qualifier="fax" />
+                            <e:field qualifier="email" />
+                        </e:section>
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

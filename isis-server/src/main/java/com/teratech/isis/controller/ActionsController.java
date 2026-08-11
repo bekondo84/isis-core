@@ -149,7 +149,7 @@ public class ActionsController {
             return ResponseEntity.ok(actionExtension.invoke(context, action, method, type));
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
     }
 

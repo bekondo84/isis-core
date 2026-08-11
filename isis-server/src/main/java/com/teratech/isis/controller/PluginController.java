@@ -34,7 +34,7 @@ public class PluginController {
            context = defaultAction.getItems(context);
            return ResponseEntity.ok((List<PluginModel>) context.get(ApplicationConstans.Actions.DATA));
        } catch (Exception e) {
-           throw new ApplicationException(e);
+           throw new ApplicationException("500", e);
        }
     }
 
@@ -44,7 +44,7 @@ public class PluginController {
       try {
           return ResponseEntity.ok(pluginService.refresh());
       } catch (Exception e) {
-          throw new ApplicationException(e);
+          throw new ApplicationException("500", e);
       }
     }
 
@@ -54,7 +54,7 @@ public class PluginController {
        try {
            return ResponseEntity.ok(pluginService.initialize());
        } catch (Exception e) {
-           throw new ApplicationException(e);
+           throw new ApplicationException("500", e);
        }
     }
 
@@ -71,7 +71,7 @@ public class PluginController {
         try {
             return ResponseEntity.ok(pluginService.getPlugins(start, max));
         } catch (Exception e) {
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
 
     }

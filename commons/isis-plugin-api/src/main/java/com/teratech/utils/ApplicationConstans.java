@@ -7,7 +7,7 @@ public class ApplicationConstans {
         public static final String SCHEMA_SERVICES_XML = "schema/services.xml";
         public static final String SCHEMA_PLUGIN_XML = "schema/plugin.xml";
         public static final String SCHEMA_EXPLORER_XML= "schema/explorer.xml";
-        public static final String SCHEMA_TEMPLATE_XML= "schema/templates/";
+        public static final String SCHEMA_TEMPLATE_XML= "templates/";
     }
 
     public static class API {

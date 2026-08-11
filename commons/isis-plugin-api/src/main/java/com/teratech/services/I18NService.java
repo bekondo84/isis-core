@@ -23,7 +23,7 @@ public interface I18NService {
 
     default String getMessage (PluginWrapper pluginWrapper, String key) {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        if (!Objects.nonNull(pluginWrapper)) {
+        if (Objects.nonNull(pluginWrapper)) {
             classLoader = pluginWrapper.getPluginClassLoader();
         }
 

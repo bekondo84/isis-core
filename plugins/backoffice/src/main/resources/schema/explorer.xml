@@ -22,7 +22,7 @@
         </navigation-node>
         <navigation-node id="backoffice.systems.backprocess" icon="fa-solid fa-server" position="99">
             <navigation-node id="backoffice.system.cronjobs" code="CronJob" position="97" icon="fa-solid fa-clock" viewMode="list,view" />
-            <navigation-node id="backoffice.system.cronjob.status" code="CronJobStatus" position="98"  viewMode="list,view" />
+            <navigation-node id="backoffice.system.cronjob.status" code="CronJobState" position="98"  viewMode="list,view" />
             <navigation-node id="backoffice.system.cronjob.result" code="CronJobResult" position="99"  viewMode="list,view" />
         </navigation-node>
         <navigation-node id="backoffice.system.businessrules" code="BusinessRule" position="98" viewMode="list,view" icon="fa-solid fa-pen-ruler" />

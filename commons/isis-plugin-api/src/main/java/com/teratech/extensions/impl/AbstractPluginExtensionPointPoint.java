@@ -66,12 +66,12 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
                 } catch (NoSuchFieldException | InvocationTargetException | IllegalAccessException |
                          InstantiationException | NoSuchMethodException | JAXBException | ModelServiceException |
                          ApplicationException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException("500", e);
                 }
             });
 
         }catch (RuntimeException e) {
-            throw  new ApplicationException(e);
+            throw  new ApplicationException("500", e);
         }
 
     }
@@ -111,7 +111,7 @@ public abstract class AbstractPluginExtensionPointPoint implements PluginExtensi
             });
         } catch (RuntimeException e) {
             e.printStackTrace();
-            throw new ApplicationException(e);
+            throw new ApplicationException("500", e);
         }
 
     }

@@ -8,6 +8,8 @@ import jakarta.xml.bind.Unmarshaller;
 import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginWrapper;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Objects;
 
@@ -32,14 +34,16 @@ public interface JAXBService {
             pluginClassLoader = wrapper.getPluginClassLoader();
         }
 
-        InputStream inputStream = pluginClassLoader.getResourceAsStream(ApplicationConstans.CMS.SCHEMA_TEMPLATE_XML +template);
+        final String pluginDir = Objects.nonNull(wrapper)? wrapper.getPluginId().toLowerCase():"";
+        File targetFile = new File(System.getProperty("user.dir")+File.separator+"templates"+File.separator+pluginDir+File.separator+template);
+        //InputStream inputStream =  null;//pluginClassLoader.getResourceAsStream(ApplicationConstans.CMS.SCHEMA_TEMPLATE_XML +template);
+        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s ::::::::: %s", System.getProperty("user.dir"), targetFile));
 
-        if (Objects.isNull(inputStream))
+        if (Objects.isNull(targetFile) || !targetFile.exists())
             return null;
-        System.out.println(String.format("InputStream :::::::::::::::::::::::::::::: %s :::::::::: %s", inputStream, pluginClassLoader.getResource(SCHEMA_TEMPLATE_XML+template)));
         JAXBContext context = JAXBContext.newInstance(Context.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (Context) unmarshaller.unmarshal(inputStream);
+        return (Context) unmarshaller.unmarshal(targetFile);
     }
 
     /**
