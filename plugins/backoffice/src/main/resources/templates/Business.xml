@@ -2,6 +2,7 @@
 <context xmlns="http://www.isis.cm/config/isis-template"
          xmlns:ls="http://www.isis.cm/config/list-view"
          xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
          xmlns:e="http://www.isis.cm/config/editor-area">
     <ls:list-view>
         <ls:list>
@@ -18,6 +19,7 @@
             <ls:column qualifier="fax" search="true" show="false"/>
             <ls:column qualifier="email" search="true" show="false"/>
         </ls:list>
+        <a:actions></a:actions>
     </ls:list-view>
     <e:editor-area searchKey="code" createOnField="false" >
         <e:component>
@@ -28,7 +30,7 @@
                             <e:field qualifier="logo" widget="media" />
                         </e:section>
                         <e:section name="hac.commons-002" position="99" columns="1">
-                            <e:field qualifier="code" />
+                            <e:field qualifier="code"  />
                             <e:field qualifier="nui" />
                         </e:section>
                     </e:section>

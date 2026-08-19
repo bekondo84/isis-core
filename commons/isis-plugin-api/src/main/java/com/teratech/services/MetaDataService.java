@@ -8,6 +8,7 @@ import org.pf4j.PluginWrapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 
 public interface MetaDataService {
 
@@ -19,7 +20,7 @@ public interface MetaDataService {
      * @param principal : IF TRUE BUILD the complete metadata else partially build the metadata
      * @return
      */
-    MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, List<String> allReadyProcess, boolean principal) throws JAXBException;
+    MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMata, List<String> allReadyProcess, boolean principal) throws JAXBException;
 
     /**
      *  Build MetaData From Navigation Node

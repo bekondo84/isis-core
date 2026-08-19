@@ -5,72 +5,69 @@ import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 
-@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue(value = "APP_USER")
 @Entity
-@IdClass(UserGroupId.class)
 @Table(name = "bs_usergroup")
 public class UserGroupModel extends AbstractItem {
 
     @Id
-    @Column(name = "plugin_id")
-    private String pluginId;
-    @Id
-    @Column(name = "plugin_version")
-    private String pluginVersion;
-    @Id
-    @Column(name = "user_code")
-    private String userCode;
+    private String code;
+    @Column(nullable = false)
+    private String name;
+    private String description;
 
     @ManyToOne
-    @JoinColumn(name = "user_code", referencedColumnName = "code", insertable = false, updatable = false)
-    private UserModel user ;
-    @ManyToOne
     @JoinColumns({
-            @JoinColumn(name = "plugin_id", referencedColumnName = "id", insertable = false,updatable = false),
-            @JoinColumn (name = "plugin_version", referencedColumnName = "version", insertable = false, updatable = false)
+            @JoinColumn(name = "plugin_id", referencedColumnName = "id"),
+            @JoinColumn (name = "plugin_version", referencedColumnName = "version")
     })
     private PluginModel plugin;
 
-    //private String name;
-
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
-    @JoinColumns ({
-            @JoinColumn (name = "plugin_id", referencedColumnName = "plugin_id"),
-            @JoinColumn (name = "plugin_version", referencedColumnName = "plugin_version"),
-            @JoinColumn (name = "user_code", referencedColumnName = "user_code")
-    })
+    @JoinColumn (name = "ug_code", referencedColumnName = "code")
     private List<UserRigthModel> userRigths = new ArrayList<>();
 
-    public String getPluginId() {
-        return pluginId;
+
+    public List<UserRigthModel> getUserRigths() {
+        return userRigths;
     }
 
-    public String getPluginVersion() {
-        return pluginVersion;
+    public void setUserRigths(List<UserRigthModel> userRigths) {
+        this.userRigths = Collections.unmodifiableList(userRigths);
     }
 
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-
-        if (Objects.nonNull(user)) {
-            this.userCode = user.getCode();
+    public void addUserRigth(UserRigthModel userRigth) {
+        if (!userRigths.contains(userRigth)) {
+            userRigths.add(userRigth);
         }
+    }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public PluginModel getPlugin() {
@@ -79,41 +76,6 @@ public class UserGroupModel extends AbstractItem {
 
     public void setPlugin(PluginModel plugin) {
         this.plugin = plugin;
-        if (Objects.nonNull(plugin)) {
-            this.pluginId = plugin.getId();
-            this.pluginVersion = plugin.getVersion();
-        }
-    }
-
-    /*
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-*/
-    public List<UserRigthModel> getUserRigths() {
-        return userRigths;
-    }
-
-    public void setUserRigths(List<UserRigthModel> userRigths) {
-        this.userRigths = userRigths;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserGroupModel that = (UserGroupModel) o;
-        return Objects.equals(pluginId, that.pluginId) && Objects.equals(pluginVersion, that.pluginVersion) && Objects.equals(userCode, that.userCode);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pluginId, pluginVersion, userCode);
     }
 
     /**
@@ -123,7 +85,7 @@ public class UserGroupModel extends AbstractItem {
      */
     @Override
     public Object getPk() {
-        return new UserGroupId(pluginId, pluginVersion, userCode);
+        return code;
     }
 
     /**
@@ -131,6 +93,19 @@ public class UserGroupModel extends AbstractItem {
      */
     @Override
     public void toStringValue() {
-        stringValue = pluginId;
+        stringValue = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserGroupModel that = (UserGroupModel) o;
+        return Objects.equals(code, that.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(code);
     }
 }

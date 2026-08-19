@@ -34,6 +34,7 @@ public class PluginModel extends AbstractItem implements Serializable {
     private boolean install = false;
     //@Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime instaldate;
+    /**
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
             name = "adm_plugin_depend",
@@ -44,6 +45,7 @@ public class PluginModel extends AbstractItem implements Serializable {
     )
     @Column(name = "name")
     private List<String> dependencies = new ArrayList<>();
+     */
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "adm_plugin_media",
           joinColumns = {
@@ -171,6 +173,7 @@ public class PluginModel extends AbstractItem implements Serializable {
         this.instaldate = instaldate;
     }
 
+    /*
     public List<String> getDependencies() {
         return dependencies;
     }
@@ -178,7 +181,7 @@ public class PluginModel extends AbstractItem implements Serializable {
     public void setDependencies(List<String> dependencies) {
         this.dependencies = dependencies;
     }
-
+*/
     public String getIcon() {
         return icon;
     }

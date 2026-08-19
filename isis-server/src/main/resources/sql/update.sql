@@ -109,6 +109,8 @@ VALUES ('Action', 'com.teratech.model.cms.ActionModel', true, '', 'backoffice', 
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('MetaType', 'com.teratech.model.cms.MetaTypeModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('MetaField', 'com.teratech.model.cms.MetaFieldModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('PageTemplate', 'com.teratech.model.cms.PageTemplateModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Settings', 'com.teratech.model.settings.SettingsModel', true, '', 'backoffice', '1.0.0', now());

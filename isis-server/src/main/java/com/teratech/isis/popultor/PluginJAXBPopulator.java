@@ -38,6 +38,6 @@ public class PluginJAXBPopulator implements Populator<Plugin, PluginModel> {
         if (Objects.nonNull(source.getDepends())) {
             source.getDepends().getDepend().forEach(dependType -> depends.add(dependType.getId()));
         }
-        target.setDependencies(depends);
+        //target.setDependencies(depends);
     }
 }

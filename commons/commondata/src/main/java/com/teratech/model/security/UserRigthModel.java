@@ -4,6 +4,7 @@ import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +14,7 @@ public class UserRigthModel extends AbstractItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String code ;
     private String name;
     @Column(name = "can_read")
@@ -23,6 +25,7 @@ public class UserRigthModel extends AbstractItem {
     private Boolean delete ;
 
     public UserRigthModel() {
+         createdAt = LocalDateTime.now();
     }
 
     public UserRigthModel(Long id) {

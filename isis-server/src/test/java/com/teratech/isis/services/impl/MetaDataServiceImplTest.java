@@ -13,6 +13,7 @@ import org.pf4j.PluginManager;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,7 +34,7 @@ class MetaDataServiceImplTest {
 
     @Test
     void createMetaForCompanyTemplate() throws JAXBException {
-        MetaData meta = metaDataService.buildMetaDataFrom(CompanyTest.class, null, "company.xml", new ArrayList<>(), true);
+        MetaData meta = metaDataService.buildMetaDataFrom(CompanyTest.class, null, "company.xml", new HashMap<>() , new ArrayList<>(), true);
         assertNotNull(meta);
         ObjectMapper mapper = new ObjectMapper();
         System.out.println(mapper.writeValueAsString(meta));

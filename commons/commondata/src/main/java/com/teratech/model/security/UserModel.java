@@ -33,17 +33,12 @@ public class UserModel extends AbstractBusinessEntity {
     @JoinColumn (name = "langue", referencedColumnName = "code")
     private LocalModel language ;
     private String token ;
-    /*
+
     @ManyToMany (fetch = FetchType.LAZY)
     @JoinTable(name = "bs_user_group",
-            joinColumns = @JoinColumn(name = "code"),
-            inverseJoinColumns = {
-               @JoinColumn(name = "plugin_id"),
-               @JoinColumn(name = "plugin_version"),
-                    @JoinColumn(name = "")
-            }
-    )*/
-    @Transient
+            joinColumns = @JoinColumn(name = "us_code",  referencedColumnName = "code"),
+            inverseJoinColumns =@JoinColumn(name = "ug_code", referencedColumnName = "code")
+    )
     private List<UserGroupModel> userGroups = new ArrayList<>();
 
     /**

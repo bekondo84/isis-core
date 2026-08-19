@@ -11,7 +11,7 @@ public abstract class AbstractItem implements Serializable {
 
     @Column(insertable = false, updatable = false)
     private Long seqnumber;
-    private LocalDateTime createdAt;
+    protected LocalDateTime createdAt;
     private LocalDateTime lastModif;
     protected String stringValue;
 
