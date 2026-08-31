@@ -34,7 +34,7 @@ public class UserModel extends AbstractBusinessEntity {
     private LocalModel language ;
     private String token ;
 
-    @ManyToMany (fetch = FetchType.LAZY)
+    @ManyToMany (fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "bs_user_group",
             joinColumns = @JoinColumn(name = "us_code",  referencedColumnName = "code"),
             inverseJoinColumns =@JoinColumn(name = "ug_code", referencedColumnName = "code")

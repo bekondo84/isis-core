@@ -1,11 +1,11 @@
 package com.teratech.extensions.impl;
 
-import com.isis.generated.DependType;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.extensions.PluginExtensionPoint;
+import com.teratech.jaxb.entities.DependType;
 import com.teratech.jaxb.entities.Plugin;
 import com.teratech.model.PluginModel;
 import com.teratech.services.JAXBService;

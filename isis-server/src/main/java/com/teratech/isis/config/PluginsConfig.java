@@ -19,4 +19,5 @@ public class PluginsConfig {
     public Logger logger() {
         return LoggerFactory.getLogger(IsisServer.class);
     }
+
 }

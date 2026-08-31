@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -109,6 +110,11 @@ public class MetaDataServiceImpl implements MetaDataService {
     @Override
     public MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
         final MetaData metaData = new MetaData(clazz.getName(), clazz.getSimpleName().replaceFirst("Model$", ""));
+        if (Modifier.isAbstract(clazz.getModifiers())) {
+            metaData.setCanCreate(false);
+            metaData.setCanDelete(false);
+            metaData.setCanUpdate(false);
+        }
         //Set PageSize
         setPageSize(metaData);
         final EditorAreaData editorArea = new EditorAreaData();
@@ -119,7 +125,6 @@ public class MetaDataServiceImpl implements MetaDataService {
         Context template = jaxbService.getTemplateFromResources(wrapper, templatename);
         //Liste des entités dejà traités
         allReadyProcess.add(clazz.getName());
-        //System.out.println(String.format("-------%s-----------------%s----------------------------  %s : %s",clazz, wrapper, templatename, template));
         //Extract all declared fields of this class and it superclass
         List<Field> fields = getDeclaredFieldsFrom(clazz);
 
@@ -358,6 +363,16 @@ public class MetaDataServiceImpl implements MetaDataService {
           && !CollectionUtils.isEmpty(editor.getActions().getAction())) {
             for (Action action : editor.getActions().getAction()) {
                 editorArea.addAction(buildActionData(action));
+            }
+        }
+        if (Objects.nonNull(editor.getShutcuts())
+          && !CollectionUtils.isEmpty(editor.getShutcuts().getShutcut())) {
+            for (Shutcut shutcut : editor.getShutcuts().getShutcut()) {
+                ShutCutData shutcutData = new ShutCutData(shutcut.getName(), shutcut.getCode(), shutcut.getCounter(), shutcut.getIcon());
+                shutcutData.setType(shutcut.getType());
+                shutcutData.setLabel(shutcutData.getLabel());
+                shutcutData.setViewMode(shutcut.getViewMode());
+                editorArea.addShutcut(shutcutData);
             }
         }
     }

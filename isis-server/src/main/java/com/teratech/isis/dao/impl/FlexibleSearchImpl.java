@@ -10,11 +10,13 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.CollectionUtils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.ParameterizedType;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
@@ -34,6 +36,7 @@ public class FlexibleSearchImpl implements FlexibleSearch {
     @Override
     public <T extends AbstractItem> T find(Class clazz, Object pk) throws IllegalAccessException {
         EntityGraph<T> graph = em.createEntityGraph(clazz);
+        /**
         List<Field> fields = ReflectionUtils.getDeclaredFields(clazz);
         for (Field field : fields) {
             field.setAccessible(true);
@@ -43,10 +46,56 @@ public class FlexibleSearchImpl implements FlexibleSearch {
                     || field.isAnnotationPresent(ManyToOne.class) ) {
                 graph.addSubgraph(field.getName());
             }
-        }
+        }*/
+        buildEntityGraph(em, graph, clazz, 2);
         Map<String, Object> hints = new HashMap<>();
         hints.put("jakarta.persistence.fetchgraph", graph);
-        return (T) releaseLazyFields (em.find(clazz, pk, hints));
+        T instance = (T) em.find(clazz, pk, hints);
+
+        return instance;
+    }
+
+    /**
+     *
+     * @param em
+     * @param currentGraph
+     * @param entityClass
+     * @param maxDepth
+     */
+    private void buildEntityGraph(EntityManager em, Graph<?> currentGraph, Class<?> entityClass, int maxDepth) {
+        if (maxDepth <= 0) return;
+
+        List<Field> fields = ReflectionUtils.getDeclaredFields(entityClass);
+        for (Field field : fields) {
+            field.setAccessible(true);
+
+            if (isRelationField(field)) {
+                // 1. Déterminer le type réel du champ (gère les Collections comme List<UserGroupModel>)
+                Class<?> targetClass = getTargetClass(field);
+
+                // 2. Créer le sous-graphe pour ce champ (ex: "groups")
+                Subgraph<?> subgraph = currentGraph.addSubgraph(field.getName(), targetClass);
+
+                // 3. Appel récursif pour inspecter les champs de l'entité enfant (ex: "plugin" dans UserGroupModel)
+                buildEntityGraph(em, subgraph, targetClass, maxDepth - 1);
+            }
+        }
+    }
+
+    private boolean isRelationField(Field field) {
+        return field.isAnnotationPresent(OneToMany.class)
+                || field.isAnnotationPresent(ManyToMany.class)
+                || field.isAnnotationPresent(OneToOne.class)
+                || field.isAnnotationPresent(ManyToOne.class);
+    }
+
+    private Class<?> getTargetClass(Field field) {
+        // Si c'est une collection (List<UserGroupModel>), on extrait le type générique
+        if (Collection.class.isAssignableFrom(field.getType())) {
+            ParameterizedType type = (ParameterizedType) field.getGenericType();
+            return (Class<?>) type.getActualTypeArguments()[0];
+        }
+        return field.getType();
     }
 
     /**

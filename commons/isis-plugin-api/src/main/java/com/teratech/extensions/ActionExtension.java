@@ -2,6 +2,7 @@ package com.teratech.extensions;
 
 import com.teratech.actions.ActionService;
 import com.teratech.actions.annotations.Action;
+import com.teratech.exceptions.ApplicationException;
 import com.teratech.metadata.ActionContextData;
 import com.teratech.model.cms.ActionModel;
 import com.teratech.model.cms.ActionType;
@@ -21,15 +22,17 @@ public interface ActionExtension extends IsisExtensionPoint{
      * @param type
      * @return
      */
-    default ActionContextData invoke (ActionContextData actionContext, ActionModel action, String method, ActionType type) throws InvocationTargetException, IllegalAccessException {
+    default ActionContextData invoke (ActionContextData actionContext, ActionModel action, String method, ActionType type) throws ApplicationException {
         assert Objects.nonNull(action): "Action can't be null";
         assert StringUtils.isNotBlank(method) : "No method is define";
+       try {
+           Object actionBean = getApplicationContext().getBean(action.getBean());
+           assert actionBean.getClass().isAnnotationPresent(Action.class) : String.format("%s n'est pas une action, vérifier la configuration de ce bean");
 
-        Object actionBean = getApplicationContext().getBean(action.getBean());
-        assert actionBean.getClass().isAnnotationPresent(Action.class): String.format("%s n'est pas une action, vérifier la configuration de ce bean");
-
-        return  ((ActionService)actionBean).invoke(action, method, type, actionContext);
-
+           return ((ActionService) actionBean).invoke(action, method, type, actionContext);
+       }catch (Exception ex) {
+           throw new ApplicationException("500", ex);
+       }
     }
 
     ApplicationContext getApplicationContext();

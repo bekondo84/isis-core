@@ -2,15 +2,12 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.07.13 à 06:55:27 PM WAT 
+// Généré le : 2026.08.20 à 08:47:04 PM WAT 
 //
 
 
 package com.teratech.jaxb.entities;
 
-import com.isis.generated.ContactType;
-import com.isis.generated.DependsType;
-import com.isis.generated.MediasType;
 import jakarta.xml.bind.annotation.*;
 
 
@@ -81,11 +78,11 @@ public class Plugin {
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
     protected String category;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
-    protected com.isis.generated.ContactType contact;
+    protected ContactType contact;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
-    protected com.isis.generated.MediasType medias;
+    protected MediasType medias;
     @XmlElement(namespace = "http://www.isis.cm/config/plugin")
-    protected com.isis.generated.DependsType depends;
+    protected DependsType depends;
 
     /**
      * Obtient la valeur de la propriété name.
@@ -292,10 +289,10 @@ public class Plugin {
      * 
      * @return
      *     possible object is
-     *     {@link com.isis.generated.ContactType }
+     *     {@link ContactType }
      *     
      */
-    public com.isis.generated.ContactType getContact() {
+    public ContactType getContact() {
         return contact;
     }
 
@@ -304,7 +301,7 @@ public class Plugin {
      * 
      * @param value
      *     allowed object is
-     *     {@link com.isis.generated.ContactType }
+     *     {@link ContactType }
      *     
      */
     public void setContact(ContactType value) {
@@ -316,10 +313,10 @@ public class Plugin {
      * 
      * @return
      *     possible object is
-     *     {@link com.isis.generated.MediasType }
+     *     {@link MediasType }
      *     
      */
-    public com.isis.generated.MediasType getMedias() {
+    public MediasType getMedias() {
         return medias;
     }
 
@@ -328,7 +325,7 @@ public class Plugin {
      * 
      * @param value
      *     allowed object is
-     *     {@link com.isis.generated.MediasType }
+     *     {@link MediasType }
      *     
      */
     public void setMedias(MediasType value) {
@@ -340,10 +337,10 @@ public class Plugin {
      * 
      * @return
      *     possible object is
-     *     {@link com.isis.generated.DependsType }
+     *     {@link DependsType }
      *     
      */
-    public com.isis.generated.DependsType getDepends() {
+    public DependsType getDepends() {
         return depends;
     }
 
@@ -352,7 +349,7 @@ public class Plugin {
      * 
      * @param value
      *     allowed object is
-     *     {@link com.isis.generated.DependsType }
+     *     {@link DependsType }
      *     
      */
     public void setDepends(DependsType value) {

@@ -15,6 +15,7 @@
             <xs:sequence>
                 <xs:element name="component" type="tns:editorAreaType" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="actions:actions" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="shutcuts:shutcuts" minOccurs="0" maxOccurs="1" />
             </xs:sequence>
             <xs:attribute name="create" type="xs:boolean" default="true" />
             <xs:attribute name="update" type="xs:boolean" default="true" />

@@ -1,5 +1,6 @@
 package com.teratech.actions;
 
+import com.teratech.exceptions.ApplicationException;
 import com.teratech.exceptions.ModelServiceException;
 import com.teratech.actions.annotations.ActionMethod;
 import com.teratech.dao.FlexibleSearch;
@@ -8,17 +9,21 @@ import com.teratech.metadata.ActionContextData;
 import com.teratech.metadata.SearchColumn;
 import com.teratech.model.cms.ActionModel;
 import com.teratech.model.cms.ActionType;
+import com.teratech.model.cms.MetaTypeModel;
 import com.teratech.model.generic.AbstractItem;
+import com.teratech.services.MetaTypeService;
 import com.teratech.tools.persistence.DAOUtilis;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import com.teratech.utils.ClassUtils;
 import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.CollectionUtils;
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.SerializationFeature;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -55,23 +60,31 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @Override
-    public ActionContextData invoke(ActionModel action, String methodName, ActionType methodType, ActionContextData context) throws InvocationTargetException, IllegalAccessException {
-        assert Objects.nonNull(action) : String.format("Action is null");
-        Optional<Method> method = ClassUtils.getMethodsFor(getClass()).stream().filter(meth -> {
-            if (meth.isAnnotationPresent(ActionMethod.class)) {
-                ActionMethod annot = meth.getAnnotation(ActionMethod.class);
-                return annot.value().equalsIgnoreCase(methodName) && annot.scope().equals(methodType);
-            } else return false;
-        }).findAny();
-        if (method.isEmpty())
-            throw new IllegalArgumentException(String.format("No method of name %s with type %s found for action %s", methodName, methodType, action.getCode()));
+    public ActionContextData invoke(ActionModel action, String methodName, ActionType methodType, ActionContextData context) throws ApplicationException {
+      try {
+          if (Objects.isNull(action)) {
+              throw new IllegalAccessException("Action to invoke can't be null");
+          }
+          Optional<Method> method = ClassUtils.getMethodsFor(getClass()).stream().filter(meth -> {
+              if (meth.isAnnotationPresent(ActionMethod.class)) {
+                  ActionMethod annot = meth.getAnnotation(ActionMethod.class);
+                  return annot.value().equalsIgnoreCase(methodName) && annot.scope().equals(methodType);
+              } else return false;
+          }).findAny();
+          if (method.isEmpty())
+              throw new IllegalArgumentException(String.format("No method of name %s with type %s found for action %s", methodName, methodType, action.getCode()));
 
-        //IF Action defined it own plugin replace the plugin by this one
-        if (Objects.nonNull(action.getPlugin())) {
-            context.put(PLUGIN, action.getPlugin().getId());
-        }
+          //IF Action defined it own plugin replace the plugin by this one
+          if (Objects.nonNull(action.getPlugin())) {
+              context.put(PLUGIN, action.getPlugin().getId());
+          }
 
-        return (ActionContextData) method.get().invoke(this, context);
+          ActionContextData contextData =  (ActionContextData) method.get().invoke(this, context);
+          //persistenceManager.flush();
+          return contextData;
+      } catch (Exception ex) {
+          throw new ApplicationException("500", ex);
+      }
     }
 
     /**
@@ -80,16 +93,17 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "create", scope = ActionType.POST)
-    ActionContextData create(final ActionContextData context) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        final String pluginId = (String) context.get(PLUGIN);
-        final String className = (String) context.get(TYPE);
+    ActionContextData create(final ActionContextData context) throws ApplicationException {
 
-        assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR;
+        try {
+            final Class clazz = getClassFromContext(context);
+            context.put(DATA, clazz.getDeclaredConstructor().newInstance());
 
-        final Class clazz = getClassType(pluginId, className);
-        context.put(DATA, clazz.getDeclaredConstructor().newInstance());
+            return context;
+        } catch (Exception ex) {
+            throw new ApplicationException("500", ex);
+        }
 
-        return context;
     }
 
     /**
@@ -98,22 +112,15 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "save", scope = ActionType.POST)
-     ActionContextData saveOrUpdate(final ActionContextData context) throws ClassNotFoundException, ModelServiceException {
+     ActionContextData saveOrUpdate(final ActionContextData context) throws ApplicationException {
          final Object object =  context.get(DATA);
 
-        assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
-
-        final String pluginId = (String) context.get(PLUGIN);
-        final String className = (String) context.get(TYPE);
-
-        assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR;
-
-        final Class clazz = getClassType(pluginId, className);
-        //Convert Json String to instance of clazz
-       final ObjectMapper mapper = new ObjectMapper();
-       Object entity = mapper.convertValue(object, clazz);
-
        try {
+           final Class clazz = getClassFromContext(context);
+           //Convert Json String to instance of clazz
+           final ObjectMapper mapper = new ObjectMapper();
+           Object entity = mapper.convertValue(object, clazz);
+           transactionTemplate.setReadOnly(false);
            return transactionTemplate.execute(status -> {
 
                Object result = null;
@@ -126,8 +133,8 @@ public abstract class AbstractAction implements ActionService{
                context.put(DATA, result);
                return context;
            });
-       } catch (RuntimeException e) {
-           throw new ModelServiceException(e);
+       } catch (Exception e) {
+           throw new ApplicationException("500", e);
        }
      }
 
@@ -137,103 +144,102 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
      @ActionMethod(value = "fetchitems", scope = ActionType.POST)
-    public ActionContextData getItems (final ActionContextData context) throws ClassNotFoundException, ParseException, IllegalAccessException {
+    public ActionContextData getItems (final ActionContextData context) throws ApplicationException {
 
-         final String pluginId = (String) context.get(PLUGIN);
-         final String className = (String) context.get(TYPE);
+         try {
+            final Object searchObject =  context.get(SEARCH_PREDICAT);
+            final ObjectMapper mapper = new ObjectMapper();
+            List<SearchColumn> searchs = new ArrayList<>();
+            List<String> sortRules = new ArrayList<>();
 
-         assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR ;
+            if (Objects.nonNull(searchObject)) {
+                searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
+                });
+            }
+            final Object sortObject = context.get("sort");
+            if (Objects.nonNull(sortObject)) {
+                sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
+            }
 
-         final Object searchObject =  context.get(SEARCH_PREDICAT);
-         final ObjectMapper mapper = new ObjectMapper();
-         List<SearchColumn> searchs = new ArrayList<>();
-         List<String> sortRules = new ArrayList<>();
+            Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
+            if (Objects.nonNull(sortRules)) {
+                for (String rule : sortRules) {
+                    if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
+                        sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
+                    } else {
+                        sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
+                    }
+                }
+            }
+            //Initialize restriction container
+            final RestrictionsContainer container = RestrictionsContainer.newInstance();
 
-         if (Objects.nonNull(searchObject)) {
-             searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
-             });
-         }
-         final Object sortObject = context.get("sort");
-         if (Objects.nonNull(sortObject)) {
-             sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
-         }
+            buildPredicatSearchCriteria(searchs, container);
 
-         Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
-         if (Objects.nonNull(sortRules)) {
-             for (String rule : sortRules) {
-                 if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
-                     sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
-                 } else {
-                     sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
-                 }
-             }
-         }
-         //Initialize restriction container
-         final RestrictionsContainer container = RestrictionsContainer.newInstance();
+            //Load class of entity
+            final Class clazz = getClassFromContext(context);
+            //Extraction des elements de pagination
+            int startIndex = Objects.nonNull(context.get(START_INDEX)) ? (int) context.get(START_INDEX) : 0;
+            int nbreOfItems = Objects.nonNull(context.get(PAGESIZE)) ? (int) context.get(PAGESIZE) : -1 ;
 
-         buildPredicatSearchCriteria(searchs, container);
-
-         //Load class of entity
-         final Class clazz = getClassType(pluginId, className);
-          //Extraction des elements de pagination
-         int startIndex = Objects.nonNull(context.get(START_INDEX)) ? (int) context.get(START_INDEX) : 0;
-         int nbreOfItems = Objects.nonNull(context.get(PAGESIZE)) ? (int) context.get(PAGESIZE) : -1 ;
-
-         //Fetch all data which map the criteria
-         List datas = flexibleSearch.doSearch(clazz, container, sortCriteria, new HashSet<>(), startIndex, nbreOfItems);
-         //Update the application context
-         context.put(DATA, datas);
-         //Fetch the number of items
-         context.put(NBREOFITEMS, flexibleSearch.count(clazz, container));
-         //Return the context
-         return context;
+            //Fetch all data which map the criteria
+            List datas = flexibleSearch.doSearch(clazz, container, sortCriteria, new HashSet<>(), startIndex, nbreOfItems);
+            //Update the application context
+            context.put(DATA, datas);
+            //Fetch the number of items
+            context.put(NBREOFITEMS, flexibleSearch.count(clazz, container));
+            //Return the context
+            return context;
+        } catch (Exception ex) {
+            throw new ApplicationException("500", ex);
+        }
     }
 
     @ActionMethod(value = "count", scope = ActionType.POST)
-    public ActionContextData countItems (final ActionContextData context) throws ClassNotFoundException, ParseException, IllegalAccessException {
+    public ActionContextData countItems (final ActionContextData context) throws ApplicationException {
 
-        final String pluginId = (String) context.get(PLUGIN);
-        final String className = (String) context.get(TYPE);
+         try {
+             final Object searchObject =  context.get(SEARCH_PREDICAT);
+             final ObjectMapper mapper = new ObjectMapper();
+             List<SearchColumn> searchs = new ArrayList<>();
+             List<String> sortRules = new ArrayList<>();
 
-        assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR ;
+             if (Objects.nonNull(searchObject)) {
+                 searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
+                 });
+             }
+             final Object sortObject = context.get("sort");
+             if (Objects.nonNull(sortObject)) {
+                 sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
+             }
 
-        final Object searchObject =  context.get(SEARCH_PREDICAT);
-        final ObjectMapper mapper = new ObjectMapper();
-        List<SearchColumn> searchs = new ArrayList<>();
-        List<String> sortRules = new ArrayList<>();
+             Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
+             if (Objects.nonNull(sortRules)) {
+                 for (String rule : sortRules) {
+                     if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
+                         sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
+                     } else {
+                         sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
+                     }
+                 }
+             }
+             //Initialize restriction container
+             final RestrictionsContainer container = RestrictionsContainer.newInstance();
 
-        if (Objects.nonNull(searchObject)) {
-            searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
-            });
-        }
-        final Object sortObject = context.get("sort");
-        if (Objects.nonNull(sortObject)) {
-            sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
-        }
+             buildPredicatSearchCriteria(searchs, container);
 
-        Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
-        if (Objects.nonNull(sortRules)) {
-            for (String rule : sortRules) {
-                if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
-                    sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
-                } else {
-                    sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
-                }
-            }
-        }
-        //Initialize restriction container
-        final RestrictionsContainer container = RestrictionsContainer.newInstance();
+             //Load class of entity
+             final Class clazz = getClassFromContext(context);
+             //Fetch all data which map the criteria
+             Long nbreItems = flexibleSearch.count(clazz, container);
+             //Update the application context
+             context.put(DATA, nbreItems);
+             //Return the context
+             return context;
+         } catch (Exception ex) {
+             throw new ApplicationException("500", ex);
+         }
 
-        buildPredicatSearchCriteria(searchs, container);
-
-        //Load class of entity
-        final Class clazz = getClassType(pluginId, className);
-        //Fetch all data which map the criteria
-        Long nbreItems = flexibleSearch.count(clazz, container);
-        //Update the application context
-        context.put(DATA, nbreItems);
-        //Return the context
-        return context;
     }
 
     /**
@@ -242,25 +248,49 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "fetchitem", scope = ActionType.POST)
-    public ActionContextData getItem (final ActionContextData context) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-        final Object object =  context.get(DATA);
+    public ActionContextData getItem (final ActionContextData context) throws ApplicationException {
+       try {
+           final Object object =  context.get(DATA);
+           final Class clazz = getClassFromContext(context);
+           //Convert Json String to instance of clazz
+           final ObjectMapper mapper = new ObjectMapper();
+           //mapper.isEnabled(SerializationFeature.FA)
+           Object entity = mapper.convertValue(object, clazz);
+           //Update the data context with the entity data fetch from database
+           context.put(DATA, flexibleSearch.find((AbstractItem) entity));
+           return context;
+       } catch (Exception ex) {
+          throw new ApplicationException("500", ex);
+       }
 
-        assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
+    }
 
-        final String pluginId = (String) context.get(PLUGIN);
-        final String className = (String) context.get(TYPE);
+    /**
+     *
+     * @param context
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws NoSuchFieldException
+     * @throws NoSuchMethodException
+     * @throws InvocationTargetException
+     * @throws ClassNotFoundException
+     */
+    private Class getClassFromContext(ActionContextData context) throws IllegalAccessException, InstantiationException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
+        final String typeCode = (String) context.get("typeCode");
 
-         assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR;
+        MetaTypeModel metaType = flexibleSearch.find(new MetaTypeModel(typeCode));
 
-        final Class clazz = getClassType(pluginId, className);
-        //Convert Json String to instance of clazz
-        final ObjectMapper mapper = new ObjectMapper();
-        Object entity = mapper.convertValue(object, clazz);
-        //System.out.println(String.format("Fetch instance --------------------- : %s", entity.getClass()));
+        if (Objects.isNull(metaType)) {
+            throw new InstantiationException(String.format("No MetaType data found for typeCode %s", typeCode));
+        }
 
-        //Update the data context with the entity data fetch from database
-        context.put(DATA, flexibleSearch.find((AbstractItem) entity));
-        return context;
+        //final String pluginId = (String) context.get(PLUGIN);
+        final String className = metaType.getClassName();
+        final String plugin = Objects.nonNull(metaType.getPlugin()) ? metaType.getPlugin().getId() : null;
+
+        final Class clazz = getClassType(plugin, className);
+        return clazz;
     }
 
     /**
@@ -269,31 +299,24 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
    @ActionMethod(value = "delete", scope = ActionType.DELETE)
-    public ActionContextData delete (final ActionContextData context) throws ModelServiceException {
+    public ActionContextData delete (final ActionContextData context) throws ApplicationException {
 
        try {
            final Object object = context.get(DATA);
-
-           assert Objects.nonNull(object) : NOT_DATA_IN_CONTEXT_ERROR;
-
-           final String pluginId = (String) context.get(PLUGIN);
-           final String className = (String) context.get(TYPE);
-
-           assert StringUtils.isNotBlank(className) : NO_TYPE_FOUND_IN_CONTEXT_ERROR;
-
+           transactionTemplate.setReadOnly(false);
            return transactionTemplate.execute(status -> {
                try {
-                   final Class clazz = getClassType(pluginId, className);
+                   final Class clazz = getClassFromContext(context);
                    //Convert Json String to instance of clazz
                    final ObjectMapper mapper = new ObjectMapper();
                    persistenceManager.delete(mapper.convertValue(object, clazz));
-               } catch (ModelServiceException | ClassNotFoundException e) {
+               } catch (Exception e) {
                    throw new RuntimeException(e);
                }
                return context;
            });
        } catch (RuntimeException ex) {
-           throw  new ModelServiceException(ex);
+           throw  new ApplicationException("500", ex);
        }
    }
 

@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.06.26 à 06:03:28 PM WAT 
+// Généré le : 2026.08.20 à 08:47:04 PM WAT 
 //
 
 
@@ -23,6 +23,7 @@ import jakarta.xml.bind.annotation.*;
  *       &lt;sequence&gt;
  *         &lt;element name="component" type="{http://www.isis.cm/config/editor-area}editorAreaType" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.isis.cm/config/isis-actions}actions" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.isis.cm/config/isis-shutcut}shutcuts" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="create" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" /&gt;
  *       &lt;attribute name="update" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" /&gt;
@@ -42,7 +43,8 @@ import jakarta.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "component",
-    "actions"
+    "actions",
+    "shutcuts"
 })
 @XmlRootElement(name = "editor-area")
 public class EditorArea {
@@ -50,6 +52,8 @@ public class EditorArea {
     protected EditorAreaType component;
     @XmlElement(namespace = "http://www.isis.cm/config/isis-actions")
     protected Actions actions;
+    @XmlElement(namespace = "http://www.isis.cm/config/isis-shutcut")
+    protected Shutcuts shutcuts;
     @XmlAttribute(name = "create")
     protected Boolean create;
     @XmlAttribute(name = "update")
@@ -113,6 +117,30 @@ public class EditorArea {
      */
     public void setActions(Actions value) {
         this.actions = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété shutcuts.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Shutcuts }
+     *     
+     */
+    public Shutcuts getShutcuts() {
+        return shutcuts;
+    }
+
+    /**
+     * Définit la valeur de la propriété shutcuts.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Shutcuts }
+     *     
+     */
+    public void setShutcuts(Shutcuts value) {
+        this.shutcuts = value;
     }
 
     /**

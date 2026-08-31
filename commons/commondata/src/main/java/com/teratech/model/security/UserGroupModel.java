@@ -1,5 +1,6 @@
 package com.teratech.model.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.teratech.model.PluginModel;
 import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
@@ -25,9 +26,10 @@ public class UserGroupModel extends AbstractItem {
             @JoinColumn(name = "plugin_id", referencedColumnName = "id"),
             @JoinColumn (name = "plugin_version", referencedColumnName = "version")
     })
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private PluginModel plugin;
 
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn (name = "ug_code", referencedColumnName = "code")
     private List<UserRigthModel> userRigths = new ArrayList<>();
 
