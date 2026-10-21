@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<tns:context name="ItemRigth"
+         xmlns:tns="http://www.isis.cm/config/isis-item"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:a="http://www.isis.cm/config/isis-actions"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         action="itemRigthAction">
+ <ls:list-view>
+     <ls:list>
+         <ls:column qualifier="metaType" search="true" />
+         <ls:column qualifier="user" search="true" />
+         <ls:column qualifier="read" search="true" />
+         <ls:column qualifier="write" search="true" />
+         <ls:column qualifier="delete" search="true" />
+     </ls:list>
+ </ls:list-view>
+ <e:editor-area searchKey="metaType">
+     <e:component>
+         <e:common>
+             <e:form>
+                 <e:section name="hac.commons" columns="2" position="100">
+                     <e:field qualifier="metaType" widget="manytoone" observable="true" updatable="false"/>
+                     <e:field qualifier="user" widget="manytoone" updatable="false"/>
+                 </e:section>
+                 <e:section name="hac.commons" columns="3" position="99">
+                     <e:field qualifier="read" widget="switch" />
+                     <e:field qualifier="write" widget="switch" />
+                     <e:field qualifier="delete" widget="switch" />
+                 </e:section>
+                 <e:section name="hac.itemrigth.entries" columns="1" position="98" header="true">
+                     <e:field qualifier="rigthEntries" widget="onetomany" observe="metaType" handler="item.rigth"/>
+                 </e:section>
+             </e:form>
+         </e:common>
+     </e:component>
+ </e:editor-area>
+</tns:context>

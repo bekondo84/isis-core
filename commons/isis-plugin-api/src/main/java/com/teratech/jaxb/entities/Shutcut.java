@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.08.20 à 08:47:04 PM WAT 
+// Généré le : 2026.10.21 à 02:48:09 PM CEST 
 //
 
 
@@ -23,12 +23,13 @@ import jakarta.xml.bind.annotation.XmlType;
  * &lt;complexType name="shutcut"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="filters" type="{http://www.isis.cm/config/isis-shutcut}filters" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="counter" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="viewMode" type="{http://www.w3.org/2001/XMLSchema}string" default="list,view" /&gt;
+ *       &lt;attribute name="viewMode" type="{http://www.isis.cm/config/isis-utils}viewModeType" default="list,view" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -37,44 +38,43 @@ import jakarta.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "shutcut", namespace = "http://www.isis.cm/config/isis-shutcut")
+@XmlType(name = "shutcut", namespace = "http://www.isis.cm/config/isis-shutcut", propOrder = {
+    "filters"
+})
 public class Shutcut {
 
-    @XmlAttribute(name = "name")
-    protected String name;
+    protected Filters filters;
     @XmlAttribute(name = "code")
     protected String code;
-    @XmlAttribute(name = "counter")
-    protected String counter;
     @XmlAttribute(name = "icon")
     protected String icon;
     @XmlAttribute(name = "type")
     protected String type;
     @XmlAttribute(name = "viewMode")
-    protected String viewMode;
+    protected ViewModeType viewMode;
 
     /**
-     * Obtient la valeur de la propriété name.
+     * Obtient la valeur de la propriété filters.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Filters }
      *     
      */
-    public String getName() {
-        return name;
+    public Filters getFilters() {
+        return filters;
     }
 
     /**
-     * Définit la valeur de la propriété name.
+     * Définit la valeur de la propriété filters.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Filters }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setFilters(Filters value) {
+        this.filters = value;
     }
 
     /**
@@ -99,30 +99,6 @@ public class Shutcut {
      */
     public void setCode(String value) {
         this.code = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété counter.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCounter() {
-        return counter;
-    }
-
-    /**
-     * Définit la valeur de la propriété counter.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCounter(String value) {
-        this.counter = value;
     }
 
     /**
@@ -182,12 +158,12 @@ public class Shutcut {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ViewModeType }
      *     
      */
-    public String getViewMode() {
+    public ViewModeType getViewMode() {
         if (viewMode == null) {
-            return "list,view";
+            return ViewModeType.LIST_VIEW;
         } else {
             return viewMode;
         }
@@ -198,10 +174,10 @@ public class Shutcut {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ViewModeType }
      *     
      */
-    public void setViewMode(String value) {
+    public void setViewMode(ViewModeType value) {
         this.viewMode = value;
     }
 

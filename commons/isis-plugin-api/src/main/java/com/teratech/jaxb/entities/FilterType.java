@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.08.20 à 08:47:04 PM WAT 
+// Généré le : 2026.10.21 à 02:48:09 PM CEST 
 //
 
 
@@ -25,7 +25,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;attribute name="source" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="value" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="operator" type="{http://www.isis.cm/config/editor-area}FilterOperator" default="eq" /&gt;
+ *       &lt;attribute name="operator" type="{http://www.isis.cm/config/isis-utils}operatorType" default="eq" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -42,7 +42,7 @@ public class FilterType {
     @XmlAttribute(name = "value")
     protected String value;
     @XmlAttribute(name = "operator")
-    protected FilterOperator operator;
+    protected OperatorType operator;
 
     /**
      * Obtient la valeur de la propriété source.
@@ -97,12 +97,12 @@ public class FilterType {
      * 
      * @return
      *     possible object is
-     *     {@link FilterOperator }
+     *     {@link OperatorType }
      *     
      */
-    public FilterOperator getOperator() {
+    public OperatorType getOperator() {
         if (operator == null) {
-            return FilterOperator.EQ;
+            return OperatorType.EQ;
         } else {
             return operator;
         }
@@ -113,10 +113,10 @@ public class FilterType {
      * 
      * @param value
      *     allowed object is
-     *     {@link FilterOperator }
+     *     {@link OperatorType }
      *     
      */
-    public void setOperator(FilterOperator value) {
+    public void setOperator(OperatorType value) {
         this.operator = value;
     }
 

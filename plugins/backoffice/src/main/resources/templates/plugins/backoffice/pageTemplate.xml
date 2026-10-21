@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="code" search="true" />
+            <ls:column qualifier="plugin"  widget="manytoone"  search="true" />
+            <ls:column qualifier="description" search="true" widget="text" />
+			<ls:column qualifier="createdAt" search="true" widget="datetime-local" />
+            <ls:column qualifier="lastModif" search="true" widget="datetime-local" />            
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="code">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="commons" columns="2" position="100">
+                        <e:field qualifier="code" editable="true" updatable="false" />
+                        <e:field qualifier="plugin" widget="manytoone" />
+                        <e:field qualifier="description" widget="text" />
+                        <e:field qualifier="createdAt" widget="datetime-local" editable="false"/>
+                        <e:field qualifier="lastModif" widget="datetime-local" editable="false"/>
+                    </e:section>
+                    <e:section name="content" columns="1" position="98">
+                        <e:field qualifier="template" widget="editor" updatable="false" editable="false" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

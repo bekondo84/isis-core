@@ -5,10 +5,12 @@
            xmlns:tns="http://www.isis.cm/config/editor-area"
            xmlns:actions="http://www.isis.cm/config/isis-actions"
            xmlns:shutcuts="http://www.isis.cm/config/isis-shutcut"
-           xmlns:widget="http://www.isis.cm/config/isis-widget">
+           xmlns:widget="http://www.isis.cm/config/isis-widget"
+           xmlns:utils="http://www.isis.cm/config/isis-utils">
     <xs:import namespace="http://www.isis.cm/config/isis-actions" schemaLocation="isis-actions.xsd"/>
     <xs:import namespace="http://www.isis.cm/config/isis-shutcut" schemaLocation="isis-shutcut.xsd"/>
     <xs:import namespace="http://www.isis.cm/config/isis-widget" schemaLocation="isis-widget.xsd"/>
+    <xs:import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd" />
 
     <xs:element name="editor-area">
         <xs:complexType>
@@ -105,16 +107,6 @@
         <xs:attribute name="source" type="xs:string" />
         <!-- when prefix with # value refered current object field -->
         <xs:attribute name="value" type="xs:string" />
-        <xs:attribute name="operator" type="tns:FilterOperator" default="eq" />
+        <xs:attribute name="operator" type="utils:operatorType" default="eq" />
     </xs:complexType>
-    <xs:simpleType name="FilterOperator">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="eq" />
-            <xs:enumeration value="neq" />
-            <xs:enumeration value="gt" />
-            <xs:enumeration value="ge" />
-            <xs:enumeration value="lt" />
-            <xs:enumeration value="le" />
-        </xs:restriction>
-    </xs:simpleType>
 </xs:schema>

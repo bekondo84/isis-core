@@ -54,9 +54,9 @@ public class PersistenceManagerImpl implements PersistenceManager {
                 setManagedField(AbstractItem.class, entity, "lastModif", LocalDateTime.now());
                 em.merge(entity);
             }
-            return (S) flexibleSearch.find(entity);
-        } catch (IllegalAccessException | NoSuchFieldException | InstantiationException | NoSuchMethodException |
-                 InvocationTargetException e) {
+            return (S) /*flexibleSearch.find*/(entity);
+        } catch (IllegalAccessException | NoSuchFieldException /*| InstantiationException | NoSuchMethodException |
+                 InvocationTargetException*/ e) {
             throw new ModelServiceException(e);
         }
 

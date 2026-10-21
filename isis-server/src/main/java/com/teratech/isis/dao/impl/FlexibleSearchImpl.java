@@ -36,7 +36,7 @@ public class FlexibleSearchImpl implements FlexibleSearch {
     @Override
     public <T extends AbstractItem> T find(Class clazz, Object pk) throws IllegalAccessException {
         EntityGraph<T> graph = em.createEntityGraph(clazz);
-        /**
+
         List<Field> fields = ReflectionUtils.getDeclaredFields(clazz);
         for (Field field : fields) {
             field.setAccessible(true);
@@ -46,7 +46,8 @@ public class FlexibleSearchImpl implements FlexibleSearch {
                     || field.isAnnotationPresent(ManyToOne.class) ) {
                 graph.addSubgraph(field.getName());
             }
-        }*/
+        }
+
         buildEntityGraph(em, graph, clazz, 2);
         Map<String, Object> hints = new HashMap<>();
         hints.put("jakarta.persistence.fetchgraph", graph);

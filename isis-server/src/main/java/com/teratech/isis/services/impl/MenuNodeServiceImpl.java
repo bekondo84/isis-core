@@ -147,7 +147,7 @@ public class MenuNodeServiceImpl implements MenuNodeService {
             menuItem.setParent(parent);
             menuItem.setAction(node.getAction());
             menuItem.setPosition(node.getPosition());
-            menuItem.setViewType(node.getViewMode());
+            menuItem.setViewType(node.getViewMode().value());
             menuItem.setPlugin(plugin);
             menuItem.setModal(node.isModal());
             menuItem.setIcon(node.getIcon());

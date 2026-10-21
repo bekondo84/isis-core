@@ -2,7 +2,10 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://www.isis.cm/config/isis-shutcut"
         xmlns:tns="http://www.isis.cm/config/isis-shutcut"
+        xmlns:utils="http://www.isis.cm/config/isis-utils"
         elementFormDefault="qualified">
+    <import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd" />
+
     <element name="shutcuts" type="tns:shutcuts" />
     <complexType name="shutcuts">
         <sequence>
@@ -10,11 +13,31 @@
         </sequence>
     </complexType>
     <complexType name="shutcut">
-        <attribute name="name" type="string" />
+        <sequence>
+            <element name="filters" type="tns:filters" minOccurs="0" maxOccurs="1" />
+        </sequence>
+
         <attribute name="code" type="string" />
-        <attribute name="counter" type="string" />
         <attribute name="icon" type="string" default="" />
         <attribute name="type" type="string" />
-        <attribute name="viewMode" type="string" default="list,view" />
+        <attribute name="viewMode" type="utils:viewModeType" default="list,view" />
     </complexType>
+
+    <complexType name="filters">
+        <sequence>
+            <element name="filter" type="tns:filter" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="filter">
+        <attribute name="source" type="string" use="required" />
+        <attribute name="target"  type="string" use="required" />
+        <attribute name="operator" type="utils:operatorType" use="required"/>
+        <attribute name="targetType" type="tns:targetValue"  use="required" />
+    </complexType>
+    <simpleType name="targetValue">
+        <restriction base="string">
+            <enumeration value="field" />
+            <enumeration value="value" />
+        </restriction>
+    </simpleType>
 </schema>

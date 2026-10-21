@@ -1,33 +1,28 @@
 package com.teratech.metadata;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class ShutCutData implements Serializable {
-    protected String name;
     protected String code;
-    protected String counter;
+    protected int  counter;
     protected String icon ;
     protected String label ;
     protected String viewMode;
     protected String type ;
+    protected List<FilterData> filters ;
 
     public ShutCutData() {
+        filters = new ArrayList<>();
     }
 
-    public ShutCutData(String name, String code, String counter, String icon) {
-        this.name = name;
+    public ShutCutData(String code, int counter, String icon) {
         this.code = code;
         this.counter = counter;
         this.icon = icon;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ShutCutData setName(String name) {
-        this.name = name;
-        return this;
+        filters = new ArrayList<>();
     }
 
     public String getCode() {
@@ -39,13 +34,12 @@ public class ShutCutData implements Serializable {
         return this;
     }
 
-    public String getCounter() {
+    public int getCounter() {
         return counter;
     }
 
-    public ShutCutData setCounter(String counter) {
+    public void setCounter(int counter) {
         this.counter = counter;
-        return this ;
     }
 
     public String getIcon() {
@@ -82,5 +76,16 @@ public class ShutCutData implements Serializable {
     public ShutCutData setType(String type) {
         this.type = type;
         return this;
+    }
+
+    public void addFilter(FilterData filter) {
+        filters.add(filter);
+    }
+    public List<FilterData> getFilters() {
+        return Collections.unmodifiableList(filters);
+    }
+
+    public void setFilters(List<FilterData> filters) {
+        this.filters = filters;
     }
 }

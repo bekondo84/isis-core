@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class FilterData implements Serializable {
     private String source;
     private String value;
-
     private String operator;
+    private String typeValue;//two possible value : field or value
 
     public FilterData(String source, String value, String operator) {
         this.source = source;
@@ -36,5 +36,13 @@ public class FilterData implements Serializable {
 
     public void setOperator(String operator) {
         this.operator = operator;
+    }
+
+    public String getTypeValue() {
+        return typeValue;
+    }
+
+    public void setTypeValue(String typeValue) {
+        this.typeValue = typeValue;
     }
 }

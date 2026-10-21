@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.isis.cm/config/isis-utils"
+           xmlns:tns="http://www.isis.cm/config/isis-utils"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="operatorType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="eq" />
+            <xs:enumeration value="neq" />
+            <xs:enumeration value="gt" />
+            <xs:enumeration value="ge" />
+            <xs:enumeration value="lt" />
+            <xs:enumeration value="le" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="viewModeType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="list"/>
+            <xs:enumeration value="view"/>
+            <xs:enumeration value="kaban"/>
+            <xs:enumeration value="list,view"/>
+            <xs:enumeration value="kaban,view"/>
+            <xs:enumeration value="list,kaban,view"/>
+            <xs:enumeration value="kaban,list,view"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

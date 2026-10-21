@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS bs_contact (
      lastModif TIMESTAMPTZ,
 
      CONSTRAINT pk_bs_contact PRIMARY KEY (id),
-     CONSTRAINT fk_bs_contact__entity FOREIGN KEY (business)
+     CONSTRAINT fk_bs_contact_entity FOREIGN KEY (business)
       REFERENCES bs_entity (code)
 );
 -----User -----

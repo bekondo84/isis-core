@@ -2,7 +2,10 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified"
            targetNamespace="http://www.isis.cm/config/explorer-tree"
-           xmlns:tns="http://www.isis.cm/config/explorer-tree">
+           xmlns:tns="http://www.isis.cm/config/explorer-tree"
+           xmlns:utils="http://www.isis.cm/config/isis-utils">
+
+    <xs:import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd" />
 
     <xs:element name="explorer-tree" type="tns:explorer-tree" />
     <xs:complexType name="explorer-tree" >
@@ -20,7 +23,7 @@
         <xs:attribute name="code" type="xs:string" />
         <xs:attribute name="action" type="xs:string" default="defaultAction"/>
         <xs:attribute name="modal" type="xs:boolean" default="false"/>
-        <xs:attribute name="viewMode" type="xs:string" default="list,view"/>
+        <xs:attribute name="viewMode" type="utils:viewModeType" default="list,view"/>
         <xs:attribute name="icon" type="xs:string"/>
         <xs:attribute name="position" type="xs:int" default="0"/>
         <!--<xs:attribute name="template" type="xs:string" />-->

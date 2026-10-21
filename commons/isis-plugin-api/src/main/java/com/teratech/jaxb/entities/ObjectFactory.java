@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.08.20 à 08:47:04 PM WAT 
+// Généré le : 2026.10.21 à 02:48:09 PM CEST 
 //
 
 
@@ -202,6 +202,22 @@ public class ObjectFactory {
      */
     public Shutcut createShutcut() {
         return new Shutcut();
+    }
+
+    /**
+     * Create an instance of {@link Filters }
+     * 
+     */
+    public Filters createFilters() {
+        return new Filters();
+    }
+
+    /**
+     * Create an instance of {@link Filter }
+     * 
+     */
+    public Filter createFilter() {
+        return new Filter();
     }
 
     /**

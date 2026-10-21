@@ -15,6 +15,8 @@ import jakarta.persistence.*;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -34,7 +36,7 @@ import java.util.stream.Collectors;
 @Service
 public class MetaDataServiceImpl implements MetaDataService {
 
-    //private static final Logger LOG = LoggerFactory.getLogger(MetaDataServiceImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MetaDataServiceImpl.class);
 
     private final PluginManager pluginManager;
     private JAXBService jaxbService;
@@ -368,10 +370,18 @@ public class MetaDataServiceImpl implements MetaDataService {
         if (Objects.nonNull(editor.getShutcuts())
           && !CollectionUtils.isEmpty(editor.getShutcuts().getShutcut())) {
             for (Shutcut shutcut : editor.getShutcuts().getShutcut()) {
-                ShutCutData shutcutData = new ShutCutData(shutcut.getName(), shutcut.getCode(), shutcut.getCounter(), shutcut.getIcon());
+                ShutCutData shutcutData = new ShutCutData(shutcut.getCode(), 0, shutcut.getIcon());
                 shutcutData.setType(shutcut.getType());
-                shutcutData.setLabel(shutcutData.getLabel());
-                shutcutData.setViewMode(shutcut.getViewMode());
+                shutcutData.setLabel(i18NService.getMessage(wrapper, shutcut.getCode()));
+                shutcutData.setViewMode(shutcut.getViewMode().value());
+                //Process of filters
+                if (Objects.nonNull(shutcut.getFilters())) {
+                    for (Filter filter : shutcut.getFilters().getFilter()) {
+                       FilterData data = new FilterData(filter.getSource(), filter.getTarget(), filter.getOperator().value());
+                       data.setTypeValue(filter.getTargetType().value());
+                       shutcutData.addFilter(data);
+                    }
+                }
                 editorArea.addShutcut(shutcutData);
             }
         }

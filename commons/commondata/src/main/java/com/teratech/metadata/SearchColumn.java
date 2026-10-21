@@ -3,7 +3,7 @@ package com.teratech.metadata;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class SearchColumn implements Serializable {
+public class  SearchColumn implements Serializable {
     protected String fieldName;
     protected String label;
     protected String type;

@@ -14,17 +14,21 @@ public class BusinessModel extends AbstractItem {
 
     @Id
     private String code;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String nui;
     @ManyToOne
     @JoinColumn(name = "logo", referencedColumnName = "id")
     private MediaModel logo;
+    @Column(nullable = false)
     private String name ;
     private String adress;
     private String city;
     private String postal;
     private String slogan;
     private String website;
+    @Column(nullable = false)
     private String phone;
     private String fax;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
@@ -158,7 +162,7 @@ public class BusinessModel extends AbstractItem {
      */
     @Override
     public void toStringValue() {
-        stringValue = name;
+        stringValue = code;
     }
 
     @Override

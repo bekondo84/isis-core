@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.08.20 à 08:47:04 PM WAT 
+// Généré le : 2026.10.21 à 02:48:09 PM CEST 
 //
 
 
@@ -30,7 +30,7 @@ import java.util.List;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="action" type="{http://www.w3.org/2001/XMLSchema}string" default="defaultAction" /&gt;
  *       &lt;attribute name="modal" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="viewMode" type="{http://www.w3.org/2001/XMLSchema}string" default="list,view" /&gt;
+ *       &lt;attribute name="viewMode" type="{http://www.isis.cm/config/isis-utils}viewModeType" default="list,view" /&gt;
  *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}int" default="0" /&gt;
  *       &lt;attribute name="counter" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
@@ -59,7 +59,7 @@ public class NavigationNode {
     @XmlAttribute(name = "modal")
     protected Boolean modal;
     @XmlAttribute(name = "viewMode")
-    protected String viewMode;
+    protected ViewModeType viewMode;
     @XmlAttribute(name = "icon")
     protected String icon;
     @XmlAttribute(name = "position")
@@ -207,12 +207,12 @@ public class NavigationNode {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ViewModeType }
      *     
      */
-    public String getViewMode() {
+    public ViewModeType getViewMode() {
         if (viewMode == null) {
-            return "list,view";
+            return ViewModeType.LIST_VIEW;
         } else {
             return viewMode;
         }
@@ -223,10 +223,10 @@ public class NavigationNode {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ViewModeType }
      *     
      */
-    public void setViewMode(String value) {
+    public void setViewMode(ViewModeType value) {
         this.viewMode = value;
     }
 

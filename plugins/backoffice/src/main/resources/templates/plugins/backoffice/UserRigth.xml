@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="code" search="true" />
+            <ls:column qualifier="name" search="false" widget="text" />
+            <ls:column qualifier="read" search="true"  />
+            <ls:column qualifier="write" search="true"  />
+            <ls:column qualifier="delete" search="true"  />
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="code" update="true" delete="false" createOnField="false" create="false">
+       <e:component>
+           <e:common>
+               <e:form>
+                   <e:section name="commons01" columns="2" position="15">
+                       <e:field qualifier="code" />
+                       <e:field qualifier="name" widget="text"/>
+                   </e:section>
+                   <e:section columns="3" name="commons02" position="5">
+                       <e:field qualifier="read"  />
+                       <e:field qualifier="write"  />
+                       <e:field qualifier="delete"  />
+                   </e:section>
+               </e:form>
+           </e:common>
+       </e:component>
+    </e:editor-area>
+</context>
