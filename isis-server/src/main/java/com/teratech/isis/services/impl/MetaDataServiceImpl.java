@@ -131,7 +131,9 @@ public class MetaDataServiceImpl implements MetaDataService {
         List<Field> fields = getDeclaredFieldsFrom(clazz);
 
         if (Objects.nonNull(template)) {
-
+            if (Objects.nonNull(template.getViewMode())) {
+                metaData.setViewMode(template.getViewMode().value());
+            }
             if (Objects.isNull(template.getDashbord())) {
                 //Build ListView Data
                 buildListView(wrapper, template, metaData, fields, createMeta, allReadyProcess);
@@ -376,9 +378,14 @@ public class MetaDataServiceImpl implements MetaDataService {
                 shutcutData.setViewMode(shutcut.getViewMode().value());
                 //Process of filters
                 if (Objects.nonNull(shutcut.getFilters())) {
+                   final List<Filter> filters = shutcut.getFilters().getFilter().stream().filter(filter -> Objects.nonNull(filter.getNature())
+                            && Objects.nonNull(filter.getType()) && Objects.nonNull(filter.getOperator())
+                            && StringUtils.isNotBlank(filter.getSource()) && StringUtils.isNotBlank(filter.getTarget()))
+                           .collect(Collectors.toList());
                     for (Filter filter : shutcut.getFilters().getFilter()) {
                        FilterData data = new FilterData(filter.getSource(), filter.getTarget(), filter.getOperator().value());
-                       data.setTypeValue(filter.getTargetType().value());
+                       data.setNature(filter.getNature().value());
+                       data.setType(filter.getType().value());
                        shutcutData.addFilter(data);
                     }
                 }

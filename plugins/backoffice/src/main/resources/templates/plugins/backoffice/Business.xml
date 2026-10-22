@@ -54,9 +54,9 @@
             </e:common>
         </e:component>
         <sh:shutcuts>
-            <sh:shutcut viewMode="list,view" name="business.contacts" type="BusinessContact" code="business.contacts">
+            <sh:shutcut viewMode="list,view"  type="BusinessContact" code="business.contacts">
                 <sh:filters>
-                    <sh:filter source="code" target="business" operator="eq" targetType="field"/>
+                    <sh:filter source="code" target="business" operator="eq" nature="field" type="string"/>
                 </sh:filters>
             </sh:shutcut>
         </sh:shutcuts>

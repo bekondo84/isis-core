@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 public class FilterData implements Serializable {
     private String source;
-    private String value;
+    private String target;
     private String operator;
-    private String typeValue;//two possible value : field or value
+    private String nature;//two possible value : field or value
+    private String type;
 
     public FilterData(String source, String value, String operator) {
         this.source = source;
-        this.value = value;
+        this.target = value;
         this.operator = operator;
     }
 
@@ -22,12 +23,12 @@ public class FilterData implements Serializable {
         this.source = source;
     }
 
-    public String getValue() {
-        return value;
+    public String getTarget() {
+        return target;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
     public String getOperator() {
@@ -38,11 +39,19 @@ public class FilterData implements Serializable {
         this.operator = operator;
     }
 
-    public String getTypeValue() {
-        return typeValue;
+    public String getNature() {
+        return nature;
     }
 
-    public void setTypeValue(String typeValue) {
-        this.typeValue = typeValue;
+    public void setNature(String nature) {
+        this.nature = nature;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

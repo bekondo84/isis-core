@@ -208,7 +208,7 @@ public abstract class AbstractAction implements ActionService{
                  searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
                  });
              }
-             final Object sortObject = context.get("sort");
+             /*final Object sortObject = context.get("sort");
              if (Objects.nonNull(sortObject)) {
                  sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
              }
@@ -222,7 +222,7 @@ public abstract class AbstractAction implements ActionService{
                          sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
                      }
                  }
-             }
+             }*/
              //Initialize restriction container
              final RestrictionsContainer container = RestrictionsContainer.newInstance();
 

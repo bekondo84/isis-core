@@ -25,4 +25,14 @@
             <xs:enumeration value="kaban,list,view"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="valueType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="int" />
+            <xs:enumeration value="float" />
+            <xs:enumeration value="short" />
+            <xs:enumeration value="double" />
+            <xs:enumeration value="long" />
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

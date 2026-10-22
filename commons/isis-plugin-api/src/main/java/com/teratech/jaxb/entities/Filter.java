@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.21 à 02:48:09 PM CEST 
+// Généré le : 2026.10.22 à 04:24:21 PM CEST 
 //
 
 
@@ -26,7 +26,8 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;attribute name="source" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="target" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="operator" use="required" type="{http://www.isis.cm/config/isis-utils}operatorType" /&gt;
- *       &lt;attribute name="targetType" use="required" type="{http://www.isis.cm/config/isis-shutcut}targetValue" /&gt;
+ *       &lt;attribute name="nature" use="required" type="{http://www.isis.cm/config/isis-shutcut}targetValue" /&gt;
+ *       &lt;attribute name="type" use="required" type="{http://www.isis.cm/config/isis-utils}valueType" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -44,8 +45,10 @@ public class Filter {
     protected String target;
     @XmlAttribute(name = "operator", required = true)
     protected OperatorType operator;
-    @XmlAttribute(name = "targetType", required = true)
-    protected TargetValue targetType;
+    @XmlAttribute(name = "nature", required = true)
+    protected TargetValue nature;
+    @XmlAttribute(name = "type", required = true)
+    protected ValueType type;
 
     /**
      * Obtient la valeur de la propriété source.
@@ -120,27 +123,51 @@ public class Filter {
     }
 
     /**
-     * Obtient la valeur de la propriété targetType.
+     * Obtient la valeur de la propriété nature.
      * 
      * @return
      *     possible object is
      *     {@link TargetValue }
      *     
      */
-    public TargetValue getTargetType() {
-        return targetType;
+    public TargetValue getNature() {
+        return nature;
     }
 
     /**
-     * Définit la valeur de la propriété targetType.
+     * Définit la valeur de la propriété nature.
      * 
      * @param value
      *     allowed object is
      *     {@link TargetValue }
      *     
      */
-    public void setTargetType(TargetValue value) {
-        this.targetType = value;
+    public void setNature(TargetValue value) {
+        this.nature = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété type.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ValueType }
+     *     
+     */
+    public ValueType getType() {
+        return type;
+    }
+
+    /**
+     * Définit la valeur de la propriété type.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ValueType }
+     *     
+     */
+    public void setType(ValueType value) {
+        this.type = value;
     }
 
 }

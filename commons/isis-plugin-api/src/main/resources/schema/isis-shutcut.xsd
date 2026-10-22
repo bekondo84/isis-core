@@ -32,7 +32,8 @@
         <attribute name="source" type="string" use="required" />
         <attribute name="target"  type="string" use="required" />
         <attribute name="operator" type="utils:operatorType" use="required"/>
-        <attribute name="targetType" type="tns:targetValue"  use="required" />
+        <attribute name="nature" type="tns:targetValue"  use="required" />
+        <attribute name="type"  type="utils:valueType" use="required" />
     </complexType>
     <simpleType name="targetValue">
         <restriction base="string">

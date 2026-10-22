@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.21 à 02:48:09 PM CEST 
+// Généré le : 2026.10.22 à 04:24:21 PM CEST 
 //
 
 
@@ -31,6 +31,7 @@ import jakarta.xml.bind.annotation.*;
  *       &lt;/choice&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="action" type="{http://www.w3.org/2001/XMLSchema}string" default="defaultAction" /&gt;
+ *       &lt;attribute name="viewMode" type="{http://www.isis.cm/config/isis-utils}viewModeType" default="list,view" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -57,6 +58,8 @@ public class Context {
     protected String name;
     @XmlAttribute(name = "action")
     protected String action;
+    @XmlAttribute(name = "viewMode")
+    protected ViewModeType viewMode;
 
     /**
      * Obtient la valeur de la propriété listView.
@@ -180,6 +183,34 @@ public class Context {
      */
     public void setAction(String value) {
         this.action = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété viewMode.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ViewModeType }
+     *     
+     */
+    public ViewModeType getViewMode() {
+        if (viewMode == null) {
+            return ViewModeType.LIST_VIEW;
+        } else {
+            return viewMode;
+        }
+    }
+
+    /**
+     * Définit la valeur de la propriété viewMode.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ViewModeType }
+     *     
+     */
+    public void setViewMode(ViewModeType value) {
+        this.viewMode = value;
     }
 
 }

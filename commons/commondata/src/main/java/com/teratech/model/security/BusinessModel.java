@@ -31,9 +31,7 @@ public class BusinessModel extends AbstractItem {
     @Column(nullable = false)
     private String phone;
     private String fax;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn (name = "business", referencedColumnName = "code")
-    private List<BusinessContactModel> contacts = new ArrayList<>();
+
 
 
     public BusinessModel() {
@@ -137,14 +135,6 @@ public class BusinessModel extends AbstractItem {
 
     public void setFax(String fax) {
         this.fax = fax;
-    }
-
-    public List<BusinessContactModel> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<BusinessContactModel> contacts) {
-        this.contacts = contacts;
     }
 
     /**

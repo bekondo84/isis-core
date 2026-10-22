@@ -5,12 +5,15 @@
         elementFormDefault="qualified"
         xmlns:list="http://www.isis.cm/config/list-view"
         xmlns:editor="http://www.isis.cm/config/editor-area"
-        xmlns:dashboard="http://www.isis.cm/config/dashboard">
+        xmlns:dashboard="http://www.isis.cm/config/dashboard"
+        xmlns:utils="http://www.isis.cm/config/isis-utils">
         <xs:import namespace="http://www.isis.cm/config/list-view" schemaLocation="isis-listview.xsd"/>
         <xs:import namespace="http://www.isis.cm/config/editor-area" schemaLocation="isis-editorarea.xsd"/>
         <xs:import namespace="http://www.isis.cm/config/dashboard" schemaLocation="isis-dashboard.xsd"/>
+        <xs:import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd"/>
 
-        <xs:element name="context">
+
+    <xs:element name="context">
             <!-- Create context type represented configuration of item -->
             <xs:complexType>
                 <xs:choice>
@@ -24,6 +27,7 @@
                 </xs:choice>
                 <xs:attribute name="name" type="xs:string" />
                 <xs:attribute name="action" type="xs:string" default="defaultAction"/>
+                <xs:attribute name="viewMode" type="utils:viewModeType" default="list,view"/>
             </xs:complexType>
         </xs:element>
 

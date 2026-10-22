@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class MetaData implements Serializable {
     protected String module;
+    private String viewMode = "list,view";
     //Action associate
     private String action;
     //Entity name use to calculate the MetaData
@@ -211,5 +212,13 @@ public class MetaData implements Serializable {
 
     public void setPageSize(Short pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public String getViewMode() {
+        return viewMode;
+    }
+
+    public void setViewMode(String viewMode) {
+        this.viewMode = viewMode;
     }
 }

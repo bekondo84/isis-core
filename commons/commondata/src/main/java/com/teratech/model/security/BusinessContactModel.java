@@ -20,6 +20,10 @@ public class BusinessContactModel extends AbstractItem {
     private String email;
     private String title;
 
+    @ManyToOne
+    @JoinColumn (name = "business", referencedColumnName = "code")
+    private BusinessModel business ;
+
 
     public BusinessContactModel() {
     }
@@ -74,6 +78,14 @@ public class BusinessContactModel extends AbstractItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public BusinessModel getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(BusinessModel business) {
+        this.business = business;
     }
 
     @Override
