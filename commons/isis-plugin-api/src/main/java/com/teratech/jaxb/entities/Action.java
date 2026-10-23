@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.22 à 04:24:21 PM CEST 
+// Généré le : 2026.10.23 à 09:28:43 AM CEST 
 //
 
 
@@ -23,18 +23,14 @@ import jakarta.xml.bind.annotation.XmlType;
  * &lt;complexType name="action"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="redirect" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
- *       &lt;attribute name="modal" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
+ *       &lt;attribute name="code" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="type" use="required" type="{http://www.isis.cm/config/isis-actions}actionType" /&gt;
  *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
- *       &lt;attribute name="dynamic" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="viewMode" type="{http://www.w3.org/2001/XMLSchema}string" default="list,view" /&gt;
- *       &lt;attribute name="counter" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
- *       &lt;attribute name="typeOp" type="{http://www.isis.cm/config/isis-typeoperation}TypeOperation" default="none" /&gt;
+ *       &lt;attribute name="askconfirmation" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
+ *       &lt;attribute name="operation" type="{http://www.isis.cm/config/isis-typeoperation}TypeOperation" default="none" /&gt;
  *       &lt;attribute name="position" type="{http://www.isis.cm/config/isis-positionvalue}positionValueType" default="actions" /&gt;
- *       &lt;attribute name="badge-color" type="{http://www.isis.cm/config/isis-color}colorType" default="bg-primary" /&gt;
+ *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -46,54 +42,22 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlType(name = "action", namespace = "http://www.isis.cm/config/isis-actions")
 public class Action {
 
-    @XmlAttribute(name = "name")
-    protected String name;
-    @XmlAttribute(name = "code")
+    @XmlAttribute(name = "code", required = true)
     protected String code;
-    @XmlAttribute(name = "redirect")
-    protected Boolean redirect;
-    @XmlAttribute(name = "type")
-    protected String type;
-    @XmlAttribute(name = "modal")
-    protected Boolean modal;
+    @XmlAttribute(name = "action", required = true)
+    protected String action;
+    @XmlAttribute(name = "type", required = true)
+    protected ActionType type;
     @XmlAttribute(name = "icon")
     protected String icon;
-    @XmlAttribute(name = "dynamic")
-    protected Boolean dynamic;
-    @XmlAttribute(name = "viewMode")
-    protected String viewMode;
-    @XmlAttribute(name = "counter")
-    protected String counter;
-    @XmlAttribute(name = "typeOp")
-    protected TypeOperation typeOp;
+    @XmlAttribute(name = "askconfirmation")
+    protected Boolean askconfirmation;
+    @XmlAttribute(name = "operation")
+    protected TypeOperation operation;
     @XmlAttribute(name = "position")
     protected PositionValueType position;
-    @XmlAttribute(name = "badge-color")
-    protected ColorType badgeColor;
-
-    /**
-     * Obtient la valeur de la propriété name.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Définit la valeur de la propriété name.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setName(String value) {
-        this.name = value;
-    }
+    @XmlAttribute(name = "color")
+    protected String color;
 
     /**
      * Obtient la valeur de la propriété code.
@@ -120,31 +84,27 @@ public class Action {
     }
 
     /**
-     * Obtient la valeur de la propriété redirect.
+     * Obtient la valeur de la propriété action.
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link String }
      *     
      */
-    public boolean isRedirect() {
-        if (redirect == null) {
-            return false;
-        } else {
-            return redirect;
-        }
+    public String getAction() {
+        return action;
     }
 
     /**
-     * Définit la valeur de la propriété redirect.
+     * Définit la valeur de la propriété action.
      * 
      * @param value
      *     allowed object is
-     *     {@link Boolean }
+     *     {@link String }
      *     
      */
-    public void setRedirect(Boolean value) {
-        this.redirect = value;
+    public void setAction(String value) {
+        this.action = value;
     }
 
     /**
@@ -152,15 +112,11 @@ public class Action {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ActionType }
      *     
      */
-    public String getType() {
-        if (type == null) {
-            return "";
-        } else {
-            return type;
-        }
+    public ActionType getType() {
+        return type;
     }
 
     /**
@@ -168,39 +124,11 @@ public class Action {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ActionType }
      *     
      */
-    public void setType(String value) {
+    public void setType(ActionType value) {
         this.type = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété modal.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isModal() {
-        if (modal == null) {
-            return false;
-        } else {
-            return modal;
-        }
-    }
-
-    /**
-     * Définit la valeur de la propriété modal.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setModal(Boolean value) {
-        this.modal = value;
     }
 
     /**
@@ -232,115 +160,59 @@ public class Action {
     }
 
     /**
-     * Obtient la valeur de la propriété dynamic.
+     * Obtient la valeur de la propriété askconfirmation.
      * 
      * @return
      *     possible object is
      *     {@link Boolean }
      *     
      */
-    public boolean isDynamic() {
-        if (dynamic == null) {
+    public boolean isAskconfirmation() {
+        if (askconfirmation == null) {
             return false;
         } else {
-            return dynamic;
+            return askconfirmation;
         }
     }
 
     /**
-     * Définit la valeur de la propriété dynamic.
+     * Définit la valeur de la propriété askconfirmation.
      * 
      * @param value
      *     allowed object is
      *     {@link Boolean }
      *     
      */
-    public void setDynamic(Boolean value) {
-        this.dynamic = value;
+    public void setAskconfirmation(Boolean value) {
+        this.askconfirmation = value;
     }
 
     /**
-     * Obtient la valeur de la propriété viewMode.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getViewMode() {
-        if (viewMode == null) {
-            return "list,view";
-        } else {
-            return viewMode;
-        }
-    }
-
-    /**
-     * Définit la valeur de la propriété viewMode.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setViewMode(String value) {
-        this.viewMode = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété counter.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCounter() {
-        if (counter == null) {
-            return "";
-        } else {
-            return counter;
-        }
-    }
-
-    /**
-     * Définit la valeur de la propriété counter.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCounter(String value) {
-        this.counter = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété typeOp.
+     * Obtient la valeur de la propriété operation.
      * 
      * @return
      *     possible object is
      *     {@link TypeOperation }
      *     
      */
-    public TypeOperation getTypeOp() {
-        if (typeOp == null) {
+    public TypeOperation getOperation() {
+        if (operation == null) {
             return TypeOperation.NONE;
         } else {
-            return typeOp;
+            return operation;
         }
     }
 
     /**
-     * Définit la valeur de la propriété typeOp.
+     * Définit la valeur de la propriété operation.
      * 
      * @param value
      *     allowed object is
      *     {@link TypeOperation }
      *     
      */
-    public void setTypeOp(TypeOperation value) {
-        this.typeOp = value;
+    public void setOperation(TypeOperation value) {
+        this.operation = value;
     }
 
     /**
@@ -372,31 +244,31 @@ public class Action {
     }
 
     /**
-     * Obtient la valeur de la propriété badgeColor.
+     * Obtient la valeur de la propriété color.
      * 
      * @return
      *     possible object is
-     *     {@link ColorType }
+     *     {@link String }
      *     
      */
-    public ColorType getBadgeColor() {
-        if (badgeColor == null) {
-            return ColorType.BG_PRIMARY;
+    public String getColor() {
+        if (color == null) {
+            return "";
         } else {
-            return badgeColor;
+            return color;
         }
     }
 
     /**
-     * Définit la valeur de la propriété badgeColor.
+     * Définit la valeur de la propriété color.
      * 
      * @param value
      *     allowed object is
-     *     {@link ColorType }
+     *     {@link String }
      *     
      */
-    public void setBadgeColor(ColorType value) {
-        this.badgeColor = value;
+    public void setColor(String value) {
+        this.color = value;
     }
 
 }

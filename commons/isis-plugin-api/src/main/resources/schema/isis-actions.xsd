@@ -18,17 +18,20 @@
         </sequence>
     </complexType>
     <complexType name="action">
-        <attribute name="name" type="string"  />
-        <attribute name="code" type="string"/>
-        <attribute name="redirect" type="boolean" default="false" />
-        <attribute name="type" type="string" default="" />
-        <attribute name="modal" type="boolean" default="false" />
+        <attribute name="code" type="string"  use="required"/>
+        <attribute name="action" type="string" use="required" />
+        <attribute name="type" type="tns:actionType" use="required" />
         <attribute name="icon" type="string" default="" />
-        <attribute name="dynamic" type="boolean" default="false" />
-        <attribute name="viewMode" type="string" default="list,view" />
-        <attribute name="counter" type="string" default=""/>
-        <attribute name="typeOp"   type="operation:TypeOperation" default="none" />
+        <attribute name="askconfirmation" type="boolean" default="false" />
+        <attribute name="operation"   type="operation:TypeOperation" default="none" />
         <attribute name="position" type="position:positionValueType" default="actions" />
-        <attribute name="badge-color" type="color:colorType" default="bg-primary" />
+        <attribute name="color" type="string" default="" />
     </complexType>
+    <simpleType name="actionType">
+        <restriction base="string">
+            <enumeration value="navigate" />
+            <enumeration value="modal" />
+            <enumeration value="execute"/>
+        </restriction>
+    </simpleType>
 </schema>

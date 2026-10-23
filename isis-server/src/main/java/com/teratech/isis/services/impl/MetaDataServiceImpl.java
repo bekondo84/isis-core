@@ -366,7 +366,10 @@ public class MetaDataServiceImpl implements MetaDataService {
         if (Objects.nonNull(editor.getActions())
           && !CollectionUtils.isEmpty(editor.getActions().getAction())) {
             for (Action action : editor.getActions().getAction()) {
-                editorArea.addAction(buildActionData(action));
+                ActionData actionData = buildActionData(wrapper, action);
+                if (actionData.isValidate()) {
+                    editorArea.addAction(actionData);
+                }
             }
         }
         if (Objects.nonNull(editor.getShutcuts())
@@ -502,8 +505,11 @@ public class MetaDataServiceImpl implements MetaDataService {
             if (Objects.nonNull(fieldType.getActions())
                 && !CollectionUtils.isEmpty(fieldType.getActions().getAction())) {
                     for (Action action : fieldType.getActions().getAction()) {
-                        ActionData actionData = buildActionData(action);
-                        column.addAction(actionData);
+                        ActionData actionData = buildActionData(wrapper, action);
+
+                        if (actionData.isValidate()) {
+                            column.addAction(actionData);
+                        }
                     }
             }
             /*if (principal)*/ {//This is done just for the principal
@@ -532,24 +538,14 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param action
      * @return
      */
-    private static ActionData buildActionData(Action action) {
-        ActionData actionData = new ActionData(action.getName(), action.getCode(), action.getIcon());
-        actionData.setType(action.getType());
-        if (Objects.nonNull(action.getBadgeColor())) {
-            actionData.setBadgeColor(action.getBadgeColor().value());
-        }
-
-        actionData.setCounter(action.getCounter());
-        actionData.setDynamic(action.isDynamic());
-        actionData.setModal(action.isModal());
-        actionData.setRedirect(action.isRedirect());
-
-        if (Objects.nonNull(action.getTypeOp())) {
-            actionData.setTypeOp(action.getTypeOp().value());
-        }
-        if (Objects.nonNull(action.getPosition())) {
-            actionData.setPosition(action.getPosition().value());
-        }
+    private  ActionData buildActionData(PluginWrapper wrapper, Action action) {
+        ActionData actionData = new ActionData(i18NService.getMessage(wrapper, action.getCode()) , action.getCode(), action.getIcon());
+        actionData.setType(action.getType().value());
+        actionData.setColor(action.getColor());
+        actionData.setOpeation(action.getOperation().value());
+        actionData.setPosition(action.getPosition().value());
+        actionData.setAction(action.getAction());
+        actionData.setAskconfirmation(action.isAskconfirmation());
         return actionData;
     }
 
@@ -605,7 +601,10 @@ public class MetaDataServiceImpl implements MetaDataService {
         if (Objects.nonNull(template.getListView().getActions())
               && !CollectionUtils.isEmpty(template.getListView().getActions().getAction())) {
             for (Action action : template.getListView().getActions().getAction()) {
-                listView.addAction(buildActionData(action));
+                ActionData actionData = buildActionData(wrapper, action);
+                if (actionData.isValidate()) {
+                    listView.addAction(actionData);
+                }
             }
         }
 
@@ -750,7 +749,9 @@ public class MetaDataServiceImpl implements MetaDataService {
         while (!Object.class.equals(currentClass)) {
             Field[] declaredFields = currentClass.getDeclaredFields();
             for (Field field : declaredFields) {
-                fields.add(field);
+                if (!Modifier.isStatic(field.getModifiers())) {
+                    fields.add(field);
+                }
             }
             currentClass = currentClass.getSuperclass();
         }

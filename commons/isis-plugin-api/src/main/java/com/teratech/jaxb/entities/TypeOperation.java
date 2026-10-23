@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.22 à 04:24:21 PM CEST 
+// Généré le : 2026.10.23 à 09:28:43 AM CEST 
 //
 
 
@@ -22,9 +22,12 @@ import jakarta.xml.bind.annotation.XmlType;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
  *     &lt;enumeration value="create"/&gt;
  *     &lt;enumeration value="edit"/&gt;
+ *     &lt;enumeration value="view"/&gt;
  *     &lt;enumeration value="delete"/&gt;
  *     &lt;enumeration value="print"/&gt;
  *     &lt;enumeration value="import"/&gt;
+ *     &lt;enumeration value="export"/&gt;
+ *     &lt;enumeration value="validate"/&gt;
  *     &lt;enumeration value="none"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
@@ -39,12 +42,18 @@ public enum TypeOperation {
     CREATE("create"),
     @XmlEnumValue("edit")
     EDIT("edit"),
+    @XmlEnumValue("view")
+    VIEW("view"),
     @XmlEnumValue("delete")
     DELETE("delete"),
     @XmlEnumValue("print")
     PRINT("print"),
     @XmlEnumValue("import")
     IMPORT("import"),
+    @XmlEnumValue("export")
+    EXPORT("export"),
+    @XmlEnumValue("validate")
+    VALIDATE("validate"),
     @XmlEnumValue("none")
     NONE("none");
     private final String value;

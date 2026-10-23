@@ -3,7 +3,8 @@
          xmlns:ls="http://www.isis.cm/config/list-view"
          xmlns:s="http://www.isis.cm/config/isis-search"
          xmlns:e="http://www.isis.cm/config/editor-area"
-		 xmlns:sh="http://www.isis.cm/config/isis-shutcut">
+		 xmlns:sh="http://www.isis.cm/config/isis-shutcut"
+         xmlns:ac="http://www.isis.cm/config/isis-actions">
     <ls:list-view>
         <ls:list>
             <ls:column qualifier="logo" search="false"  widget="media"/>
@@ -19,6 +20,10 @@
             <ls:column qualifier="fax" search="true" show="false"/>
             <ls:column qualifier="email" search="true" show="false"/>
         </ls:list>
+        <ac:actions>
+            <ac:action code="business.activate" action="businessActivator" type="execute" askconfirmation="true" operation="none" position="actions"/>
+            <ac:action code="business.activate2" action="businessActivator" type="execute" askconfirmation="true" operation="none" position="workflow"/>
+        </ac:actions>
     </ls:list-view>
     <e:editor-area searchKey="code" createOnField="false" >
         <e:component>
@@ -53,6 +58,10 @@
                 </e:form>
             </e:common>
         </e:component>
+        <ac:actions>
+            <ac:action code="business.activate" action="businessActivator" type="execute" askconfirmation="true" operation="none" position="actions"/>
+            <ac:action code="business.activate2" action="businessActivator" type="execute" askconfirmation="true" operation="none" position="workflow"/>
+        </ac:actions>
         <sh:shutcuts>
             <sh:shutcut viewMode="list,view"  type="BusinessContact" code="business.contacts">
                 <sh:filters>

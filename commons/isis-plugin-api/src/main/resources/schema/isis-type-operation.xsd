@@ -10,9 +10,12 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="create" />
             <xs:enumeration value="edit" />
+            <xs:enumeration value="view" />
             <xs:enumeration value="delete" />
             <xs:enumeration value="print" />
             <xs:enumeration value="import" />
+            <xs:enumeration value="export" />
+            <xs:enumeration value="validate" />
             <xs:enumeration value="none" />
         </xs:restriction>
      </xs:simpleType>

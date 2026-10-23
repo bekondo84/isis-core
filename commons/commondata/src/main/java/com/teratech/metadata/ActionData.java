@@ -1,31 +1,32 @@
 package com.teratech.metadata;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
 
 public class ActionData implements Serializable {
     private String name ;
     private String code ;
-    private Boolean redirect;
     private String type;
-    private boolean modal;
     private String icon ;
-    private Boolean dynamic ;
     private String position ;
-    private String viewMode;
-    protected String typeOp ;
-    protected String badgeColor;
-    protected String counter;
+    private String opeation ;
+    private String color;
+    private String action;
+    private boolean askconfirmation;
+
 
 
     public ActionData() {
-        typeOp = "none";
+
+
     }
 
     public ActionData(String name, String code, String icon) {
         this.name = name;
         this.code = code;
         this.icon = icon;
-        typeOp = "none";
     }
 
     public String getName() {
@@ -43,24 +44,6 @@ public class ActionData implements Serializable {
 
     public ActionData setCode(String code) {
         this.code = code;
-        return this;
-    }
-
-    public Boolean getRedirect() {
-        return redirect;
-    }
-
-    public ActionData setRedirect(Boolean redirect) {
-        this.redirect = redirect;
-        return this;
-    }
-
-    public Boolean getDynamic() {
-        return dynamic;
-    }
-
-    public ActionData setDynamic(Boolean dynamic) {
-        this.dynamic = dynamic;
         return this;
     }
 
@@ -82,15 +65,6 @@ public class ActionData implements Serializable {
         return this;
     }
 
-    public boolean isModal() {
-        return modal;
-    }
-
-    public ActionData setModal(boolean modal) {
-        this.modal = modal;
-        return this;
-    }
-
     public String getIcon() {
         return icon;
     }
@@ -100,39 +74,44 @@ public class ActionData implements Serializable {
         return  this;
     }
 
-    public String getViewMode() {
-        return viewMode;
+    public String getOpeation() {
+        return opeation;
     }
 
-    public ActionData setViewMode(String viewMode) {
-        this.viewMode = viewMode;
-        return this;
+    public void setOpeation(String opeation) {
+        this.opeation = opeation;
     }
 
-    public String getTypeOp() {
-        return typeOp;
+    public String getColor() {
+        return color;
     }
 
-    public ActionData setTypeOp(String typeOp) {
-        this.typeOp = typeOp;
-        return this ;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getBadgeColor() {
-        return badgeColor;
+    public String getAction() {
+        return action;
     }
 
-    public ActionData setBadgeColor(String badgeColor) {
-        this.badgeColor = badgeColor;
-        return this;
+    public void setAction(String action) {
+        this.action = action;
     }
 
-    public String getCounter() {
-        return counter;
+    public boolean isAskconfirmation() {
+        return askconfirmation;
     }
 
-    public ActionData setCounter(String counter) {
-        this.counter = counter;
-        return this;
+    public void setAskconfirmation(boolean askconfirmation) {
+        this.askconfirmation = askconfirmation;
+    }
+
+    @JsonIgnore
+    public boolean isValidate() {
+       return StringUtils.isNotBlank(code)
+               && StringUtils.isNotBlank(action)
+               && StringUtils.isNotBlank(type)
+               && StringUtils.isNotBlank(opeation)
+               && StringUtils.isNotBlank(position);
     }
 }
