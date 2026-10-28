@@ -17,6 +17,7 @@
     <xs:simpleType name="viewModeType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="list"/>
+            <xs:enumeration value="dashboard"/>
             <xs:enumeration value="view"/>
             <xs:enumeration value="kaban"/>
             <xs:enumeration value="list,view"/>

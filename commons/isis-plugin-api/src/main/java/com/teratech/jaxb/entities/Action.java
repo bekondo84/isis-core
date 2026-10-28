@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.23 à 09:28:43 AM CEST 
+// Généré le : 2026.10.26 à 12:04:35 PM CET 
 //
 
 
@@ -25,6 +25,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;attribute name="code" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="method" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="type" use="required" type="{http://www.isis.cm/config/isis-actions}actionType" /&gt;
  *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
  *       &lt;attribute name="askconfirmation" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
@@ -46,6 +47,8 @@ public class Action {
     protected String code;
     @XmlAttribute(name = "action", required = true)
     protected String action;
+    @XmlAttribute(name = "method", required = true)
+    protected String method;
     @XmlAttribute(name = "type", required = true)
     protected ActionType type;
     @XmlAttribute(name = "icon")
@@ -105,6 +108,30 @@ public class Action {
      */
     public void setAction(String value) {
         this.action = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété method.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMethod() {
+        return method;
+    }
+
+    /**
+     * Définit la valeur de la propriété method.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMethod(String value) {
+        this.method = value;
     }
 
     /**

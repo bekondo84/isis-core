@@ -46,13 +46,17 @@ public class ActionsController {
      */
     @CrossOrigin("*")
       @GetMapping("/navigation/meta/{name}")
-      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws IllegalAccessException, JAXBException, ClassNotFoundException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws ApplicationException {
 
-              final MenuItemModel menuItem = (MenuItemModel) flexibleSearch.find(new MenuItemModel(name));
+            try {
+                final MenuItemModel menuItem = (MenuItemModel) flexibleSearch.find(new MenuItemModel(name));
 
-              if (Objects.isNull(menuItem))
-                  throw new IllegalArgumentException(String.format("No Navigation node found with name %s", name));
-              return  ResponseEntity.ok(metaDataService.buildMetaDataFrom(menuItem));
+                if (Objects.isNull(menuItem))
+                    throw new IllegalArgumentException(String.format("No Navigation node found with name %s", name));
+                return ResponseEntity.ok(metaDataService.buildMetaDataFrom(menuItem));
+            }catch (Exception e) {
+                throw new ApplicationException("500", e.getMessage(), e);
+            }
       }
 
 

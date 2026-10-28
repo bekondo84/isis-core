@@ -83,4 +83,8 @@ public class ApplicationException extends Exception {
         super(message, cause, enableSuppression, writableStackTrace);
         this.code = code;
     }
+
+    public String getCode() {
+        return code;
+    }
 }

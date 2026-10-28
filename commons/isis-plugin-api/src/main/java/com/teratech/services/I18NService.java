@@ -12,6 +12,10 @@ public interface I18NService {
 
     static final Logger LOG = LoggerFactory.getLogger(I18NService.class);
 
+    default String getMessage (String key) {
+        return getMessage((PluginWrapper) null, key);
+    }
+
     default String getMessage (String pluginId, String key) {
         PluginWrapper pluginWrapper = null ;
         if (!StringUtils.isBlank(pluginId)) {

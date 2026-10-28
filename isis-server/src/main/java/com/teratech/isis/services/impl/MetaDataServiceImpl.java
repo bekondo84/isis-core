@@ -1,5 +1,8 @@
 package com.teratech.isis.services.impl;
 
+import com.teratech.annotations.File;
+import com.teratech.annotations.Image;
+import com.teratech.annotations.Media;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.model.settings.SettingsModel;
 import com.teratech.utils.ReflectionUtils;
@@ -545,6 +548,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         actionData.setOpeation(action.getOperation().value());
         actionData.setPosition(action.getPosition().value());
         actionData.setAction(action.getAction());
+        actionData.setMethod(action.getMethod());
         actionData.setAskconfirmation(action.isAskconfirmation());
         return actionData;
     }
@@ -726,15 +730,22 @@ public class MetaDataServiceImpl implements MetaDataService {
         if (Arrays.asList(int.class, short.class, long.class, double.class, float.class, double.class, Long.class, Integer.class
         , Short.class, BigDecimal.class, Float.class, Double.class, BigInteger.class).contains(field.getType()))
             column.setWidget("number");
-        else if (field.getType().isAssignableFrom(String.class))
-            column.setWidget("text");
-        else if (field.getType().isAssignableFrom(LocalDate.class))
+       else if (field.getType().isAssignableFrom(LocalDate.class))
             column.setWidget("date");
         else if (field.getType().isAssignableFrom(LocalDateTime.class))
             column.setWidget("datetime-local");
         else if (field.getType().isAssignableFrom(Boolean.class)
                 || field.getType().equals(boolean.class))
             column.setWidget("switch");
+        else if (field.isAnnotationPresent(Media.class))
+            column.setWidget("media");
+        else if (field.isAnnotationPresent(Image.class))
+            column.setWidget("image");
+        else if (field.isAnnotationPresent(File.class))
+            column.setWidget("file");
+        else if (field.getType().isAssignableFrom(String.class))
+            column.setWidget("text");
+
     }
 
 

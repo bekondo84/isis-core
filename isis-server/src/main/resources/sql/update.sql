@@ -114,3 +114,5 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('PageTemplate', 'com.teratech.model.cms.PageTemplateModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Settings', 'com.teratech.model.settings.SettingsModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('Media', 'com.teratech.model.media.MediaModel', true, '', 'backoffice', '1.0.0', now());

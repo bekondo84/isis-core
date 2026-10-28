@@ -14,6 +14,7 @@ public class ActionData implements Serializable {
     private String opeation ;
     private String color;
     private String action;
+    private String method;
     private boolean askconfirmation;
 
 
@@ -106,10 +107,19 @@ public class ActionData implements Serializable {
         this.askconfirmation = askconfirmation;
     }
 
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
     @JsonIgnore
     public boolean isValidate() {
        return StringUtils.isNotBlank(code)
                && StringUtils.isNotBlank(action)
+               && StringUtils.isNotBlank(method)
                && StringUtils.isNotBlank(type)
                && StringUtils.isNotBlank(opeation)
                && StringUtils.isNotBlank(position);

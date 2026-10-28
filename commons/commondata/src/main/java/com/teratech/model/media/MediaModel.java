@@ -1,5 +1,6 @@
 package com.teratech.model.media;
 
+import com.teratech.annotations.Image;
 import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
@@ -12,6 +13,7 @@ public class MediaModel extends AbstractItem implements Serializable {
 
     @Id
     private String id ;
+    @Image
     private String url ;
     private String format;
     private boolean confidential = false;
