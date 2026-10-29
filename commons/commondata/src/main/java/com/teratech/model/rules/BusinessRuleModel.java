@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-//@Entity
-//@Table(name = "bus_rule")
+@Entity
+@Table(name = "adm_business_rule")
 public class BusinessRuleModel extends AbstractItem {
 
     @Id
     private String code;
     private String description;
+    @Column(name = "rulegroup")
     private String group;
     @Lob
     private String rule;

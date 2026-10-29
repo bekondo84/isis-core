@@ -34,6 +34,7 @@ import java.util.List;
  * 
  * 
  */
+@XmlRootElement(name = "explorer-tree", namespace = "http://www.isis.cm/config/explorer-tree")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "explorer-tree", namespace = "http://www.isis.cm/config/explorer-tree", propOrder = {
     "navigationNode"

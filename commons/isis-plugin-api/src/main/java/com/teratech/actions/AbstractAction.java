@@ -83,7 +83,7 @@ public abstract class AbstractAction implements ActionService{
           //persistenceManager.flush();
           return contextData;
       } catch (Exception ex) {
-          throw new ApplicationException("500", ex);
+          throw new ApplicationException("500", ex.getMessage(), ex);
       }
     }
 
@@ -101,7 +101,8 @@ public abstract class AbstractAction implements ActionService{
 
             return context;
         } catch (Exception ex) {
-            throw new ApplicationException("500", ex);
+            ex.printStackTrace();
+            throw new ApplicationException("500", ex.getMessage(), ex);
         }
 
     }
@@ -134,7 +135,7 @@ public abstract class AbstractAction implements ActionService{
                return context;
            });
        } catch (Exception e) {
-           throw new ApplicationException("500", e);
+           throw new ApplicationException("500", e.getMessage(), e);
        }
      }
 
@@ -191,7 +192,7 @@ public abstract class AbstractAction implements ActionService{
             //Return the context
             return context;
         } catch (Exception ex) {
-            throw new ApplicationException("500", ex);
+            throw new ApplicationException("500", ex.getMessage(), ex);
         }
     }
 
@@ -237,7 +238,7 @@ public abstract class AbstractAction implements ActionService{
              //Return the context
              return context;
          } catch (Exception ex) {
-             throw new ApplicationException("500", ex);
+             throw new ApplicationException("500", ex.getMessage(), ex);
          }
 
     }
@@ -260,7 +261,7 @@ public abstract class AbstractAction implements ActionService{
            context.put(DATA, flexibleSearch.find((AbstractItem) entity));
            return context;
        } catch (Exception ex) {
-          throw new ApplicationException("500", ex);
+          throw new ApplicationException("500", ex.getMessage(), ex);
        }
 
     }
@@ -298,7 +299,7 @@ public abstract class AbstractAction implements ActionService{
      * @param context
      * @return
      */
-   @ActionMethod(value = "delete", scope = ActionType.DELETE)
+   @ActionMethod(value = "delete", scope = ActionType.POST)
     public ActionContextData delete (final ActionContextData context) throws ApplicationException {
 
        try {
@@ -316,7 +317,7 @@ public abstract class AbstractAction implements ActionService{
                return context;
            });
        } catch (RuntimeException ex) {
-           throw  new ApplicationException("500", ex);
+           throw  new ApplicationException("500", ex.getMessage(), ex);
        }
    }
 

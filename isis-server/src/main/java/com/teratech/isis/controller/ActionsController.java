@@ -14,6 +14,8 @@ import com.teratech.services.MetaDataService;
 import com.teratech.utils.ApplicationConstans;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,7 @@ import java.util.Objects;
 @RestController
 @RequestMapping(ApplicationConstans.API.API_PREFIX+"/actions")
 public class ActionsController {
+    public final static Logger LOGGER = LoggerFactory.getLogger(ActionsController.class.getName());
 
     @Autowired
     private FlexibleSearch flexibleSearch;
@@ -153,7 +156,7 @@ public class ActionsController {
             return ResponseEntity.ok(actionExtension.invoke(context, action, method, type));
         } catch (Exception e) {
             e.printStackTrace();
-            throw new ApplicationException("500", e);
+            throw new ApplicationException("500", e.getMessage(), e);
         }
     }
 

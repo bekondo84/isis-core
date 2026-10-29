@@ -572,8 +572,8 @@ public class MetaDataServiceImpl implements MetaDataService {
             return; //No ListView for this metadata
         }
         //Build the list of template column
-        columnsTypeMap = template.getListView().getList().getColumn().stream().collect(Collectors.toMap(ColumnType::getQualifier,
-                columnType -> columnType));
+        //columnsTypeMap = template.getListView().getList().getColumn().stream().collect(Collectors.toMap(ColumnType::getQualifier,
+          //      columnType -> columnType));
 
         if (Objects.nonNull(template.getListView().getSearch())
             && !CollectionUtils.isEmpty(template.getListView().getSearch().getField())) {
@@ -581,7 +581,15 @@ public class MetaDataServiceImpl implements MetaDataService {
         }
 
         final Set<String> columnsTypeNameKeys = columnsTypeMap.keySet();
-        managedFields.addAll(fields.stream().filter(field -> columnsTypeNameKeys.contains(field.getName())).collect(Collectors.toUnmodifiableList()));
+
+        for (ColumnType columnType : template.getListView().getList().getColumn()) {
+            if (!columnType.isShow())
+                continue;
+            managedFields.addAll(fields.stream()
+                    .filter(field -> field.getName().equalsIgnoreCase(columnType.getQualifier()))
+                    .collect(Collectors.toUnmodifiableList()));
+        }
+
         ListViewData listView = meta.getListView();
         //Set ListEditor Title
         meta.setListViewTitle(i18NService.getMessage(wrapper, meta.getTypeCode().concat(".list.title")));

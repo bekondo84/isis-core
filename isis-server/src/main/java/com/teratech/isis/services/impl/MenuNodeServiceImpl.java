@@ -89,6 +89,12 @@ public class MenuNodeServiceImpl implements MenuNodeService {
        buildMenus (explorer, plugin, wrapper);
     }
 
+    @Override
+    public void buildMenus(PluginModel plugin) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, JAXBException, ModelServiceException {
+          final PluginWrapper wrapper = pluginManager.getPlugin(plugin.getId());
+          buildMenus(wrapper);
+    }
+
     /**
      *
      * @param explorer

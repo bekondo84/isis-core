@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+         xmlns:sh="http://www.isis.cm/config/isis-shutcut"
+         xmlns:ac="http://www.isis.cm/config/isis-actions">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="id" search="true" />
+            <ls:column qualifier="version" search="true" />
+            <ls:column qualifier="category" search="true" />
+            <ls:column qualifier="autoInstall" search="false" />
+            <ls:column qualifier="install"  search="false" />
+            <ls:column qualifier="instaldate"  search="false" widget="datetime-local"/>
+            <ls:column qualifier="icon" search="false"  show="false"/>
+            <ls:column qualifier="color" search="false" show="false"/>
+            <ls:column qualifier="sequence" search="false" show="false" />
+            <ls:column qualifier="summary" search="true" />
+            <ls:column qualifier="email" search="true" />
+            <ls:column qualifier="website" search="true" />
+            <ls:column qualifier="phone" search="true" />
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="id" createOnField="false" create="false" update="false" delete="false">
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="plugin.header" columns="2" position="100">
+                        <e:field qualifier="id" />
+                        <e:field qualifier="version" />
+                        <e:field qualifier="install" widget="switch" />
+                        <e:field qualifier="instaldate" widget="datetime-local" />
+                        <e:field qualifier="summary" />
+                    </e:section>
+                    <e:section name="plugin.general.infos" columns="2" position="99">
+                        <e:field qualifier="autoInstall" widget="switch" />
+                        <e:field qualifier="sequence" widget="number" />
+                        <e:field qualifier="icon" />
+                        <e:field qualifier="color" />
+                        <e:field qualifier="email"/>
+                        <e:field qualifier="website" />
+                        <e:field qualifier="phone" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+        <ac:actions>
+            <ac:action code="plugin.reload.action" action="pluginAction" method="reload" type="execute" icon="RefreshCcw" position="workflow"/>
+        </ac:actions>
+    </e:editor-area>
+</context>

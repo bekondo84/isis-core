@@ -1,5 +1,6 @@
 package com.teratech.model.security;
 
+import com.teratech.annotations.Media;
 import com.teratech.model.generic.AbstractItem;
 import com.teratech.model.media.MediaModel;
 import jakarta.persistence.*;
@@ -18,6 +19,7 @@ public class BusinessModel extends AbstractItem {
     private String email;
     @Column(nullable = false)
     private String nui;
+    @Media
     @ManyToOne
     @JoinColumn(name = "logo", referencedColumnName = "id")
     private MediaModel logo;

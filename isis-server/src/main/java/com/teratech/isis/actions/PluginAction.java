@@ -9,25 +9,36 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.metadata.ActionContextData;
 import com.teratech.metadata.ActionData;
+import com.teratech.model.PluginModel;
 import com.teratech.model.cms.ActionType;
+import com.teratech.services.MenuNodeService;
 import com.teratech.services.PluginService;
 import com.teratech.services.UserService;
 import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.support.TransactionTemplate;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 import static com.teratech.utils.ApplicationConstans.Actions.*;
 
 @Action
 public class PluginAction extends AbstractAction {
+    private static final Logger LOG = LoggerFactory.getLogger(PluginAction.class.getName());
 
     private final PluginService pluginService ;
     private final UserService userService;
+    private final MenuNodeService menuNodeService;
+    private final TransactionTemplate transactionTemplate;
+
+
     /**
      * @param pluginManager
      * @param flexibleSearch
@@ -35,10 +46,12 @@ public class PluginAction extends AbstractAction {
      * @param transactionTemplate
      */
     @Autowired
-    protected PluginAction(PluginManager pluginManager, FlexibleSearch flexibleSearch, PersistenceManager persistenceManager, TransactionTemplate transactionTemplate, PluginService pluginService, UserService userService) {
+    protected PluginAction(PluginManager pluginManager, FlexibleSearch flexibleSearch, PersistenceManager persistenceManager, TransactionTemplate transactionTemplate, PluginService pluginService, UserService userService, MenuNodeService menuNodeService, TransactionTemplate transactionTemplate1) {
         super(pluginManager, flexibleSearch, persistenceManager, transactionTemplate);
         this.pluginService = pluginService;
         this.userService = userService;
+        this.menuNodeService = menuNodeService;
+        this.transactionTemplate = transactionTemplate1;
     }
 
     /**
@@ -96,6 +109,32 @@ public class PluginAction extends AbstractAction {
                  InstantiationException | InvocationTargetException | NoSuchMethodException e) {
             throw new ModelServiceException(e);
         }
+    }
+
+    @ActionMethod(value = "reload", scope = ActionType.POST)
+    public ActionContextData reload (ActionContextData context) throws Exception {
+        final ObjectMapper mapper = new ObjectMapper();
+        Object data = context.get(DATA);
+
+        if (Objects.isNull(data))
+            throw new IllegalArgumentException("No data provided");
+
+        PluginModel plugin = mapper.convertValue(data, PluginModel.class);
+        transactionTemplate.setReadOnly(false);
+
+        try {
+            return transactionTemplate.execute(status -> {
+                try {
+                    menuNodeService.buildMenus(plugin);
+                    return context;
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (RuntimeException e) {
+            throw new Exception(e);
+        }
+
     }
 
     /**

@@ -37,7 +37,7 @@ public class CronJobModel extends AbstractItem {
     @ManyToOne
     @JoinColumn(name = "result", referencedColumnName = "code")
     private CronJobResultModel result;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumns({
             @JoinColumn(name = "plugin_id", referencedColumnName = "id"),
             @JoinColumn(name = "plugin_version", referencedColumnName = "version")

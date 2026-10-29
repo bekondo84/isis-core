@@ -32,6 +32,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, getHttpStatus(e));
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleException(Exception e, WebRequest request) {
+        ErrorResponse error = new ErrorResponse().setDate(LocalDateTime.now())
+                .setMessage(e.getMessage())
+                .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                .setErroCode(ApplicationException.class.getName());
+
+        //LOG.info(e.get);
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private static HttpStatus getHttpStatus(ApplicationException e) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         if (e.getCode().equals("404")) {

@@ -1,6 +1,7 @@
 package com.teratech.services;
 
 import com.teratech.exceptions.ModelServiceException;
+import com.teratech.model.PluginModel;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginWrapper;
 
@@ -22,4 +23,10 @@ public interface MenuNodeService {
       * @param wrapper
       */
      void cleanPluginMenus (PluginWrapper wrapper) ;
+
+     /**
+      *
+      * @param plugin
+      */
+     void buildMenus(PluginModel plugin) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, JAXBException, ModelServiceException ;
 }
