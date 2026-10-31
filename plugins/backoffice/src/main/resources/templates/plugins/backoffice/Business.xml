@@ -38,7 +38,10 @@
                             <e:field qualifier="nui" />
                         </e:section>
                     </e:section>
-                    <e:section name="hac.commons" columns="2" position="99">
+                    <e:section name="hac.commons"
+                               columns="2"
+                               position="99"
+                               visibleWhen="[{field:'code', criteria: 'neq', value:null}]">
                         <e:field qualifier="name" widget="text" />
                         <e:field qualifier="slogan" widget="text" />
                     </e:section>

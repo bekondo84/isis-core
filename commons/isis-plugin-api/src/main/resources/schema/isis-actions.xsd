@@ -27,6 +27,8 @@
         <attribute name="operation"   type="operation:TypeOperation" default="none" />
         <attribute name="position" type="position:positionValueType" default="actions" />
         <attribute name="color" type="string" default="" />
+        <!-- The code of the MetaType Associate to action, this requiered from actions of types navigate or modal-->
+        <attribute name="typeCode" type="string" />
     </complexType>
     <simpleType name="actionType">
         <restriction base="string">

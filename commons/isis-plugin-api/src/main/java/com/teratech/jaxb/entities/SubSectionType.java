@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.26 à 12:04:35 PM CET 
+// Généré le : 2026.10.30 à 01:41:32 PM CET 
 //
 
 
@@ -34,6 +34,7 @@ import java.util.List;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}unsignedInt" default="100" /&gt;
  *       &lt;attribute name="columns" type="{http://www.w3.org/2001/XMLSchema}integer" default="2" /&gt;
  *       &lt;attribute name="header" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
+ *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -62,6 +63,8 @@ public class SubSectionType {
     protected BigInteger columns;
     @XmlAttribute(name = "header")
     protected Boolean header;
+    @XmlAttribute(name = "visibleWhen")
+    protected String visibleWhen;
 
     /**
      * Gets the value of the field property.
@@ -222,6 +225,30 @@ public class SubSectionType {
      */
     public void setHeader(Boolean value) {
         this.header = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété visibleWhen.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    /**
+     * Définit la valeur de la propriété visibleWhen.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVisibleWhen(String value) {
+        this.visibleWhen = value;
     }
 
 }

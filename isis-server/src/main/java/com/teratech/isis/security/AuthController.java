@@ -90,7 +90,8 @@ public class AuthController {
                 .setToken_type("bearer")
                 .setUser(user.getCode())
                 .setExpires_in(jwtService.extractExpireDate(token).getTime())
-                .setLang(Objects.nonNull(user.getLanguage()) ? user.getLanguage().getCode() : "fr");
+                .setLang(Objects.nonNull(user.getLanguage()) ? user.getLanguage().getCode() : "fr")
+                .setUser_name(user.getName());
 
         return ResponseEntity.ok(response);
     }

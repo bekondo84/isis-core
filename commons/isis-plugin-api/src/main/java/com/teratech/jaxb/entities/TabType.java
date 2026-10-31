@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.26 à 12:04:35 PM CET 
+// Généré le : 2026.10.30 à 01:41:32 PM CET 
 //
 
 
@@ -25,6 +25,7 @@ import jakarta.xml.bind.annotation.*;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}unsignedInt" default="100" /&gt;
+ *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -45,6 +46,8 @@ public class TabType {
     @XmlAttribute(name = "position")
     @XmlSchemaType(name = "unsignedInt")
     protected Long position;
+    @XmlAttribute(name = "visibleWhen")
+    protected String visibleWhen;
 
     /**
      * Obtient la valeur de la propriété form.
@@ -120,6 +123,30 @@ public class TabType {
      */
     public void setPosition(Long value) {
         this.position = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété visibleWhen.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    /**
+     * Définit la valeur de la propriété visibleWhen.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVisibleWhen(String value) {
+        this.visibleWhen = value;
     }
 
 }

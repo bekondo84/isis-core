@@ -54,6 +54,8 @@
         </xs:sequence>
         <xs:attribute name="name" type="xs:string"/>
         <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <xs:attribute name="visibleWhen" type="xs:string" />
     </xs:complexType>
 
     <xs:complexType name="subSectionType">
@@ -67,6 +69,8 @@
         <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
         <xs:attribute name="columns"  type="xs:integer" default="2"/>
         <xs:attribute name="header" type="xs:boolean" default="false"/>
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <xs:attribute name="visibleWhen" type="xs:string" />
     </xs:complexType>
     <!--Section on the Editor Area -->
     <xs:complexType name="sectionType">
@@ -99,9 +103,10 @@
         <xs:attribute name="updatable" type="xs:boolean" default="true" />
         <xs:attribute name="deletable" type="xs:boolean" default="true" />
         <xs:attribute name="search"  type="xs:boolean" default="false" />
-        <xs:attribute name="observable" type="xs:boolean" default="false" />
-        <xs:attribute name="observe" type="xs:string" default="" />
-        <xs:attribute name="handler"  type="xs:string" default="" />
+        <!--Set of field this field depends on  [{field: "01", handler: "handler01"},{field:"field02", handler: "handler02"}] -->
+        <xs:attribute name="dependsOn" type="xs:string"  />
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <xs:attribute name="visibleWhen" type="xs:string" />
     </xs:complexType>
     <xs:complexType name="filterType">
         <xs:attribute name="source" type="xs:string" />

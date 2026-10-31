@@ -8,6 +8,7 @@ public class AuthResponse implements Serializable {
     private Long expires_in;
     private String lang;
     private String user;
+    private String user_name;
 
     public String getAccess_token() {
         return access_token;
@@ -42,6 +43,15 @@ public class AuthResponse implements Serializable {
 
     public AuthResponse setLang(String lang) {
         this.lang = lang;
+        return this;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public AuthResponse setUser_name(String user_name) {
+        this.user_name = user_name;
         return this;
     }
 

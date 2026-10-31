@@ -31,17 +31,17 @@ public class MetaColumn implements Serializable {
     protected String widget ;
     //True is fied is unique
     protected Boolean unique = Boolean.FALSE;
+    protected Boolean primaryKey = Boolean.FALSE;
     protected Boolean email = Boolean.FALSE;
     protected int max ;
     protected  int min ;
-     protected Boolean observable ;
-    protected String observe ;
-    protected String handler;
     protected MetaData meta ;
     protected List<ActionData> actions ;
     protected List<EnumTypeData> values ;
     protected PatternData pattern;
     protected List<FilterData> filters ;
+    protected String visibleWhen;
+    protected String dependsOn;
 
     /**
      * Sequence give the position priority the field with lower value appear first
@@ -51,7 +51,6 @@ public class MetaColumn implements Serializable {
 
 
     public MetaColumn() {
-        observable = false ;
         this.actions = new ArrayList<>();
         filters = new ArrayList<>();
         this.values = new ArrayList<>();
@@ -65,7 +64,6 @@ public class MetaColumn implements Serializable {
     public MetaColumn(String type, String fieldName) {
         this.type = type;
         this.fieldName = fieldName;
-        observable = false ;
         this.actions = new ArrayList<>();
         this.values = new ArrayList<>();
         this.filters = new ArrayList<>();
@@ -207,30 +205,6 @@ public class MetaColumn implements Serializable {
         this.pattern = pattern;
     }
 
-    public Boolean getObservable() {
-        return observable;
-    }
-
-    public void setObservable(Boolean observable) {
-        this.observable = observable;
-    }
-
-    public String getObserve() {
-        return observe;
-    }
-
-    public void setObserve(String observe) {
-        this.observe = observe;
-    }
-
-    public String getHandler() {
-        return handler;
-    }
-
-    public void setHandler(String handler) {
-        this.handler = handler;
-    }
-
     public Boolean getDeletable() {
         return deletable;
     }
@@ -286,6 +260,29 @@ public class MetaColumn implements Serializable {
         return Objects.equals(type, that.type) && Objects.equals(fieldName, that.fieldName);
     }
 
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    public void setVisibleWhen(String visibleWhen) {
+        this.visibleWhen = visibleWhen;
+    }
+
+    public String getDependsOn() {
+        return dependsOn;
+    }
+
+    public void setDependsOn(String dependsOn) {
+        this.dependsOn = dependsOn;
+    }
+
+    public Boolean getPrimaryKey() {
+        return primaryKey;
+    }
+
+    public void setPrimaryKey(Boolean primaryKey) {
+        this.primaryKey = primaryKey;
+    }
 
     @Override
     public int hashCode() {

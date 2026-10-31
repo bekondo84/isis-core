@@ -1,5 +1,6 @@
 package com.teratech.model.media;
 
+import com.teratech.annotations.File;
 import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,13 +12,16 @@ import jakarta.persistence.Table;
 public class FileModel extends AbstractItem {
     @Id
     private String id;
-    @Column(name = "file_name")
+    @Column(name = "file_name", nullable = false)
     private String name;
-    @Column(name = "extension")
+    @Column(name = "extension", nullable = false)
     private String type;
     private boolean confidential = false;
     private String description;
+    @Column(name = "file_size")
     private int size;
+    @File
+    @Column(nullable = false)
     private String url;
 
 

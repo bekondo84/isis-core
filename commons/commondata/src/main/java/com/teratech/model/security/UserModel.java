@@ -1,5 +1,6 @@
 package com.teratech.model.security;
 
+import com.teratech.annotations.Media;
 import com.teratech.model.generic.AbstractBusinessEntity;
 import com.teratech.model.i18n.LocalModel;
 import com.teratech.model.media.MediaModel;
@@ -26,6 +27,7 @@ public class UserModel extends AbstractBusinessEntity {
     private String password;
     @ManyToOne
     @JoinColumn(name = "image", referencedColumnName = "id")
+    @Media
     private MediaModel image ;
     private boolean active = true;
     private boolean locked = false;

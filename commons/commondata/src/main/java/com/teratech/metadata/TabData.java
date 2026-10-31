@@ -6,6 +6,8 @@ public class TabData implements Serializable {
     private String name ;
     private String title ;
     private FormData form ;
+    private String visibleWhen;
+
 
     public TabData() {
     }

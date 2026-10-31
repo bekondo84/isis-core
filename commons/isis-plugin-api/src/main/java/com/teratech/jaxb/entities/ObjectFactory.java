@@ -2,12 +2,13 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.26 à 12:04:35 PM CET 
+// Généré le : 2026.10.30 à 01:41:32 PM CET 
 //
 
 
 package com.teratech.jaxb.entities;
 
+import com.isis.generated.ExplorerTree;
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.annotation.XmlElementDecl;
 import jakarta.xml.bind.annotation.XmlRegistry;
@@ -221,11 +222,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ExplorerTree }
+     * Create an instance of {@link com.isis.generated.ExplorerTree }
      * 
      */
-    public ExplorerTree createExplorerTree() {
-        return new ExplorerTree();
+    public com.isis.generated.ExplorerTree createExplorerTree() {
+        return new com.isis.generated.ExplorerTree();
     }
 
     /**
@@ -399,16 +400,16 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ExplorerTree }{@code >}
+     * Create an instance of {@link JAXBElement }{@code <}{@link com.isis.generated.ExplorerTree }{@code >}
      * 
      * @param value
      *     Java instance representing xml element's value.
      * @return
-     *     the new instance of {@link JAXBElement }{@code <}{@link ExplorerTree }{@code >}
+     *     the new instance of {@link JAXBElement }{@code <}{@link com.isis.generated.ExplorerTree }{@code >}
      */
     @XmlElementDecl(namespace = "http://www.isis.cm/config/explorer-tree", name = "explorer-tree")
-    public JAXBElement<ExplorerTree> createExplorerTree(ExplorerTree value) {
-        return new JAXBElement<ExplorerTree>(_ExplorerTree_QNAME, ExplorerTree.class, null, value);
+    public JAXBElement<com.isis.generated.ExplorerTree> createExplorerTree(com.isis.generated.ExplorerTree value) {
+        return new JAXBElement<com.isis.generated.ExplorerTree>(_ExplorerTree_QNAME, ExplorerTree.class, null, value);
     }
 
     /**

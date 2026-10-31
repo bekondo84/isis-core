@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.26 à 12:04:35 PM CET 
+// Généré le : 2026.10.30 à 01:41:32 PM CET 
 //
 
 
@@ -21,6 +21,7 @@ import jakarta.xml.bind.annotation.XmlType;
  * &lt;simpleType name="viewModeType"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
  *     &lt;enumeration value="list"/&gt;
+ *     &lt;enumeration value="dashboard"/&gt;
  *     &lt;enumeration value="view"/&gt;
  *     &lt;enumeration value="kaban"/&gt;
  *     &lt;enumeration value="list,view"/&gt;
@@ -38,6 +39,8 @@ public enum ViewModeType {
 
     @XmlEnumValue("list")
     LIST("list"),
+    @XmlEnumValue("dashboard")
+    DASHBOARD("dashboard"),
     @XmlEnumValue("view")
     VIEW("view"),
     @XmlEnumValue("kaban")

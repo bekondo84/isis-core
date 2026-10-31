@@ -58,6 +58,7 @@ public class ActionsController {
                     throw new IllegalArgumentException(String.format("No Navigation node found with name %s", name));
                 return ResponseEntity.ok(metaDataService.buildMetaDataFrom(menuItem));
             }catch (Exception e) {
+                e.printStackTrace();
                 throw new ApplicationException("500", e.getMessage(), e);
             }
       }

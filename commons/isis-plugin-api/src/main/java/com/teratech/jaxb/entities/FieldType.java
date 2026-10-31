@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.26 à 12:04:35 PM CET 
+// Généré le : 2026.10.30 à 01:41:32 PM CET 
 //
 
 
@@ -44,9 +44,8 @@ import java.util.List;
  *       &lt;attribute name="updatable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" /&gt;
  *       &lt;attribute name="deletable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" /&gt;
  *       &lt;attribute name="search" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="observable" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
- *       &lt;attribute name="observe" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
- *       &lt;attribute name="handler" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
+ *       &lt;attribute name="dependsOn" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -79,12 +78,10 @@ public class FieldType {
     protected Boolean deletable;
     @XmlAttribute(name = "search")
     protected Boolean search;
-    @XmlAttribute(name = "observable")
-    protected Boolean observable;
-    @XmlAttribute(name = "observe")
-    protected String observe;
-    @XmlAttribute(name = "handler")
-    protected String handler;
+    @XmlAttribute(name = "dependsOn")
+    protected String dependsOn;
+    @XmlAttribute(name = "visibleWhen")
+    protected String visibleWhen;
 
     /**
      * Obtient la valeur de la propriété actions.
@@ -323,87 +320,51 @@ public class FieldType {
     }
 
     /**
-     * Obtient la valeur de la propriété observable.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
-     */
-    public boolean isObservable() {
-        if (observable == null) {
-            return false;
-        } else {
-            return observable;
-        }
-    }
-
-    /**
-     * Définit la valeur de la propriété observable.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
-     */
-    public void setObservable(Boolean value) {
-        this.observable = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété observe.
+     * Obtient la valeur de la propriété dependsOn.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getObserve() {
-        if (observe == null) {
-            return "";
-        } else {
-            return observe;
-        }
+    public String getDependsOn() {
+        return dependsOn;
     }
 
     /**
-     * Définit la valeur de la propriété observe.
+     * Définit la valeur de la propriété dependsOn.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setObserve(String value) {
-        this.observe = value;
+    public void setDependsOn(String value) {
+        this.dependsOn = value;
     }
 
     /**
-     * Obtient la valeur de la propriété handler.
+     * Obtient la valeur de la propriété visibleWhen.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getHandler() {
-        if (handler == null) {
-            return "";
-        } else {
-            return handler;
-        }
+    public String getVisibleWhen() {
+        return visibleWhen;
     }
 
     /**
-     * Définit la valeur de la propriété handler.
+     * Définit la valeur de la propriété visibleWhen.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setHandler(String value) {
-        this.handler = value;
+    public void setVisibleWhen(String value) {
+        this.visibleWhen = value;
     }
 
 

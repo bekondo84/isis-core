@@ -8,6 +8,7 @@ public class AbstractSection implements Serializable {
     protected int columns;
     protected  boolean header;
     protected int position;
+    protected String visibleWhen;
 
     public AbstractSection() {
     }
@@ -58,5 +59,13 @@ public class AbstractSection implements Serializable {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    public void setVisibleWhen(String visibleWhen) {
+        this.visibleWhen = visibleWhen;
     }
 }

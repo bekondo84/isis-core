@@ -210,7 +210,6 @@ public class MetaDataServiceImpl implements MetaDataService {
         for (DashboardItem dashboardItem : items) {
             MetaColumn column = new MetaColumn("Dashbord", dashboardItem.getName());
             sectionData.addField(column);
-            column.setHandler(dashboardItem.getAction());
             column.setLabel(i18NService.getMessage(wrapper, dashboardItem.getName()));
             column.setWidget(dashboardItem.getType().value());
             int refresh = Objects.nonNull(dashboardItem.getRefresh()) ? dashboardItem.getRefresh().intValue() : 0 ;
@@ -279,6 +278,7 @@ public class MetaDataServiceImpl implements MetaDataService {
     private static void setFieldContraints(Field field, MetaColumn column) {
         if (field.isAnnotationPresent(Id.class)) {
             column.setUnique(true);
+            column.setPrimaryKey(true);
             column.setMandatory(true);
         } else if (field.isAnnotationPresent(Column.class)) {
             Column annot = field.getAnnotation(Column.class);
@@ -429,6 +429,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         });
         for (SectionType sectionType : formType.getSection()) {
              SectionData sectionData = new SectionData(sectionType.getName(), sectionType.getName(), sectionType.getColumns().intValue());
+             sectionData.setVisibleWhen(sectionType.getVisibleWhen());
              formData.addSection(sectionData);
              buildSection(wrapper, meta, sectionData, sectionType, fields, createMeta, allReadyProcess, principal);
          }
@@ -473,6 +474,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         sectionData.setColumns(sectionType.getColumns().intValue());
         sectionData.setHeader(sectionType.isHeader());
         sectionData.setName(sectionType.getName());
+        sectionData.setVisibleWhen(sectionType.getVisibleWhen());
         //TODO : build sectionData title
         sectionData.setTitle(i18NService.getMessage(wrapper, sectionData.getName()));
         Map<String, FieldType> fieldTypeMap = sectionType.getField().stream().collect(Collectors.toMap(FieldType::getQualifier, fieldType -> fieldType));
@@ -493,6 +495,8 @@ public class MetaDataServiceImpl implements MetaDataService {
             setFieldContraints(field, column);
 
             FieldType fieldType = fieldTypeMap.get(field.getName());
+            column.setVisibleWhen(fieldType.getVisibleWhen());
+            column.setDependsOn(fieldType.getDependsOn());
             column.setSequence((short) fieldType.getPosition());
             if (Objects.nonNull(fieldType.getWidget())) {
                 column.setWidget(fieldType.getWidget().value());
@@ -500,10 +504,8 @@ public class MetaDataServiceImpl implements MetaDataService {
             column.setEditable(fieldType.isEditable());
             column.setUpdatable(fieldType.isUpdatable());
             column.setDeletable(fieldType.isDeletable());
-            column.setObservable(fieldType.isObservable());
-            column.setObserve(fieldType.getObserve());
-            column.setHandler(fieldType.getHandler());
-
+            column.setDependsOn(fieldType.getDependsOn());
+            //column.setVisibleWhen(fieldType.getVisibleWhen());
             //Gestion des actions
             if (Objects.nonNull(fieldType.getActions())
                 && !CollectionUtils.isEmpty(fieldType.getActions().getAction())) {

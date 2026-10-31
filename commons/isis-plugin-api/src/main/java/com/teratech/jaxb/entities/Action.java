@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.26 à 12:04:35 PM CET 
+// Généré le : 2026.10.30 à 01:41:32 PM CET 
 //
 
 
@@ -32,6 +32,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;attribute name="operation" type="{http://www.isis.cm/config/isis-typeoperation}TypeOperation" default="none" /&gt;
  *       &lt;attribute name="position" type="{http://www.isis.cm/config/isis-positionvalue}positionValueType" default="actions" /&gt;
  *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
+ *       &lt;attribute name="typeCode" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -61,6 +62,8 @@ public class Action {
     protected PositionValueType position;
     @XmlAttribute(name = "color")
     protected String color;
+    @XmlAttribute(name = "typeCode")
+    protected String typeCode;
 
     /**
      * Obtient la valeur de la propriété code.
@@ -296,6 +299,30 @@ public class Action {
      */
     public void setColor(String value) {
         this.color = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété typeCode.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    /**
+     * Définit la valeur de la propriété typeCode.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTypeCode(String value) {
+        this.typeCode = value;
     }
 
 }
