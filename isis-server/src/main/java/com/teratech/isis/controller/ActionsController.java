@@ -49,18 +49,14 @@ public class ActionsController {
      */
     @CrossOrigin("*")
       @GetMapping("/navigation/meta/{name}")
-      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws ApplicationException {
+      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws ApplicationException, JAXBException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
 
-            try {
                 final MenuItemModel menuItem = (MenuItemModel) flexibleSearch.find(new MenuItemModel(name));
 
                 if (Objects.isNull(menuItem))
                     throw new IllegalArgumentException(String.format("No Navigation node found with name %s", name));
                 return ResponseEntity.ok(metaDataService.buildMetaDataFrom(menuItem));
-            }catch (Exception e) {
-                e.printStackTrace();
-                throw new ApplicationException("500", e.getMessage(), e);
-            }
+
       }
 
 
@@ -135,7 +131,7 @@ public class ActionsController {
             final ActionModel action = (ActionModel) flexibleSearch.find(new ActionModel(actionId));
             //Check if the action exists
             if (Objects.isNull(action))
-                throw new ApplicationException(String.format("No action found with ID %s", actionId));
+                throw new ApplicationException("500", String.format("No action found with ID %s", actionId));
 
             //Case where action it is a global action
             if (Objects.isNull(action.getPlugin())) {
@@ -155,9 +151,16 @@ public class ActionsController {
             ActionExtension actionExtension = (ActionExtension) actionExtensions.get(0);
 
             return ResponseEntity.ok(actionExtension.invoke(context, action, method, type));
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ApplicationException("500", e.getMessage(), e);
+        } catch (ApplicationException e) {
+            throw e;
+        }catch (Exception e) {
+            Throwable cause = e;
+            if (e instanceof InvocationTargetException && e.getCause() != null) {
+                cause = e.getCause();
+            }
+            String message = cause.getMessage();
+
+            throw new ApplicationException("500", message, e);
         }
     }
 

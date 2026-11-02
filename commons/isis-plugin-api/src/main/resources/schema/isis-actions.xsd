@@ -20,6 +20,7 @@
     <complexType name="action">
         <attribute name="code" type="string"  use="required"/>
         <attribute name="action" type="string" use="required" />
+        <!--  This method is use just for action of type execute -->
         <attribute name="method" type="string" use="required" />
         <attribute name="type" type="tns:actionType" use="required" />
         <attribute name="icon" type="string" default="" />

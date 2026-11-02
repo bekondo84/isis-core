@@ -148,7 +148,7 @@ public class PluginAction extends AbstractAction {
         final String pluginId = (String) context.get(PLUGIN);
 
         if (StringUtils.isBlank(pluginId)) {
-            throw new ApplicationException(String.format("No plugin found in the action context data"));
+            throw new ApplicationException("500", String.format("No plugin found in the action context data"));
         }
         Boolean status =  pluginService.install(pluginId);
         context.put(STATUS, status.toString());
@@ -166,7 +166,7 @@ public class PluginAction extends AbstractAction {
         final String pluginId = (String) context.get(PLUGIN);
 
         if (StringUtils.isBlank(pluginId)) {
-            throw new ApplicationException(String.format("No plugin found in the action context data"));
+            throw new ApplicationException("500", String.format("No plugin found in the action context data"));
         }
         Boolean status = pluginService.uninstall(pluginId);
         context.put(STATUS, status.toString());
@@ -179,12 +179,11 @@ public class PluginAction extends AbstractAction {
         try {
             final String pluginId = (String) context.get(PLUGIN);
             if (StringUtils.isBlank(pluginId)) {
-                throw new ApplicationException(String.format("No plugin found in the action context data"));
+                throw new ApplicationException("500", String.format("No plugin found in the action context data"));
             }
             context.put(DATA, pluginService.loadPlugin(pluginId)) ;
             return context;
         } catch (ApplicationException | ModelServiceException ex) {
-            ex.printStackTrace();
             throw new ApplicationException("500", ex);
         }
 

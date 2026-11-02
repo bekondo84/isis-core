@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class ErrorResponse implements Serializable {
-    private HttpStatus status;
+    private int status;
     private LocalDateTime date;
     private String message;
     private String erroCode;
@@ -14,11 +14,11 @@ public class ErrorResponse implements Serializable {
     public ErrorResponse() {
     }
 
-    public HttpStatus getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public ErrorResponse setStatus(HttpStatus status) {
+    public ErrorResponse setStatus(int status) {
         this.status = status;
         return this;
     }

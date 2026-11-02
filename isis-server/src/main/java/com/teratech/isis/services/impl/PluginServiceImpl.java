@@ -153,13 +153,13 @@ public class PluginServiceImpl implements PluginService {
         if (!CollectionUtils.isEmpty(depends)) {
             List<String> installdepends = depends.stream().filter(plug -> plug.isInstall()).map(plug -> plug.getId()).collect(Collectors.toUnmodifiableList());
             if (!CollectionUtils.isEmpty(installdepends))
-                throw new ApplicationException(String.format("These plugins %s depends on %s, Please uninstall it and try again", installdepends, pluginId));
+                throw new ApplicationException("500", String.format("These plugins %s depends on %s, Please uninstall it and try again", installdepends, pluginId));
         }
         //Get the PluginExtension
         List<PluginExtensionPoint>  pluginExtensionPoints =  pluginManager.getExtensions(PluginExtensionPoint.class, pluginId);
         //System.out.println(pluginManager.getExtensions(plugin));
         if (pluginExtensionPoints == null || pluginExtensionPoints.isEmpty()) {
-            throw new IllegalArgumentException(String.format("No extension point of type PluginExtensionPoint found for plugin with id : %s", pluginId));
+            throw new IllegalArgumentException(String.format("500", "No extension point of type PluginExtensionPoint found for plugin with id : %s", pluginId));
         }
         PluginExtensionPoint extensionPoint = pluginExtensionPoints.get(0);
 

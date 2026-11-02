@@ -552,6 +552,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         actionData.setAction(action.getAction());
         actionData.setMethod(action.getMethod());
         actionData.setAskconfirmation(action.isAskconfirmation());
+        actionData.setTypeCode(action.getTypeCode());
         return actionData;
     }
 

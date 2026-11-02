@@ -60,7 +60,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @Override
-    public ActionContextData invoke(ActionModel action, String methodName, ActionType methodType, ActionContextData context) throws ApplicationException {
+    public ActionContextData invoke(ActionModel action, String methodName, ActionType methodType, ActionContextData context) throws ApplicationException, InvocationTargetException, IllegalAccessException, ModelServiceException {
       try {
           if (Objects.isNull(action)) {
               throw new IllegalAccessException("Action to invoke can't be null");
@@ -82,8 +82,8 @@ public abstract class AbstractAction implements ActionService{
           ActionContextData contextData =  (ActionContextData) method.get().invoke(this, context);
           //persistenceManager.flush();
           return contextData;
-      } catch (Exception ex) {
-          throw new ApplicationException("500", ex.getMessage(), ex);
+      } catch (RuntimeException ex) {
+          throw new ModelServiceException(ex);
       }
     }
 
@@ -93,18 +93,11 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "create", scope = ActionType.POST)
-    ActionContextData create(final ActionContextData context) throws ApplicationException {
-
-        try {
+    ActionContextData create(final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
             final Class clazz = getClassFromContext(context);
             context.put(DATA, clazz.getDeclaredConstructor().newInstance());
 
             return context;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new ApplicationException("500", ex.getMessage(), ex);
-        }
-
     }
 
     /**
@@ -113,15 +106,18 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "save", scope = ActionType.POST)
-     ActionContextData saveOrUpdate(final ActionContextData context) throws ApplicationException {
+     ActionContextData saveOrUpdate(final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ModelServiceException {
          final Object object =  context.get(DATA);
 
-       try {
            final Class clazz = getClassFromContext(context);
            //Convert Json String to instance of clazz
            final ObjectMapper mapper = new ObjectMapper();
            Object entity = mapper.convertValue(object, clazz);
-           transactionTemplate.setReadOnly(false);
+           //Check if an instace of this entity all ready existed
+          Object oldEntity = flexibleSearch.find((AbstractItem) entity);
+
+        try {
+            transactionTemplate.setReadOnly(false);
            return transactionTemplate.execute(status -> {
 
                Object result = null;
@@ -134,8 +130,8 @@ public abstract class AbstractAction implements ActionService{
                context.put(DATA, result);
                return context;
            });
-       } catch (Exception e) {
-           throw new ApplicationException("500", e.getMessage(), e);
+       } catch (RuntimeException e) {
+           throw new ModelServiceException(e);
        }
      }
 
@@ -145,9 +141,8 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
      @ActionMethod(value = "fetchitems", scope = ActionType.POST)
-    public ActionContextData getItems (final ActionContextData context) throws ApplicationException {
+    public ActionContextData getItems (final ActionContextData context) throws ApplicationException, ParseException, ClassNotFoundException, NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
 
-         try {
             final Object searchObject =  context.get(SEARCH_PREDICAT);
             final ObjectMapper mapper = new ObjectMapper();
             List<SearchColumn> searchs = new ArrayList<>();
@@ -191,39 +186,18 @@ public abstract class AbstractAction implements ActionService{
             context.put(NBREOFITEMS, flexibleSearch.count(clazz, container));
             //Return the context
             return context;
-        } catch (Exception ex) {
-            throw new ApplicationException("500", ex.getMessage(), ex);
-        }
     }
 
     @ActionMethod(value = "count", scope = ActionType.POST)
-    public ActionContextData countItems (final ActionContextData context) throws ApplicationException {
-
-         try {
+    public ActionContextData countItems (final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ParseException {
              final Object searchObject =  context.get(SEARCH_PREDICAT);
              final ObjectMapper mapper = new ObjectMapper();
              List<SearchColumn> searchs = new ArrayList<>();
-             List<String> sortRules = new ArrayList<>();
 
              if (Objects.nonNull(searchObject)) {
                  searchs = mapper.convertValue(searchObject, new TypeReference<List<SearchColumn>>() {
                  });
              }
-             /*final Object sortObject = context.get("sort");
-             if (Objects.nonNull(sortObject)) {
-                 sortRules = mapper.convertValue(sortObject, new TypeReference<List<String>>() {});
-             }
-
-             Map<String, DAOUtilis.OrderType> sortCriteria = new HashMap<>();
-             if (Objects.nonNull(sortRules)) {
-                 for (String rule : sortRules) {
-                     if (rule.split(":")[1].equalsIgnoreCase("ASC")) {
-                         sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.ASC);
-                     } else {
-                         sortCriteria.put(rule.split(":")[0], DAOUtilis.OrderType.DESC);
-                     }
-                 }
-             }*/
              //Initialize restriction container
              final RestrictionsContainer container = RestrictionsContainer.newInstance();
 
@@ -237,10 +211,6 @@ public abstract class AbstractAction implements ActionService{
              context.put(DATA, nbreItems);
              //Return the context
              return context;
-         } catch (Exception ex) {
-             throw new ApplicationException("500", ex.getMessage(), ex);
-         }
-
     }
 
     /**
@@ -249,8 +219,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "fetchitem", scope = ActionType.POST)
-    public ActionContextData getItem (final ActionContextData context) throws ApplicationException {
-       try {
+    public ActionContextData getItem (final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
            final Object object =  context.get(DATA);
            final Class clazz = getClassFromContext(context);
            //Convert Json String to instance of clazz
@@ -260,10 +229,6 @@ public abstract class AbstractAction implements ActionService{
            //Update the data context with the entity data fetch from database
            context.put(DATA, flexibleSearch.find((AbstractItem) entity));
            return context;
-       } catch (Exception ex) {
-          throw new ApplicationException("500", ex.getMessage(), ex);
-       }
-
     }
 
     /**
@@ -300,7 +265,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
    @ActionMethod(value = "delete", scope = ActionType.POST)
-    public ActionContextData delete (final ActionContextData context) throws ApplicationException {
+    public ActionContextData delete (final ActionContextData context) throws ApplicationException, ModelServiceException {
 
        try {
            final Object object = context.get(DATA);
@@ -317,7 +282,7 @@ public abstract class AbstractAction implements ActionService{
                return context;
            });
        } catch (RuntimeException ex) {
-           throw  new ApplicationException("500", ex.getMessage(), ex);
+           throw  new ModelServiceException(ex);
        }
    }
 
@@ -355,7 +320,7 @@ public abstract class AbstractAction implements ActionService{
                 if (Number.class.isAssignableFrom(type)) {
                     value = NumberFormat.getNumberInstance().parse(search.getValue());
                 }
-                switch (search.getCond()) {
+                switch (search.getCond().toUpperCase()) {
                     case "EQ" :
                         container.addEq(search.getFieldName(), search.getValue());
                         break;

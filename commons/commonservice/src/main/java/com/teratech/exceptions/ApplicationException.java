@@ -5,14 +5,6 @@ import java.security.PrivilegedActionException;
 public class ApplicationException extends Exception {
 
     private String code ;
-    /**
-     * Constructs a new exception with {@code null} as its detail message.
-     * The cause is not initialized, and may subsequently be initialized by a
-     * call to {@link #initCause}.
-     */
-    public ApplicationException(String code) {
-        this.code = code;
-    }
 
     /**
      * Constructs a new exception with the specified detail message.  The
@@ -61,7 +53,7 @@ public class ApplicationException extends Exception {
      * @since 1.4
      */
     public ApplicationException(String code, Throwable cause) {
-        super(cause);
+        super(cause.getMessage(), cause);
         this.code = code;
     }
 

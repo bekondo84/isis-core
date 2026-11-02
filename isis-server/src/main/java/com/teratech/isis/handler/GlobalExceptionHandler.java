@@ -22,24 +22,25 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorResponse> handleApplicationException(ApplicationException e, WebRequest request) {
-
+        LOG.info("Inside ApplicationException handler  ::: "+e.getMessage());
         ErrorResponse error = new ErrorResponse().setDate(LocalDateTime.now())
                 .setMessage(e.getMessage())
-                .setStatus(getHttpStatus(e))
+                .setStatus(getHttpStatus(e).value())
                 .setErroCode(ApplicationException.class.getName());
 
-        //LOG.info(e.get);
+        LOG.error(e.getMessage(), e);
         return new ResponseEntity<>(error, getHttpStatus(e));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e, WebRequest request) {
+        LOG.info("Inside Exception handler");
         ErrorResponse error = new ErrorResponse().setDate(LocalDateTime.now())
                 .setMessage(e.getMessage())
-                .setStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-                .setErroCode(ApplicationException.class.getName());
+                .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .setErroCode(Exception.class.getName());
 
-        //LOG.info(e.get);
+        LOG.error(e.getMessage(), e);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -59,7 +60,7 @@ public class GlobalExceptionHandler {
         body.put("error", "Unauthorized");
         body.put("message", "Le jeton de connexion (JWT) a expiré. Veuillez vous reconnecter.");
         body.put("path", "Erreur d'authentification");
-
+        LOG.error(ex.getMessage(), ex);
         return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 }

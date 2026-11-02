@@ -57,7 +57,7 @@ public class ModelServiceException extends Exception{
      * @since 1.4
      */
     public ModelServiceException(Throwable cause) {
-        super(cause);
+        super(cause.getMessage(), cause);
     }
 
     /**

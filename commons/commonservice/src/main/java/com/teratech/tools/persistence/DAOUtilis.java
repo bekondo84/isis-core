@@ -119,8 +119,7 @@ public class DAOUtilis {
 	 */
 	public static void addPredicates(CriteriaBuilder criteriaBuilder, Root<?> root, CriteriaQuery<?> criteriaQuery, List<Predicat> predicates) {
 		
-                if(predicates==null) return ;
-                
+		if(predicates==null) return ;
 		// Liste de predicats JPA 2
 		List<Predicate> jpaPredicates = new ArrayList<>();
 		

@@ -120,3 +120,5 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('Media', 'com.teratech.model.media.MediaModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('File', 'com.teratech.model.media.FileModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('Currency', 'com.teratech.model.settings.CurrencyModel', true, '', 'backoffice', '1.0.0', now());

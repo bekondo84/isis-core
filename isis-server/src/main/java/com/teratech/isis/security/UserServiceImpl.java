@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel getUserForCode(String code) throws ApplicationException {
         if (StringUtils.isBlank(code))
-            throw new ApplicationException("User.code can't be null");
+            throw new ApplicationException("500", "User.code can't be null");
         try {
             return flexibleSearch.find(new UserModel(code));
         } catch (Exception e) {

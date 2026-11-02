@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ActionData implements Serializable {
     private String name ;
@@ -16,6 +17,7 @@ public class ActionData implements Serializable {
     private String action;
     private String method;
     private boolean askconfirmation;
+    private String typeCode;
 
 
 
@@ -103,16 +105,26 @@ public class ActionData implements Serializable {
         return askconfirmation;
     }
 
-    public void setAskconfirmation(boolean askconfirmation) {
+    public ActionData setAskconfirmation(boolean askconfirmation) {
         this.askconfirmation = askconfirmation;
+        return this;
     }
 
     public String getMethod() {
         return method;
     }
 
-    public void setMethod(String method) {
+    public ActionData setMethod(String method) {
         this.method = method;
+        return this;
+    }
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+    public ActionData setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+        return this;
     }
 
     @JsonIgnore
@@ -121,7 +133,7 @@ public class ActionData implements Serializable {
                && StringUtils.isNotBlank(action)
                && StringUtils.isNotBlank(method)
                && StringUtils.isNotBlank(type)
-               && StringUtils.isNotBlank(opeation)
-               && StringUtils.isNotBlank(position);
+               && StringUtils.isNotBlank(position)
+               && (Objects.equals(type, "execute") || StringUtils.isNotBlank(typeCode));
     }
 }

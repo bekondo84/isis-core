@@ -5,6 +5,7 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.dao.PersistenceManager;
 import com.teratech.model.generic.AbstractBusinessEntity;
 import com.teratech.model.generic.AbstractItem;
+import com.teratech.services.I18NService;
 import com.teratech.utils.ClassUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -28,6 +29,8 @@ public class PersistenceManagerImpl implements PersistenceManager {
     private FlexibleSearch flexibleSearch;
     @Autowired
     private PluginManager pluginManager;
+    @Autowired
+    private I18NService i18nService;
 
     /**
      * Save or update entity en transactional mode
@@ -48,15 +51,19 @@ public class PersistenceManagerImpl implements PersistenceManager {
             entity.toStringValue();
             //Save the change
             if (Objects.isNull(entity.getCreatedAt())) {
+                //Check if the entity already existed with the same primary keys
+                Object oldInstance = flexibleSearch.find((AbstractItem) entity);
+                if (Objects.nonNull(oldInstance)) {
+                    throw new ModelServiceException(String.format(i18nService.getMessage("duplicate_error")));
+                }
                 setManagedField(AbstractItem.class, entity, "createdAt", LocalDateTime.now());
                 em.persist(entity);
             } else  {
                 setManagedField(AbstractItem.class, entity, "lastModif", LocalDateTime.now());
                 em.merge(entity);
             }
-            return (S) /*flexibleSearch.find*/(entity);
-        } catch (IllegalAccessException | NoSuchFieldException /*| InstantiationException | NoSuchMethodException |
-                 InvocationTargetException*/ e) {
+            return (S) entity;
+        } catch (Exception e) {
             throw new ModelServiceException(e);
         }
 
@@ -92,8 +99,7 @@ public class PersistenceManagerImpl implements PersistenceManager {
     public void delete(Object entity) throws ModelServiceException {
         try {
             em.remove(flexibleSearch.find((AbstractItem) entity));
-        } catch (IllegalAccessException | InstantiationException | NoSuchFieldException | NoSuchMethodException |
-                 InvocationTargetException e) {
+        } catch (Exception e) {
             throw new ModelServiceException(e);
         }
     }
