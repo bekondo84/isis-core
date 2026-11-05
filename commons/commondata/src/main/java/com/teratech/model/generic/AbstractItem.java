@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 public abstract class AbstractItem implements Serializable {
 
     @Column(insertable = false, updatable = false)
-    private Long seqnumber;
+    protected Long seqnumber;
     protected LocalDateTime createdAt;
-    private LocalDateTime lastModif;
+    protected LocalDateTime lastModif;
     protected String stringValue;
 
     public LocalDateTime getCreatedAt() {

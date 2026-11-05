@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ApplicationException.class)
     public ResponseEntity<ErrorResponse> handleApplicationException(ApplicationException e, WebRequest request) {
-        LOG.info("Inside ApplicationException handler  ::: "+e.getMessage());
+        //LOG.info("Inside ApplicationException handler  ::: "+e.getMessage());
         ErrorResponse error = new ErrorResponse().setDate(LocalDateTime.now())
                 .setMessage(e.getMessage())
                 .setStatus(getHttpStatus(e).value())
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e, WebRequest request) {
-        LOG.info("Inside Exception handler");
+       // LOG.info("Inside Exception handler");
         ErrorResponse error = new ErrorResponse().setDate(LocalDateTime.now())
                 .setMessage(e.getMessage())
                 .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -48,6 +48,8 @@ public class GlobalExceptionHandler {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         if (e.getCode().equals("404")) {
             status = HttpStatus.NOT_FOUND;
+        } else if (e.getCode().equals("204")) {
+            status = HttpStatus.NO_CONTENT;
         }
         return status;
     }

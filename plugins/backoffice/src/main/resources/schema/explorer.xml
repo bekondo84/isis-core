@@ -16,7 +16,7 @@
     </navigation-node>
     <navigation-node id="backoffice.system.node" position="98" icon="fa-solid fa-gear">
         <navigation-node id="backoffice.system.types" code="MetaType" position="100" icon="fa-solid fa-vector-square" viewMode="list,view" />
-        <navigation-node id="backoffice.system.medias" position="101" icon="fa-solid fa-photo-film">
+        <navigation-node id="backoffice.system.medias" position="102" icon="fa-solid fa-photo-film">
             <navigation-node id="backoffice.system.media" code="Media" position="99" icon="fa-solid fa-image" viewMode="list,view" />
             <navigation-node id="backoffice.system.mediacontainer" code="MediaContainer" position="100" icon="fa-solid fa-box-open" viewMode="list,view" />
             <navigation-node id="backoffice.system.file" code="File" position="98" icon="fa-solid fa-box-open" viewMode="list,view" />
@@ -27,6 +27,7 @@
             <navigation-node id="backoffice.system.cronjob.result" code="CronJobResult" position="99"  viewMode="list,view" />
         </navigation-node>
         <navigation-node id="backoffice.system.businessrules" code="BusinessRule" position="98" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
+        <navigation-node id="backoffice.system.Filters" code="Filter" position="101" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
     </navigation-node>
     <navigation-node id="backoffice.explorer.node" position="99" icon="fa-solid fa-align-center">
         <navigation-node id="backoffice.explorer.plugins" code="Plugin" viewMode="list,view" icon="fa-brands fa-google-play"/>

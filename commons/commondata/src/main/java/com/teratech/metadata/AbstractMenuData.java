@@ -14,6 +14,7 @@ public abstract class AbstractMenuData implements Serializable {
 
     protected int position;
 
+    protected long seqnumber;
     //protected NavigationNodeLevel level;
 
     protected boolean selected = false;
@@ -56,5 +57,21 @@ public abstract class AbstractMenuData implements Serializable {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public long getSeqnumber() {
+        return seqnumber;
+    }
+
+    public void setSeqnumber(long seqnumber) {
+        this.seqnumber = seqnumber;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

@@ -6,5 +6,19 @@ package com.teratech.populator;
  * @param <U>
  */
 public interface Populator<T , U> {
+    /**
+     *
+     * @param source
+     * @param target
+     * @throws Exception
+     */
     void populate(T source, U target) throws Exception;
+
+    /**
+     *
+     * @param source
+     * @param target
+     * @throws Exception
+     */
+    default void reverse (U source, T target) throws Exception {}
 }

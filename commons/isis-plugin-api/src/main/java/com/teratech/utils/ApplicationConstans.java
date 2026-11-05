@@ -18,6 +18,7 @@ public class ApplicationConstans {
         public static final String DEFAULT_ACTION ="defaultAction";
         public static final String DATA = "data";
         public static final String TYPE = "class";
+        public static final String TYPECODE = "typeCode";
         public static final String PLUGIN = "plugin";
         public static final String SEARCH_PREDICAT = "predicates";
         public static final String START_INDEX = "startIndex";

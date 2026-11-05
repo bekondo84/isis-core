@@ -47,7 +47,7 @@ public class ResourceController {
                         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                         .body(resource);
             }
-          throw new ApplicationException("404", "Resource not found");
+          throw new ApplicationException("204", "Resource not found");
     }
 
     /**

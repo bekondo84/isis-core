@@ -73,6 +73,12 @@ public interface FlexibleSearch {
     long count(final Class<? extends Object> entityClass , final RestrictionsContainer container);
 
     /**
+     * Get the next sequence
+     * @param seq_name
+     * @return
+     */
+    long getSequence (final String seq_name) ;
+    /**
      * MetaTypeModel of given typeCode
      * @param typeCode
      * @return

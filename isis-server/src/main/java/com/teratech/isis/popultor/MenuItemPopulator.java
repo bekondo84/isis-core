@@ -26,5 +26,6 @@ public class MenuItemPopulator implements Populator<MenuItemModel, MenuItemData>
            target.setTemplate(source.getTemplate());
            target.setBadgeColor(source.getBadgeColor());
            target.setModal(source.isModal());
+           target.setSeqnumber(source.getSeqnumber());
     }
 }

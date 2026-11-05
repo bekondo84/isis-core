@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+		 xmlns:sh="http://www.isis.cm/config/isis-shutcut"
+         xmlns:ac="http://www.isis.cm/config/isis-actions">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="name" search="true"  />
+            <ls:column qualifier="scope" search="true" />
+            <ls:column qualifier="type" search="true"  />
+            <ls:column qualifier="user" search="true"  widget="manytoone"/>
+            <ls:column qualifier="group" search="true"  widget="manytoone"/>
+            <ls:column qualifier="typeCode" search="true" />
+            <ls:column qualifier="value" search="true" />
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="code" createOnField="false" >
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section name="hac.commons" columns="2" position="100">
+                       <e:field qualifier="name" />
+                        <e:field qualifier="typeCode" />
+                        <e:field qualifier="scope" widget="combobox"/>
+                        <e:field qualifier="type" widget="combobox"/>
+                    </e:section>
+                    <e:section name="hac.commons0"   columns="2"  position="99"
+                               visibleWhen="[{field:'scope', criteria: 'eq', value:'1'}]">
+                        <e:field qualifier="user" widget="manytoone" />
+                    </e:section>
+                    <e:section name="hac.commons1"   columns="2"  position="99"
+                               visibleWhen="[{field:'scope', criteria: 'eq', value:'2'}]">
+                        <e:field qualifier="group" widget="manytoone" />
+                    </e:section>
+                    <e:section name="hac.commons" columns="2" position="98">
+                        <e:field qualifier="value" widget="textarea" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>

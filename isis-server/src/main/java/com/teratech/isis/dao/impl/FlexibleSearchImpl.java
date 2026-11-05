@@ -215,6 +215,12 @@ public class FlexibleSearchImpl implements FlexibleSearch {
         return query.getSingleResult();
     }
 
+    @Override
+    public long getSequence(String seq_name) {
+        final String query = "SELECT nextval('" + seq_name + "')";
+        return (long) em.createQuery(query).getSingleResult();
+    }
+
     /**
      *
      * @param entityClass

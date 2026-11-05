@@ -1,5 +1,6 @@
 package com.teratech.isis.services.impl;
 
+import com.teratech.annotations.Combobox;
 import com.teratech.annotations.File;
 import com.teratech.annotations.Image;
 import com.teratech.annotations.Media;
@@ -115,6 +116,12 @@ public class MetaDataServiceImpl implements MetaDataService {
     @Override
     public MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
         final MetaData metaData = new MetaData(clazz.getName(), clazz.getSimpleName().replaceFirst("Model$", ""));
+
+        if (clazz.isAnnotationPresent(com.teratech.annotations.Action.class)) {
+            com.teratech.annotations.Action annot = (com.teratech.annotations.Action) clazz.getAnnotation(com.teratech.annotations.Action.class);
+            metaData.setAction(annot.value());
+        }
+
         if (Modifier.isAbstract(clazz.getModifiers())) {
             metaData.setCanCreate(false);
             metaData.setCanDelete(false);
@@ -526,6 +533,7 @@ public class MetaDataServiceImpl implements MetaDataService {
                 }
             }
             //TODO Traitement des filters
+
             if (Objects.nonNull(fieldType.getFilters())
                && !CollectionUtils.isEmpty(fieldType.getFilters().getFilter())) {
                 for (FilterType filterType : fieldType.getFilters().getFilter()) {
@@ -754,6 +762,8 @@ public class MetaDataServiceImpl implements MetaDataService {
             column.setWidget("image");
         else if (field.isAnnotationPresent(File.class))
             column.setWidget("file");
+        else if (field.isAnnotationPresent(Combobox.class))
+            column.setWidget("combobox");
         else if (field.getType().isAssignableFrom(String.class))
             column.setWidget("text");
 

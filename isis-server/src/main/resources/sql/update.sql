@@ -7,6 +7,8 @@ VALUES ('pluginAction', 'Action permettant effectuer des actions sur un plugin',
 ----cronJobAction
 INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createdat,stringvalue)
 VALUES ('cronJobAction', 'Action gerant les opérations sur le cronJob', 'cronJobAction', null, null, NOW(), 'cronJobAction');
+INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createdat,stringvalue)
+VALUES ('filterAction', 'Action gerant les filtres', 'filterAction', null, null, NOW(), 'filterAction');
 ----Ccron_state
 INSERT INTO cron_state (code, description, createdat,stringvalue)
 VALUES ('CREATE', 'Nouveau', NOW(), 'Nouveau');
@@ -122,3 +124,5 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('File', 'com.teratech.model.media.FileModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Currency', 'com.teratech.model.settings.CurrencyModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('Filter', 'com.teratech.model.settings.FilterModel', true, '', 'backoffice', '1.0.0', now());

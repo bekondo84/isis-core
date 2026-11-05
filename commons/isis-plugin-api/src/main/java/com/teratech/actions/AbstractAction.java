@@ -93,7 +93,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "create", scope = ActionType.POST)
-    ActionContextData create(final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    ActionContextData create(final ActionContextData context) throws Exception {
             final Class clazz = getClassFromContext(context);
             context.put(DATA, clazz.getDeclaredConstructor().newInstance());
 
@@ -106,7 +106,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "save", scope = ActionType.POST)
-     ActionContextData saveOrUpdate(final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ModelServiceException {
+     ActionContextData saveOrUpdate(final ActionContextData context) throws Exception {
          final Object object =  context.get(DATA);
 
            final Class clazz = getClassFromContext(context);
@@ -141,7 +141,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
      @ActionMethod(value = "fetchitems", scope = ActionType.POST)
-    public ActionContextData getItems (final ActionContextData context) throws ApplicationException, ParseException, ClassNotFoundException, NoSuchFieldException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    public ActionContextData getItems (final ActionContextData context) throws Exception {
 
             final Object searchObject =  context.get(SEARCH_PREDICAT);
             final ObjectMapper mapper = new ObjectMapper();
@@ -189,7 +189,7 @@ public abstract class AbstractAction implements ActionService{
     }
 
     @ActionMethod(value = "count", scope = ActionType.POST)
-    public ActionContextData countItems (final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException, ParseException {
+    public ActionContextData countItems (final ActionContextData context) throws Exception {
              final Object searchObject =  context.get(SEARCH_PREDICAT);
              final ObjectMapper mapper = new ObjectMapper();
              List<SearchColumn> searchs = new ArrayList<>();
@@ -219,7 +219,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "fetchitem", scope = ActionType.POST)
-    public ActionContextData getItem (final ActionContextData context) throws ApplicationException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+    public ActionContextData getItem (final ActionContextData context) throws Exception {
            final Object object =  context.get(DATA);
            final Class clazz = getClassFromContext(context);
            //Convert Json String to instance of clazz
@@ -242,7 +242,7 @@ public abstract class AbstractAction implements ActionService{
      * @throws InvocationTargetException
      * @throws ClassNotFoundException
      */
-    private Class getClassFromContext(ActionContextData context) throws IllegalAccessException, InstantiationException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
+    protected Class getClassFromContext(ActionContextData context) throws IllegalAccessException, InstantiationException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
         final String typeCode = (String) context.get("typeCode");
 
         MetaTypeModel metaType = flexibleSearch.find(new MetaTypeModel(typeCode));
@@ -265,7 +265,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
    @ActionMethod(value = "delete", scope = ActionType.POST)
-    public ActionContextData delete (final ActionContextData context) throws ApplicationException, ModelServiceException {
+    public ActionContextData delete (final ActionContextData context) throws Exception {
 
        try {
            final Object object = context.get(DATA);
@@ -293,7 +293,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      * @throws ClassNotFoundException
      */
-    private Class getClassType(String pluginId, String className) throws ClassNotFoundException {
+    protected Class getClassType(String pluginId, String className) throws ClassNotFoundException {
         PluginWrapper pluginWrapper = null ;
         if (!StringUtils.isBlank(pluginId)) {
             pluginWrapper = pluginManager.getPlugin(pluginId);
@@ -311,7 +311,7 @@ public abstract class AbstractAction implements ActionService{
      * @throws ClassNotFoundException
      * @throws ParseException
      */
-    private static void buildPredicatSearchCriteria(List<SearchColumn> searchs, RestrictionsContainer container) throws ClassNotFoundException, ParseException {
+    protected static void buildPredicatSearchCriteria(List<SearchColumn> searchs, RestrictionsContainer container) throws ClassNotFoundException, ParseException {
         if (!CollectionUtils.isEmpty(searchs)) {
             for (SearchColumn search : searchs) {
                 Class type = Class.forName(search.getType());
