@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="key" search="true" />
+            <ls:column qualifier="type" search="true"  widget="combobox"/>
+            <ls:column qualifier="name" search="false" widget="text" />
+            <ls:column qualifier="user" search="true"  widget="manytoone"/>
+            <ls:column qualifier="typeCode" search="true"  />
+            <ls:column qualifier="value" search="true"  />
+            <ls:column qualifier="createdAt" search="true"  widget="datetime-local"/>
+            <ls:column qualifier="lastModif" search="true"  widget="datetime-local"/>
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="key" update="true" >
+       <e:component>
+           <e:common>
+               <e:form>
+                   <e:section name="commons01" columns="2" position="15">
+                       <e:field qualifier="key" />
+                       <e:field qualifier="name" />
+                       <e:field qualifier="type" widget="combobox"/>
+                       <e:field qualifier="user"  widget="manytoone"  visibleWhen="[{field: 'type', criteria:'eq', value: '3'}]"/>
+                   </e:section>
+                   <e:section columns="2" name="commons02" position="5" visibleWhen="[{field:'type', criteria: 'eq', value: '2'}]">
+                       <e:field qualifier="user"  widget="manytoone"/>
+                       <e:field qualifier="typeCode"  />
+                   </e:section>
+                   <e:section columns="2" name="commons03" position="3">
+                       <e:field qualifier="value"   widget="textarea"/>
+                   </e:section>
+               </e:form>
+           </e:common>
+       </e:component>
+    </e:editor-area>
+</context>

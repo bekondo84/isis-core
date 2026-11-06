@@ -60,7 +60,7 @@ public class FilterAction extends AbstractAction {
         String typeCode = context.get(ApplicationConstans.Actions.TYPECODE).toString();
         ObjectMapper mapper = new ObjectMapper();
         CustomFilterData customFilter =  mapper.convertValue(data, CustomFilterData.class);
-        LOG.info("saveFilterData customFilter={}", customFilter);
+       // LOG.info("saveFilterData customFilter={}", customFilter);
         FilterModel filter = new FilterModel();
 
         customFilterPopulator.populate(customFilter, filter);

@@ -9,6 +9,9 @@ public class MetaArray extends MetaColumn implements Serializable {
 
      private MetaData metaData;
 
+    public MetaArray() {
+    }
+
     /**
      *
      * @param type

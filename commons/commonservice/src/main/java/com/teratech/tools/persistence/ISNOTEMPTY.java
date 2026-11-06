@@ -56,7 +56,7 @@ public class ISNOTEMPTY<Y extends Comparable<Y>> extends Predicat implements Ser
   
     @Override
     public Predicate generateJPAPredicat(CriteriaBuilder criteriaBuilder, Root<?> root) {
-        return criteriaBuilder.isNotEmpty((Expression) DAOUtilis.<Y>buildPropertyPath(root, propertyName));
+        return criteriaBuilder.isNotNull((Expression) DAOUtilis.<Y>buildPropertyPath(root, propertyName));
     }
     
     

@@ -56,7 +56,7 @@ public class ISEMPTY<Y extends Comparable<Y>> extends Predicat implements Serial
   
     @Override
     public Predicate generateJPAPredicat(CriteriaBuilder criteriaBuilder, Root<?> root) {
-    	return criteriaBuilder.isEmpty((Expression) DAOUtilis.<Y>buildPropertyPath(root, propertyName));
+    	return criteriaBuilder.isNull((Expression) DAOUtilis.<Y>buildPropertyPath(root, propertyName));
     }
     
     

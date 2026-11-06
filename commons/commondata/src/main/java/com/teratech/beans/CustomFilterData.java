@@ -2,6 +2,7 @@ package com.teratech.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +13,7 @@ public class CustomFilterData implements Serializable {
     private String typeCode;
     private String scope;
     private String type;
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
     private List<PredicateData> predicates = new ArrayList<>();
 
 
@@ -64,11 +65,11 @@ public class CustomFilterData implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 

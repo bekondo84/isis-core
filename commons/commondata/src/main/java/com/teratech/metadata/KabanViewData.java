@@ -9,6 +9,9 @@ public class KabanViewData implements Serializable {
     private boolean viewable;
     private String template;
 
+    public KabanViewData() {
+    }
+
     public KabanViewData(String template) {
         this.template = template;
     }

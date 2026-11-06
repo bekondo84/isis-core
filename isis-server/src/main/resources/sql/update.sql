@@ -9,6 +9,8 @@ INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createda
 VALUES ('cronJobAction', 'Action gerant les opérations sur le cronJob', 'cronJobAction', null, null, NOW(), 'cronJobAction');
 INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createdat,stringvalue)
 VALUES ('filterAction', 'Action gerant les filtres', 'filterAction', null, null, NOW(), 'filterAction');
+INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createdat,stringvalue)
+VALUES ('settingsAction', 'gestion des configurations', 'settingsAction', null, null, NOW(), 'settingsAction');
 ----Ccron_state
 INSERT INTO cron_state (code, description, createdat,stringvalue)
 VALUES ('CREATE', 'Nouveau', NOW(), 'Nouveau');
@@ -45,8 +47,8 @@ VALUES ('finance', 'Finances & Factures', NOW(), 'Finances & Factures');
 INSERT INTO adm_plugin_category (code, title, createdat, stringvalue)
 VALUES ('human_resources', 'Ressource humaines', NOW(), 'Ressource humaines');
 ------Settings-------------
-INSERT INTO adm_settings (key, value, createdat, stringvalue)
-VALUES ('PAGE_SIZE', '10', NOW(), 'PAGE_SIZE');
+INSERT INTO adm_settings (key, value, name, type, createdat, stringvalue)
+VALUES ('PAGE_SIZE', '10', 'Pagination: taille des pages', '1', NOW(), 'PAGE_SIZE');
 -- Fake Module
 INSERT INTO public.adm_plugin(
 	id, version, name, icon, color, sequence, autoinstall, summary, description, category, email, website, phone, install, instaldate, createdat, lastmodif)
@@ -116,8 +118,8 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('MetaField', 'com.teratech.model.cms.MetaFieldModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('PageTemplate', 'com.teratech.model.cms.PageTemplateModel', true, '', 'backoffice', '1.0.0', now());
-INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
-VALUES ('Settings', 'com.teratech.model.settings.SettingsModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('Settings', 'com.teratech.model.settings.SettingsModel', true, '', 'backoffice', '1.0.0', now(),'Settings.xml');
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Media', 'com.teratech.model.media.MediaModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)

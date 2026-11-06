@@ -9,6 +9,9 @@ public class FilterData implements Serializable {
     private String nature;//two possible value : field or value
     private String type;
 
+    public FilterData() {
+    }
+
     public FilterData(String source, String value, String operator) {
         this.source = source;
         this.target = value;

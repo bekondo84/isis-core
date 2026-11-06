@@ -15,6 +15,10 @@ public class MetaObject<MetaData> extends MetaColumn implements Serializable {
         super(type, fieldName);
     }
 
+
+    public MetaObject() {
+    }
+
     public MetaData getMetaData() {
         return metaData;
     }

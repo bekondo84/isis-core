@@ -65,6 +65,7 @@ public class CustomFilterPopulator implements Populator<CustomFilterData, Filter
         target.setType(source.getType());
         target.setScope(source.getScope());
         target.setTypeCode(source.getTypeCode());
+        target.setCreationDate(source.getCreatedAt());
         List<CustomFilterData.PredicateData> predicates  = mapper.readValue(source.getValue(), new TypeReference<List<CustomFilterData.PredicateData>>() {
         });
         target.setPredicates(predicates);

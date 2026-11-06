@@ -1,10 +1,8 @@
 package com.teratech.isis.services.impl;
 
-import com.teratech.annotations.Combobox;
-import com.teratech.annotations.File;
-import com.teratech.annotations.Image;
-import com.teratech.annotations.Media;
+import com.teratech.annotations.*;
 import com.teratech.dao.FlexibleSearch;
+import com.teratech.jaxb.entities.Action;
 import com.teratech.model.settings.SettingsModel;
 import com.teratech.utils.ReflectionUtils;
 import com.teratech.jaxb.entities.*;
@@ -26,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -141,6 +140,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         List<Field> fields = getDeclaredFieldsFrom(clazz);
 
         if (Objects.nonNull(template)) {
+            metaData.setAction(template.getAction());
             if (Objects.nonNull(template.getViewMode())) {
                 metaData.setViewMode(template.getViewMode().value());
             }
@@ -291,6 +291,12 @@ public class MetaDataServiceImpl implements MetaDataService {
             Column annot = field.getAnnotation(Column.class);
             column.setMandatory(!annot.nullable());
             column.setUnique(annot.unique());
+        } else if (field.isAnnotationPresent(JoinColumn.class)) {
+            JoinColumn annot = field.getAnnotation(JoinColumn.class);
+            column.setMandatory(!annot.nullable());
+        } else if (field.isAnnotationPresent(Nullable.class)) {
+            Nullable annot = field.getAnnotation(Nullable.class);
+            column.setMandatory(!annot.value());
         }
     }
 

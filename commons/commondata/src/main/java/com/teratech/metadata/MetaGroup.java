@@ -26,6 +26,9 @@ public class MetaGroup extends MetaColumn  implements Serializable {
         this.elements =  new ArrayList<>();;
     }
 
+    public MetaGroup() {
+    }
+
     public void add(MetaColumn column){
         assert Objects.nonNull(column):"Column can't be null";
         elements.add(column);
