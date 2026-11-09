@@ -770,6 +770,8 @@ public class MetaDataServiceImpl implements MetaDataService {
             column.setWidget("file");
         else if (field.isAnnotationPresent(Combobox.class))
             column.setWidget("combobox");
+        else if (field.isAnnotationPresent(Password.class))
+            column.setWidget("password");
         else if (field.getType().isAssignableFrom(String.class))
             column.setWidget("text");
 

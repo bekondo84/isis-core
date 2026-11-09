@@ -16,19 +16,23 @@ import com.teratech.model.settings.SettingsModel;
 import com.teratech.tools.persistence.RestrictionsContainer;
 import com.teratech.utils.ApplicationConstans;
 import org.pf4j.PluginManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 import tools.jackson.databind.ObjectMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.teratech.utils.ApplicationConstans.Actions.DATA;
 
 @Action("settingsAction")
 public class SettingsAction extends AbstractAction {
-
+    private static final Logger LOG = LoggerFactory.getLogger(SettingsAction.class);
 
     private final SettingsPopulator settingsPopulator;
     private final SettingsConverter settingsConverter;
@@ -58,17 +62,19 @@ public class SettingsAction extends AbstractAction {
 
         if (Objects.nonNull(settings)) {
             settingsPopulator.reverse(settings, settingsData);
+            context.put(DATA,  settingsData);
+        } else {
+            context.put(DATA,  null);
         }
-        context.put(DATA,  settingsData);
-
         return context;
     }
+
     @ActionMethod(value = "save_table_settings", scope = ActionType.POST)
     public ActionContextData  saveTableAction(ActionContextData actionContextData) throws Exception {
        Object data = actionContextData.get(ApplicationConstans.Actions.DATA);
         ObjectMapper mapper = new ObjectMapper();
         SettingsData settingsData = mapper.convertValue(data, SettingsData.class);
-        System.out.println(String.format("Saving settings to table: %s", settingsData.getColumns().size()));
+       //LOG.error(String.format("Saving settings to table: %s", settingsData.getColumns().stream().map(col -> col.getSequence()).collect(Collectors.toList())));
         SettingsModel settings = new SettingsModel();
         settingsPopulator.populate(settingsData, settings);
 
@@ -101,6 +107,24 @@ public class SettingsAction extends AbstractAction {
             context.put(DATA, settingsConverter.convert(settings));
         }
 
+        return context;
+    }
+
+    @Transactional (readOnly = false)
+    @ActionMethod(value = "reset_columns_settings", scope = ActionType.POST)
+    public ActionContextData resetColumnsSettings(ActionContextData context) throws Exception {
+        final String typeCode = Objects.requireNonNull(context.get(ApplicationConstans.Actions.TYPECODE)).toString();
+        final String username = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
+        final String pk = String.format("%s_%s", username.toLowerCase(), typeCode.toLowerCase());
+        SettingsModel settings = flexibleSearch.find(new SettingsModel(pk));
+        if (Objects.nonNull(settings)) {
+            try {
+                persistenceManager.delete(settings);
+            } catch (RuntimeException e) {
+                throw new Exception(e);
+            }
+        }
+        context.put(DATA,  null);
         return context;
     }
 }

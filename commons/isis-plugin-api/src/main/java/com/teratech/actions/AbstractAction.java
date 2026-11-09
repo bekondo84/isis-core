@@ -60,8 +60,8 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @Override
-    public ActionContextData invoke(ActionModel action, String methodName, ActionType methodType, ActionContextData context) throws ApplicationException, InvocationTargetException, IllegalAccessException, ModelServiceException {
-      try {
+    public ActionContextData invoke(ActionModel action, String methodName, ActionType methodType, ActionContextData context) throws Exception{
+
           if (Objects.isNull(action)) {
               throw new IllegalAccessException("Action to invoke can't be null");
           }
@@ -79,12 +79,28 @@ public abstract class AbstractAction implements ActionService{
               context.put(PLUGIN, action.getPlugin().getId());
           }
 
-          ActionContextData contextData =  (ActionContextData) method.get().invoke(this, context);
-          //persistenceManager.flush();
-          return contextData;
-      } catch (RuntimeException ex) {
-          throw new ModelServiceException(ex);
-      }
+          if (method.get().isAnnotationPresent(Transactional.class)) {
+              Transactional annot = method.get().getAnnotation(Transactional.class);
+              try {
+                  //Set transaction properties
+                  transactionTemplate.setReadOnly(annot.readOnly());
+                  transactionTemplate.setIsolationLevel(annot.isolation().value());
+                  transactionTemplate.setPropagationBehavior(annot.propagation().value());
+                  transactionTemplate.setTimeout(annot.timeout());
+                  //Execute instruction in transaction context
+                  return transactionTemplate.execute(status -> {
+                      try {
+                          return (ActionContextData) method.get().invoke(this, context);
+                      } catch (Exception e) {
+                          throw new RuntimeException(e);
+                      }
+                  });
+              } catch (RuntimeException e) {
+                  throw new Exception(e);
+              }
+          } else {
+              return (ActionContextData) method.get().invoke(this, context);
+          }
     }
 
     /**

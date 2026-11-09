@@ -42,12 +42,11 @@ public class MetaColumn implements Serializable {
     protected List<FilterData> filters ;
     protected String visibleWhen;
     protected String dependsOn;
-
     /**
      * Sequence give the position priority the field with lower value appear first
      * this rule is close in a group where the field is member
      */
-    protected short sequence = 0 ;
+    protected Short sequence  ;
 
 
     public MetaColumn() {
@@ -133,11 +132,11 @@ public class MetaColumn implements Serializable {
         this.show = show;
     }
 
-    public short getSequence() {
+    public Short getSequence() {
         return sequence;
     }
 
-    public void setSequence(short sequence) {
+    public void setSequence(Short sequence) {
         this.sequence = sequence;
     }
 
@@ -283,6 +282,8 @@ public class MetaColumn implements Serializable {
     public void setPrimaryKey(Boolean primaryKey) {
         this.primaryKey = primaryKey;
     }
+
+
 
     @Override
     public int hashCode() {

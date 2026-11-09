@@ -18,6 +18,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class SettingsPopulator implements Populator <SettingsData, SettingsModel> {
@@ -38,7 +39,6 @@ public class SettingsPopulator implements Populator <SettingsData, SettingsModel
         if (!CollectionUtils.isEmpty(source.getColumns())) {
             target.setValue(mapper.writeValueAsString(source.getColumns()));
         }
-
         target.setName(String.format(i18NService.getMessage("Settings.table.message"), source.getTypeCode()));
         String usernane = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
         target.setKey(String.format("%s_%s", usernane.toLowerCase(), source.getTypeCode().toLowerCase()));
@@ -52,6 +52,8 @@ public class SettingsPopulator implements Populator <SettingsData, SettingsModel
             UserModel user = flexibleSearch.find(new UserModel(usernane));
             target.setUser(user);
         }
+
+        //throw new Exception(mapper.writeValueAsString(source.getColumns().stream().map(col -> col.getSequence()).collect(Collectors.toList())));
     }
 
     @Override

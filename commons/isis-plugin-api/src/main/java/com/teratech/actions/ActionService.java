@@ -10,5 +10,5 @@ import java.lang.reflect.InvocationTargetException;
 
 public interface ActionService {
 
-    ActionContextData invoke(final ActionModel action, String method, ActionType methodType, final ActionContextData context) throws ApplicationException, InvocationTargetException, IllegalAccessException, ModelServiceException;
+    ActionContextData invoke(final ActionModel action, String method, ActionType methodType, final ActionContextData context) throws Exception;
 }
