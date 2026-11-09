@@ -5,11 +5,10 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.exceptions.ApplicationException;
 import com.teratech.extensions.ActionExtension;
 import com.teratech.metadata.ActionContextData;
+import com.teratech.metadata.DashboardData;
 import com.teratech.metadata.MetaData;
-import com.teratech.model.cms.ActionModel;
-import com.teratech.model.cms.ActionType;
-import com.teratech.model.cms.MenuItemModel;
-import com.teratech.model.cms.MetaTypeModel;
+import com.teratech.model.cms.*;
+import com.teratech.services.DashboardDataService;
 import com.teratech.services.MetaDataService;
 import com.teratech.utils.ApplicationConstans;
 import jakarta.xml.bind.JAXBException;
@@ -40,6 +39,8 @@ public class ActionsController {
     private ApplicationContext applicationContext;
    @Autowired
     private PluginManager pluginManager;
+    @Autowired
+   private DashboardDataService dashboardDataService;
 
     /**
      * Get MetaData for entity associate to navigation node
@@ -49,7 +50,7 @@ public class ActionsController {
      */
     @CrossOrigin("*")
       @GetMapping("/navigation/meta/{name}")
-      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws ApplicationException, JAXBException, NoSuchFieldException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
+      public ResponseEntity<MetaData>  processNavigationMenu(@PathVariable final String name, final Principal principal) throws Exception {
 
                 final MenuItemModel menuItem = (MenuItemModel) flexibleSearch.find(new MenuItemModel(name));
 
@@ -68,9 +69,25 @@ public class ActionsController {
      */
     @CrossOrigin("*")
     @GetMapping("/entity/meta/{name}")
-      public ResponseEntity<MetaData> getMetaForTypeCode(@PathVariable final String name, final Principal principal) throws NoSuchFieldException, IllegalAccessException, InstantiationException, JAXBException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException {
+      public ResponseEntity<MetaData> getMetaForTypeCode(@PathVariable final String name, final Principal principal) throws Exception {
           final MetaTypeModel metaType = (MetaTypeModel) flexibleSearch.find(new MetaTypeModel(name));
+
+          if (Objects.isNull(metaType)) {
+              throw new IllegalArgumentException(String.format("No meta type found with name %s", name));
+          }
           return ResponseEntity.ok(metaDataService.buildMetaDataFrom(metaType));
+      }
+
+      @CrossOrigin("*")
+      @GetMapping("/dashboard/meta/{code}")
+      public  ResponseEntity<DashboardData> getDashboardByCode(String code, Principal principal) throws Exception {
+          final DashboardModel dashboard = (DashboardModel) flexibleSearch.find(new DashboardModel(code));
+
+          if (Objects.isNull(dashboard)) {
+              throw new IllegalArgumentException(String.format("No dashboard found with code %s", code));
+          }
+
+          return ResponseEntity.ok(dashboardDataService.buildDashboardData(dashboard));
       }
 
 

@@ -128,3 +128,5 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('Currency', 'com.teratech.model.settings.CurrencyModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Filter', 'com.teratech.model.settings.FilterModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
+VALUES ('Dashboard', 'com.teratech.model.cms.DashboardModel', true, '', 'backoffice', '1.0.0', now());

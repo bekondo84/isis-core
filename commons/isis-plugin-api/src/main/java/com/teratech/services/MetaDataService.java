@@ -20,7 +20,7 @@ public interface MetaDataService {
      * @param principal : IF TRUE BUILD the complete metadata else partially build the metadata
      * @return
      */
-    MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMata, List<String> allReadyProcess, boolean principal) throws JAXBException;
+    MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMata, List<String> allReadyProcess, boolean principal) throws Exception;
 
     /**
      *  Build MetaData From Navigation Node
@@ -29,7 +29,7 @@ public interface MetaDataService {
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
-    MetaData buildMetaDataFrom (MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException;
+    MetaData buildMetaDataFrom (MenuItemModel menuItem) throws Exception;
 
     /**
      *  Build MetaData From Navigation Node
@@ -38,7 +38,7 @@ public interface MetaDataService {
      * @throws ClassNotFoundException
      * @throws JAXBException
      */
-    MetaData buildMetaDataFrom (MetaTypeModel metaType) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException;
+    MetaData buildMetaDataFrom (MetaTypeModel metaType) throws Exception;
 
 
 }

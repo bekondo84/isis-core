@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.10.30 à 01:41:32 PM CET 
+// Généré le : 2026.11.09 à 01:53:46 PM CET 
 //
 
 
@@ -102,27 +102,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DashboardSectionType }
+     * Create an instance of {@link Charts }
      * 
      */
-    public DashboardSectionType createDashboardSectionType() {
-        return new DashboardSectionType();
+    public Charts createCharts() {
+        return new Charts();
     }
 
     /**
-     * Create an instance of {@link DashboardSubSectionType }
+     * Create an instance of {@link KpiCards }
      * 
      */
-    public DashboardSubSectionType createDashboardSubSectionType() {
-        return new DashboardSubSectionType();
+    public KpiCards createKpiCards() {
+        return new KpiCards();
     }
 
     /**
-     * Create an instance of {@link DashboardItem }
+     * Create an instance of {@link WorflowKpiCards }
      * 
      */
-    public DashboardItem createDashboardItem() {
-        return new DashboardItem();
+    public WorflowKpiCards createWorflowKpiCards() {
+        return new WorflowKpiCards();
+    }
+
+    /**
+     * Create an instance of {@link AbstractDashboardSection }
+     * 
+     */
+    public AbstractDashboardSection createAbstractDashboardSection() {
+        return new AbstractDashboardSection();
+    }
+
+    /**
+     * Create an instance of {@link CardItem }
+     * 
+     */
+    public CardItem createCardItem() {
+        return new CardItem();
+    }
+
+    /**
+     * Create an instance of {@link ChartItem }
+     * 
+     */
+    public ChartItem createChartItem() {
+        return new ChartItem();
     }
 
     /**

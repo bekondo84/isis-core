@@ -3,6 +3,7 @@ package com.teratech.isis.services.impl;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.isis.dao.impl.FlexibleSearchImpl;
 import com.teratech.metadata.MetaData;
+import com.teratech.services.DashboardDataService;
 import com.teratech.services.I18NService;
 import com.teratech.services.MetaDataService;
 import jakarta.xml.bind.JAXBException;
@@ -23,17 +24,18 @@ class MetaDataServiceImplTest {
     private PluginManager pluginManager;
     private FlexibleSearch flexibleSearch;
     private I18NService i18NService;
+    private DashboardDataService dashboardDataService;
 
     @BeforeEach
     void setUp() {
         pluginManager = Mockito.mock(PluginManager.class);
         flexibleSearch = Mockito.mock(FlexibleSearchImpl.class);
         i18NService = Mockito.mock(I18NServiceImpl.class);
-        metaDataService = new MetaDataServiceImpl(pluginManager, flexibleSearch, i18NService);
+        metaDataService = new MetaDataServiceImpl(pluginManager, flexibleSearch, i18NService, dashboardDataService);
     }
 
     @Test
-    void createMetaForCompanyTemplate() throws JAXBException {
+    void createMetaForCompanyTemplate() throws Exception {
         MetaData meta = metaDataService.buildMetaDataFrom(CompanyTest.class, null, "company.xml", new HashMap<>() , new ArrayList<>(), true);
         assertNotNull(meta);
         ObjectMapper mapper = new ObjectMapper();

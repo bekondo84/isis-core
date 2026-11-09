@@ -4,6 +4,7 @@ import com.teratech.annotations.*;
 import com.teratech.dao.FlexibleSearch;
 import com.teratech.jaxb.entities.Action;
 import com.teratech.model.settings.SettingsModel;
+import com.teratech.services.DashboardDataService;
 import com.teratech.utils.ReflectionUtils;
 import com.teratech.jaxb.entities.*;
 import com.teratech.metadata.*;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
-import javax.annotation.Nonnull;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -45,12 +45,14 @@ public class MetaDataServiceImpl implements MetaDataService {
     private JAXBService jaxbService;
     private final FlexibleSearch flexibleSearch;
     private final I18NService i18NService;
+    private final DashboardDataService dashboardDataService;
 
     @Autowired
-    public MetaDataServiceImpl(PluginManager pluginManager, FlexibleSearch flexibleSearch, I18NService i18NService) {
+    public MetaDataServiceImpl(PluginManager pluginManager, FlexibleSearch flexibleSearch, I18NService i18NService, DashboardDataService dashboardDataService) {
         this.pluginManager = pluginManager;
         this.flexibleSearch = flexibleSearch;
         this.i18NService = i18NService;
+        this.dashboardDataService = dashboardDataService;
         jaxbService = new JAXBServiceImpl();
     }
 
@@ -62,7 +64,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @throws JAXBException
      */
     @Override
-    public MetaData buildMetaDataFrom(MenuItemModel menuItem) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException {
+    public MetaData buildMetaDataFrom(MenuItemModel menuItem) throws Exception {
 
         //Get Type code
         MetaTypeModel metaType = (MetaTypeModel) flexibleSearch.find(new MetaTypeModel(menuItem.getType()));
@@ -81,7 +83,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @throws JAXBException
      */
     @Override
-    public MetaData buildMetaDataFrom(MetaTypeModel metaType) throws ClassNotFoundException, JAXBException, IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public MetaData buildMetaDataFrom(MetaTypeModel metaType) throws Exception {
         PluginWrapper wrapper = null ;
         final List<String> allReadyProcess = new ArrayList<>();
         final Map<String, MetaData> createMeta = new HashMap<>();
@@ -113,7 +115,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @throws JAXBException
      */
     @Override
-    public MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    public MetaData buildMetaDataFrom(Class clazz, PluginWrapper wrapper, String templatename, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
         final MetaData metaData = new MetaData(clazz.getName(), clazz.getSimpleName().replaceFirst("Model$", ""));
 
         if (clazz.isAnnotationPresent(com.teratech.annotations.Action.class)) {
@@ -153,7 +155,7 @@ public class MetaDataServiceImpl implements MetaDataService {
                 buildKabanView(template, metaData);
             } else {
                 //Build Dashbord View
-                buildDashboard(wrapper, template, metaData);
+               // dashboardDataService.buildDashboardData(wrapper, template);
             }
         } else  {
             List<Field> processFields = fields.stream().filter(f -> !Arrays.asList("stringValue", "seqnumber").contains(f.getName())).collect(Collectors.toUnmodifiableList());
@@ -180,10 +182,10 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param wrapper
      * @param template
      * @param metaData
-     */
+
     private void buildDashboard(PluginWrapper wrapper, Context template, MetaData metaData) {
 
-        DashboardMeta dashboardMeta = new DashboardMeta();
+        DashboardData dashboardMeta = new DashboardData();
         metaData.setDashboardView(dashboardMeta);
         Dashbord dashbord = template.getDashbord();
         dashboardMeta.setName(dashbord.getName());
@@ -206,7 +208,7 @@ public class MetaDataServiceImpl implements MetaDataService {
              }
         }
     }
-
+     */
     /**
      *
      * @param wrapper
@@ -235,7 +237,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         metaData.setKabanView(kabanViewData);
     }
 
-    private void buildEditorArea(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildEditorArea(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
          FormData formData = new FormData();
         metaData.getEditorarea().setForm(formData);
         metaData.setFormViewTitle(i18NService.getMessage(wrapper, metaData.getTypeCode().concat(".form.title")));
@@ -312,7 +314,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param metaData
      * @param fields
      */
-    private void buildListView(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildListView(PluginWrapper wrapper, Class clazz, MetaData metaData, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
         final ListViewData listViewData = metaData.getListView();
         //Set ListEditor Title
         metaData.setListViewTitle(i18NService.getMessage(wrapper, metaData.getTypeCode().concat(".list.title")));
@@ -343,7 +345,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param meta
      * @param fields
      */
-    private void buildEditorArea(PluginWrapper wrapper, Context template, MetaData meta, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildEditorArea(PluginWrapper wrapper, Context template, MetaData meta, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
         //Fields use to build Table column
         final EditorAreaData editorArea = meta.getEditorarea();
 
@@ -420,7 +422,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param tabType
      * @param fields
      */
-    private void buildTab(PluginWrapper wrapper, MetaData meta, TabData tabData, TabType tabType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildTab(PluginWrapper wrapper, MetaData meta, TabData tabData, TabType tabType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
              FormData formData = new FormData();
              tabData.setForm(formData);
              buildForm(wrapper, meta, formData, tabType.getForm(), fields, createMeta, allReadyProcess, principal);
@@ -432,7 +434,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param formType
      * @param fields
      */
-    private void buildForm(PluginWrapper wrapper, MetaData meta, FormData formData, FormType formType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildForm(PluginWrapper wrapper, MetaData meta, FormData formData, FormType formType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
          //System.out.println(String.format("----------MetaDataServiceImpl.buildForm ------------------ %s", formType.getSection().size()));
         formType.getSection().sort(new Comparator<SectionType>() {
             @Override
@@ -454,7 +456,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param sectionType
      * @param fields
      */
-    private void buildSection(PluginWrapper wrapper, MetaData meta, SectionData sectionData, SectionType sectionType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildSection(PluginWrapper wrapper, MetaData meta, SectionData sectionData, SectionType sectionType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
             buildSubsectionType(wrapper, meta, sectionData, sectionType, fields, createMeta, allReadyProcess, principal);
 
             if (Objects.nonNull(sectionType)
@@ -483,7 +485,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param sectionType
      * @param fields
      */
-    private void buildSubsectionType(PluginWrapper wrapper, MetaData meta, SectionData sectionData, SubSectionType sectionType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws JAXBException {
+    private void buildSubsectionType(PluginWrapper wrapper, MetaData meta, SectionData sectionData, SubSectionType sectionType, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess, boolean principal) throws Exception {
         sectionData.setColumns(sectionType.getColumns().intValue());
         sectionData.setHeader(sectionType.isHeader());
         sectionData.setName(sectionType.getName());
@@ -575,7 +577,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param meta
      * @param fields
      */
-    private void buildListView(PluginWrapper wrapper, Context template, MetaData meta, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess) throws JAXBException {
+    private void buildListView(PluginWrapper wrapper, Context template, MetaData meta, List<Field> fields, Map<String, MetaData> createMeta, List<String> allReadyProcess) throws Exception {
         //Fields use to build Table column
         final List<Field> managedFields = new ArrayList<>();
         Map<String, ColumnType> columnsTypeMap = new HashMap();
@@ -650,7 +652,7 @@ public class MetaDataServiceImpl implements MetaDataService {
      * @param column
      * @throws JAXBException
      */
-    private void setComplexTypeField(PluginWrapper wrapper, Field field, MetaColumn column, Map<String, MetaData> createMeta, List<String> allReadyProcess) throws JAXBException {
+    private void setComplexTypeField(PluginWrapper wrapper, Field field, MetaColumn column, Map<String, MetaData> createMeta, List<String> allReadyProcess) throws Exception {
         Class fieldClass = field.getType();
 
         if (Collection.class.isAssignableFrom(fieldClass)) {
