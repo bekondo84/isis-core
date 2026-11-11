@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/dashboard">
+    <ls:dashbord action="da">
+        <ls:kpiCards name="general_kpis" columns="4" position="1" refresh="3600" action="backofficeDashboardAction" method="general_kpis">
+            <ls:items id="number_items"  icon="DollarSign" color="text-purple-600 bg-purple-50 dark:bg-purple-950/30"/>
+            <ls:items id="number_items2" />
+            <ls:items id="number_items3" />
+        </ls:kpiCards>
+        <ls:workflowKpiCards name="workflow_kpis" columns="5" position="2" refresh="3600"
+                             action="backofficeDashboardAction" method="workflow_kpis" unit="Mails">
+            <ls:items id="workflow_item_01" color="bg-purple-600 dark:bg-purple-500" text="text-purple-700"/>
+            <ls:items id="workflow_item_02" color="bg-blue-600 dark:bg-blue-500" text="text-purple-700"/>
+            <ls:items id="workflow_item_03" color="bg-amber-500 dark:bg-amber-400" text="text-purple-700"/>
+        </ls:workflowKpiCards>
+    </ls:dashbord>
+</context>

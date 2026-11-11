@@ -14,12 +14,14 @@ public interface DashboardDataService {
      * @return
      */
     DashboardData buildDashboardData(DashboardModel dashboard) throws Exception;
+
     /**
      *
-     * @param wrapper
+     * @param wrapperwrapper
+     * @param dashboardModel
      * @param context
      * @return
      * @throws Exception
      */
-    DashboardData buildDashboardData(PluginWrapper wrapper, Context context) throws Exception;
+    DashboardData buildDashboardData(PluginWrapper wrapperwrapper, DashboardModel dashboardModel, Context context) throws Exception;
 }

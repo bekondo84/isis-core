@@ -5,9 +5,11 @@ import java.io.Serializable;
 public class AbstractDashboardSectionData implements Serializable {
     protected String name;
     protected String label;
+    protected String icon;
     protected Integer position;
     protected Integer columns;
     protected Boolean header = false;
+    protected String type;
 
     public AbstractDashboardSectionData() {
     }
@@ -70,6 +72,23 @@ public class AbstractDashboardSectionData implements Serializable {
 
     public AbstractDashboardSectionData setHeader(Boolean header) {
         this.header = header;
+        return this;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public AbstractDashboardSectionData setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+    public AbstractDashboardSectionData setIcon(String icon) {
+        this.icon = icon;
         return this;
     }
 

@@ -479,7 +479,7 @@ CREATE TABLE IF NOT EXISTS adm_filter (
     CONSTRAINT fk_filter_group FOREIGN KEY (group_id) REFERENCES bs_usergroup
 );
 ------CREATE cms_metatype
-  CREATE TABLE IF NOT EXISTS cms_metatype (
+  CREATE TABLE IF NOT EXISTS cms_dashboard (
       code VARCHAR (50) NOT NULL,
       descrip VARCHAR (255) NOT NULL,
       template VARCHAR (255) NOT NULL,

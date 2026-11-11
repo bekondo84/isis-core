@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.09 à 01:53:46 PM CET 
+// Généré le : 2026.11.11 à 02:25:21 PM CET 
 //
 
 
@@ -27,6 +27,8 @@ import java.util.List;
  *       &lt;sequence&gt;
  *         &lt;element name="items" type="{http://www.isis.cm/config/dashboard}CardItem" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="unit" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="method" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="refresh" type="{http://www.w3.org/2001/XMLSchema}integer" default="3600" /&gt;
@@ -47,6 +49,10 @@ public class WorflowKpiCards
 
     @XmlElement(required = true)
     protected List<CardItem> items;
+    @XmlAttribute(name = "icon")
+    protected String icon;
+    @XmlAttribute(name = "unit")
+    protected String unit;
     @XmlAttribute(name = "action", required = true)
     protected String action;
     @XmlAttribute(name = "method", required = true)
@@ -81,6 +87,54 @@ public class WorflowKpiCards
             items = new ArrayList<CardItem>();
         }
         return this.items;
+    }
+
+    /**
+     * Obtient la valeur de la propriété icon.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getIcon() {
+        return icon;
+    }
+
+    /**
+     * Définit la valeur de la propriété icon.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setIcon(String value) {
+        this.icon = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété unit.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getUnit() {
+        return unit;
+    }
+
+    /**
+     * Définit la valeur de la propriété unit.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUnit(String value) {
+        this.unit = value;
     }
 
     /**

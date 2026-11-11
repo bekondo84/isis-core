@@ -1,5 +1,7 @@
 package com.teratech.metadata;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,12 +16,14 @@ public class KpiCardsData extends AbstractDashboardSectionData {
 
     public KpiCardsData() {
         items = new ArrayList<>();
+        type = "kpiCards";
     }
 
     public KpiCardsData(String action, String method, Integer refresh) {
         this.action = action;
         this.method = method;
         this.refresh = refresh;
+        type = "kpiCards";
         items = new ArrayList<>();
     }
 
@@ -62,11 +66,10 @@ public class KpiCardsData extends AbstractDashboardSectionData {
 
     public boolean isValid(){
         return !items.isEmpty()
-                && action != null
-                && !action.isEmpty()
-                && method != null
-                && !method.isEmpty()
+                && StringUtils.isNotBlank(action)
+                && StringUtils.isNotBlank(method)
                 && refresh != null
-                && super.isValid();
+                && super.isValid()
+                && type.equals("kpiCards");
     }
 }

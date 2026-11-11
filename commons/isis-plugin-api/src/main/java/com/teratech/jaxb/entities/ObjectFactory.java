@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.09 à 01:53:46 PM CET 
+// Généré le : 2026.11.11 à 02:25:21 PM CET 
 //
 
 
@@ -131,6 +131,14 @@ public class ObjectFactory {
      */
     public AbstractDashboardSection createAbstractDashboardSection() {
         return new AbstractDashboardSection();
+    }
+
+    /**
+     * Create an instance of {@link AbstractDashboardItem }
+     * 
+     */
+    public AbstractDashboardItem createAbstractDashboardItem() {
+        return new AbstractDashboardItem();
     }
 
     /**

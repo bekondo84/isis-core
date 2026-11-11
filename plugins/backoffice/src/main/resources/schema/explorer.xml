@@ -2,7 +2,7 @@
 <explorer-tree xmlns="http://www.isis.cm/config/explorer-tree"
 >
     <navigation-node id="backoffice.dashbord.node" position="95" icon="fa-solid fa-chart-line" >
-        <navigation-node id="backoffice.system.dashbord" position="100" code="Dashboard"  icon="fa-solid fa-chart-line" viewMode="dashboard" />
+        <navigation-node id="backoffice.system.dashbord" position="100" code="backoffice.dashboard"  icon="fa-solid fa-chart-line" viewMode="dashboard" />
     </navigation-node>
     <navigation-node id="backoffice.settings.node" position="96"  icon="fa-solid fa-screwdriver-wrench">
         <navigation-node id="backoffice.general.settings.node" code="Settings" position="98" icon="fa-solid fa-gear" viewMode="list,view" />

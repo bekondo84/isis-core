@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.09 à 01:53:46 PM CET 
+// Généré le : 2026.11.11 à 02:25:21 PM CET 
 //
 
 
@@ -10,6 +10,7 @@ package com.teratech.jaxb.entities;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlType;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.List;
  *   &lt;complexContent&gt;
  *     &lt;extension base="{http://www.isis.cm/config/dashboard}AbstractDashboardSection"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="items" type="{http://www.isis.cm/config/dashboard}ChartItem" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="items" type="{http://www.isis.cm/config/dashboard}ChartItem" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
@@ -43,6 +44,7 @@ public class Charts
     extends AbstractDashboardSection
 {
 
+    @XmlElement(required = true)
     protected List<ChartItem> items;
 
     /**

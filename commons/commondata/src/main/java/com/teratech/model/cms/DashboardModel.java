@@ -22,7 +22,7 @@ public class DashboardModel extends AbstractItem {
     @ManyToOne
     @JoinColumns({
             @JoinColumn(name = "plugin_id", referencedColumnName = "id", nullable = false),
-            @JoinColumn(name = "version_version", referencedColumnName = "version", nullable = false),
+            @JoinColumn(name = "plugin_version", referencedColumnName = "version", nullable = false),
     })
     protected PluginModel plugin;
 

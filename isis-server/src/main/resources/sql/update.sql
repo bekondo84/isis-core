@@ -11,6 +11,10 @@ INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createda
 VALUES ('filterAction', 'Action gerant les filtres', 'filterAction', null, null, NOW(), 'filterAction');
 INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createdat,stringvalue)
 VALUES ('settingsAction', 'gestion des configurations', 'settingsAction', null, null, NOW(), 'settingsAction');
+INSERT INTO cms_action (code, descrip, bean, plugin_id, plugin_version, createdat,stringvalue)
+VALUES ('backofficeDashboardAction', 'Gestion du dashboard du backoffice', 'backofficeDashboardAction', null, null, NOW(), 'backofficeDashboardAction');
+
+
 ----Ccron_state
 INSERT INTO cron_state (code, description, createdat,stringvalue)
 VALUES ('CREATE', 'Nouveau', NOW(), 'Nouveau');
@@ -130,3 +134,6 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('Filter', 'com.teratech.model.settings.FilterModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Dashboard', 'com.teratech.model.cms.DashboardModel', true, '', 'backoffice', '1.0.0', now());
+-------------Dashboard entry
+INSERT INTO  cms_dashboard (code, descrip, template, plugin_id, plugin_version, stringvalue, createdAt)
+VALUES ('backoffice.dashboard', 'Tableau de bord du module admin', 'dashboard.xml', 'backoffice','1.0.0', 'Tableau de bord du module admin', now());

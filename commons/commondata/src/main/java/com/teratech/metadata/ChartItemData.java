@@ -1,6 +1,6 @@
 package com.teratech.metadata;
 
-public class ChartItemData extends CardItemData{
+public class ChartItemData extends AbstractDashboardItem{
     protected String action;
     protected String method;
     protected String type;
@@ -16,14 +16,14 @@ public class ChartItemData extends CardItemData{
     /**
      *
      * @param id
-     * @param name
+     * @param label
      * @param action
      * @param method
      * @param type
      * @param refresh
      */
-    public ChartItemData(String id, String name, String action, String method, String type, Integer refresh) {
-        super(id, name);
+    public ChartItemData(String id, String label, String action, String method, String type, Integer refresh) {
+        super(id, label);
         this.action = action;
         this.method = method;
         this.type = type;
@@ -67,6 +67,6 @@ public class ChartItemData extends CardItemData{
     }
 
     public boolean isValid() {
-        return id != null && name != null && refresh != null && type != null && action != null && method != null;
+        return id != null && label != null && refresh != null && type != null && action != null && method != null;
     }
 }

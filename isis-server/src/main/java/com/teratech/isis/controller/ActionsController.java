@@ -11,6 +11,7 @@ import com.teratech.model.cms.*;
 import com.teratech.services.DashboardDataService;
 import com.teratech.services.MetaDataService;
 import com.teratech.utils.ApplicationConstans;
+import com.teratech.utils.ApplicationConstans.Actions;
 import jakarta.xml.bind.JAXBException;
 import org.pf4j.PluginManager;
 import org.slf4j.Logger;
@@ -23,8 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.security.Principal;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping(ApplicationConstans.API.API_PREFIX+"/actions")
@@ -60,6 +60,20 @@ public class ActionsController {
 
       }
 
+      @CrossOrigin("*")
+      @GetMapping("/navigation/dashboard/{name}")
+      public ResponseEntity<DashboardData> processNavigationDashboard(@PathVariable final String name, final Principal principal) throws Exception {
+          final MenuItemModel menuItem = flexibleSearch.find(new MenuItemModel(name));
+
+          if (Objects.isNull(menuItem))
+              throw new IllegalArgumentException(String.format("No Navigation node found with name %s", name));
+          //Find Dashboard associate
+          final DashboardModel dashboard = flexibleSearch.find(new DashboardModel(menuItem.getType()));
+          if (Objects.isNull(dashboard))
+              throw new IllegalArgumentException(String.format("No Dashboard record found with name %s", menuItem.getType()));
+          return ResponseEntity.ok(dashboardDataService.buildDashboardData(dashboard));
+      }
+
 
     /**
      * Get meta data for entity base on it name, if custom action is provided then use this action to get
@@ -79,7 +93,7 @@ public class ActionsController {
       }
 
       @CrossOrigin("*")
-      @GetMapping("/dashboard/meta/{code}")
+      @GetMapping("/dashboard/{code}")
       public  ResponseEntity<DashboardData> getDashboardByCode(String code, Principal principal) throws Exception {
           final DashboardModel dashboard = (DashboardModel) flexibleSearch.find(new DashboardModel(code));
 
@@ -130,6 +144,29 @@ public class ActionsController {
     @DeleteMapping("execute/{action}/{method}")
     public ResponseEntity<ActionContextData> executeDeleteAction(@RequestBody ActionContextData context, @PathVariable final String action, @PathVariable String method, final Principal principal) throws ApplicationException {
         return executeAction(context, action, method, ActionType.DELETE);
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("execute/{action}/{method}")
+    public ResponseEntity<ActionContextData> executeAction(@ModelAttribute Map<String, String> context, @PathVariable String action, @PathVariable String method) throws Exception {
+           ActionContextData appcontext = new ActionContextData();
+           appcontext.put(Actions.TYPECODE, context.get(Actions.TYPECODE));
+           appcontext.put(Actions.TYPE, context.get(Actions.TYPE));
+           appcontext.put(Actions.PLUGIN, context.get(Actions.PLUGIN));
+           appcontext.put(Actions.PAGESIZE, context.get(Actions.PAGESIZE));
+           appcontext.put(Actions.NBREOFITEMS, context.get(Actions.NBREOFITEMS));
+           final Map<String, String> data = new HashMap<>();
+
+           if (Objects.nonNull(context)) {
+               for (String key : context.keySet()) {
+                   if (!Arrays.asList(Actions.TYPECODE, Actions.TYPE, Actions.NBREOFITEMS, Actions.PLUGIN, Actions.PAGESIZE).contains(context.get(key))) {
+                       data.put(key, context.get(key));
+                   }
+               }
+           }
+           appcontext.put(Actions.DATA, data);
+
+          return executeAction(appcontext, action, method, ActionType.GET);
     }
 
     /**

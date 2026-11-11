@@ -5,10 +5,10 @@
            xmlns:tns="http://www.isis.cm/config/dashboard">
     <xs:element name="dashbord">
         <xs:complexType>
-            <xs:choice>
-                <xs:element name="charts" type="tns:Charts" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element name="kpiCards" type="tns:KpiCards" minOccurs="0" maxOccurs="unbounded" />
-                <xs:element name="workflowKpiCards" type="tns:WorflowKpiCards" minOccurs="0" maxOccurs="unbounded" />
+            <xs:choice minOccurs="1" maxOccurs="unbounded">
+                <xs:element name="charts" type="tns:Charts"  />
+                <xs:element name="kpiCards" type="tns:KpiCards" />
+                <xs:element name="workflowKpiCards" type="tns:WorflowKpiCards" />
             </xs:choice>
             <xs:attribute name="action" type="xs:string" use="required"/>
         </xs:complexType>
@@ -16,7 +16,7 @@
     <xs:complexType name="AbstractDashboardSection">
         <xs:attribute name="name" type="xs:string"/>
         <xs:attribute name="position" type="xs:unsignedInt" default="100"/>
-        <xs:attribute name="columns"  type="xs:unsignedInt" />
+        <xs:attribute name="columns"  type="xs:unsignedInt" default="3" />
         <xs:attribute name="header"  type="xs:boolean" default="false" />
     </xs:complexType>
     <!--Kpi cards  -->
@@ -39,6 +39,8 @@
                 <xs:sequence>
                     <xs:element name="items" type="tns:CardItem" minOccurs="1" maxOccurs="unbounded" />
                 </xs:sequence>
+                <xs:attribute name="icon" type="xs:string" />
+                <xs:attribute name="unit" type="xs:string" />
                 <xs:attribute name="action" use="required"  type="xs:string"/>
                 <xs:attribute name="method" use="required"  type="xs:string" />
                 <xs:attribute name="refresh" type="xs:integer"  default="3600"/>
@@ -55,13 +57,23 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    <xs:complexType name="AbstractDashboardItem">
+        <xs:attribute name="id" type="xs:string" use="required" />
+        <xs:attribute name="color" type="xs:string" />
+        <xs:attribute name="icon" type="xs:string" />
+    </xs:complexType>
     <xs:complexType name="CardItem">
-        <xs:attribute name="id" type="xs:string" use="required"/>
-        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:complexContent>
+            <xs:extension base="tns:AbstractDashboardItem">
+               <xs:attribute name="currency" type="xs:string" />
+                <!-- the color of the text -->
+                <xs:attribute name="text" type="xs:string" />
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     <xs:complexType name="ChartItem">
        <xs:complexContent>
-           <xs:extension base="tns:CardItem">
+           <xs:extension base="tns:AbstractDashboardItem">
                <xs:attribute name="action" type="xs:string" use="required"/>
                <xs:attribute name="method" type="xs:string" use="required"/>
                <xs:attribute name="type" type="tns:ChartType" use="required"/>
@@ -71,10 +83,13 @@
     </xs:complexType>
     <xs:simpleType name="ChartType">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="pie" />
-            <xs:enumeration value="line" />
-            <xs:enumeration value="doughnut" />
             <xs:enumeration value="bar" />
+            <xs:enumeration value="doughnut" />
+            <xs:enumeration value="line" />
+            <xs:enumeration value="pie" />
+            <xs:enumeration value="radar" />
+            <xs:enumeration value="scatter" />
+            <xs:enumeration value="activitylogs" />
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>

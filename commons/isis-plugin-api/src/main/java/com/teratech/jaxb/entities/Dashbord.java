@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.09 à 03:02:43 PM CET 
+// Généré le : 2026.11.11 à 02:25:21 PM CET 
 //
 
 
@@ -23,10 +23,10 @@ import java.util.List;
  * &lt;complexType&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;choice&gt;
- *         &lt;element name="charts" type="{http://www.isis.cm/config/dashboard}Charts" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="kpiCards" type="{http://www.isis.cm/config/dashboard}KpiCards" maxOccurs="unbounded" minOccurs="0"/&gt;
- *         &lt;element name="workflowKpiCards" type="{http://www.isis.cm/config/dashboard}WorflowKpiCards" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;choice maxOccurs="unbounded"&gt;
+ *         &lt;element name="charts" type="{http://www.isis.cm/config/dashboard}Charts"/&gt;
+ *         &lt;element name="kpiCards" type="{http://www.isis.cm/config/dashboard}KpiCards"/&gt;
+ *         &lt;element name="workflowKpiCards" type="{http://www.isis.cm/config/dashboard}WorflowKpiCards"/&gt;
  *       &lt;/choice&gt;
  *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
@@ -38,107 +38,49 @@ import java.util.List;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "charts",
-    "kpiCards",
-    "workflowKpiCards"
+    "chartsOrKpiCardsOrWorkflowKpiCards"
 })
 @XmlRootElement(name = "dashbord", namespace = "http://www.isis.cm/config/dashboard")
 public class Dashbord {
 
-    @XmlElement(namespace = "http://www.isis.cm/config/dashboard")
-    protected List<Charts> charts;
-    @XmlElement(namespace = "http://www.isis.cm/config/dashboard")
-    protected List<KpiCards> kpiCards;
-    @XmlElement(namespace = "http://www.isis.cm/config/dashboard")
-    protected List<WorflowKpiCards> workflowKpiCards;
+    @XmlElements({
+        @XmlElement(name = "charts", namespace = "http://www.isis.cm/config/dashboard", type = Charts.class),
+        @XmlElement(name = "kpiCards", namespace = "http://www.isis.cm/config/dashboard", type = KpiCards.class),
+        @XmlElement(name = "workflowKpiCards", namespace = "http://www.isis.cm/config/dashboard", type = WorflowKpiCards.class)
+    })
+    protected List<AbstractDashboardSection> chartsOrKpiCardsOrWorkflowKpiCards;
     @XmlAttribute(name = "action", required = true)
     protected String action;
 
     /**
-     * Gets the value of the charts property.
+     * Gets the value of the chartsOrKpiCardsOrWorkflowKpiCards property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the charts property.
+     * This is why there is not a <CODE>set</CODE> method for the chartsOrKpiCardsOrWorkflowKpiCards property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCharts().add(newItem);
+     *    getChartsOrKpiCardsOrWorkflowKpiCards().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link com.isis.generated.Charts }
+     * {@link Charts }
+     * {@link KpiCards }
+     * {@link WorflowKpiCards }
      * 
      * 
      */
-    public List<Charts> getCharts() {
-        if (charts == null) {
-            charts = new ArrayList<Charts>();
+    public List<AbstractDashboardSection> getChartsOrKpiCardsOrWorkflowKpiCards() {
+        if (chartsOrKpiCardsOrWorkflowKpiCards == null) {
+            chartsOrKpiCardsOrWorkflowKpiCards = new ArrayList<AbstractDashboardSection>();
         }
-        return this.charts;
-    }
-
-    /**
-     * Gets the value of the kpiCards property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the kpiCards property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getKpiCards().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link com.isis.generated.KpiCards }
-     * 
-     * 
-     */
-    public List<KpiCards> getKpiCards() {
-        if (kpiCards == null) {
-            kpiCards = new ArrayList<KpiCards>();
-        }
-        return this.kpiCards;
-    }
-
-    /**
-     * Gets the value of the workflowKpiCards property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the workflowKpiCards property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getWorkflowKpiCards().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link com.isis.generated.WorflowKpiCards }
-     * 
-     * 
-     */
-    public List<WorflowKpiCards> getWorkflowKpiCards() {
-        if (workflowKpiCards == null) {
-            workflowKpiCards = new ArrayList<WorflowKpiCards>();
-        }
-        return this.workflowKpiCards;
+        return this.chartsOrKpiCardsOrWorkflowKpiCards;
     }
 
     /**

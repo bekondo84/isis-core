@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.09 à 01:53:46 PM CET 
+// Généré le : 2026.11.11 à 02:25:21 PM CET 
 //
 
 
@@ -22,7 +22,7 @@ import jakarta.xml.bind.annotation.*;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="position" type="{http://www.w3.org/2001/XMLSchema}unsignedInt" default="100" /&gt;
- *       &lt;attribute name="columns" type="{http://www.w3.org/2001/XMLSchema}unsignedInt" /&gt;
+ *       &lt;attribute name="columns" type="{http://www.w3.org/2001/XMLSchema}unsignedInt" default="3" /&gt;
  *       &lt;attribute name="header" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -111,8 +111,12 @@ public class AbstractDashboardSection {
      *     {@link Long }
      *     
      */
-    public Long getColumns() {
-        return columns;
+    public long getColumns() {
+        if (columns == null) {
+            return  3L;
+        } else {
+            return columns;
+        }
     }
 
     /**

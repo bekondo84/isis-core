@@ -1,38 +1,57 @@
 package com.teratech.metadata;
 
-import java.io.Serializable;
+import org.apache.commons.lang.StringUtils;
+
 import java.util.Objects;
 
-public class CardItemData implements Serializable {
-    protected  String id;
-    protected String name;
+public class CardItemData extends AbstractDashboardItem {
+
+    protected Double value;
+    protected Float change;
+    protected String scope;
+    protected String currency;
+
 
     public CardItemData() {
     }
 
     public CardItemData(String id, String name) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
     }
 
-    public String getId() {
-        return id;
+    public Double getValue() {
+        return value;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public CardItemData setValue(Double value) {
+        this.value = value;
+        return this;
     }
 
-    public String getName() {
-        return name;
+    public Float getChange() {
+        return change;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public CardItemData setChange(Float change) {
+        this.change = change;
+        return this;
     }
 
-    public boolean isValid() {
-        return id != null && name != null;
+    public String getScope() {
+        return scope;
+    }
+
+    public CardItemData setScope(String scope) {
+        this.scope = scope;
+        return this;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     @Override
@@ -45,5 +64,10 @@ public class CardItemData implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public boolean isValid() {
+        return StringUtils.isNotBlank(id)
+                && StringUtils.isNotBlank(label);
     }
 }

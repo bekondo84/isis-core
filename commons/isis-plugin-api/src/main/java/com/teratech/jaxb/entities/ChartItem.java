@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.09 à 01:53:46 PM CET 
+// Généré le : 2026.11.11 à 02:25:21 PM CET 
 //
 
 
@@ -24,7 +24,7 @@ import java.math.BigInteger;
  * <pre>
  * &lt;complexType name="ChartItem"&gt;
  *   &lt;complexContent&gt;
- *     &lt;extension base="{http://www.isis.cm/config/dashboard}CardItem"&gt;
+ *     &lt;extension base="{http://www.isis.cm/config/dashboard}AbstractDashboardItem"&gt;
  *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="method" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="type" use="required" type="{http://www.isis.cm/config/dashboard}ChartType" /&gt;
@@ -39,7 +39,7 @@ import java.math.BigInteger;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChartItem", namespace = "http://www.isis.cm/config/dashboard")
 public class ChartItem
-    extends CardItem
+    extends AbstractDashboardItem
 {
 
     @XmlAttribute(name = "action", required = true)
