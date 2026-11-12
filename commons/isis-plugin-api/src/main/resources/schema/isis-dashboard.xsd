@@ -51,9 +51,13 @@
     <xs:complexType name="Charts">
         <xs:complexContent>
             <xs:extension base="tns:AbstractDashboardSection">
-                <xs:sequence>
-                    <xs:element name="items" type="tns:ChartItem" minOccurs="1" maxOccurs="unbounded"/>
-                </xs:sequence>
+                <xs:choice minOccurs="1" maxOccurs="unbounded">
+                    <xs:element name="barChart" type="tns:BarChart" />
+                    <xs:element name="pieChart" type="tns:PieChart" />
+                    <xs:element name="doughnutChart" type="tns:DoughnutChart" />
+                    <xs:element name="lineChart" type="tns:LineChart" />
+                    <xs:element name="activityLogs" type="tns:ActivityLogs" />
+                </xs:choice>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -76,10 +80,45 @@
            <xs:extension base="tns:AbstractDashboardItem">
                <xs:attribute name="action" type="xs:string" use="required"/>
                <xs:attribute name="method" type="xs:string" use="required"/>
-               <xs:attribute name="type" type="tns:ChartType" use="required"/>
                <xs:attribute name="refresh" type="xs:integer"  default="3600"/>
            </xs:extension>
        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="BarChart">
+        <xs:complexContent>
+            <xs:extension base="tns:ChartItem">
+                <xs:attribute name="bgColor" type="xs:string" default="#9333ea"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="LineChart">
+        <xs:complexContent>
+            <xs:extension base="tns:BarChart">
+                <xs:attribute name="pointBgColor" type="xs:string" default="#9333ea"/>
+                <xs:attribute name="borderColor" type="xs:string" default="#9333ea" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="DoughnutChart">
+        <xs:complexContent>
+            <xs:extension base="tns:ChartItem">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="PieChart">
+        <xs:complexContent>
+            <xs:extension base="tns:ChartItem">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ActivityLogs">
+        <xs:complexContent>
+            <xs:extension base="tns:ChartItem">
+
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
     <xs:simpleType name="ChartType">
         <xs:restriction base="xs:string">

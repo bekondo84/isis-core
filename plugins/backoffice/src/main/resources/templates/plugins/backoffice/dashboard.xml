@@ -13,5 +13,12 @@
             <ls:items id="workflow_item_02" color="bg-blue-600 dark:bg-blue-500" text="text-purple-700"/>
             <ls:items id="workflow_item_03" color="bg-amber-500 dark:bg-amber-400" text="text-purple-700"/>
         </ls:workflowKpiCards>
+        <ls:charts>
+            <ls:pieChart id="pie" action="backofficeDashboardAction" method="pie_test" refresh="3600"/>
+            <ls:barChart id="bar" action="backofficeDashboardAction" method="bar_test" />
+            <ls:doughnutChart id="doughnut" action="backofficeDashboardAction" method="doughnut_test" />
+            <ls:lineChart id="line" action="backofficeDashboardAction" method="line_test" />
+            <ls:activityLogs id="activitylogs" action="backofficeDashboardAction" method="activityLogs_test"/>
+        </ls:charts>
     </ls:dashbord>
 </context>

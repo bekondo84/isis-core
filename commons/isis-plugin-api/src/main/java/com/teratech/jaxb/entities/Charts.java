@@ -2,16 +2,13 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
 package com.teratech.jaxb.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +23,13 @@ import java.util.List;
  * &lt;complexType name="Charts"&gt;
  *   &lt;complexContent&gt;
  *     &lt;extension base="{http://www.isis.cm/config/dashboard}AbstractDashboardSection"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="items" type="{http://www.isis.cm/config/dashboard}ChartItem" maxOccurs="unbounded"/&gt;
- *       &lt;/sequence&gt;
+ *       &lt;choice maxOccurs="unbounded"&gt;
+ *         &lt;element name="barChart" type="{http://www.isis.cm/config/dashboard}BarChart"/&gt;
+ *         &lt;element name="pieChart" type="{http://www.isis.cm/config/dashboard}PieChart"/&gt;
+ *         &lt;element name="doughnutChart" type="{http://www.isis.cm/config/dashboard}DoughnutChart"/&gt;
+ *         &lt;element name="lineChart" type="{http://www.isis.cm/config/dashboard}LineChart"/&gt;
+ *         &lt;element name="activityLogs" type="{http://www.isis.cm/config/dashboard}ActivityLogs"/&gt;
+ *       &lt;/choice&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -37,43 +38,53 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Charts", namespace = "http://www.isis.cm/config/dashboard", propOrder = {
-    "items"
+@XmlType(name = "Charts", propOrder = {
+    "barChartOrPieChartOrDoughnutChart"
 })
 public class Charts
     extends AbstractDashboardSection
 {
 
-    @XmlElement(required = true)
-    protected List<ChartItem> items;
+    @XmlElements({
+        @XmlElement(name = "barChart", type = BarChart.class),
+        @XmlElement(name = "pieChart", type = PieChart.class),
+        @XmlElement(name = "doughnutChart", type = DoughnutChart.class),
+        @XmlElement(name = "lineChart", type = LineChart.class),
+        @XmlElement(name = "activityLogs", type = ActivityLogs.class)
+    })
+    protected List<ChartItem> barChartOrPieChartOrDoughnutChart;
 
     /**
-     * Gets the value of the items property.
+     * Gets the value of the barChartOrPieChartOrDoughnutChart property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the Jakarta XML Binding object.
-     * This is why there is not a <CODE>set</CODE> method for the items property.
+     * This is why there is not a <CODE>set</CODE> method for the barChartOrPieChartOrDoughnutChart property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getItems().add(newItem);
+     *    getBarChartOrPieChartOrDoughnutChart().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ChartItem }
+     * {@link ActivityLogs }
+     * {@link BarChart }
+     * {@link DoughnutChart }
+     * {@link LineChart }
+     * {@link PieChart }
      * 
      * 
      */
-    public List<ChartItem> getItems() {
-        if (items == null) {
-            items = new ArrayList<ChartItem>();
+    public List<ChartItem> getBarChartOrPieChartOrDoughnutChart() {
+        if (barChartOrPieChartOrDoughnutChart == null) {
+            barChartOrPieChartOrDoughnutChart = new ArrayList<ChartItem>();
         }
-        return this.items;
+        return this.barChartOrPieChartOrDoughnutChart;
     }
 
 }

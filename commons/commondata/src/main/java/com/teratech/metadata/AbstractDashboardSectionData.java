@@ -1,6 +1,9 @@
 package com.teratech.metadata;
 
+import org.apache.commons.lang.StringUtils;
+
 import java.io.Serializable;
+import java.util.Objects;
 
 public class AbstractDashboardSectionData implements Serializable {
     protected String name;
@@ -93,6 +96,6 @@ public class AbstractDashboardSectionData implements Serializable {
     }
 
     public boolean isValid() {
-        return name != null && position != null && columns != null ;
+        return StringUtils.isNotBlank(name)  && Objects.nonNull(position) && Objects.nonNull(columns)  ;
     }
 }

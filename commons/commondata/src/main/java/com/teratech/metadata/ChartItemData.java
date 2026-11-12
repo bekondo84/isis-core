@@ -19,15 +19,14 @@ public class ChartItemData extends AbstractDashboardItem{
      * @param label
      * @param action
      * @param method
-     * @param type
      * @param refresh
      */
-    public ChartItemData(String id, String label, String action, String method, String type, Integer refresh) {
+    public ChartItemData(String id, String label, String action, String method, Integer refresh) {
         super(id, label);
         this.action = action;
         this.method = method;
-        this.type = type;
         this.refresh = refresh;
+        this.type = "chart";
     }
 
     public String getAction() {

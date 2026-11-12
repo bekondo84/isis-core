@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
@@ -155,6 +155,46 @@ public class ObjectFactory {
      */
     public ChartItem createChartItem() {
         return new ChartItem();
+    }
+
+    /**
+     * Create an instance of {@link BarChart }
+     * 
+     */
+    public BarChart createBarChart() {
+        return new BarChart();
+    }
+
+    /**
+     * Create an instance of {@link LineChart }
+     * 
+     */
+    public LineChart createLineChart() {
+        return new LineChart();
+    }
+
+    /**
+     * Create an instance of {@link DoughnutChart }
+     * 
+     */
+    public DoughnutChart createDoughnutChart() {
+        return new DoughnutChart();
+    }
+
+    /**
+     * Create an instance of {@link PieChart }
+     * 
+     */
+    public PieChart createPieChart() {
+        return new PieChart();
+    }
+
+    /**
+     * Create an instance of {@link ActivityLogs }
+     * 
+     */
+    public ActivityLogs createActivityLogs() {
+        return new ActivityLogs();
     }
 
     /**

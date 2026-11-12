@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
@@ -38,7 +38,7 @@ import java.util.List;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "sectionType", propOrder = {
+@XmlType(name = "sectionType", namespace = "http://www.isis.cm/config/editor-area", propOrder = {
     "section"
 })
 public class SectionType

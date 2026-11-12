@@ -9,6 +9,7 @@ public class ChartsData extends AbstractDashboardSectionData{
     protected List<ChartItemData> items = new ArrayList<ChartItemData>();
 
     public ChartsData() {
+        type = "Charts";
     }
 
     /**
@@ -21,6 +22,7 @@ public class ChartsData extends AbstractDashboardSectionData{
      */
     public ChartsData(String name, String label, Integer position, Integer columns, Boolean header) {
         super(name, label, position, columns, header);
+        type = "Charts";
     }
 
     public List<ChartItemData> getItems() {
@@ -31,7 +33,7 @@ public class ChartsData extends AbstractDashboardSectionData{
     }
 
     public void addItem(ChartItemData item) {
-        if (items.contains(item)) {
+        if (!items.contains(item)) {
             this.items.add(item);
         }
     }

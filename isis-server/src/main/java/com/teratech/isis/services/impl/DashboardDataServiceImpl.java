@@ -95,6 +95,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                           ChartsData item = buildChartData((Charts) chart);
                           if (item.isValid()) {
                               dashboardData.addItem(item);
+                          } else  {
+                              throw new IllegalArgumentException("Config-Error: invalid Charts config: name, columns and position are required ..."+item.getItems());
                           }
                       });
         }
@@ -106,21 +108,120 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @return
      */
     private ChartsData buildChartData(Charts chart) {
+        if (StringUtils.isBlank(chart.getName())) {
+            throw new IllegalArgumentException("Config-Error: No name provided for charts ...");
+        }
         final ChartsData chartsData = new ChartsData(chart.getName()
                 , i18NService.getMessage(chart.getName())
                 , (int)chart.getPosition()
                 , (int)chart.getColumns()
                 , chart.isHeader());
 
-         if (!CollectionUtils.isEmpty(chart.getItems())) {
-             chart.getItems().forEach((item) -> {
-                 ChartItemData chartItemDa = buildChartItem(item);
-                 if (chartItemDa.isValid()) {
-                     chartsData.addItem(chartItemDa);
+         if (!CollectionUtils.isEmpty(chart.getBarChartOrPieChartOrDoughnutChart())) {
+             chart.getBarChartOrPieChartOrDoughnutChart().forEach((item) -> {
+                 if (item instanceof LineChart) {
+                     LineChartData itemData = buildLineChartData((LineChart)item);
+                     if (itemData.isValid()) {
+                         chartsData.addItem(itemData);
+                     } else {
+                         throw new IllegalArgumentException("Config-Error:  Invalid LineChart config: id, refresh, action and method are required...");
+                     }
+                 } else if (item instanceof BarChart) {
+                     BarChartData itemData = buildBarChartData((BarChart) item);
+                     if (itemData.isValid()) {
+                         chartsData.addItem(itemData);
+                     } else {
+                         throw new IllegalArgumentException("Config-Error:  Invalid BarChart config: id, refresh, action and method are required...");
+                     }
+                 }  else if (item instanceof DoughnutChart) {
+                     DoughnutChartData itemData = buildDoughnutChartData((DoughnutChart)item);
+                     if (itemData.isValid()) {
+                         chartsData.addItem(itemData);
+                     } else {
+                         throw new IllegalArgumentException("Config-Error:  Invalid DoughnutChart config: id, refresh, action and method are required...");
+                     }
+                 } else if (item instanceof PieChart) {
+                     PieChartData itemData = buildPieChartData((PieChart)item);
+                     if (itemData.isValid()) {
+                         chartsData.addItem(itemData);
+                     }  else {
+                         throw new IllegalArgumentException("Config-Error:  Invalid PieChart config: id, refresh, action and method are required...");
+                     }
+                 } else if (item instanceof ActivityLogs) {
+                     ActivityLogsData activityLogsData = buildActivityLogsData((ActivityLogs)item);
+                     if (activityLogsData.isValid()) {
+                         chartsData.addItem(activityLogsData);
+                     } else {
+                         throw new IllegalArgumentException("Config-Error:  Invalid ActivityLogs config: id, refresh, action and method are required...");
+                     }
                  }
+
              });
          }
         return  chartsData;
+    }
+
+    private ActivityLogsData buildActivityLogsData(ActivityLogs item) {
+        ActivityLogsData activityLogsData = new ActivityLogsData(item.getId(), i18NService.getMessage(item.getId()));
+        activityLogsData.setAction(item.getAction())
+                .setMethod(item.getMethod())
+                .setRefresh(item.getRefresh().intValue())
+                .setColor(item.getColor())
+                .setIcon(item.getIcon())
+                .setId(item.getId())
+                .setIcon(item.getIcon())
+                .setColor(item.getColor());
+        return activityLogsData;
+    }
+
+    private PieChartData buildPieChartData(PieChart item) {
+        PieChartData pieChartData = new PieChartData(item.getId(), i18NService.getMessage(item.getId()));
+        pieChartData.setAction(item.getAction())
+                .setMethod(item.getMethod())
+                .setRefresh(item.getRefresh().intValue())
+                .setColor(item.getColor())
+                .setIcon(item.getIcon())
+                .setId(item.getId());
+        return pieChartData;
+    }
+
+    private DoughnutChartData buildDoughnutChartData(DoughnutChart item) {
+        DoughnutChartData doughnutChartData = new DoughnutChartData(item.getId(), i18NService.getMessage(item.getId()));
+        doughnutChartData.setAction(item.getAction())
+                .setMethod(item.getMethod())
+                .setRefresh(item.getRefresh().intValue())
+                .setColor(item.getColor())
+                .setIcon(item.getIcon())
+                .setId(item.getId());
+        return doughnutChartData;
+    }
+
+
+    private LineChartData buildLineChartData(LineChart item) {
+        final LineChartData lineChartData = new LineChartData(item.getId(), i18NService.getMessage(item.getId()));
+        lineChartData.setType("line")
+                .setAction(item.getAction())
+                .setMethod(item.getMethod())
+                .setRefresh(item.getRefresh().intValue())
+                .setColor(item.getColor())
+                .setIcon(item.getIcon())
+                .setId(item.getId())
+                .setLabel(i18NService.getMessage(item.getId()));
+        return  lineChartData;
+    }
+
+    private BarChartData buildBarChartData(BarChart barChart) {
+        final BarChartData barChartData = new BarChartData();
+        barChartData.setBgColor(barChart.getBgColor())
+                .setType("bar")
+                .setAction(barChart.getAction())
+                .setMethod(barChart.getMethod())
+                .setRefresh(barChart.getRefresh().intValue())
+                .setColor(barChart.getColor())
+                .setIcon(barChart.getIcon())
+                .setId(barChart.getId())
+                .setLabel(i18NService.getMessage(barChart.getId()));
+        return  barChartData;
     }
     /**
      *
@@ -132,7 +233,6 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                  , i18NService.getMessage( chartItem.getId())
                  , chartItem.getAction()
                  , chartItem.getMethod()
-                 , chartItem.getType().value()
                  , chartItem.getRefresh().intValue());
     }
     /**
@@ -146,8 +246,10 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                     .filter(item -> item instanceof  WorflowKpiCards).forEach(card -> {
                 WorflowKpiCardsData item = buildWorflowKpiCardsData((WorflowKpiCards) card);
 
-                /*if (item.isValid()) */{
+                if (item.isValid()) {
                     dashboardData.addItem(item);
+                }  else {
+                    throw new IllegalArgumentException("Config-Error:  Invalid WorflowKpiCards config: name, position, columns, refresh, action and method are required...");
                 }
             });
         }
@@ -159,6 +261,9 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @return
      */
     private WorflowKpiCardsData buildWorflowKpiCardsData(WorflowKpiCards worflowKpiCards)  {
+        if (StringUtils.isBlank(worflowKpiCards.getName())) {
+            throw new IllegalArgumentException("Config-Error: No name provided for workflowKpiCards ...");
+        }
         WorflowKpiCardsData worflowKpiCardsData =  new WorflowKpiCardsData(worflowKpiCards.getAction(), worflowKpiCards.getMethod(), worflowKpiCards.getRefresh().intValue());
         worflowKpiCardsData.setName(worflowKpiCards.getName());
         worflowKpiCardsData.setLabel(i18NService.getMessage(worflowKpiCards.getName()));
@@ -177,6 +282,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                  card.setCurrency(cardItem.getCurrency());
                  if (card.isValid()) {
                      worflowKpiCardsData.addItem(card);
+                 }  else {
+                     throw new IllegalArgumentException("Config-Error:  Invalid CardItem config: id is required...");
                  }
             });
         }
@@ -199,6 +306,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
 
                     if (e.isValid()) {
                         dashboardData.getDashbordItems().add(e);
+                    }  else {
+                        throw new IllegalArgumentException("Config-Error:  Invalid CardItem config: name, position, columns, action, method and refresh is required...");
                     }
                 });
         }
@@ -212,6 +321,9 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @throws Exception
      */
     private KpiCardsData buildKpiCardsData(PluginWrapper wrapper, KpiCards kpiCards)  {
+            if (StringUtils.isBlank(kpiCards.getName())) {
+                throw new IllegalArgumentException("Config-Error: No name provided for kpiCards ...");
+            }
            final KpiCardsData kpiCardsData = new KpiCardsData(kpiCards.getAction(), kpiCards.getMethod(), kpiCards.getRefresh().intValue());
            kpiCardsData.setName(kpiCards.getName());
            kpiCardsData.setLabel(i18NService.getMessage(kpiCards.getName()));
@@ -226,6 +338,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                    item.setCurrency(card.getCurrency());
                    if (item.isValid()) {
                        kpiCardsData.addItem(item);
+                   }  else {
+                       throw new IllegalArgumentException("Config-Error:  Invalid CardItem config: id is required...");
                    }
                });
            }

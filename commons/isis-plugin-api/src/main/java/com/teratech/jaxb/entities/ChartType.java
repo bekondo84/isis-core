@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
@@ -20,27 +20,36 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;simpleType name="ChartType"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="pie"/&gt;
- *     &lt;enumeration value="line"/&gt;
- *     &lt;enumeration value="doughnut"/&gt;
  *     &lt;enumeration value="bar"/&gt;
+ *     &lt;enumeration value="doughnut"/&gt;
+ *     &lt;enumeration value="line"/&gt;
+ *     &lt;enumeration value="pie"/&gt;
+ *     &lt;enumeration value="radar"/&gt;
+ *     &lt;enumeration value="scatter"/&gt;
+ *     &lt;enumeration value="activitylogs"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
  * </pre>
  * 
  */
-@XmlType(name = "ChartType", namespace = "http://www.isis.cm/config/dashboard")
+@XmlType(name = "ChartType")
 @XmlEnum
 public enum ChartType {
 
-    @XmlEnumValue("pie")
-    PIE("pie"),
-    @XmlEnumValue("line")
-    LINE("line"),
+    @XmlEnumValue("bar")
+    BAR("bar"),
     @XmlEnumValue("doughnut")
     DOUGHNUT("doughnut"),
-    @XmlEnumValue("bar")
-    BAR("bar");
+    @XmlEnumValue("line")
+    LINE("line"),
+    @XmlEnumValue("pie")
+    PIE("pie"),
+    @XmlEnumValue("radar")
+    RADAR("radar"),
+    @XmlEnumValue("scatter")
+    SCATTER("scatter"),
+    @XmlEnumValue("activitylogs")
+    ACTIVITYLOGS("activitylogs");
     private final String value;
 
     ChartType(String v) {

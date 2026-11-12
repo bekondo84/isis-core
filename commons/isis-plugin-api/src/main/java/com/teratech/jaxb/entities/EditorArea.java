@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
@@ -46,9 +46,10 @@ import jakarta.xml.bind.annotation.*;
     "actions",
     "shutcuts"
 })
-@XmlRootElement(name = "editor-area")
+@XmlRootElement(name = "editor-area", namespace = "http://www.isis.cm/config/editor-area")
 public class EditorArea {
 
+    @XmlElement(namespace = "http://www.isis.cm/config/editor-area")
     protected EditorAreaType component;
     @XmlElement(namespace = "http://www.isis.cm/config/isis-actions")
     protected Actions actions;

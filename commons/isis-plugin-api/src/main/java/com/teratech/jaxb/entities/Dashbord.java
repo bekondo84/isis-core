@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
@@ -40,13 +40,13 @@ import java.util.List;
 @XmlType(name = "", propOrder = {
     "chartsOrKpiCardsOrWorkflowKpiCards"
 })
-@XmlRootElement(name = "dashbord", namespace = "http://www.isis.cm/config/dashboard")
+@XmlRootElement(name = "dashbord")
 public class Dashbord {
 
     @XmlElements({
-        @XmlElement(name = "charts", namespace = "http://www.isis.cm/config/dashboard", type = Charts.class),
-        @XmlElement(name = "kpiCards", namespace = "http://www.isis.cm/config/dashboard", type = KpiCards.class),
-        @XmlElement(name = "workflowKpiCards", namespace = "http://www.isis.cm/config/dashboard", type = WorflowKpiCards.class)
+        @XmlElement(name = "charts", type = Charts.class),
+        @XmlElement(name = "kpiCards", type = KpiCards.class),
+        @XmlElement(name = "workflowKpiCards", type = WorflowKpiCards.class)
     })
     protected List<AbstractDashboardSection> chartsOrKpiCardsOrWorkflowKpiCards;
     @XmlAttribute(name = "action", required = true)

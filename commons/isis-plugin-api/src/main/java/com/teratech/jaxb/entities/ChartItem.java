@@ -2,16 +2,13 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.11 à 02:25:21 PM CET 
+// Généré le : 2026.11.12 à 10:19:41 AM CET 
 //
 
 
 package com.teratech.jaxb.entities;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import java.math.BigInteger;
 
@@ -27,7 +24,6 @@ import java.math.BigInteger;
  *     &lt;extension base="{http://www.isis.cm/config/dashboard}AbstractDashboardItem"&gt;
  *       &lt;attribute name="action" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="method" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
- *       &lt;attribute name="type" use="required" type="{http://www.isis.cm/config/dashboard}ChartType" /&gt;
  *       &lt;attribute name="refresh" type="{http://www.w3.org/2001/XMLSchema}integer" default="3600" /&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
@@ -37,7 +33,13 @@ import java.math.BigInteger;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChartItem", namespace = "http://www.isis.cm/config/dashboard")
+@XmlType(name = "ChartItem")
+@XmlSeeAlso({
+    BarChart.class,
+    DoughnutChart.class,
+    PieChart.class,
+    ActivityLogs.class
+})
 public class ChartItem
     extends AbstractDashboardItem
 {
@@ -46,8 +48,6 @@ public class ChartItem
     protected String action;
     @XmlAttribute(name = "method", required = true)
     protected String method;
-    @XmlAttribute(name = "type", required = true)
-    protected ChartType type;
     @XmlAttribute(name = "refresh")
     protected BigInteger refresh;
 
@@ -97,30 +97,6 @@ public class ChartItem
      */
     public void setMethod(String value) {
         this.method = value;
-    }
-
-    /**
-     * Obtient la valeur de la propriété type.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ChartType }
-     *     
-     */
-    public ChartType getType() {
-        return type;
-    }
-
-    /**
-     * Définit la valeur de la propriété type.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ChartType }
-     *     
-     */
-    public void setType(ChartType value) {
-        this.type = value;
     }
 
     /**
