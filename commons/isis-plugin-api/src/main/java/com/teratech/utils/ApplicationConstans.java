@@ -17,6 +17,7 @@ public class ApplicationConstans {
     public static class Actions {
         public static final String DEFAULT_ACTION ="defaultAction";
         public static final String DATA = "data";
+        public static final String FILTER = "filter";
         public static final String TYPE = "class";
         public static final String TYPECODE = "typeCode";
         public static final String PLUGIN = "plugin";

@@ -5,6 +5,7 @@ import com.teratech.dao.FlexibleSearch;
 import com.teratech.model.security.UserModel;
 import com.teratech.model.settings.FilterModel;
 import com.teratech.populator.Populator;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -66,8 +67,12 @@ public class CustomFilterPopulator implements Populator<CustomFilterData, Filter
         target.setScope(source.getScope());
         target.setTypeCode(source.getTypeCode());
         target.setCreationDate(source.getCreatedAt());
-        List<CustomFilterData.PredicateData> predicates  = mapper.readValue(source.getValue(), new TypeReference<List<CustomFilterData.PredicateData>>() {
-        });
-        target.setPredicates(predicates);
+        if (StringUtils.equals(source.getType(), "1")) {
+            List<CustomFilterData.PredicateData> predicates = mapper.readValue(source.getValue(), new TypeReference<List<CustomFilterData.PredicateData>>() {
+            });
+            target.setPredicates(predicates);
+        } else {
+            target.setQuery(source.getValue());
+        }
     }
 }

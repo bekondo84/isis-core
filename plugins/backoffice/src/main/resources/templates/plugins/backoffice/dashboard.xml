@@ -18,7 +18,6 @@
             <ls:barChart id="bar" action="backofficeDashboardAction" method="bar_test" />
             <ls:doughnutChart id="doughnut" action="backofficeDashboardAction" method="doughnut_test" />
             <ls:lineChart id="line" action="backofficeDashboardAction" method="line_test" />
-            <ls:activityLogs id="activitylogs" action="backofficeDashboardAction" method="activityLogs_test"/>
         </ls:charts>
     </ls:dashbord>
 </context>

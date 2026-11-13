@@ -15,6 +15,7 @@ public class CustomFilterData implements Serializable {
     private String type;
     private LocalDateTime creationDate;
     private List<PredicateData> predicates = new ArrayList<>();
+    private String query;
 
 
     public CustomFilterData(long id, String name, String typeCode) {
@@ -87,6 +88,14 @@ public class CustomFilterData implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 
     /**

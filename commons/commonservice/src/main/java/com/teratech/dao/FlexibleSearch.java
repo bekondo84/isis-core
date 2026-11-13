@@ -64,7 +64,14 @@ public interface FlexibleSearch {
      * @param parameters : Map of parameters
      * @return
      */
-    List doSearch(final String queryString ,  final Map<String , Object> parameters) throws IllegalAccessException;
+    List doSearch(final String queryString, final Map<String , Object> parameters , int firstResult , int maxResult) throws IllegalAccessException;
+
+    /**
+     *
+     * @param queryString
+     * @return
+     */
+    long count(final String queryString);
     /**
      * Number of entities which match the criteria
      * @param container

@@ -1,0 +1,50 @@
+<svg
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 shrink-0"
+>
+    <defs>
+        {/* Dégradé Feu / Forge (Cuivre & Orange) */}
+        <linearGradient id="forgeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f97316" /> {/* Orange vif */}
+            <stop offset="100%" stopColor="#c2410c" /> {/* Cuivre sombre */}
+        </linearGradient>
+
+        {/* Dégradé Tech / Modules ERP (Indigo & Violet) */}
+        <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8b5cf6" /> {/* Violet */}
+            <stop offset="100%" stopColor="#6366f1" /> {/* Indigo */}
+        </linearGradient>
+    </defs>
+
+    {/* Lignes de connexion (Architecture modulaire) */}
+    <path
+            d="M12 20H28M20 12V28M14 14L26 26M26 14L14 26"
+            stroke="url(#techGradient)"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            opacity="0.3"
+    />
+
+    {/* Nœuds modulaires extérieurs */}
+    <circle cx="12" cy="12" r="3" fill="#8b5cf6" />
+    <circle cx="28" cy="12" r="3" fill="#8b5cf6" />
+    <circle cx="12" cy="28" r="3" fill="#8b5cf6" />
+    <circle cx="28" cy="28" r="3" fill="#8b5cf6" />
+
+    {/* Le Cœur de la Forge / Étincelle centrale (Symbolisant Ògún) */}
+    <rect
+            x="16"
+            y="16"
+            width="8"
+            height="8"
+            rx="2"
+            fill="url(#forgeGradient)"
+            transform="rotate(45 20 20)"
+            className="shadow-md"
+    />
+
+    {/* Point lumineux central (L'étincelle pure) */}
+    <circle cx="20" cy="20" r="1.5" fill="#ffffff" />
+</svg>

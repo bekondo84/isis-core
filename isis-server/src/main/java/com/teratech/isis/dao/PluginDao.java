@@ -84,7 +84,7 @@ public interface PluginDao {
      * @throws IllegalAccessException
      */
    default  List<PluginModel> getDependesOf (String pluginid) throws IllegalAccessException {
-       return getFlexibleSearch().doSearch(GET_DEPENDS, Collections.singletonMap("pluginId", pluginid));
+       return getFlexibleSearch().doSearch(GET_DEPENDS, Collections.singletonMap("pluginId", pluginid), 0, -1);
    }
 
    FlexibleSearch getFlexibleSearch();

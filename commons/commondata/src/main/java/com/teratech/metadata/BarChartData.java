@@ -1,13 +1,13 @@
 package com.teratech.metadata;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 
 public class BarChartData extends ChartItemData {
-    protected String bgColor;
+    protected List<String> labels;
     protected List<DataSet> dataSets;
 
     public BarChartData() {
@@ -27,12 +27,12 @@ public class BarChartData extends ChartItemData {
         //type = "bar";
     }
 
-    public String getBgColor() {
-        return bgColor;
+    public List<String> getLabels() {
+        return labels;
     }
 
-    public BarChartData setBgColor(String bgColor) {
-        this.bgColor = bgColor;
+    public BarChartData setLabels(List<String> labels) {
+        this.labels = labels;
         return this;
     }
 
@@ -40,12 +40,17 @@ public class BarChartData extends ChartItemData {
         return Collections.unmodifiableList(dataSets);
     }
 
-    public void setDataSets(List<DataSet> dataSets) {
+    public BarChartData setDataSets(List<DataSet> dataSets) {
         this.dataSets = dataSets;
+        return this;
     }
 
     public void addDataSet(DataSet dataSet) {
         dataSets.add(dataSet);
+    }
+
+    public void addLabel(String label) {
+        this.labels.add(label);
     }
 
     @Override
@@ -53,7 +58,47 @@ public class BarChartData extends ChartItemData {
         return super.isValid();
     }
 
-    public static  class DataSet extends HashMap<String,Double> {
+    public static  class DataSet implements Serializable {
+        private String label;
+        private List<Double> values;
+        private String bgColor;
 
+        public DataSet(String label, String bgColor) {
+            this.label = label;
+        }
+
+        public DataSet() {
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public DataSet setLabel(String label) {
+            this.label = label;
+            return this;
+        }
+
+        public List<Double> getValues() {
+            return values;
+        }
+
+        public DataSet setValues(List<Double> values) {
+            this.values = values;
+            return this;
+        }
+
+        public String getBgColor() {
+            return bgColor;
+        }
+
+        public DataSet setBgColor(String bgColor) {
+            this.bgColor = bgColor;
+            return this;
+        }
+
+        public void addValue(double value) {
+            values.add(value);
+        }
     }
 }

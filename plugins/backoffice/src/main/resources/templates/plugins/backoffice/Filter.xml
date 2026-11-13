@@ -34,6 +34,10 @@
                                visibleWhen="[{field:'scope', criteria: 'eq', value:'2'}]">
                         <e:field qualifier="group" widget="manytoone" />
                     </e:section>
+                    <e:section name="hac.commons02" columns="2" position="98">
+                        <e:field qualifier="createdAt" widget="datetime-local"/>
+                        <e:field qualifier="lastModif" widget="datetime-local" />
+					</e:section>
                     <e:section name="hac.commons" columns="2" position="98">
                         <e:field qualifier="value" widget="textarea" />
                     </e:section>

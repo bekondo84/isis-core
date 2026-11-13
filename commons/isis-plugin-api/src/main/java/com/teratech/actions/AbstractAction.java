@@ -11,6 +11,7 @@ import com.teratech.model.cms.ActionModel;
 import com.teratech.model.cms.ActionType;
 import com.teratech.model.cms.MetaTypeModel;
 import com.teratech.model.generic.AbstractItem;
+import com.teratech.model.settings.FilterModel;
 import com.teratech.services.MetaTypeService;
 import com.teratech.tools.persistence.DAOUtilis;
 import com.teratech.tools.persistence.RestrictionsContainer;
@@ -109,7 +110,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "create", scope = ActionType.POST)
-    ActionContextData create(final ActionContextData context) throws Exception {
+    public ActionContextData create(final ActionContextData context) throws Exception {
             final Class clazz = getClassFromContext(context);
             context.put(DATA, clazz.getDeclaredConstructor().newInstance());
 
@@ -122,7 +123,7 @@ public abstract class AbstractAction implements ActionService{
      * @return
      */
     @ActionMethod(value = "save", scope = ActionType.POST)
-     ActionContextData saveOrUpdate(final ActionContextData context) throws Exception {
+    public ActionContextData saveOrUpdate(final ActionContextData context) throws Exception {
          final Object object =  context.get(DATA);
 
            final Class clazz = getClassFromContext(context);
@@ -151,6 +152,21 @@ public abstract class AbstractAction implements ActionService{
        }
      }
 
+     @ActionMethod(value = "customfilter", scope = ActionType.POST)
+     public ActionContextData customFilter(ActionContextData context) throws Exception {
+        final ObjectMapper mapper = new ObjectMapper();
+         final Object filterObj =   context.get(FILTER);
+         FilterModel filter = mapper.convertValue(filterObj, FilterModel.class);
+         //Extraction des elements de pagination
+         int startIndex = Objects.nonNull(context.get(START_INDEX)) ? (int) context.get(START_INDEX) : 0;
+         int nbreOfItems = Objects.nonNull(context.get(PAGESIZE)) ? (int) context.get(PAGESIZE) : -1 ;
+
+         List data = flexibleSearch.doSearch(filter.getValue(), new HashMap<>(), startIndex, nbreOfItems);
+         context.put(NBREOFITEMS, flexibleSearch.count(filter.getValue()));
+         context.put(DATA, data);
+
+         return context;
+     }
     /**
      * Fetch List of items
      * @param context
@@ -158,7 +174,6 @@ public abstract class AbstractAction implements ActionService{
      */
      @ActionMethod(value = "fetchitems", scope = ActionType.POST)
     public ActionContextData getItems (final ActionContextData context) throws Exception {
-
             final Object searchObject =  context.get(SEARCH_PREDICAT);
             final ObjectMapper mapper = new ObjectMapper();
             List<SearchColumn> searchs = new ArrayList<>();

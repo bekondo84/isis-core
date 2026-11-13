@@ -212,8 +212,7 @@ public class DashboardDataServiceImpl implements DashboardDataService {
 
     private BarChartData buildBarChartData(BarChart barChart) {
         final BarChartData barChartData = new BarChartData();
-        barChartData.setBgColor(barChart.getBgColor())
-                .setType("bar")
+        barChartData.setType("bar")
                 .setAction(barChart.getAction())
                 .setMethod(barChart.getMethod())
                 .setRefresh(barChart.getRefresh().intValue())

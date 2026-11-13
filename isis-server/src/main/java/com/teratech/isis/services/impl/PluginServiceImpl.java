@@ -253,7 +253,7 @@ public class PluginServiceImpl implements PluginService {
      */
     @Override
     public List<PluginModel> getDependesOf(String pluginid) throws IllegalAccessException {
-        return flexibleSearch.doSearch(GET_DEPENDS, Collections.singletonMap("pluginId", pluginid));
+        return flexibleSearch.doSearch(GET_DEPENDS, Collections.singletonMap("pluginId", pluginid), -1, 0);
     }
 
     /**

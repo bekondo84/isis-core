@@ -24,5 +24,6 @@ public class AbstractMenuPopulator implements Populator<AbstractMenu, AbstractMe
           target.setIcon(source.getIcon());
           target.setLabel(i18NService.getMessage(source.getPlugin().getId(), source.getLabel()));
           target.setPosition(source.getPosition());
+          target.setSeqnumber(source.getSeqnumber());
     }
 }

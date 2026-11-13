@@ -56,7 +56,7 @@
                     <xs:element name="pieChart" type="tns:PieChart" />
                     <xs:element name="doughnutChart" type="tns:DoughnutChart" />
                     <xs:element name="lineChart" type="tns:LineChart" />
-                    <xs:element name="activityLogs" type="tns:ActivityLogs" />
+<!--                    <xs:element name="activityLogs" type="tns:ActivityLogs" />-->
                 </xs:choice>
             </xs:extension>
         </xs:complexContent>
@@ -120,15 +120,4 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:simpleType name="ChartType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="bar" />
-            <xs:enumeration value="doughnut" />
-            <xs:enumeration value="line" />
-            <xs:enumeration value="pie" />
-            <xs:enumeration value="radar" />
-            <xs:enumeration value="scatter" />
-            <xs:enumeration value="activitylogs" />
-        </xs:restriction>
-    </xs:simpleType>
 </xs:schema>

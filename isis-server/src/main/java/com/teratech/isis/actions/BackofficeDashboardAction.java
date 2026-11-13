@@ -128,4 +128,26 @@ public class BackofficeDashboardAction extends AbstractAction {
         context.put(ApplicationConstans.Actions.DATA, lineChartData);
         return context;
     }
+
+    @ActionMethod(value = "bar_test", scope = ActionType.POST)
+    public ActionContextData bar_test (ActionContextData context) throws Exception {
+        Object data = context.get(ApplicationConstans.Actions.DATA);
+        if (Objects.isNull(data)) {
+            throw new IllegalArgumentException("No Bar data provided");
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        BarChartData barChartData = mapper.convertValue(data, BarChartData.class);
+        BarChartData.DataSet dataSet = new BarChartData.DataSet();
+        barChartData.setLabels(Arrays.asList("Q1", "Q2", "Q3", "Q4"));
+        dataSet.setValues(Arrays.asList(100000d, 120000d, 140000d, 180000d))
+                .setLabel("Objectif (€)")
+                .setBgColor("#3b82f6");
+        barChartData.addDataSet(dataSet);
+        dataSet = new BarChartData.DataSet("Réalisé (€)", "#10b981");
+        dataSet.setValues(Arrays.asList(95000d, 125000d, 135000d, 190000d));
+        barChartData.addDataSet(dataSet);
+        context.put(ApplicationConstans.Actions.DATA, barChartData);
+        return context;
+    }
+
 }

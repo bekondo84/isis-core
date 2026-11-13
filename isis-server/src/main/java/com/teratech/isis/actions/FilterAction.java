@@ -16,12 +16,14 @@ import com.teratech.model.cms.ActionType;
 import com.teratech.model.generic.AbstractItem;
 import com.teratech.model.settings.FilterModel;
 import com.teratech.utils.ApplicationConstans;
+import org.apache.commons.lang.StringUtils;
 import org.pf4j.PluginManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.CollectionUtils;
+import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.ObjectMapper;
 
 import java.lang.reflect.InvocationTargetException;
@@ -32,6 +34,7 @@ import static com.teratech.utils.ApplicationConstans.Actions.DATA;
 @Action("filterAction")
 public class FilterAction extends AbstractAction {
     private static final Logger LOG = LoggerFactory.getLogger(FilterAction.class.getName());
+    public static final String SEQ_ADM_FILTER = "seq_adm_filter";
 
     private final CustomFilterPopulator customFilterPopulator;
     private final FilterPopulator filterPopulator;
@@ -47,6 +50,8 @@ public class FilterAction extends AbstractAction {
         this.customFilterPopulator = customFilterPopulator;
         this.filterPopulator = filterPopulator;
     }
+
+
 
     /**
      * Save new user action
@@ -97,13 +102,59 @@ public class FilterAction extends AbstractAction {
         return context;
     }
 
+    @Override
+    public ActionContextData saveOrUpdate(ActionContextData context) throws Exception {
+        final Object object = context.get(DATA);
+        final ObjectMapper mapper = new ObjectMapper();
+        FilterModel source = mapper.convertValue(object, FilterModel.class);
+        //Check précondition
+        filterValidator(source, mapper);
+
+        if (source.getId() <= 0) {
+            source.setId(flexibleSearch.getSequence(SEQ_ADM_FILTER));
+        }
+        try {
+            transactionTemplate.execute(status -> {
+                try {
+                    persistenceManager.save(source);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return status;
+            });
+        } catch (RuntimeException e) {
+            throw new ModelServiceException(e);
+        }
+        context.put(DATA,  source);
+        return context;
+    }
+
+    /**
+     *
+     * @param source
+     * @param mapper
+     */
+    private static void filterValidator(FilterModel source, ObjectMapper mapper) {
+        if (StringUtils.isBlank(source.getValue())) {
+            throw new IllegalArgumentException("No Prédicates or JPQL query found ...");
+        }
+        if (StringUtils.equals(source.getType(), "1")) {
+            try {
+                List<CustomFilterData.PredicateData> predicates = mapper.readValue(source.getValue(), new TypeReference<List<CustomFilterData.PredicateData>>() {
+                });
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Le script fournit pour ce filtre est incompatible avec le type choisit");
+            }
+        }
+    }
+
     @ActionMethod(value = "userfilters", scope = ActionType.POST)
     public ActionContextData loadCurrentUserFilter(ActionContextData context) throws Exception {
         String typeCode = context.get(ApplicationConstans.Actions.TYPECODE).toString();
         String query = "SELECT c FROM FilterModel c WHERE c.typeCode = :typeCode AND (c.user.id = :userId OR c.scope = '3') ORDER BY c.name DESC";
         String username = Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getName();
         final List<CustomFilterData> filters = new ArrayList<>();
-        List<FilterModel> data = flexibleSearch.doSearch(query, Map.of("userId", username, "typeCode", typeCode));
+        List<FilterModel> data = flexibleSearch.doSearch(query, Map.of("userId", username, "typeCode", typeCode), -1, 0);
 
         if (!CollectionUtils.isEmpty(data)) {
             for  (FilterModel filter : data) {

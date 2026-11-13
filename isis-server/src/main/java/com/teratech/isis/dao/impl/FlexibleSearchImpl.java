@@ -182,13 +182,29 @@ public class FlexibleSearchImpl implements FlexibleSearch {
      * @return
      */
     @Override
-    public List doSearch(String queryString, Map<String, Object> parameters) throws IllegalAccessException {
+    public List doSearch(String queryString, Map<String, Object> parameters , int firstResult , int maxResult) throws IllegalAccessException {
         assert StringUtils.isNotBlank(queryString):"Query can't be null";
 
         final Query query = em.createQuery(queryString);
+
+        query.setFirstResult(0);
+
+        if (firstResult > 0) {
+            query.setFirstResult(firstResult);
+        }
+        if(maxResult >0){
+            query.setMaxResults(maxResult);
+        }
+
         addQueryParameters(query , parameters);
         Set properties = new HashSet<>();
         return resetLazyFields(properties, query.getResultList());
+    }
+
+    @Override
+    public long count(String queryString) {
+        final Query query = em.createQuery(queryString);
+        return query.getResultList().size();
     }
 
     /**

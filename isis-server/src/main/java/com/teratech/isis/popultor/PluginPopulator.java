@@ -97,10 +97,12 @@ public class PluginPopulator implements Populator<PluginModel, PluginData> {
             AbstractMenuData menuData = null ;
              if (menu instanceof MenuModel) {
                  menuData = new MenuData();
+                 menuData.setSeqnumber(((MenuModel) menu).getSeqnumber());
                  menuPopulator.populate(menu, menuData);
              }
              else {
                  menuData = new MenuItemData();
+                 menuData.setSeqnumber(((MenuItemModel) menu).getSeqnumber());
                  menuItemPopulator.populate((MenuItemModel) menu, (MenuItemData) menuData);
              }
              //Ajout du menu dans la base de connaissance
