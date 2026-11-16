@@ -278,6 +278,11 @@ public class PluginServiceImpl implements PluginService {
         try {
             PluginWrapper pluginWrapper = pluginManager.getPlugin(pluginId);
             PluginModel pluginModel = flexibleSearch.find(new PluginModel(pluginId, pluginWrapper.getDescriptor().getVersion()));
+
+            if (Objects.isNull(pluginModel)) {
+                throw new ApplicationException("204", String.format("Plugin with id %s not found", pluginId));
+            }
+
             final PluginData pluginData = new PluginData();
             pluginPopulator.populate(pluginModel, pluginData);
             pluginPopulator.buildMenus(pluginData);
