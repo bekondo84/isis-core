@@ -134,6 +134,10 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('Filter', 'com.teratech.model.settings.FilterModel', true, '', 'backoffice', '1.0.0', now());
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat)
 VALUES ('Dashboard', 'com.teratech.model.cms.DashboardModel', true, '', 'backoffice', '1.0.0', now());
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('UserUiThemeSpec', 'com.teratech.model.settings.UserUiThemeSpecModel', true, '', 'backoffice', '1.0.0', now(), 'UserUiThemeSpec.xml');
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('GlobalUiThemeSpec', 'com.teratech.model.settings.GlobalUiThemeSpecModel', true, '', 'backoffice', '1.0.0', now(), 'GlobalUiThemeSpec.xml');
 -------------Dashboard entry
 INSERT INTO  cms_dashboard (code, descrip, template, plugin_id, plugin_version, stringvalue, createdAt)
 VALUES ('backoffice.dashboard', 'Tableau de bord du module admin', 'dashboard.xml', 'backoffice','1.0.0', 'Tableau de bord du module admin', now());

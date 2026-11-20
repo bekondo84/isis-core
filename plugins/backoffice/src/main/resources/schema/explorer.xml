@@ -9,6 +9,10 @@
         <navigation-node id="backoffice.security.business" code="Business" icon="fa-solid fa-landmark" viewMode="list,view"  />
         <navigation-node id="backoffice.system.locale" code="Local" position="99" icon="fa-solid fa-language" viewMode="list,view" />
         <navigation-node id="backoffice.system.currency" code="Currency" position="100" icon="fa-solid fa-coins" viewMode="list,view" />
+        <navigation-node id="backoffice.system.ui" position="101">
+            <navigation-node id="backoffice.system.user_ui" position="100" code="UserUiThemeSpec" viewMode="view" />
+            <navigation-node id="backoffice.system.global_ui" position="101" code="GlobalUiThemeSpec" viewMode="list,view" />
+        </navigation-node>
     </navigation-node>
     <navigation-node id="backoffice.security.node" position="97" icon="fa-solid fa-shield">
         <navigation-node id="backoffice.security.user" code="User" icon="fa-solid fa-user-tie" viewMode="list,kaban,view" action="userAction"/>

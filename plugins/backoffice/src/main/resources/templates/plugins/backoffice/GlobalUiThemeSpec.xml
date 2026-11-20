@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:ls="http://www.isis.cm/config/list-view"
+         xmlns:s="http://www.isis.cm/config/isis-search"
+         xmlns:e="http://www.isis.cm/config/editor-area"
+		 xmlns:sh="http://www.isis.cm/config/isis-shutcut"
+         xmlns:ac="http://www.isis.cm/config/isis-actions" viewMode="view">
+    <ls:list-view>
+        <ls:list>
+            <ls:column qualifier="erpTemplate" search="true"  />
+            <ls:column qualifier="themeMode" search="true"  />
+            <ls:column qualifier="accentColor" search="true" />
+            <ls:column qualifier="sidebarStyle" search="true" />
+            <ls:column qualifier="sidebarCollapsed" search="true" />
+            <ls:column qualifier="topbarStyle" search="true" />
+        </ls:list>
+    </ls:list-view>
+    <e:editor-area searchKey="userid" createOnField="false" >
+        <e:component>
+            <e:common>
+                <e:form>
+                    <e:section position="100" columns="2">
+                        <e:field qualifier="name" />
+                        <e:field qualifier="slogan" />
+                    </e:section>
+                   <e:section name="hac.commons0"   columns="2"  position="99">
+                        <e:field qualifier="erpTemplate" widget="combobox" />
+                        <e:field qualifier="themeMode" widget="combobox" />
+                        <e:field qualifier="accentColor" widget="combobox" />
+                        <e:field qualifier="sidebarStyle" widget="combobox" />
+                        <e:field qualifier="topbarStyle" widget="combobox" />
+                        <e:field qualifier="sidebarCollapsed" widget="switch" />
+                    </e:section>
+                </e:form>
+            </e:common>
+        </e:component>
+    </e:editor-area>
+</context>
