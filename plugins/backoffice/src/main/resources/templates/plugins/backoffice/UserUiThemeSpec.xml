@@ -9,12 +9,12 @@
         <ls:list>
             <ls:column qualifier="userid" search="true"  />
             <ls:column qualifier="businessid" search="true" />
-            <ls:column qualifier="erpTemplate" search="true"  />
-            <ls:column qualifier="themeMode" search="true"  />
-            <ls:column qualifier="accentColor" search="true" />
-            <ls:column qualifier="sidebarStyle" search="true" />
-            <ls:column qualifier="sidebarCollapsed" search="true" />
-            <ls:column qualifier="topbarStyle" search="true" />
+            <ls:column qualifier="erpTemplate" search="true"  widget="combobox"/>
+            <ls:column qualifier="themeMode" search="true" widget="combobox" />
+            <ls:column qualifier="accentColor" search="true" widget="combobox"/>
+            <ls:column qualifier="sidebarStyle" search="true" widget="combobox"/>
+            <ls:column qualifier="sidebarCollapsed" search="true" widget="switch"/>
+            <ls:column qualifier="topbarStyle" search="true" widget="combobox"/>
         </ls:list>
     </ls:list-view>
     <e:editor-area searchKey="userid" createOnField="false" >

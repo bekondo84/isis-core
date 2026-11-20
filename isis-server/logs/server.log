@@ -498,3 +498,406 @@
 2026-11-20T12:07:40.199+01:00  INFO 13924 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-11-20T12:07:40.201+01:00  INFO 13924 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-11-20T12:07:40.209+01:00  INFO 13924 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-20T15:01:56.621+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 27612 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-20T15:01:56.622+01:00 DEBUG 27612 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-20T15:01:56.623+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-20T15:01:56.646+01:00 DEBUG 27612 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-20T15:01:57.132+01:00  INFO 27612 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-20T15:01:57.152+01:00  INFO 27612 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JPA repository interfaces.
+2026-11-20T15:01:57.467+01:00  INFO 27612 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-20T15:01:57.502+01:00  INFO 27612 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-20T15:01:57.858+01:00  INFO 27612 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-20T15:01:57.876+01:00  INFO 27612 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-20T15:01:58.027+01:00  INFO 27612 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@23365142
+2026-11-20T15:01:58.028+01:00  INFO 27612 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-20T15:01:58.076+01:00  INFO 27612 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-20T15:01:59.118+01:00  INFO 27612 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-20T15:01:59.131+01:00  INFO 27612 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T15:01:59.147+01:00  INFO 27612 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-20T15:01:59.147+01:00  INFO 27612 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-20T15:01:59.147+01:00  INFO 27612 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-20T15:01:59.449+01:00 DEBUG 27612 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 25 mappings in 'requestMappingHandlerMapping'
+2026-11-20T15:01:59.482+01:00  WARN 27612 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-20T15:01:59.516+01:00 DEBUG 27612 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-20T15:01:59.546+01:00  INFO 27612 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-20T15:01:59.561+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-20T15:01:59.693+01:00 DEBUG 27612 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-20T15:01:59.789+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-20T15:01:59.796+01:00 DEBUG 27612 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-20T15:01:59.807+01:00 DEBUG 27612 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-20T15:01:59.912+01:00  INFO 27612 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-20T15:01:59.922+01:00  INFO 27612 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-20T15:01:59.922+01:00  INFO 27612 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-20T15:01:59.923+01:00  INFO 27612 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-20T15:01:59.924+01:00  INFO 27612 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-20T15:01:59.924+01:00  INFO 27612 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-20T15:01:59.924+01:00  INFO 27612 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-20T15:01:59.924+01:00  INFO 27612 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@380ea757
+2026-11-20T15:01:59.956+01:00  INFO 27612 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-20T15:01:59.956+01:00  INFO 27612 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-20T15:01:59.967+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 3.577 seconds (process running for 4.368)
+2026-11-20T15:01:59.969+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-20T15:01:59.970+01:00  WARN 27612 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-20T15:01:59.970+01:00  INFO 27612 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-20T15:01:59.970+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-20T15:02:00.118+01:00 DEBUG 27612 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T15:02:00.136+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-20T15:02:00.137+01:00 DEBUG 27612 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T15:02:00.138+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-20T15:02:00.139+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-20T15:02:00.141+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-20T15:02:00.142+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-20T15:02:00.143+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-20T15:02:00.143+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-20T15:02:00.143+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-20T15:02:00.143+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-20T15:02:00.143+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-20T15:02:00.143+01:00  INFO 27612 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-20T15:02:01.052+01:00 DEBUG 27612 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 20 15:01:56 CET 2026
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-20T15:02:01.057+01:00  INFO 27612 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-20T17:18:15.452+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 22524 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-20T17:18:15.455+01:00 DEBUG 22524 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-20T17:18:15.457+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-20T17:18:15.514+01:00 DEBUG 22524 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-20T17:18:16.185+01:00  INFO 22524 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-20T17:18:16.213+01:00  INFO 22524 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 JPA repository interfaces.
+2026-11-20T17:18:16.651+01:00  INFO 22524 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-20T17:18:16.695+01:00  INFO 22524 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-20T17:18:17.137+01:00  INFO 22524 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-20T17:18:17.157+01:00  INFO 22524 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-20T17:18:17.328+01:00  INFO 22524 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@14bf9fd0
+2026-11-20T17:18:17.329+01:00  INFO 22524 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-20T17:18:17.405+01:00  INFO 22524 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-20T17:18:18.817+01:00  INFO 22524 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-20T17:18:18.825+01:00  INFO 22524 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T17:18:18.862+01:00  INFO 22524 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-20T17:18:18.862+01:00  INFO 22524 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-20T17:18:18.864+01:00  INFO 22524 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-20T17:18:19.375+01:00 DEBUG 22524 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-20T17:18:19.424+01:00  WARN 22524 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-20T17:18:19.515+01:00 DEBUG 22524 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-20T17:18:19.557+01:00  INFO 22524 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-20T17:18:19.566+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-20T17:18:19.737+01:00 DEBUG 22524 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-20T17:18:19.868+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-20T17:18:19.877+01:00 DEBUG 22524 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-20T17:18:19.895+01:00 DEBUG 22524 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-20T17:18:20.068+01:00  INFO 22524 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-20T17:18:20.077+01:00  INFO 22524 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-20T17:18:20.077+01:00  INFO 22524 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-20T17:18:20.079+01:00  INFO 22524 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-20T17:18:20.079+01:00  INFO 22524 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-20T17:18:20.079+01:00  INFO 22524 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-20T17:18:20.080+01:00  INFO 22524 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-20T17:18:20.080+01:00  INFO 22524 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@41fc5625
+2026-11-20T17:18:20.135+01:00  INFO 22524 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-20T17:18:20.136+01:00  INFO 22524 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-20T17:18:20.140+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 5.017 seconds (process running for 6.326)
+2026-11-20T17:18:20.142+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-20T17:18:20.143+01:00  WARN 22524 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-20T17:18:20.143+01:00  INFO 22524 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-20T17:18:20.144+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-20T17:18:20.310+01:00 DEBUG 22524 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T17:18:20.328+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-20T17:18:20.330+01:00 DEBUG 22524 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T17:18:20.331+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-20T17:18:20.332+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-20T17:18:20.334+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-20T17:18:20.334+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-20T17:18:20.334+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-20T17:18:20.334+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-20T17:18:20.334+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-20T17:18:20.334+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-20T17:18:20.335+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-20T17:18:20.336+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-20T17:18:20.336+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-20T17:18:20.336+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-20T17:18:20.336+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-20T17:18:20.337+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-20T17:18:20.337+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-20T17:18:20.337+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-20T17:18:20.337+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-20T17:18:20.337+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-20T17:18:20.338+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-20T17:18:20.338+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-20T17:18:20.338+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-20T17:18:20.338+01:00  INFO 22524 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-20T17:18:21.423+01:00 DEBUG 22524 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 20 17:18:15 CET 2026
+2026-11-20T17:18:21.431+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T17:18:21.431+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-20T17:18:21.431+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-20T17:18:21.431+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T17:18:21.432+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-20T17:18:21.439+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T17:18:21.442+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-20T17:18:21.449+01:00  INFO 22524 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-20T18:05:38.802+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 32700 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-20T18:05:38.804+01:00 DEBUG 32700 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-20T18:05:38.805+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-20T18:05:38.855+01:00 DEBUG 32700 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-20T18:05:39.594+01:00  INFO 32700 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-20T18:05:39.629+01:00  INFO 32700 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 JPA repository interfaces.
+2026-11-20T18:05:40.139+01:00  INFO 32700 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-20T18:05:40.195+01:00  INFO 32700 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-20T18:05:40.623+01:00  INFO 32700 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-20T18:05:40.644+01:00  INFO 32700 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-20T18:05:40.851+01:00  INFO 32700 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@29ee8174
+2026-11-20T18:05:40.851+01:00  INFO 32700 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-20T18:05:40.929+01:00  INFO 32700 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-20T18:05:42.362+01:00  INFO 32700 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-20T18:05:42.368+01:00  INFO 32700 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T18:05:42.402+01:00  INFO 32700 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-20T18:05:42.403+01:00  INFO 32700 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-20T18:05:42.406+01:00  INFO 32700 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-20T18:05:42.826+01:00 DEBUG 32700 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-20T18:05:42.860+01:00  WARN 32700 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-20T18:05:42.905+01:00 DEBUG 32700 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-20T18:05:42.937+01:00  INFO 32700 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-20T18:05:42.945+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-20T18:05:43.085+01:00 DEBUG 32700 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-20T18:05:43.175+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-20T18:05:43.182+01:00 DEBUG 32700 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-20T18:05:43.192+01:00 DEBUG 32700 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-20T18:05:43.332+01:00  INFO 32700 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-20T18:05:43.342+01:00  INFO 32700 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-20T18:05:43.342+01:00  INFO 32700 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-20T18:05:43.343+01:00  INFO 32700 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-20T18:05:43.343+01:00  INFO 32700 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-20T18:05:43.343+01:00  INFO 32700 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-20T18:05:43.344+01:00  INFO 32700 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-20T18:05:43.344+01:00  INFO 32700 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@380ea757
+2026-11-20T18:05:43.389+01:00  INFO 32700 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-20T18:05:43.390+01:00  INFO 32700 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-20T18:05:43.394+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 4.977 seconds (process running for 6.24)
+2026-11-20T18:05:43.396+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-20T18:05:43.397+01:00  WARN 32700 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-20T18:05:43.398+01:00  INFO 32700 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-20T18:05:43.398+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-20T18:05:43.559+01:00 DEBUG 32700 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T18:05:43.579+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-20T18:05:43.580+01:00 DEBUG 32700 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T18:05:43.582+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-20T18:05:43.583+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-20T18:05:43.585+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-20T18:05:43.586+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-20T18:05:43.586+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-20T18:05:43.586+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-20T18:05:43.586+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-20T18:05:43.586+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-20T18:05:43.586+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-20T18:05:43.587+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-20T18:05:43.587+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-20T18:05:43.587+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-20T18:05:43.587+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-20T18:05:43.587+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-20T18:05:43.587+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-20T18:05:43.588+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-20T18:05:43.588+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-20T18:05:43.588+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-20T18:05:43.588+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-20T18:05:43.588+01:00  INFO 32700 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-20T18:05:44.714+01:00 DEBUG 32700 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 20 18:05:38 CET 2026
+2026-11-20T18:05:44.735+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T18:05:44.735+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-20T18:05:44.735+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-20T18:05:44.735+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T18:05:44.735+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-20T18:05:44.753+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T18:05:44.756+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-20T18:05:44.772+01:00  INFO 32700 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-20T18:07:12.084+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 39816 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-20T18:07:12.085+01:00 DEBUG 39816 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-20T18:07:12.086+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-20T18:07:12.120+01:00 DEBUG 39816 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-20T18:07:12.735+01:00  INFO 39816 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-20T18:07:12.764+01:00  INFO 39816 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 0 JPA repository interfaces.
+2026-11-20T18:07:13.207+01:00  INFO 39816 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-20T18:07:13.245+01:00  INFO 39816 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-20T18:07:13.668+01:00  INFO 39816 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-20T18:07:13.687+01:00  INFO 39816 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-20T18:07:13.840+01:00  INFO 39816 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@64887fbc
+2026-11-20T18:07:13.841+01:00  INFO 39816 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-20T18:07:13.911+01:00  INFO 39816 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-20T18:07:15.203+01:00  INFO 39816 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-20T18:07:15.209+01:00  INFO 39816 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T18:07:15.236+01:00  INFO 39816 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-20T18:07:15.237+01:00  INFO 39816 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-20T18:07:15.239+01:00  INFO 39816 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-20T18:07:15.616+01:00 DEBUG 39816 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-20T18:07:15.654+01:00  WARN 39816 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-20T18:07:15.720+01:00 DEBUG 39816 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-20T18:07:15.773+01:00  INFO 39816 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-20T18:07:15.784+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-20T18:07:15.936+01:00 DEBUG 39816 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-20T18:07:16.040+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-20T18:07:16.049+01:00 DEBUG 39816 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-20T18:07:16.061+01:00 DEBUG 39816 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-20T18:07:16.198+01:00  INFO 39816 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-20T18:07:16.207+01:00  INFO 39816 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-20T18:07:16.207+01:00  INFO 39816 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-20T18:07:16.207+01:00  INFO 39816 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-20T18:07:16.210+01:00  INFO 39816 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-20T18:07:16.211+01:00  INFO 39816 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-20T18:07:16.211+01:00  INFO 39816 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-20T18:07:16.211+01:00  INFO 39816 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@24e5a4e0
+2026-11-20T18:07:16.266+01:00  INFO 39816 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-20T18:07:16.266+01:00  INFO 39816 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-20T18:07:16.271+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 4.559 seconds (process running for 5.754)
+2026-11-20T18:07:16.274+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-20T18:07:16.274+01:00  WARN 39816 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-20T18:07:16.275+01:00  INFO 39816 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-20T18:07:16.275+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-20T18:07:16.458+01:00 DEBUG 39816 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T18:07:16.476+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-20T18:07:16.478+01:00 DEBUG 39816 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-20T18:07:16.480+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-20T18:07:16.481+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-20T18:07:16.483+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-20T18:07:16.484+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-20T18:07:16.484+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-20T18:07:16.484+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-20T18:07:16.484+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-20T18:07:16.485+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-20T18:07:16.485+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-20T18:07:16.485+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-20T18:07:16.486+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-20T18:07:16.486+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-20T18:07:16.486+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-20T18:07:16.486+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-20T18:07:16.486+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-20T18:07:16.486+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-20T18:07:16.487+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-20T18:07:16.487+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-20T18:07:16.487+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-20T18:07:16.487+01:00  INFO 39816 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-20T18:07:17.528+01:00 DEBUG 39816 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 20 18:07:12 CET 2026
+2026-11-20T18:07:17.537+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T18:07:17.538+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-20T18:07:17.538+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-20T18:07:17.539+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-20T18:07:17.539+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-20T18:07:17.546+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T18:07:17.549+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-20T18:07:17.556+01:00  INFO 39816 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

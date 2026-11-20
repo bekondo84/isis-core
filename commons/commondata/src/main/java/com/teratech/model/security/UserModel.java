@@ -178,6 +178,6 @@ public class UserModel extends AbstractBusinessEntity {
      */
     @Override
     public void toStringValue() {
-        stringValue = StringUtils.defaultString(surname, StringUtils.EMPTY)+" "+name;
+        stringValue = StringUtils.defaultString(name, StringUtils.EMPTY);
     }
 }
