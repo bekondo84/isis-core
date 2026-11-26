@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:l="http://www.isis.cm/config/list-view"
+         xmlns:a="http://www.isis.cm/config/editor-area">
+    <l:list-view>
+        <l:list>
+            <l:column qualifier="id" search="true" />
+            <l:column qualifier="name" search="true" />
+            <l:column qualifier="taskType" search="true" widget="manytoone" />
+            <l:column qualifier="workflow" search="true" widget="manytoone" />
+            <l:column qualifier="description" search="true" />
+            <l:column qualifier="assignee" search="true" />
+            <l:column qualifier="candidateGroup" search="true"  />
+            <l:column qualifier="dueDate" search="true" widget="datetime-local" />
+            <l:column qualifier="handler" search="true"  show="false"/>
+            <l:column qualifier="async" search="true" widget="switch"/>
+            <l:column qualifier="retryCount" search="true" widget="number" />
+            <l:column qualifier="cycle" search="true" widget="manytoone"/>
+            <l:column qualifier="timeExpression" search="true"/>
+            <l:column qualifier="duration" search="true"/>
+            <l:column qualifier="eventType" search="true" widget="manytoone" />
+            <l:column qualifier="messageRef" search="true" />
+            <l:column qualifier="correlationKey" search="true"/>
+            <l:column qualifier="signalRef" search="true"  />
+            <l:column qualifier="attachedToRef" search="true" />
+            <l:column qualifier="cancelActivity" search="true" widget="switch"/>
+        </l:list>
+    </l:list-view>
+    <a:editor-area createOnField="false" create="false" update="false" delete="false">
+        <a:component>
+            <a:common>
+                <a:form>
+                    <a:section name="hac.001" columns="2" position="100">
+                        <a:field qualifier="id" />
+                        <a:field qualifier="name" />
+                        <a:field qualifier="workflow" widget="manytoone" />
+                        <a:field qualifier="taskType" widget="manytoone" />
+                    </a:section>
+                    <a:section name="hac.usertask" columns="2" position="99" visibleWhen="[{field: 'taskType.code', criteria: 'eq', value:'USERTASK' }]">
+                        <a:field qualifier="assignee" />
+                        <a:field qualifier="candidateGroup" />
+                        <a:field qualifier="dueDate" widget="datetime-local" />
+                    </a:section>
+                    <a:section name="hac.serviceTask" position="98" visibleWhen="[{field: 'taskType.code', criteria: 'eq', value:'SERVICETASK' }]">
+                        <a:field qualifier="handler" />
+                        <a:field qualifier="async" widget="switch" />
+                        <a:field qualifier="retryCount" widget="number" />
+                    </a:section>
+                    <a:section name="hac.timeEvent" position="98" visibleWhen="[{field: 'taskType.code', criteria: 'eq', value:'TIMEREVENT'}]">
+                        <a:field qualifier="cycle" widget="manytoone" position="97"/>
+                        <a:field qualifier="dueDate" position="99" widget="datetime-local" visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'DATE'}]"/>
+                        <a:field qualifier="duration" position="98" widget="number" visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'DURATION'}]"/>
+                        <a:field qualifier="timeExpression" position="97"  visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'CYCLE'}]" />
+                    </a:section>
+                    <a:section name="hac.intermediateCatchEvent" columns="1" position="96" visibleWhen="[{field: 'taskType.code', criteria: 'eq', value:'INTERMEDIATECATCHEVENT'}]">
+                        <a:section name="hac.eventType" columns="2" position="97" >
+                            <a:field qualifier="eventType" widget="manytoone" />
+                        </a:section>
+                        <a:section name="hac.timeEvent" position="98" visibleWhen="[{field: 'eventType.code', criteria: 'eq', value:'TIMEEVENT'}]">
+                            <a:field qualifier="cycle" widget="manytoone" position="100"/>
+                            <a:field qualifier="dueDate" position="99" widget="datetime-local" visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'DATE'}]"/>
+                            <a:field qualifier="duration" position="98" widget="number" visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'DURATION'}]"/>
+                            <a:field qualifier="timeExpression" position="97"  visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'CYCLE'}]" />
+                        </a:section>
+                        <a:section name="hac.messageEvent" position="99" columns="2" visibleWhen="[{field: 'eventType.code', criteria: 'eq', value:'MESSAGEEVENT'}]">
+                            <a:field qualifier="messageRef" position="99" />
+                            <a:field qualifier="correlationKey" position="98" />
+                        </a:section>
+                        <a:section name="hac.signalEvent" position="100" columns="2" visibleWhen="[{field: 'eventType.code', criteria: 'eq', value:'SIGNALVENT'}]">
+                            <a:field qualifier="signalRef" position="99" />
+                        </a:section>
+                    </a:section>
+                    <a:section name="hac.bondaryEvent" columns="1" position="96" visibleWhen="[{field: 'taskType.code', criteria: 'eq', value:'BOUNDARYEVENT'}]">
+                        <a:section name="hac.eventType" columns="2" position="97" >
+                            <a:field qualifier="eventType" widget="manytoone" />
+                        </a:section>
+                        <a:section name="hac.timeEvent" position="98" visibleWhen="[{field: 'eventType.code', criteria: 'eq', value:'TIMEEVENT'}]">
+                            <a:field qualifier="cycle" widget="manytoone" position="100"/>
+                            <a:field qualifier="dueDate" position="99" widget="datetime-local" visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'DATE'}]"/>
+                            <a:field qualifier="duration" position="98" widget="number" visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'DURATION'}]"/>
+                            <a:field qualifier="timeExpression" position="97"  visibleWhen="[{field: 'cycle.code', criteria: 'eq', value: 'CYCLE'}]" />
+                        </a:section>
+                        <a:section name="hac.messageEvent" position="99" columns="2" visibleWhen="[{field: 'eventType.code', criteria: 'eq', value:'MESSAGEEVENT'}]">
+                            <a:field qualifier="messageRef" position="99" />
+                            <a:field qualifier="correlationKey" position="98" />
+                        </a:section>
+                        <a:section name="hac.signalEvent" position="100" columns="2" visibleWhen="[{field: 'eventType.code', criteria: 'eq', value:'SIGNALVENT'}]">
+                            <a:field qualifier="signalRef" position="99" />
+                        </a:section>
+                    </a:section>
+                </a:form>
+            </a:common>
+        </a:component>
+    </a:editor-area>
+</context>

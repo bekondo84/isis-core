@@ -6,11 +6,11 @@
         xmlns:list="http://www.isis.cm/config/list-view"
         xmlns:editor="http://www.isis.cm/config/editor-area"
         xmlns:dashboard="http://www.isis.cm/config/dashboard"
-        xmlns:utils="http://www.isis.cm/config/isis-utils">
+        xmlns:calendar="http://www.isis.cm/config/isis-calendar">
         <xs:import namespace="http://www.isis.cm/config/list-view" schemaLocation="isis-listview.xsd"/>
         <xs:import namespace="http://www.isis.cm/config/editor-area" schemaLocation="isis-editorarea.xsd"/>
         <xs:import namespace="http://www.isis.cm/config/dashboard" schemaLocation="isis-dashboard.xsd"/>
-        <xs:import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd"/>
+        <xs:import namespace="http://www.isis.cm/config/isis-calendar" schemaLocation="isis-calendar.xsd"/>
 
 
     <xs:element name="context">
@@ -20,6 +20,7 @@
                     <xs:sequence>
                         <xs:element ref="list:list-view" minOccurs="0" maxOccurs="1" xmlns:list="http://www.isis.cm/config/list-view" />
                         <xs:element ref="editor:editor-area" minOccurs="0" maxOccurs="1" xmlns:editor="http://www.isis.cm/config/editor-area"/>
+                        <xs:element name="calendar" minOccurs="0" maxOccurs="1" type="calendar:Calendar" />
                     </xs:sequence>
                     <xs:sequence>
                         <xs:element ref="dashboard:dashbord" minOccurs="1" maxOccurs="1" xmlns:dashboard="http://www.isis.cm/config/dashboard" />
@@ -27,7 +28,7 @@
                 </xs:choice>
                 <xs:attribute name="name" type="xs:string" />
                 <xs:attribute name="action" type="xs:string" default="defaultAction"/>
-                <xs:attribute name="viewMode" type="utils:viewModeType" default="list,view"/>
+                <xs:attribute name="viewMode" type="xs:string" default="list,view"/>
             </xs:complexType>
         </xs:element>
 

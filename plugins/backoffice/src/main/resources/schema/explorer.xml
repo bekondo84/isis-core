@@ -30,7 +30,12 @@
             <navigation-node id="backoffice.system.cronjob.status" code="CronJobState" position="98"  viewMode="list,view" />
             <navigation-node id="backoffice.system.cronjob.result" code="CronJobResult" position="99"  viewMode="list,view" />
         </navigation-node>
-        <navigation-node id="backoffice.system.businessrules" code="BusinessRule" position="98" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
+        <navigation-node id="backoffice.systems.businessprocess" icon="solid" position="98">
+            <navigation-node id="backoffice.systems.workflowdef" code="WorkflowDef" position="100" viewMode="list,view" />
+            <navigation-node id="backoffice.systems.taskdef" code="TaskDef" position="99" viewMode="list,view" />
+            <navigation-node id="backoffice.systems.sequenceflowdef" code="SequenceFlowDef" position="98" viewMode="list,view" />
+        </navigation-node>
+        <navigation-node id="backoffice.system.businessrules" code="BusinessRule" position="97" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
         <navigation-node id="backoffice.system.Filters" code="Filter" position="101" viewMode="list,view" icon="fa-solid fa-pen-ruler" />
     </navigation-node>
     <navigation-node id="backoffice.explorer.node" position="99" icon="fa-solid fa-align-center">

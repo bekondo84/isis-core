@@ -50,6 +50,39 @@ INSERT INTO adm_plugin_category (code, title, createdat, stringvalue)
 VALUES ('finance', 'Finances & Factures', NOW(), 'Finances & Factures');
 INSERT INTO adm_plugin_category (code, title, createdat, stringvalue)
 VALUES ('human_resources', 'Ressource humaines', NOW(), 'Ressource humaines');
+----------TASK Type value -----------
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('STARTEVENT', 'Start event', now(), 'Start event');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('USERTASK', 'User task', now(), 'User task');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('SERVICETASK', 'Service task', now(), 'Service task');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('EXCLUSIVEGATEWAY', 'Exclusive gateway', now(), 'Exclusive gateway');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('PARALLELGATEWAY', 'Parallel gateway', now(), 'Parallel gateway');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('TIMEREVENT', 'Timer event', now(), 'Timer event');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('INTERMEDIATECATCHEVENT', 'Intermediate catch event', now(), 'Intermediate catch event');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('BOUNDARYEVENT', 'Boundary event', now(), 'Boundary event');
+INSERT INTO adm_task_type (code, description, createdat, stringvalue)
+VALUES ('ENDEVENT', 'End event', now(), 'End event');
+--------------TimerCycle ----------------
+INSERT INTO adm_timer_cycle (code, description, createdat, stringvalue)
+VALUES ('DATE', 'Date', now(), 'Date');
+INSERT INTO adm_timer_cycle (code, description, createdat, stringvalue)
+VALUES ('DURATION', 'Duration', now(), 'Duration');
+INSERT INTO adm_timer_cycle (code, description, createdat, stringvalue)
+VALUES ('CYCLE', 'Cycle', now(), 'Cycle');
+--------------Event type ----------------
+INSERT INTO adm_event_type (code, description, createdat, stringvalue)
+VALUES ('TIMEEVENT', 'Time event', now(), 'Time event');
+INSERT INTO adm_event_type (code, description, createdat, stringvalue)
+VALUES ('MESSAGEEVENT', 'Message event', now(), 'Message event');
+INSERT INTO adm_event_type (code, description, createdat, stringvalue)
+VALUES ('SIGNALVENT', 'Signal event', now(), 'Signal event');
 ------Settings-------------
 INSERT INTO adm_settings (key, value, name, type, createdat, stringvalue)
 VALUES ('PAGE_SIZE', '10', 'Pagination: taille des pages', '1', NOW(), 'PAGE_SIZE');
@@ -138,6 +171,19 @@ INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin
 VALUES ('UserUiThemeSpec', 'com.teratech.model.settings.UserUiThemeSpecModel', true, '', 'backoffice', '1.0.0', now(), 'UserUiThemeSpec.xml');
 INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
 VALUES ('GlobalUiThemeSpec', 'com.teratech.model.settings.GlobalUiThemeSpecModel', true, '', 'backoffice', '1.0.0', now(), 'GlobalUiThemeSpec.xml');
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('WorkflowDef', 'com.teratech.model.definition.WorkflowDefModel', true, '', 'backoffice', '1.0.0', now(), 'WorkflowDef.xml');
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('TaskDef', 'com.teratech.model.definition.TaskDefModel', true, '', 'backoffice', '1.0.0', now(), 'TaskDef.xml');
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('SequenceFlowDef', 'com.teratech.model.definition.SequenceFlowDefModel', true, '', 'backoffice', '1.0.0', now(), 'SequenceFlowDef.xml');
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('TaskType', 'com.teratech.model.definition.TaskTypeModel', true, '', 'backoffice', '1.0.0', now(), null);
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('TimerCycle', 'com.teratech.model.definition.TimerCycleModel', true, '', 'backoffice', '1.0.0', now(), null);
+INSERT INTO cms_metatype (code, class_name, concrete, descrip, plugin_id, plugin_version, createdat, template)
+VALUES ('EventType', 'com.teratech.model.definition.EventTypeModel', true, '', 'backoffice', '1.0.0', now(), null);
 -------------Dashboard entry
 INSERT INTO  cms_dashboard (code, descrip, template, plugin_id, plugin_version, stringvalue, createdAt)
 VALUES ('backoffice.dashboard', 'Tableau de bord du module admin', 'dashboard.xml', 'backoffice','1.0.0', 'Tableau de bord du module admin', now());
+

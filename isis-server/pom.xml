@@ -112,6 +112,12 @@
 		</dependency>
 		<dependency>
 			<groupId>com.teratech</groupId>
+			<artifactId>worklow</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.teratech</groupId>
 			<artifactId>isis-plugin-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<scope>compile</scope>

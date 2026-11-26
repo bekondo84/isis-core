@@ -20,6 +20,7 @@
         <module>commondata</module>
         <module>commonservice</module>
         <module>isis-plugin-api</module>
+        <module>worklow-api</module>
     </modules>
 
 </project>

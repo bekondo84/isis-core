@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.12 à 10:19:41 AM CET 
+// Généré le : 2026.11.25 à 11:53:14 AM CET 
 //
 
 
@@ -24,6 +24,7 @@ import jakarta.xml.bind.annotation.*;
  *         &lt;sequence&gt;
  *           &lt;element ref="{http://www.isis.cm/config/list-view}list-view" minOccurs="0"/&gt;
  *           &lt;element ref="{http://www.isis.cm/config/editor-area}editor-area" minOccurs="0"/&gt;
+ *           &lt;element name="calendar" type="{http://www.isis.cm/config/isis-calendar}Calendar" minOccurs="0"/&gt;
  *         &lt;/sequence&gt;
  *         &lt;sequence&gt;
  *           &lt;element ref="{http://www.isis.cm/config/dashboard}dashbord"/&gt;
@@ -31,7 +32,7 @@ import jakarta.xml.bind.annotation.*;
  *       &lt;/choice&gt;
  *       &lt;attribute name="name" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="action" type="{http://www.w3.org/2001/XMLSchema}string" default="defaultAction" /&gt;
- *       &lt;attribute name="viewMode" type="{http://www.isis.cm/config/isis-utils}viewModeType" default="list,view" /&gt;
+ *       &lt;attribute name="viewMode" type="{http://www.w3.org/2001/XMLSchema}string" default="list,view" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -43,6 +44,7 @@ import jakarta.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {
     "listView",
     "editorArea",
+    "calendar",
     "dashbord"
 })
 @XmlRootElement(name = "context", namespace = "http://www.isis.cm/config/isis-template")
@@ -52,13 +54,15 @@ public class Context {
     protected ListView listView;
     @XmlElement(name = "editor-area", namespace = "http://www.isis.cm/config/editor-area")
     protected EditorArea editorArea;
+    @XmlElement(namespace = "http://www.isis.cm/config/isis-template")
+    protected Calendar calendar;
     protected Dashbord dashbord;
     @XmlAttribute(name = "name")
     protected String name;
     @XmlAttribute(name = "action")
     protected String action;
     @XmlAttribute(name = "viewMode")
-    protected ViewModeType viewMode;
+    protected String viewMode;
 
     /**
      * Obtient la valeur de la propriété listView.
@@ -106,6 +110,30 @@ public class Context {
      */
     public void setEditorArea(EditorArea value) {
         this.editorArea = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété calendar.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Calendar }
+     *     
+     */
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    /**
+     * Définit la valeur de la propriété calendar.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Calendar }
+     *     
+     */
+    public void setCalendar(Calendar value) {
+        this.calendar = value;
     }
 
     /**
@@ -189,12 +217,12 @@ public class Context {
      * 
      * @return
      *     possible object is
-     *     {@link ViewModeType }
+     *     {@link String }
      *     
      */
-    public ViewModeType getViewMode() {
+    public String getViewMode() {
         if (viewMode == null) {
-            return ViewModeType.LIST_VIEW;
+            return "list,view";
         } else {
             return viewMode;
         }
@@ -205,10 +233,10 @@ public class Context {
      * 
      * @param value
      *     allowed object is
-     *     {@link ViewModeType }
+     *     {@link String }
      *     
      */
-    public void setViewMode(ViewModeType value) {
+    public void setViewMode(String value) {
         this.viewMode = value;
     }
 

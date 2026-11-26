@@ -1,5 +1,6 @@
 package com.teratech.model.settings;
 
+import com.teratech.annotations.Combobox;
 import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
@@ -9,16 +10,21 @@ import java.io.Serializable;
 public  class UiThemSpec extends AbstractItem {
 	//private static final long serialVersionUID = 1L;
 
+    @Combobox
     @Column(name = "erp_template")
     protected String erpTemplate;
+    @Combobox
     @Column(name = "theme_mode")
     protected String themeMode;
+    @Combobox
     @Column(name = "accent_color")
     protected String accentColor;
+    @Combobox
     @Column(name = "sidebar_style")
     protected String sidebarStyle;
     @Column(name = "sidebar_collapsed")
     protected Boolean sidebarCollapsed;
+    @Combobox
     @Column(name = "topbar_style")
     protected String topbarStyle;
 

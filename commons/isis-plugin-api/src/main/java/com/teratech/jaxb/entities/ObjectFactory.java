@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.12 à 10:19:41 AM CET 
+// Généré le : 2026.11.25 à 11:53:14 AM CET 
 //
 
 
@@ -91,6 +91,14 @@ public class ObjectFactory {
      */
     public Action createAction() {
         return new Action();
+    }
+
+    /**
+     * Create an instance of {@link Calendar }
+     * 
+     */
+    public Calendar createCalendar() {
+        return new Calendar();
     }
 
     /**

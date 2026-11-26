@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.isis.cm/config/workflow"
+        targetNamespace="http://www.isis.cm/config/workflow"
+        elementFormDefault="qualified">
+
+    <!-- ================================================= -->
+    <!-- ROOT ELEMENT                                      -->
+    <!-- ================================================= -->
+
+    <xs:element name="process" type="tns:Process"/>
+
+    <!-- ================================================= -->
+    <!-- PROCESS                                           -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="Process">
+        <xs:choice minOccurs="1" maxOccurs="unbounded">
+
+            <xs:element name="startEvent" type="tns:Node"/>
+
+            <xs:element name="userTask" type="tns:UserTask"/>
+
+            <xs:element name="serviceTask" type="tns:ServiceTask"/>
+
+            <xs:element name="exclusiveGateway" type="tns:Gateway"/>
+
+            <xs:element name="parallelGateway" type="tns:Gateway"/>
+
+            <xs:element name="timerEvent" type="tns:TimerEvent"/>
+
+            <xs:element name="intermediateCatchEvent"
+                        type="tns:IntermediateCatchEvent"/>
+
+            <xs:element name="boundaryEvent"
+                        type="tns:BoundaryEvent"/>
+
+            <xs:element name="endEvent" type="tns:Node"/>
+
+            <xs:element name="sequenceFlow" type="tns:SequenceFlow"/>
+
+        </xs:choice>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="version" type="xs:string" default="1.0"/>
+        <xs:attribute name="executable" type="xs:boolean" default="true"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- BASIC NODE                                        -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="Node">
+        <xs:sequence>
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- USER TASK                                         -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="UserTask">
+        <xs:sequence>
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="assignee" type="xs:string"/>
+        <xs:attribute name="candidateGroup" type="xs:string"/>
+        <xs:attribute name="dueDate" type="xs:string"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- SERVICE TASK                                      -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="ServiceTask">
+        <xs:sequence>
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+        <xs:attribute name="handler" type="xs:string" use="required"/>
+        <xs:attribute name="async" type="xs:boolean" default="false"/>
+        <xs:attribute name="retryCount"
+                      type="xs:positiveInteger" default="3"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- GATEWAYS                                          -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="Gateway">
+        <xs:sequence>
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- TIMER EVENT                                       -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="TimerEvent">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="timeDate" type="xs:dateTime"/>
+                <xs:element name="timeDuration" type="xs:duration"/>
+                <xs:element name="timeCycle" type="xs:string"/>
+            </xs:choice>
+
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- INTERMEDIATE CATCH EVENT                          -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="IntermediateCatchEvent">
+        <xs:sequence>
+
+            <xs:choice>
+                <xs:element name="timerEventDefinition"
+                            type="tns:TimerDefinition"/>
+
+                <xs:element name="messageEventDefinition"
+                            type="tns:MessageDefinition"/>
+
+                <xs:element name="signalEventDefinition"
+                            type="tns:SignalDefinition"/>
+            </xs:choice>
+
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- BOUNDARY EVENT                                    -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="BoundaryEvent">
+        <xs:sequence>
+
+            <xs:choice>
+                <xs:element name="timerEventDefinition"
+                            type="tns:TimerDefinition"/>
+
+                <xs:element name="messageEventDefinition"
+                            type="tns:MessageDefinition"/>
+
+                <xs:element name="signalEventDefinition"
+                            type="tns:SignalDefinition"/>
+            </xs:choice>
+
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="name" type="xs:string"/>
+
+        <xs:attribute name="attachedToRef"
+                      type="xs:IDREF" use="required"/>
+
+        <xs:attribute name="cancelActivity"
+                      type="xs:boolean" default="true"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- EVENT DEFINITIONS                                 -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="TimerDefinition">
+        <xs:choice>
+            <xs:element name="timeDate" type="xs:dateTime"/>
+            <xs:element name="timeDuration" type="xs:duration"/>
+            <xs:element name="timeCycle" type="xs:string"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="MessageDefinition">
+        <xs:attribute name="messageRef" type="xs:string"/>
+        <xs:attribute name="correlationKey" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="SignalDefinition">
+        <xs:attribute name="signalRef" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- SEQUENCE FLOW                                     -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="SequenceFlow">
+        <xs:sequence>
+            <xs:element name="extensionElements"
+                        type="tns:ExtensionElements"
+                        minOccurs="0"/>
+        </xs:sequence>
+
+        <xs:attribute name="id" type="xs:ID" use="required"/>
+        <xs:attribute name="sourceRef" type="xs:IDREF" use="required"/>
+        <xs:attribute name="targetRef" type="xs:IDREF" use="required"/>
+        <xs:attribute name="condition" type="xs:string"/>
+        <xs:attribute name="default" type="xs:boolean" default="false"/>
+
+    </xs:complexType>
+
+    <!-- ================================================= -->
+    <!-- EXTENSION ELEMENTS                                -->
+    <!-- ================================================= -->
+
+    <xs:complexType name="ExtensionElements">
+        <xs:sequence>
+            <xs:any
+                    namespace="##other"
+                    processContents="lax"
+                    minOccurs="0"
+                    maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

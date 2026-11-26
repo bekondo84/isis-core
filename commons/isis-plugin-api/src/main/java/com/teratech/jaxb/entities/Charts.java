@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.12 à 10:19:41 AM CET 
+// Généré le : 2026.11.25 à 11:53:14 AM CET 
 //
 
 
@@ -28,7 +28,6 @@ import java.util.List;
  *         &lt;element name="pieChart" type="{http://www.isis.cm/config/dashboard}PieChart"/&gt;
  *         &lt;element name="doughnutChart" type="{http://www.isis.cm/config/dashboard}DoughnutChart"/&gt;
  *         &lt;element name="lineChart" type="{http://www.isis.cm/config/dashboard}LineChart"/&gt;
- *         &lt;element name="activityLogs" type="{http://www.isis.cm/config/dashboard}ActivityLogs"/&gt;
  *       &lt;/choice&gt;
  *     &lt;/extension&gt;
  *   &lt;/complexContent&gt;
@@ -49,8 +48,7 @@ public class Charts
         @XmlElement(name = "barChart", type = BarChart.class),
         @XmlElement(name = "pieChart", type = PieChart.class),
         @XmlElement(name = "doughnutChart", type = DoughnutChart.class),
-        @XmlElement(name = "lineChart", type = LineChart.class),
-        @XmlElement(name = "activityLogs", type = ActivityLogs.class)
+        @XmlElement(name = "lineChart", type = LineChart.class)
     })
     protected List<ChartItem> barChartOrPieChartOrDoughnutChart;
 
@@ -72,7 +70,6 @@ public class Charts
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ActivityLogs }
      * {@link BarChart }
      * {@link DoughnutChart }
      * {@link LineChart }

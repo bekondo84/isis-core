@@ -144,7 +144,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         if (Objects.nonNull(template)) {
             metaData.setAction(template.getAction());
             if (Objects.nonNull(template.getViewMode())) {
-                metaData.setViewMode(template.getViewMode().value());
+                metaData.setViewMode(template.getViewMode());
             }
             if (Objects.isNull(template.getDashbord())) {
                 //Build ListView Data
@@ -153,6 +153,7 @@ public class MetaDataServiceImpl implements MetaDataService {
                 buildEditorArea(wrapper, template, metaData, fields, createMeta, allReadyProcess, principal);
                 //Build Kaban View
                 buildKabanView(template, metaData);
+                buildCalendarView (template, metaData);
             } else {
                 //Build Dashbord View
                // dashboardDataService.buildDashboardData(wrapper, template);
@@ -166,6 +167,18 @@ public class MetaDataServiceImpl implements MetaDataService {
         }
 
         return metaData;
+    }
+
+    private void buildCalendarView(Context template, MetaData metaData) {
+          if (Objects.nonNull(template.getCalendar())) {
+              final CalendarData calendar = new CalendarData();
+              calendar.setEnd_field(template.getCalendar().getEnd());
+              calendar.setStart_field(template.getCalendar().getStart());
+              calendar.setId_field(template.getCalendar().getId());
+              calendar.setTitle_field(template.getCalendar().getTitle());
+              calendar.setCategory_field(template.getCalendar().getCategory());
+              metaData.setCalendarView(calendar);
+          }
     }
 
     private void setPageSize(MetaData metaData) {
@@ -618,7 +631,7 @@ public class MetaDataServiceImpl implements MetaDataService {
             column.setLabel(getMessage(wrapper, meta, field));
             listView.addColumn(column);
             setFieldContraints(field, column);
-            setDefaultWidget(field, column);
+            //setDefaultWidget(field, column);
             if (column.getSearch()) {
                 listView.addSearch(buildSearchField(wrapper, field, meta));
             }

@@ -36,6 +36,7 @@ public class MetaData implements Serializable {
     private ListViewData listView;
     private KabanViewData kabanView;
     private DashboardData dashboardView;
+    private CalendarData calendarView;
     private String searchKey;
     private String searchTitle;
     private Short pageSize;
@@ -220,5 +221,13 @@ public class MetaData implements Serializable {
 
     public void setViewMode(String viewMode) {
         this.viewMode = viewMode;
+    }
+
+    public CalendarData getCalendarView() {
+        return calendarView;
+    }
+
+    public void setCalendarView(CalendarData calendarView) {
+        this.calendarView = calendarView;
     }
 }

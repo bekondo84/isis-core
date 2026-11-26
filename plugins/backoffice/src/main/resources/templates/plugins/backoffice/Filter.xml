@@ -4,7 +4,8 @@
          xmlns:s="http://www.isis.cm/config/isis-search"
          xmlns:e="http://www.isis.cm/config/editor-area"
 		 xmlns:sh="http://www.isis.cm/config/isis-shutcut"
-         xmlns:ac="http://www.isis.cm/config/isis-actions">
+         xmlns:c="http://www.isis.cm/config/isis-calendar"
+         xmlns:ac="http://www.isis.cm/config/isis-actions" viewMode="list,calendar,view">
     <ls:list-view>
         <ls:list>
             <ls:column qualifier="name" search="true"  />
@@ -45,4 +46,5 @@
             </e:common>
         </e:component>
     </e:editor-area>
+    <calendar id="filter_calendar" title="name" start="createdAt" end="lastModif" />
 </context>

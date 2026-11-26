@@ -31,7 +31,6 @@ public class DashboardDataServiceImpl implements DashboardDataService {
     public DashboardData buildDashboardData(DashboardModel dashboard) throws Exception{
         DashboardData dashboardData = new DashboardData();
         dashboardData.setId(dashboard.getCode());
-        dashboardData.setLabel(i18NService.getMessage(dashboard.getCode()));
         dashboardData.setName(dashboard.getDescription());
 
        final String pluginid = Objects.nonNull(dashboard.getPlugin()) ? dashboard.getPlugin().getId() : null;
@@ -43,7 +42,7 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                throw new IllegalArgumentException("Plugin " + pluginid + " not found");
            }
        }
-
+        dashboardData.setLabel(i18NService.getMessage(wrapper, dashboard.getCode()));
         Context template = jaxbService.getTemplateFromResources(wrapper, dashboard.getTemplate());
 
        if (Objects.isNull(template)) {
@@ -68,11 +67,11 @@ public class DashboardDataServiceImpl implements DashboardDataService {
         final DashboardData dashboardData = new DashboardData();
         dashboardData.setId(dashboardModel.getCode());
         dashboardData.setName(dashboardModel.getCode());
-        dashboardData.setLabel(i18NService.getMessage(dashboardModel.getCode()));
+        dashboardData.setLabel(i18NService.getMessage(wrapper, dashboardModel.getCode()));
         //Builds KPI cards sections
         buildKpiCardsData(wrapper, dashbord, dashboardData);
-        buildWorkflowKpiCards(dashbord, dashboardData);
-        buildCharts(dashbord, dashboardData);
+        buildWorkflowKpiCards(dashbord, dashboardData, wrapper);
+        buildCharts(dashbord, dashboardData, wrapper);
 
         //Tri des sections par ordre croissant de position
         if (!CollectionUtils.isEmpty(dashboardData.getDashbordItems())) {
@@ -87,12 +86,12 @@ public class DashboardDataServiceImpl implements DashboardDataService {
         return dashboardData;
     }
 
-    private void buildCharts(Dashbord dashbord, DashboardData dashboardData) {
+    private void buildCharts(Dashbord dashbord, DashboardData dashboardData, PluginWrapper wrapper) throws Exception {
         if (!CollectionUtils.isEmpty(dashbord.getChartsOrKpiCardsOrWorkflowKpiCards())) {
               dashbord.getChartsOrKpiCardsOrWorkflowKpiCards().stream()
                       .filter(item -> item instanceof Charts)
                       .forEach((chart) -> {
-                          ChartsData item = buildChartData((Charts) chart);
+                          ChartsData item = buildChartData((Charts) chart, wrapper);
                           if (item.isValid()) {
                               dashboardData.addItem(item);
                           } else  {
@@ -107,12 +106,12 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @param chart
      * @return
      */
-    private ChartsData buildChartData(Charts chart) {
+    private ChartsData buildChartData(Charts chart, PluginWrapper wrapper) {
         if (StringUtils.isBlank(chart.getName())) {
             throw new IllegalArgumentException("Config-Error: No name provided for charts ...");
         }
         final ChartsData chartsData = new ChartsData(chart.getName()
-                , i18NService.getMessage(chart.getName())
+                , i18NService.getMessage(wrapper, chart.getName())
                 , (int)chart.getPosition()
                 , (int)chart.getColumns()
                 , chart.isHeader());
@@ -120,35 +119,35 @@ public class DashboardDataServiceImpl implements DashboardDataService {
          if (!CollectionUtils.isEmpty(chart.getBarChartOrPieChartOrDoughnutChart())) {
              chart.getBarChartOrPieChartOrDoughnutChart().forEach((item) -> {
                  if (item instanceof LineChart) {
-                     LineChartData itemData = buildLineChartData((LineChart)item);
+                     LineChartData itemData = buildLineChartData((LineChart)item, wrapper);
                      if (itemData.isValid()) {
                          chartsData.addItem(itemData);
                      } else {
                          throw new IllegalArgumentException("Config-Error:  Invalid LineChart config: id, refresh, action and method are required...");
                      }
                  } else if (item instanceof BarChart) {
-                     BarChartData itemData = buildBarChartData((BarChart) item);
+                     BarChartData itemData = buildBarChartData((BarChart) item, wrapper);
                      if (itemData.isValid()) {
                          chartsData.addItem(itemData);
                      } else {
                          throw new IllegalArgumentException("Config-Error:  Invalid BarChart config: id, refresh, action and method are required...");
                      }
                  }  else if (item instanceof DoughnutChart) {
-                     DoughnutChartData itemData = buildDoughnutChartData((DoughnutChart)item);
+                     DoughnutChartData itemData = buildDoughnutChartData((DoughnutChart)item, wrapper);
                      if (itemData.isValid()) {
                          chartsData.addItem(itemData);
                      } else {
                          throw new IllegalArgumentException("Config-Error:  Invalid DoughnutChart config: id, refresh, action and method are required...");
                      }
                  } else if (item instanceof PieChart) {
-                     PieChartData itemData = buildPieChartData((PieChart)item);
+                     PieChartData itemData = buildPieChartData((PieChart)item, wrapper);
                      if (itemData.isValid()) {
                          chartsData.addItem(itemData);
                      }  else {
                          throw new IllegalArgumentException("Config-Error:  Invalid PieChart config: id, refresh, action and method are required...");
                      }
                  } else if (item instanceof ActivityLogs) {
-                     ActivityLogsData activityLogsData = buildActivityLogsData((ActivityLogs)item);
+                     ActivityLogsData activityLogsData = buildActivityLogsData((ActivityLogs)item, wrapper);
                      if (activityLogsData.isValid()) {
                          chartsData.addItem(activityLogsData);
                      } else {
@@ -161,8 +160,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
         return  chartsData;
     }
 
-    private ActivityLogsData buildActivityLogsData(ActivityLogs item) {
-        ActivityLogsData activityLogsData = new ActivityLogsData(item.getId(), i18NService.getMessage(item.getId()));
+    private ActivityLogsData buildActivityLogsData(ActivityLogs item, PluginWrapper wrapper) {
+        ActivityLogsData activityLogsData = new ActivityLogsData(item.getId(), i18NService.getMessage(wrapper, item.getId()));
         activityLogsData.setAction(item.getAction())
                 .setMethod(item.getMethod())
                 .setRefresh(item.getRefresh().intValue())
@@ -174,8 +173,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
         return activityLogsData;
     }
 
-    private PieChartData buildPieChartData(PieChart item) {
-        PieChartData pieChartData = new PieChartData(item.getId(), i18NService.getMessage(item.getId()));
+    private PieChartData buildPieChartData(PieChart item, PluginWrapper wrapper) {
+        PieChartData pieChartData = new PieChartData(item.getId(), i18NService.getMessage(wrapper, item.getId()));
         pieChartData.setAction(item.getAction())
                 .setMethod(item.getMethod())
                 .setRefresh(item.getRefresh().intValue())
@@ -185,8 +184,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
         return pieChartData;
     }
 
-    private DoughnutChartData buildDoughnutChartData(DoughnutChart item) {
-        DoughnutChartData doughnutChartData = new DoughnutChartData(item.getId(), i18NService.getMessage(item.getId()));
+    private DoughnutChartData buildDoughnutChartData(DoughnutChart item, PluginWrapper wrapper) {
+        DoughnutChartData doughnutChartData = new DoughnutChartData(item.getId(), i18NService.getMessage(wrapper, item.getId()));
         doughnutChartData.setAction(item.getAction())
                 .setMethod(item.getMethod())
                 .setRefresh(item.getRefresh().intValue())
@@ -197,8 +196,8 @@ public class DashboardDataServiceImpl implements DashboardDataService {
     }
 
 
-    private LineChartData buildLineChartData(LineChart item) {
-        final LineChartData lineChartData = new LineChartData(item.getId(), i18NService.getMessage(item.getId()));
+    private LineChartData buildLineChartData(LineChart item, PluginWrapper wrapper) {
+        final LineChartData lineChartData = new LineChartData(item.getId(), i18NService.getMessage(wrapper, item.getId()));
         lineChartData.setType("line")
                 .setAction(item.getAction())
                 .setMethod(item.getMethod())
@@ -206,11 +205,11 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                 .setColor(item.getColor())
                 .setIcon(item.getIcon())
                 .setId(item.getId())
-                .setLabel(i18NService.getMessage(item.getId()));
+                .setLabel(i18NService.getMessage(wrapper, item.getId()));
         return  lineChartData;
     }
 
-    private BarChartData buildBarChartData(BarChart barChart) {
+    private BarChartData buildBarChartData(BarChart barChart, PluginWrapper wrapper) {
         final BarChartData barChartData = new BarChartData();
         barChartData.setType("bar")
                 .setAction(barChart.getAction())
@@ -219,7 +218,7 @@ public class DashboardDataServiceImpl implements DashboardDataService {
                 .setColor(barChart.getColor())
                 .setIcon(barChart.getIcon())
                 .setId(barChart.getId())
-                .setLabel(i18NService.getMessage(barChart.getId()));
+                .setLabel(i18NService.getMessage(wrapper, barChart.getId()));
         return  barChartData;
     }
     /**
@@ -227,9 +226,9 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @param chartItem
      * @throws Exception
      */
-    private ChartItemData buildChartItem(ChartItem chartItem)  {
+    private ChartItemData buildChartItem(ChartItem chartItem, PluginWrapper wrapper)  {
          return new ChartItemData(chartItem.getId()
-                 , i18NService.getMessage( chartItem.getId())
+                 , i18NService.getMessage(wrapper, chartItem.getId())
                  , chartItem.getAction()
                  , chartItem.getMethod()
                  , chartItem.getRefresh().intValue());
@@ -239,11 +238,11 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @param dashbord
      * @param dashboardData
      */
-    private void buildWorkflowKpiCards(Dashbord dashbord, DashboardData dashboardData) {
+    private void buildWorkflowKpiCards(Dashbord dashbord, DashboardData dashboardData, PluginWrapper wrapper) {
         if (!CollectionUtils.isEmpty(dashbord.getChartsOrKpiCardsOrWorkflowKpiCards())) {
             dashbord.getChartsOrKpiCardsOrWorkflowKpiCards().stream()
                     .filter(item -> item instanceof  WorflowKpiCards).forEach(card -> {
-                WorflowKpiCardsData item = buildWorflowKpiCardsData((WorflowKpiCards) card);
+                WorflowKpiCardsData item = buildWorflowKpiCardsData((WorflowKpiCards) card, wrapper);
 
                 if (item.isValid()) {
                     dashboardData.addItem(item);
@@ -259,22 +258,22 @@ public class DashboardDataServiceImpl implements DashboardDataService {
      * @param worflowKpiCards
      * @return
      */
-    private WorflowKpiCardsData buildWorflowKpiCardsData(WorflowKpiCards worflowKpiCards)  {
+    private WorflowKpiCardsData buildWorflowKpiCardsData(WorflowKpiCards worflowKpiCards, PluginWrapper wrapper)  {
         if (StringUtils.isBlank(worflowKpiCards.getName())) {
             throw new IllegalArgumentException("Config-Error: No name provided for workflowKpiCards ...");
         }
         WorflowKpiCardsData worflowKpiCardsData =  new WorflowKpiCardsData(worflowKpiCards.getAction(), worflowKpiCards.getMethod(), worflowKpiCards.getRefresh().intValue());
         worflowKpiCardsData.setName(worflowKpiCards.getName());
-        worflowKpiCardsData.setLabel(i18NService.getMessage(worflowKpiCards.getName()));
+        worflowKpiCardsData.setLabel(i18NService.getMessage(wrapper, worflowKpiCards.getName()));
         //worflowKpiCardsData.setResume(worflowKpiCards.get);
         worflowKpiCardsData.setIcon(worflowKpiCards.getIcon());
         worflowKpiCardsData.setPosition((int) worflowKpiCards.getPosition());
         worflowKpiCardsData.setColumns((int) worflowKpiCards.getColumns());
         worflowKpiCardsData.setUnit(worflowKpiCards.getUnit());
-        worflowKpiCardsData.setLabel(i18NService.getMessage(worflowKpiCards.getName()));
+        worflowKpiCardsData.setLabel(i18NService.getMessage(wrapper, worflowKpiCards.getName()));
         if (!CollectionUtils.isEmpty(worflowKpiCards.getItems())) {
             worflowKpiCards.getItems().forEach((cardItem) -> {
-                 final WorkflowItemData card = new WorkflowItemData(cardItem.getId(), i18NService.getMessage(cardItem.getId()));
+                 final WorkflowItemData card = new WorkflowItemData(cardItem.getId(), i18NService.getMessage(wrapper, cardItem.getId()));
                  card.setIcon(cardItem.getIcon());
                  card.setStatecolor(cardItem.getText());
                  card.setColor(cardItem.getColor());
@@ -325,13 +324,13 @@ public class DashboardDataServiceImpl implements DashboardDataService {
             }
            final KpiCardsData kpiCardsData = new KpiCardsData(kpiCards.getAction(), kpiCards.getMethod(), kpiCards.getRefresh().intValue());
            kpiCardsData.setName(kpiCards.getName());
-           kpiCardsData.setLabel(i18NService.getMessage(kpiCards.getName()));
+           kpiCardsData.setLabel(i18NService.getMessage(wrapper, kpiCards.getName()));
            kpiCardsData.setRefresh(kpiCards.getRefresh().intValue());
            kpiCardsData.setPosition((int) kpiCards.getPosition());
            kpiCardsData.setColumns((int)kpiCards.getColumns());
            if (!CollectionUtils.isEmpty(kpiCards.getItems())) {
                kpiCards.getItems().forEach(card -> {
-                   CardItemData item = new CardItemData(card.getId(), i18NService.getMessage(card.getId()));
+                   CardItemData item = new CardItemData(card.getId(), i18NService.getMessage(wrapper, card.getId()));
                    item.setColor(card.getColor());
                    item.setIcon(card.getIcon());
                    item.setCurrency(card.getCurrency());

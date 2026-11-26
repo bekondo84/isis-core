@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<context xmlns="http://www.isis.cm/config/isis-template"
+         xmlns:a="http://www.isis.cm/config/editor-area"
+         xmlns:l="http://www.isis.cm/config/list-view">
+     <l:list-view>
+         <l:list>
+             <l:column qualifier="id" search="true" />
+             <l:column qualifier="workflow" widget="manytoone" search="true" />
+             <l:column qualifier="sourceRef" widget="manytoone" search="true" />
+             <l:column qualifier="targetRef" widget="manytoone" search="true" />
+             <l:column qualifier="condition" search="false" />
+             <l:column qualifier="standard" search="true" widget="switch" />
+         </l:list>
+     </l:list-view>
+    <a:editor-area createOnField="false" create="false" update="false" delete="false" >
+        <a:component>
+            <a:common>
+                <a:form>
+                    <a:section name="hac.001" columns="2" position="100">
+                        <a:field qualifier="id" />
+                        <a:field qualifier="workflow"  widget="manytoone" />
+                        <a:field qualifier="standard" widget="switch" />
+                    </a:section>
+                    <a:section name="hac.002" columns="2" position="99">
+                        <a:field qualifier="sourceRef" widget="manytoone" />
+                        <a:field qualifier="targetRef" widget="manytoone" />
+                    </a:section>
+                    <a:section name="hac.003" columns="1" position="98">
+                        <a:field qualifier="condition" widget="textarea" />
+                    </a:section>
+                </a:form>
+            </a:common>
+        </a:component>
+    </a:editor-area>
+</context>
