@@ -24,6 +24,9 @@ public class PluginModel extends AbstractItem implements Serializable {
     private String icon;
     private String color;
     private int sequence;
+    @ManyToOne
+    @JoinColumn(name = "state")
+    private PluginStateModel state;
     private boolean autoInstall = false;
     private String summary;
     private String description;
@@ -173,15 +176,14 @@ public class PluginModel extends AbstractItem implements Serializable {
         this.instaldate = instaldate;
     }
 
-    /*
-    public List<String> getDependencies() {
-        return dependencies;
+    public PluginStateModel getState() {
+        return state;
     }
 
-    public void setDependencies(List<String> dependencies) {
-        this.dependencies = dependencies;
+    public void setState(PluginStateModel state) {
+        this.state = state;
     }
-*/
+
     public String getIcon() {
         return icon;
     }

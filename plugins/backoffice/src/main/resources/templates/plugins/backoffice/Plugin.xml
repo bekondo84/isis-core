@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <context xmlns="http://www.isis.cm/config/isis-template"
          xmlns:ls="http://www.isis.cm/config/list-view"
-         xmlns:s="http://www.isis.cm/config/isis-search"
          xmlns:e="http://www.isis.cm/config/editor-area"
-         xmlns:sh="http://www.isis.cm/config/isis-shutcut"
+         xmlns:st="http://www.isis.cm/config/isis-states"
          xmlns:ac="http://www.isis.cm/config/isis-actions">
     <ls:list-view>
         <ls:list>
             <ls:column qualifier="id" search="true" />
             <ls:column qualifier="version" search="true" />
             <ls:column qualifier="category" search="true" />
+            <ls:column qualifier="state" search="true" widget="manytoone"/>
             <ls:column qualifier="autoInstall" search="false" />
             <ls:column qualifier="install"  search="false" />
             <ls:column qualifier="instaldate"  search="false" widget="datetime-local"/>
@@ -29,6 +29,7 @@
                     <e:section name="plugin.header" columns="2" position="100">
                         <e:field qualifier="id" />
                         <e:field qualifier="version" />
+                        <e:field qualifier="state" widget="manytoone" />
                         <e:field qualifier="install" widget="switch" />
                         <e:field qualifier="instaldate" widget="datetime-local" />
                         <e:field qualifier="summary" />
@@ -48,5 +49,10 @@
         <ac:actions>
             <ac:action code="plugin.reload.action" action="pluginAction" method="reload" type="execute" icon="RefreshCcw" position="workflow"/>
         </ac:actions>
+        <st:states>
+            <st:state code="AVAILABLE" />
+            <st:state code="UNINSTALL" />
+            <st:state code="INSTALL" />
+        </st:states>
     </e:editor-area>
 </context>

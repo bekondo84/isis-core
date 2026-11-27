@@ -431,6 +431,7 @@ public class MetaDataServiceImpl implements MetaDataService {
 
         if (Objects.nonNull(editor.getStates())) {
             final StatesData statesData = new StatesData();
+            statesData.setField(editor.getStates().getField());
             statesData.setVisibleWhen(editor.getStates().getVisibleWhen());
             for (State state : editor.getStates().getState()) {
                 StatesData.StateData stateData = new StatesData.StateData(state.getCode(), i18NService.getMessage(wrapper, state.getCode()), state.getColor());

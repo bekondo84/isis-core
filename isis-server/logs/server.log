@@ -705,3 +705,707 @@
 2026-11-27T09:17:31.434+01:00  INFO 40208 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2026-11-27T09:17:31.441+01:00  INFO 40208 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2026-11-27T09:17:31.453+01:00  INFO 40208 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-27T15:33:40.854+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 17736 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-27T15:33:40.855+01:00 DEBUG 17736 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-27T15:33:40.855+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T15:33:40.876+01:00 DEBUG 17736 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-27T15:33:41.359+01:00  INFO 17736 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-27T15:33:41.380+01:00  INFO 17736 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 0 JPA repository interfaces.
+2026-11-27T15:33:41.700+01:00  INFO 17736 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-27T15:33:41.733+01:00  INFO 17736 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-27T15:33:42.077+01:00  INFO 17736 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-27T15:33:42.092+01:00  INFO 17736 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-27T15:33:42.260+01:00  INFO 17736 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5b0835cb
+2026-11-27T15:33:42.261+01:00  INFO 17736 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-27T15:33:42.315+01:00  INFO 17736 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-27T15:33:43.366+01:00  INFO 17736 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-27T15:33:43.372+01:00  INFO 17736 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T15:33:43.392+01:00  INFO 17736 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-27T15:33:43.393+01:00  INFO 17736 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-27T15:33:43.395+01:00  INFO 17736 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-27T15:33:43.701+01:00 DEBUG 17736 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-27T15:33:43.732+01:00  WARN 17736 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-27T15:33:43.783+01:00 DEBUG 17736 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-27T15:33:43.817+01:00  INFO 17736 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-27T15:33:43.824+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-27T15:33:43.951+01:00 DEBUG 17736 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-27T15:33:44.011+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-27T15:33:44.017+01:00 DEBUG 17736 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-27T15:33:44.027+01:00 DEBUG 17736 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-27T15:33:44.140+01:00  INFO 17736 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-27T15:33:44.150+01:00  INFO 17736 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-27T15:33:44.150+01:00  INFO 17736 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-27T15:33:44.151+01:00  INFO 17736 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-27T15:33:44.151+01:00  INFO 17736 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-27T15:33:44.151+01:00  INFO 17736 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-27T15:33:44.152+01:00  INFO 17736 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-27T15:33:44.152+01:00  INFO 17736 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@5a96081a
+2026-11-27T15:33:44.192+01:00  INFO 17736 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-27T15:33:44.192+01:00  INFO 17736 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-27T15:33:44.196+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 3.576 seconds (process running for 4.417)
+2026-11-27T15:33:44.197+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-27T15:33:44.198+01:00  WARN 17736 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-27T15:33:44.198+01:00  INFO 17736 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-27T15:33:44.199+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-27T15:33:44.340+01:00 DEBUG 17736 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T15:33:44.357+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-27T15:33:44.359+01:00 DEBUG 17736 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T15:33:44.361+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-27T15:33:44.361+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-27T15:33:44.363+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-27T15:33:44.363+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-27T15:33:44.363+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-27T15:33:44.363+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-27T15:33:44.363+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-27T15:33:44.363+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-27T15:33:44.364+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-27T15:33:44.365+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-27T15:33:44.366+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-27T15:33:44.366+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-27T15:33:44.366+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-27T15:33:44.366+01:00  INFO 17736 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-27T15:33:45.253+01:00 DEBUG 17736 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 27 15:33:40 CET 2026
+2026-11-27T15:33:45.261+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T15:33:45.262+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-27T15:33:45.263+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-27T15:33:45.263+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T15:33:45.263+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-27T15:33:45.269+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T15:33:45.271+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-27T15:33:45.278+01:00  INFO 17736 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-27T15:37:06.036+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 20284 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-27T15:37:06.038+01:00 DEBUG 20284 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-27T15:37:06.038+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T15:37:06.060+01:00 DEBUG 20284 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-27T15:37:06.542+01:00  INFO 20284 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-27T15:37:06.560+01:00  INFO 20284 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JPA repository interfaces.
+2026-11-27T15:37:06.889+01:00  INFO 20284 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-27T15:37:06.922+01:00  INFO 20284 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-27T15:37:07.244+01:00  INFO 20284 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-27T15:37:07.259+01:00  INFO 20284 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-27T15:37:07.419+01:00  INFO 20284 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5b0835cb
+2026-11-27T15:37:07.420+01:00  INFO 20284 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-27T15:37:07.481+01:00  INFO 20284 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-27T15:37:08.581+01:00  INFO 20284 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-27T15:37:08.588+01:00  INFO 20284 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T15:37:08.609+01:00  INFO 20284 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-27T15:37:08.610+01:00  INFO 20284 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-27T15:37:08.612+01:00  INFO 20284 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-27T15:37:08.877+01:00 DEBUG 20284 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-27T15:37:08.902+01:00  WARN 20284 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-27T15:37:08.941+01:00 DEBUG 20284 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-27T15:37:08.969+01:00  INFO 20284 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-27T15:37:08.975+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-27T15:37:09.098+01:00 DEBUG 20284 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-27T15:37:09.165+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-27T15:37:09.172+01:00 DEBUG 20284 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-27T15:37:09.184+01:00 DEBUG 20284 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-27T15:37:09.295+01:00  INFO 20284 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-27T15:37:09.303+01:00  INFO 20284 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-27T15:37:09.303+01:00  INFO 20284 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-27T15:37:09.303+01:00  INFO 20284 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-27T15:37:09.304+01:00  INFO 20284 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-27T15:37:09.304+01:00  INFO 20284 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-27T15:37:09.304+01:00  INFO 20284 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-27T15:37:09.304+01:00  INFO 20284 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@5a96081a
+2026-11-27T15:37:09.346+01:00  INFO 20284 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-27T15:37:09.346+01:00  INFO 20284 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-27T15:37:09.350+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 3.542 seconds (process running for 4.346)
+2026-11-27T15:37:09.353+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-27T15:37:09.353+01:00  WARN 20284 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-27T15:37:09.354+01:00  INFO 20284 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-27T15:37:09.354+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-27T15:37:09.498+01:00 DEBUG 20284 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T15:37:09.514+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-27T15:37:09.516+01:00 DEBUG 20284 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T15:37:09.517+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-27T15:37:09.518+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-27T15:37:09.519+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-27T15:37:09.519+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-27T15:37:09.519+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-27T15:37:09.519+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-27T15:37:09.519+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-27T15:37:09.520+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-27T15:37:09.521+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-27T15:37:09.521+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-27T15:37:09.521+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-27T15:37:09.521+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-27T15:37:09.521+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-27T15:37:09.522+01:00  INFO 20284 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-27T15:37:10.401+01:00 DEBUG 20284 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 27 15:37:06 CET 2026
+2026-11-27T15:37:10.406+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T15:37:10.407+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-27T15:37:10.407+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-27T15:37:10.407+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T15:37:10.407+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-27T15:37:10.413+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T15:37:10.415+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-27T15:37:10.419+01:00  INFO 20284 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-27T16:07:50.486+01:00  INFO 37324 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 37324 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-27T16:07:50.487+01:00 DEBUG 37324 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-27T16:07:50.488+01:00  INFO 37324 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T16:07:50.509+01:00 DEBUG 37324 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-27T16:07:50.988+01:00  INFO 37324 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-27T16:07:51.007+01:00  INFO 37324 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 0 JPA repository interfaces.
+2026-11-27T16:07:51.316+01:00  INFO 37324 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-27T16:07:51.348+01:00  INFO 37324 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-27T16:07:51.666+01:00  INFO 37324 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-27T16:07:51.682+01:00  INFO 37324 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-27T16:07:51.836+01:00  INFO 37324 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@35f22eef
+2026-11-27T16:07:51.837+01:00  INFO 37324 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-27T16:07:51.888+01:00  INFO 37324 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-27T16:07:52.009+01:00 ERROR 37324 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Entity 'com.teratech.model.PluginStateModel' has no identifier (every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property)
+2026-11-27T16:07:52.009+01:00  WARN 37324 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [com/teratech/isis/config/JpaMultiTenantConfiguration.class]: Entity 'com.teratech.model.PluginStateModel' has no identifier (every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property)
+2026-11-27T16:07:52.010+01:00  INFO 37324 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-27T16:07:52.025+01:00  INFO 37324 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-27T16:07:52.035+01:00  INFO 37324 --- [isis-server] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-11-27T16:07:52.045+01:00 ERROR 37324 --- [isis-server] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [com/teratech/isis/config/JpaMultiTenantConfiguration.class]: Entity 'com.teratech.model.PluginStateModel' has no identifier (every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125) ~[surefire-api-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.5.jar:3.5.5]
+Caused by: org.hibernate.AnnotationException: Entity 'com.teratech.model.PluginStateModel' has no identifier (every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property)
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:282) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:233) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:166) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:371) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:217) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:247) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:167) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:318) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.coordinateProcessors(MetadataBuildingProcess.java:352) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:201) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1392) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.populateSessionFactoryBuilder(EntityManagerFactoryBuilderImpl.java:1472) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1454) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
+	... 106 common frames omitted
+
+2026-11-27T16:07:52.052+01:00  WARN 37324 --- [isis-server] [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.teratech.isis.IsisServerTests@5e976553]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@3adbd038 testClass = com.teratech.isis.IsisServerTests, locations = [], classes = [com.teratech.isis.IsisServer], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.PropertyMappingContextCustomizer@0, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@24fb6a80, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@132ddbab, org.springframework.boot.test.autoconfigure.OnFailureConditionReportContextCustomizerFactory$OnFailureConditionReportContextCustomizer@5bf22f18, org.springframework.test.context.support.DynamicPropertiesContextCustomizer@0, org.springframework.boot.webmvc.test.autoconfigure.WebDriverContextCustomizer@1536602f, org.springframework.boot.web.server.context.SpringBootTestRandomPortContextCustomizer@6256ac4f, org.springframework.boot.test.context.SpringBootTestAnnotation@73d6dce4], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:195) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125) ~[surefire-api-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136) ~[surefire-junit-platform-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.5.jar:3.5.5]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.5.jar:3.5.5]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [com/teratech/isis/config/JpaMultiTenantConfiguration.class]: Entity 'com.teratech.model.PluginStateModel' has no identifier (every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.7.jar:7.0.7]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46) ~[spring-core-7.0.7.jar:7.0.7]
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465) ~[spring-boot-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114) ~[spring-boot-test-4.0.6.jar:4.0.6]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247) ~[spring-test-7.0.7.jar:7.0.7]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167) ~[spring-test-7.0.7.jar:7.0.7]
+	... 86 common frames omitted
+Caused by: org.hibernate.AnnotationException: Entity 'com.teratech.model.PluginStateModel' has no identifier (every '@Entity' class must declare or inherit at least one '@Id' or '@EmbeddedId' property)
+	at org.hibernate.boot.model.internal.InheritanceState.determineDefaultAccessType(InheritanceState.java:282) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.getElementsToProcess(InheritanceState.java:233) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.InheritanceState.postProcess(InheritanceState.java:166) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.handleIdentifier(EntityBinder.java:371) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.EntityBinder.bindEntityClass(EntityBinder.java:217) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.internal.AnnotationBinder.bindClass(AnnotationBinder.java:247) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl.processEntityHierarchies(AnnotationMetadataSourceProcessorImpl.java:167) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess$1.processEntityHierarchies(MetadataBuildingProcess.java:318) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.coordinateProcessors(MetadataBuildingProcess.java:352) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:201) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1392) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.populateSessionFactoryBuilder(EntityManagerFactoryBuilderImpl.java:1472) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1454) ~[hibernate-core-7.2.12.Final.jar:7.2.12.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419) ~[spring-orm-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.7.jar:7.0.7]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.7.jar:7.0.7]
+	... 106 common frames omitted
+
+2026-11-27T16:08:44.317+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 23136 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-27T16:08:44.318+01:00 DEBUG 23136 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-27T16:08:44.318+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T16:08:44.338+01:00 DEBUG 23136 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-27T16:08:44.799+01:00  INFO 23136 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-27T16:08:44.818+01:00  INFO 23136 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 13 ms. Found 0 JPA repository interfaces.
+2026-11-27T16:08:45.123+01:00  INFO 23136 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-27T16:08:45.153+01:00  INFO 23136 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-27T16:08:45.451+01:00  INFO 23136 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-27T16:08:45.467+01:00  INFO 23136 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-27T16:08:45.630+01:00  INFO 23136 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5dc7391e
+2026-11-27T16:08:45.631+01:00  INFO 23136 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-27T16:08:45.673+01:00  INFO 23136 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-27T16:08:46.755+01:00  INFO 23136 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-27T16:08:46.760+01:00  INFO 23136 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T16:08:46.778+01:00  INFO 23136 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-27T16:08:46.779+01:00  INFO 23136 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-27T16:08:46.781+01:00  INFO 23136 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-27T16:08:47.084+01:00 DEBUG 23136 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-27T16:08:47.111+01:00  WARN 23136 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-27T16:08:47.159+01:00 DEBUG 23136 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-27T16:08:47.197+01:00  INFO 23136 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-27T16:08:47.206+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-27T16:08:47.320+01:00 DEBUG 23136 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-27T16:08:47.394+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-27T16:08:47.402+01:00 DEBUG 23136 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-27T16:08:47.415+01:00 DEBUG 23136 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-27T16:08:47.534+01:00  INFO 23136 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-27T16:08:47.542+01:00  INFO 23136 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-27T16:08:47.542+01:00  INFO 23136 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-27T16:08:47.542+01:00  INFO 23136 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-27T16:08:47.542+01:00  INFO 23136 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-27T16:08:47.542+01:00  INFO 23136 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-27T16:08:47.542+01:00  INFO 23136 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-27T16:08:47.544+01:00  INFO 23136 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@72a80415
+2026-11-27T16:08:47.585+01:00  INFO 23136 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-27T16:08:47.585+01:00  INFO 23136 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-27T16:08:47.590+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 3.493 seconds (process running for 4.285)
+2026-11-27T16:08:47.591+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-27T16:08:47.591+01:00  WARN 23136 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-27T16:08:47.591+01:00  INFO 23136 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-27T16:08:47.593+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-27T16:08:47.739+01:00 DEBUG 23136 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T16:08:47.756+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-27T16:08:47.758+01:00 DEBUG 23136 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T16:08:47.759+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-27T16:08:47.760+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-27T16:08:47.762+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-27T16:08:47.763+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-27T16:08:47.764+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-27T16:08:47.765+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-27T16:08:47.765+01:00  INFO 23136 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-27T16:08:48.594+01:00 DEBUG 23136 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 27 16:08:44 CET 2026
+2026-11-27T16:08:48.600+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T16:08:48.601+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-27T16:08:48.601+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-27T16:08:48.601+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T16:08:48.602+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-27T16:08:48.607+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T16:08:48.609+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-27T16:08:48.614+01:00  INFO 23136 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-11-27T16:35:40.143+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Starting IsisServerTests using Java 21.0.11 with PID 14432 (started by dieunedort.bekondo in D:\P_Projects\isis-core\isis-server)
+2026-11-27T16:35:40.144+01:00 DEBUG 14432 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Running with Spring Boot v4.0.6, Spring v7.0.7
+2026-11-27T16:35:40.145+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : No active profile set, falling back to 1 default profile: "default"
+2026-11-27T16:35:40.167+01:00 DEBUG 14432 --- [isis-server] [main] o.s.w.c.s.GenericWebApplicationContext   : Refreshing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff
+2026-11-27T16:35:40.642+01:00  INFO 14432 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-27T16:35:40.660+01:00  INFO 14432 --- [isis-server] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 0 JPA repository interfaces.
+2026-11-27T16:35:40.977+01:00  INFO 14432 --- [isis-server] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-27T16:35:41.010+01:00  INFO 14432 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.12.Final
+2026-11-27T16:35:41.343+01:00  INFO 14432 --- [isis-server] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-27T16:35:41.359+01:00  INFO 14432 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-27T16:35:41.497+01:00  INFO 14432 --- [isis-server] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@430212cb
+2026-11-27T16:35:41.498+01:00  INFO 14432 --- [isis-server] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-27T16:35:41.544+01:00  INFO 14432 --- [isis-server] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [undefined/unknown]
+	Database driver: undefined/unknown
+	Database dialect: PostgreSQLDialect
+	Database version: 17.10
+	Default catalog/schema: unknown/unknown
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	JDBC fetch size: undefined/unknown
+	Pool: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-11-27T16:35:42.652+01:00  INFO 14432 --- [isis-server] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-27T16:35:42.658+01:00  INFO 14432 --- [isis-server] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T16:35:42.686+01:00  INFO 14432 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Enabled plugins: []
+2026-11-27T16:35:42.686+01:00  INFO 14432 --- [isis-server] [main] org.pf4j.DefaultPluginStatusProvider     : Disabled plugins: []
+2026-11-27T16:35:42.689+01:00  INFO 14432 --- [isis-server] [main] org.pf4j.DefaultPluginManager            : PF4J version 3.13.0 in 'deployment' mode
+2026-11-27T16:35:42.963+01:00 DEBUG 14432 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerMapping : 26 mappings in 'requestMappingHandlerMapping'
+2026-11-27T16:35:42.991+01:00  WARN 14432 --- [isis-server] [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2026-11-27T16:35:43.033+01:00 DEBUG 14432 --- [isis-server] [main] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2026-11-27T16:35:43.066+01:00  INFO 14432 --- [isis-server] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name isisUserDetailsService
+2026-11-27T16:35:43.075+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] - Moteur Thymeleaf configuré pour accepter les templates des plugins.
+2026-11-27T16:35:43.195+01:00 DEBUG 14432 --- [isis-server] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure Or [PathPattern [/api/**]] with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-11-27T16:35:43.284+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Core-UI] Moteur de ressources statiques dynamiques PF4J initialisé.
+2026-11-27T16:35:43.289+01:00 DEBUG 14432 --- [isis-server] [main] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/webjars/**, /**, /plugins-assets/**] in 'resourceHandlerMapping'
+2026-11-27T16:35:43.299+01:00 DEBUG 14432 --- [isis-server] [main] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 2 RequestBodyAdvice, 1 ResponseBodyAdvice
+2026-11-27T16:35:43.404+01:00  INFO 14432 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Using default implementation for ThreadExecutor
+2026-11-27T16:35:43.411+01:00  INFO 14432 --- [isis-server] [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2026-11-27T16:35:43.412+01:00  INFO 14432 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v2.5.2 created.
+2026-11-27T16:35:43.412+01:00  INFO 14432 --- [isis-server] [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2026-11-27T16:35:43.413+01:00  INFO 14432 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.5.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2026-11-27T16:35:43.413+01:00  INFO 14432 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+2026-11-27T16:35:43.413+01:00  INFO 14432 --- [isis-server] [main] hedulerFactoryBean$LocalSchedulerFactory : Quartz scheduler version: 2.5.2
+2026-11-27T16:35:43.413+01:00  INFO 14432 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@27cc84a2
+2026-11-27T16:35:43.457+01:00  INFO 14432 --- [isis-server] [main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+2026-11-27T16:35:43.457+01:00  INFO 14432 --- [isis-server] [main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+2026-11-27T16:35:43.461+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServerTests        : Started IsisServerTests in 3.545 seconds (process running for 4.375)
+2026-11-27T16:35:43.464+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : DEMARRAGE DES PLUGINS EN COURS !!!!!!!!
+2026-11-27T16:35:43.464+01:00  WARN 14432 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No 'plugins' root
+2026-11-27T16:35:43.465+01:00  INFO 14432 --- [isis-server] [main] org.pf4j.AbstractPluginManager           : No plugins
+2026-11-27T16:35:43.465+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : LES PLUGINS CORRECTEMENT DEMARREES !
+2026-11-27T16:35:43.625+01:00 DEBUG 14432 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T16:35:43.641+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : Intializing Thread Pool --------------------------
+2026-11-27T16:35:43.643+01:00 DEBUG 14432 --- [isis-server] [main] org.hibernate.SQL                        : select cjm1_0.id,cjm1_0.abort,cjm1_0.actif,cjm1_0.createdAt,cjm1_0.cron_expression,cjm1_0.description,cjm1_0.job,cjm1_0.last_execution,cjm1_0.lastModif,cjm1_0.next_execution,cjm1_0.plugin_id,cjm1_0.plugin_version,cjm1_0.priority,cjm1_0.result,cjm1_0.seqnumber,cjm1_0.state,cjm1_0.stringValue from cron_job cjm1_0 where cjm1_0.actif=? offset ? rows
+2026-11-27T16:35:43.645+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : CronJobModel fetch : []
+2026-11-27T16:35:43.646+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : 
+========== [CATALOGUE OF SPRING ROAD] ==========
+2026-11-27T16:35:43.647+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/general/settings]} | Associate component : com.teratech.isis.controller.SystemController#getGeneralSettings[0 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/system/status]} | Associate component : com.teratech.isis.controller.SystemController#getSystemStatus[0 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/message]} | Associate component : com.teratech.isis.controller.I18NController#translate[2 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationMenu[2 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/entity/meta/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#getMetaForTypeCode[2 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePostAction[4 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/i18n/values]} | Associate component : com.teratech.isis.controller.I18NController#getComboxValues[3 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeAction[3 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/dashboard/{code}]} | Associate component : com.teratech.isis.controller.ActionsController#getDashboardByCode[2 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/initialize]} | Associate component : com.teratech.isis.controller.PluginController#initialize[0 args]
+2026-11-27T16:35:43.648+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/actions/navigation/dashboard/{name}]} | Associate component : com.teratech.isis.controller.ActionsController#processNavigationDashboard[2 args]
+2026-11-27T16:35:43.649+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/file/delete/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#deleteFile[1 args]
+2026-11-27T16:35:43.649+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getPlugins[1 args]
+2026-11-27T16:35:43.649+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/file/download/{file:.+}]} | Associate component : com.teratech.isis.controller.ResourceController#storeFile[1 args]
+2026-11-27T16:35:43.649+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/plugins]} | Associate component : com.teratech.isis.controller.PluginController#getAllPlugins[2 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {PUT [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executePutAction[4 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error], produces [text/html]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#errorHtml[2 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> { [/error]} | Associate component : org.springframework.boot.webmvc.autoconfigure.error.BasicErrorController#error[1 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {GET [/api/docs]} | Associate component : com.teratech.isis.controller.DocsController#getDocs[0 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/refresh]} | Associate component : com.teratech.isis.controller.PluginController#refresh[0 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {DELETE [/api/actions/execute/{action}/{method}]} | Associate component : com.teratech.isis.controller.ActionsController#executeDeleteAction[4 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/login]} | Associate component : com.teratech.isis.security.AuthController#login[1 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/file/upload], consumes [multipart/form-data]} | Associate component : com.teratech.isis.controller.ResourceController#upload[2 args]
+2026-11-27T16:35:43.650+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/system/user/preferences]} | Associate component : com.teratech.isis.controller.SystemController#setUserPreferences[1 args]
+2026-11-27T16:35:43.651+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/auth/init]} | Associate component : com.teratech.isis.security.AuthController#initialze[0 args]
+2026-11-27T16:35:43.651+01:00  INFO 14432 --- [isis-server] [main] com.teratech.isis.IsisServer             : [Active Road] -> {POST [/api/plugins/install]} | Associate component : com.teratech.isis.controller.PluginController#sayHello[2 args]
+2026-11-27T16:35:44.477+01:00 DEBUG 14432 --- [isis-server] [SpringApplicationShutdownHook] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@1ff55ff, started on Fri Nov 27 16:35:40 CET 2026
+2026-11-27T16:35:44.483+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T16:35:44.484+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+2026-11-27T16:35:44.484+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+2026-11-27T16:35:44.484+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+2026-11-27T16:35:44.484+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+2026-11-27T16:35:44.489+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-11-27T16:35:44.491+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-11-27T16:35:44.496+01:00  INFO 14432 --- [isis-server] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

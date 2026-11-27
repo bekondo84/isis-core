@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.27 à 08:20:55 AM CET 
+// Généré le : 2026.11.27 à 03:33:33 PM CET 
 //
 
 
@@ -30,6 +30,7 @@ import java.util.List;
  *         &lt;element name="state" type="{http://www.isis.cm/config/isis-states}State" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
+ *       &lt;attribute name="field" use="required" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -46,6 +47,8 @@ public class States {
     protected List<State> state;
     @XmlAttribute(name = "visibleWhen")
     protected String visibleWhen;
+    @XmlAttribute(name = "field", required = true)
+    protected String field;
 
     /**
      * Gets the value of the state property.
@@ -98,6 +101,30 @@ public class States {
      */
     public void setVisibleWhen(String value) {
         this.visibleWhen = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété field.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getField() {
+        return field;
+    }
+
+    /**
+     * Définit la valeur de la propriété field.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setField(String value) {
+        this.field = value;
     }
 
 }

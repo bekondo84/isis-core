@@ -12,6 +12,7 @@
         </sequence>
         <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
         <attribute name="visibleWhen" type="string" />
+        <attribute name="field" type="string" use="required" />
     </complexType>
     <complexType name="State">
         <attribute name="code" type="string"  use="required"/>

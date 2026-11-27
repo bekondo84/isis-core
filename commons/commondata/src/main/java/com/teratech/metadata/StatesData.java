@@ -7,6 +7,7 @@ import java.util.List;
 
 public class StatesData implements Serializable {
 
+    protected String field;
     protected String visibleWhen;
 
     protected List<StateData> states = new ArrayList<>();
@@ -32,6 +33,14 @@ public class StatesData implements Serializable {
 
     public void addState(StateData stateData) {
         this.states.add(stateData);
+    }
+
+    public String getField() {
+        return field;
+    }
+    public StatesData setField(String field) {
+        this.field = field;
+        return this;
     }
 
     public static final class StateData implements Serializable {

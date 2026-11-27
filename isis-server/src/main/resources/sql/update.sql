@@ -83,6 +83,13 @@ INSERT INTO adm_event_type (code, description, createdat, stringvalue)
 VALUES ('MESSAGEEVENT', 'Message event', now(), 'Message event');
 INSERT INTO adm_event_type (code, description, createdat, stringvalue)
 VALUES ('SIGNALVENT', 'Signal event', now(), 'Signal event');
+-------------adm_plugin_state ----------------
+INSERT INTO adm_plugin_state (code, description, createdat, stringvalue)
+VALUES ('AVAILABLE', 'Disponible', now(), 'Disponible');
+INSERT INTO adm_plugin_state (code, description, createdat, stringvalue)
+VALUES ('UNINSTALL', 'Non installé', now(), 'Non installé');
+INSERT INTO adm_plugin_state (code, description, createdat, stringvalue)
+VALUES ('INSTALL', 'Installé', now(), 'Installé');
 ------Settings-------------
 INSERT INTO adm_settings (key, value, name, type, createdat, stringvalue)
 VALUES ('PAGE_SIZE', '10', 'Pagination: taille des pages', '1', NOW(), 'PAGE_SIZE');
