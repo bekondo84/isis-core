@@ -394,22 +394,70 @@ public class MetaDataServiceImpl implements MetaDataService {
                 buildTab(wrapper, meta, tabData, tabType, fields, createMeta, allReadyProcess, principal);
             }
         }
+        buildActionsData(wrapper, editor, editorArea);
+        buildShutcutsData(wrapper, editor, editorArea);
+        buildStatesData(wrapper, editor, editorArea);
+    }
+
+    /**
+     *
+     * @param wrapper
+     * @param editor
+     * @param editorArea
+     */
+    private void buildActionsData(PluginWrapper wrapper, EditorArea editor, EditorAreaData editorArea) {
         if (Objects.nonNull(editor.getActions())
           && !CollectionUtils.isEmpty(editor.getActions().getAction())) {
+            final ActionsData actionsData = new ActionsData();
+            actionsData.setVisibleWhen(editor.getActions().getVisibleWhen());
+
             for (Action action : editor.getActions().getAction()) {
                 ActionData actionData = buildActionData(wrapper, action);
                 if (actionData.isValidate()) {
-                    editorArea.addAction(actionData);
+                    actionsData.addAction(actionData);
                 }
             }
+            editorArea.setActions(actionsData);
         }
-        if (Objects.nonNull(editor.getShutcuts())
-          && !CollectionUtils.isEmpty(editor.getShutcuts().getShutcut())) {
+    }
+
+    /**
+     *
+     * @param wrapper
+     * @param editor
+     * @param editorArea
+     */
+    private void buildStatesData(PluginWrapper wrapper, EditorArea editor, EditorAreaData editorArea) {
+
+        if (Objects.nonNull(editor.getStates())) {
+            final StatesData statesData = new StatesData();
+            statesData.setVisibleWhen(editor.getStates().getVisibleWhen());
+            for (State state : editor.getStates().getState()) {
+                StatesData.StateData stateData = new StatesData.StateData(state.getCode(), i18NService.getMessage(wrapper, state.getCode()), state.getColor());
+                stateData.setVisibleWhen(state.getVisibleWhen());
+                statesData.addState(stateData);
+            }
+            editorArea.setStates(statesData);
+        }
+    }
+
+    /**
+     * Build the shutcuts components
+     * @param wrapper
+     * @param editor
+     * @param editorArea
+     */
+    private void buildShutcutsData(PluginWrapper wrapper, EditorArea editor, EditorAreaData editorArea) {
+        if (Objects.nonNull(editor.getShutcuts())) {
+            final ShutCutsData shutCutsData = new ShutCutsData();
+            shutCutsData.setVisibleWhen(editor.getShutcuts().getVisibleWhen());
+            editorArea.setShutcuts(shutCutsData);
             for (Shutcut shutcut : editor.getShutcuts().getShutcut()) {
                 ShutCutData shutcutData = new ShutCutData(shutcut.getCode(), 0, shutcut.getIcon());
                 shutcutData.setType(shutcut.getType());
                 shutcutData.setLabel(i18NService.getMessage(wrapper, shutcut.getCode()));
                 shutcutData.setViewMode(shutcut.getViewMode().value());
+                shutcutData.setVisibleWhen(shutcut.getVisibleWhen());
                 //Process of filters
                 if (Objects.nonNull(shutcut.getFilters())) {
                    final List<Filter> filters = shutcut.getFilters().getFilter().stream().filter(filter -> Objects.nonNull(filter.getNature())
@@ -423,7 +471,7 @@ public class MetaDataServiceImpl implements MetaDataService {
                        shutcutData.addFilter(data);
                     }
                 }
-                editorArea.addShutcut(shutcutData);
+                shutCutsData.addShutcut(shutcutData);
             }
         }
     }
@@ -535,13 +583,15 @@ public class MetaDataServiceImpl implements MetaDataService {
             column.setDependsOn(fieldType.getDependsOn());
             //column.setVisibleWhen(fieldType.getVisibleWhen());
             //Gestion des actions
-            if (Objects.nonNull(fieldType.getActions())
-                && !CollectionUtils.isEmpty(fieldType.getActions().getAction())) {
+            if (Objects.nonNull(fieldType.getActions())) {
+                    final ActionsData actionsData = new ActionsData();
+                    actionsData.setVisibleWhen(fieldType.getActions().getVisibleWhen());
+                    column.setActions(actionsData);
                     for (Action action : fieldType.getActions().getAction()) {
                         ActionData actionData = buildActionData(wrapper, action);
 
                         if (actionData.isValidate()) {
-                            column.addAction(actionData);
+                            actionsData.addAction(actionData);
                         }
                     }
             }
@@ -582,6 +632,7 @@ public class MetaDataServiceImpl implements MetaDataService {
         actionData.setMethod(action.getMethod());
         actionData.setAskconfirmation(action.isAskconfirmation());
         actionData.setTypeCode(action.getTypeCode());
+        actionData.setVisibleWhen(action.getVisibleWhen());
         return actionData;
     }
 
@@ -642,12 +693,15 @@ public class MetaDataServiceImpl implements MetaDataService {
         }
 
         //Build Action List
-        if (Objects.nonNull(template.getListView().getActions())
-              && !CollectionUtils.isEmpty(template.getListView().getActions().getAction())) {
+        if (Objects.nonNull(template.getListView().getActions())) {
+            Actions actions = template.getListView().getActions();
+            final ActionsData actionsData = new ActionsData();
+            actionsData.setVisibleWhen(actions.getVisibleWhen());
+            listView.setActions(actionsData);
             for (Action action : template.getListView().getActions().getAction()) {
                 ActionData actionData = buildActionData(wrapper, action);
                 if (actionData.isValidate()) {
-                    listView.addAction(actionData);
+                    actionsData.addAction(actionData);
                 }
             }
         }

@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.25 à 11:53:14 AM CET 
+// Généré le : 2026.11.27 à 08:20:55 AM CET 
 //
 
 
@@ -34,6 +34,7 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _Actions_QNAME = new QName("http://www.isis.cm/config/isis-actions", "actions");
+    private final static QName _States_QNAME = new QName("http://www.isis.cm/config/isis-states", "states");
     private final static QName _Shutcuts_QNAME = new QName("http://www.isis.cm/config/isis-shutcut", "shutcuts");
     private final static QName _ExplorerTree_QNAME = new QName("http://www.isis.cm/config/explorer-tree", "explorer-tree");
     private final static QName _Search_QNAME = new QName("http://www.isis.cm/config/isis-search", "search");
@@ -222,6 +223,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link States }
+     * 
+     */
+    public States createStates() {
+        return new States();
+    }
+
+    /**
      * Create an instance of {@link Shutcuts }
      * 
      */
@@ -299,6 +308,14 @@ public class ObjectFactory {
      */
     public Filter createFilter() {
         return new Filter();
+    }
+
+    /**
+     * Create an instance of {@link State }
+     * 
+     */
+    public State createState() {
+        return new State();
     }
 
     /**
@@ -464,6 +481,19 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.isis.cm/config/isis-actions", name = "actions")
     public JAXBElement<Actions> createActions(Actions value) {
         return new JAXBElement<Actions>(_Actions_QNAME, Actions.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link States }{@code >}
+     * 
+     * @param value
+     *     Java instance representing xml element's value.
+     * @return
+     *     the new instance of {@link JAXBElement }{@code <}{@link States }{@code >}
+     */
+    @XmlElementDecl(namespace = "http://www.isis.cm/config/isis-states", name = "states")
+    public JAXBElement<States> createStates(States value) {
+        return new JAXBElement<States>(_States_QNAME, States.class, null, value);
     }
 
     /**

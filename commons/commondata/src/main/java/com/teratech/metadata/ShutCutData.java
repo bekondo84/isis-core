@@ -12,6 +12,7 @@ public class ShutCutData implements Serializable {
     protected String label ;
     protected String viewMode;
     protected String type ;
+    private String visibleWhen;
     protected List<FilterData> filters ;
 
     public ShutCutData() {
@@ -87,5 +88,14 @@ public class ShutCutData implements Serializable {
 
     public void setFilters(List<FilterData> filters) {
         this.filters = filters;
+    }
+
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    public ShutCutData setVisibleWhen(String visibleWhen) {
+        this.visibleWhen = visibleWhen;
+        return this;
     }
 }

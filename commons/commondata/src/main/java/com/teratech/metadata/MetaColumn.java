@@ -36,7 +36,7 @@ public class MetaColumn implements Serializable {
     protected int max ;
     protected  int min ;
     protected MetaData meta ;
-    protected List<ActionData> actions ;
+    protected ActionsData actions ;
     protected List<EnumTypeData> values ;
     protected PatternData pattern;
     protected List<FilterData> filters ;
@@ -50,7 +50,6 @@ public class MetaColumn implements Serializable {
 
 
     public MetaColumn() {
-        this.actions = new ArrayList<>();
         filters = new ArrayList<>();
         this.values = new ArrayList<>();
     }
@@ -63,7 +62,6 @@ public class MetaColumn implements Serializable {
     public MetaColumn(String type, String fieldName) {
         this.type = type;
         this.fieldName = fieldName;
-        this.actions = new ArrayList<>();
         this.values = new ArrayList<>();
         this.filters = new ArrayList<>();
     }
@@ -212,14 +210,11 @@ public class MetaColumn implements Serializable {
         this.deletable = deletable;
     }
 
-    public void addAction(final ActionData action) {
-        actions.add(action);
-    }
-    public List<ActionData> getActions() {
-        return Collections.unmodifiableList(actions);
+    public ActionsData getActions() {
+        return actions;
     }
 
-    public void setActions(List<ActionData> actions) {
+    public void setActions(ActionsData actions) {
         this.actions = actions;
     }
 

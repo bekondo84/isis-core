@@ -6,17 +6,20 @@
            xmlns:actions="http://www.isis.cm/config/isis-actions"
            xmlns:shutcuts="http://www.isis.cm/config/isis-shutcut"
            xmlns:widget="http://www.isis.cm/config/isis-widget"
-           xmlns:utils="http://www.isis.cm/config/isis-utils">
+           xmlns:utils="http://www.isis.cm/config/isis-utils"
+           xmlns:states="http://www.isis.cm/config/isis-states">
     <xs:import namespace="http://www.isis.cm/config/isis-actions" schemaLocation="isis-actions.xsd"/>
     <xs:import namespace="http://www.isis.cm/config/isis-shutcut" schemaLocation="isis-shutcut.xsd"/>
     <xs:import namespace="http://www.isis.cm/config/isis-widget" schemaLocation="isis-widget.xsd"/>
     <xs:import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd" />
+    <xs:import namespace="http://www.isis.cm/config/isis-states" schemaLocation="isis-states.xsd" />
 
     <xs:element name="editor-area">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="component" type="tns:editorAreaType" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="actions:actions" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="states:states"  minOccurs="0" maxOccurs="1" />
                 <xs:element ref="shutcuts:shutcuts" minOccurs="0" maxOccurs="1" />
             </xs:sequence>
             <xs:attribute name="create" type="xs:boolean" default="true" />
@@ -29,7 +32,6 @@
             <xs:attribute name="searchTitle" type="xs:string" default="" />
         </xs:complexType>
     </xs:element>
-
     <xs:complexType name="editorAreaType">
         <xs:sequence>
             <xs:element name="common" type="tns:commonType" minOccurs="0" maxOccurs="1" />

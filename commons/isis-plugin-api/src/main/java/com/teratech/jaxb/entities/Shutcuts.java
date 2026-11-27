@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.25 à 11:53:14 AM CET 
+// Généré le : 2026.11.27 à 08:20:55 AM CET 
 //
 
 
@@ -10,6 +10,7 @@ package com.teratech.jaxb.entities;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlType;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import java.util.List;
  *       &lt;sequence&gt;
  *         &lt;element name="shutcut" type="{http://www.isis.cm/config/isis-shutcut}shutcut" maxOccurs="unbounded" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
+ *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
  * &lt;/complexType&gt;
@@ -42,6 +44,8 @@ import java.util.List;
 public class Shutcuts {
 
     protected List<Shutcut> shutcut;
+    @XmlAttribute(name = "visibleWhen")
+    protected String visibleWhen;
 
     /**
      * Gets the value of the shutcut property.
@@ -70,6 +74,30 @@ public class Shutcuts {
             shutcut = new ArrayList<Shutcut>();
         }
         return this.shutcut;
+    }
+
+    /**
+     * Obtient la valeur de la propriété visibleWhen.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    /**
+     * Définit la valeur de la propriété visibleWhen.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVisibleWhen(String value) {
+        this.visibleWhen = value;
     }
 
 }

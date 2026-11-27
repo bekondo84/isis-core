@@ -12,12 +12,11 @@ public class ListViewData implements Serializable {
     private boolean viewable;
     private List<MetaColumn> columns;
     private List<SearchColumn> search;
-    private List<ActionData> actions;
+    private ActionsData actions;
 
     public ListViewData() {
         this.search = new ArrayList<>();
         columns = new ArrayList<>();
-        actions = new ArrayList<>();
         this.creatable = true;
         this.deletable = true;
         this.viewable = true;
@@ -46,15 +45,12 @@ public class ListViewData implements Serializable {
         this.search.add(item);
     }
 
-    public List<ActionData> getActions() {
-        return Collections.unmodifiableList(actions);
+    public ActionsData getActions() {
+        return actions;
     }
 
-    public void setActions(List<ActionData> actions) {
+    public void setActions(ActionsData actions) {
         this.actions = actions;
-    }
-    public  void addAction(final ActionData action) {
-        actions.add(action);
     }
 
     public boolean isCreatable() {

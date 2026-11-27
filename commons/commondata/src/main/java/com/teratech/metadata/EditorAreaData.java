@@ -8,14 +8,13 @@ import java.util.List;
 public class EditorAreaData implements Serializable {
     private FormData form ;
     private List<TabData> tabs ;
-    private List<ActionData> actions;
-    private List<ShutCutData> shutcuts;
+    private ActionsData actions;
+    private ShutCutsData shutcuts;
+    private StatesData states;
 
     public EditorAreaData() {
         form = new FormData();
         tabs = new ArrayList<>();
-        actions = new ArrayList<>();
-        shutcuts = new ArrayList<>();
     }
 
     public FormData getForm() {
@@ -37,26 +36,29 @@ public class EditorAreaData implements Serializable {
         this.tabs = Collections.unmodifiableList(tabs);
     }
 
-    public List<ActionData> getActions() {
-        return Collections.unmodifiableList(actions);
+    public StatesData getStates() {
+        return states;
     }
 
-    public void setActions(List<ActionData> actions) {
+    public void setStates(StatesData states) {
+        this.states = states;
+    }
+
+    public ActionsData getActions() {
+        return actions;
+    }
+
+    public EditorAreaData setActions(ActionsData actions) {
         this.actions = actions;
-    }
-    public  void addAction(final ActionData action) {
-        actions.add(action);
+        return this;
     }
 
-    public List<ShutCutData> getShutcuts() {
+    public ShutCutsData getShutcuts() {
         return shutcuts;
     }
 
-    public void setShutcuts(List<ShutCutData> shutcuts) {
+    public EditorAreaData setShutcuts(ShutCutsData shutcuts) {
         this.shutcuts = shutcuts;
-    }
-
-    public void addShutcut(final ShutCutData shutcut) {
-        shutcuts.add(shutcut);
+        return this;
     }
 }

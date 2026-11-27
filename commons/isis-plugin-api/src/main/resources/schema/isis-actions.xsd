@@ -16,6 +16,8 @@
         <sequence>
            <element name="action" type="tns:action" minOccurs="0" maxOccurs="unbounded" />
         </sequence>
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <attribute name="visibleWhen" type="string" />
     </complexType>
     <complexType name="action">
         <attribute name="code" type="string"  use="required"/>
@@ -30,6 +32,8 @@
         <attribute name="color" type="string" default="" />
         <!-- The code of the MetaType Associate to action, this requiered from actions of types navigate or modal-->
         <attribute name="typeCode" type="string" />
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <attribute name="visibleWhen" type="string" />
     </complexType>
     <simpleType name="actionType">
         <restriction base="string">

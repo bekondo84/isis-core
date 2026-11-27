@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.isis.cm/config/isis-states"
+        xmlns:tns="http://www.isis.cm/config/isis-states"
+       elementFormDefault="qualified">
+
+    <element name="states" type="tns:States"> </element>
+    <!-- Create context type represented configuration of item -->
+    <complexType name="States">
+        <sequence>
+           <element name="state" type="tns:State" minOccurs="0" maxOccurs="unbounded" />
+        </sequence>
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <attribute name="visibleWhen" type="string" />
+    </complexType>
+    <complexType name="State">
+        <attribute name="code" type="string"  use="required"/>
+        <attribute name="color" type="string" />
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <attribute name="visibleWhen" type="string" />
+    </complexType>
+</schema>

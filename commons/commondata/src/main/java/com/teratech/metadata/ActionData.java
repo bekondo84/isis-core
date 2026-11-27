@@ -18,6 +18,7 @@ public class ActionData implements Serializable {
     private String method;
     private boolean askconfirmation;
     private String typeCode;
+    private String visibleWhen;
 
 
 
@@ -124,6 +125,15 @@ public class ActionData implements Serializable {
     }
     public ActionData setTypeCode(String typeCode) {
         this.typeCode = typeCode;
+        return this;
+    }
+
+    public String getVisibleWhen() {
+        return visibleWhen;
+    }
+
+    public ActionData setVisibleWhen(String visibleWhen) {
+        this.visibleWhen = visibleWhen;
         return this;
     }
 

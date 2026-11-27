@@ -11,6 +11,8 @@
         <sequence>
             <element name="shutcut" type="tns:shutcut" minOccurs="0" maxOccurs="unbounded" />
         </sequence>
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <attribute name="visibleWhen" type="string" />
     </complexType>
     <complexType name="shutcut">
         <sequence>
@@ -21,6 +23,8 @@
         <attribute name="icon" type="string" default="" />
         <attribute name="type" type="string" />
         <attribute name="viewMode" type="utils:viewModeType" default="list,view" />
+        <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->
+        <attribute name="visibleWhen" type="string" />
     </complexType>
 
     <complexType name="filters">

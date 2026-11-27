@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.25 à 11:53:14 AM CET 
+// Généré le : 2026.11.27 à 08:20:55 AM CET 
 //
 
 
@@ -23,6 +23,7 @@ import jakarta.xml.bind.annotation.*;
  *       &lt;sequence&gt;
  *         &lt;element name="component" type="{http://www.isis.cm/config/editor-area}editorAreaType" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.isis.cm/config/isis-actions}actions" minOccurs="0"/&gt;
+ *         &lt;element ref="{http://www.isis.cm/config/isis-states}states" minOccurs="0"/&gt;
  *         &lt;element ref="{http://www.isis.cm/config/isis-shutcut}shutcuts" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="create" type="{http://www.w3.org/2001/XMLSchema}boolean" default="true" /&gt;
@@ -44,6 +45,7 @@ import jakarta.xml.bind.annotation.*;
 @XmlType(name = "", propOrder = {
     "component",
     "actions",
+    "states",
     "shutcuts"
 })
 @XmlRootElement(name = "editor-area", namespace = "http://www.isis.cm/config/editor-area")
@@ -53,6 +55,8 @@ public class EditorArea {
     protected EditorAreaType component;
     @XmlElement(namespace = "http://www.isis.cm/config/isis-actions")
     protected Actions actions;
+    @XmlElement(namespace = "http://www.isis.cm/config/isis-states")
+    protected States states;
     @XmlElement(namespace = "http://www.isis.cm/config/isis-shutcut")
     protected Shutcuts shutcuts;
     @XmlAttribute(name = "create")
@@ -118,6 +122,30 @@ public class EditorArea {
      */
     public void setActions(Actions value) {
         this.actions = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété states.
+     * 
+     * @return
+     *     possible object is
+     *     {@link States }
+     *     
+     */
+    public States getStates() {
+        return states;
+    }
+
+    /**
+     * Définit la valeur de la propriété states.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link States }
+     *     
+     */
+    public void setStates(States value) {
+        this.states = value;
     }
 
     /**
