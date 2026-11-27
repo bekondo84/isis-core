@@ -194,3 +194,5 @@ VALUES ('EventType', 'com.teratech.model.definition.EventTypeModel', true, '', '
 INSERT INTO  cms_dashboard (code, descrip, template, plugin_id, plugin_version, stringvalue, createdAt)
 VALUES ('backoffice.dashboard', 'Tableau de bord du module admin', 'dashboard.xml', 'backoffice','1.0.0', 'Tableau de bord du module admin', now());
 
+INSERT INTO adm_wf_def (id, name, version, template, plugin_id, version_id, createdAt)
+VALUES ('order_process', 'Processus metier de traitement pour une commande', '1.0', 'order_preocess.xml', 'backoffice', '1.0.0', now());

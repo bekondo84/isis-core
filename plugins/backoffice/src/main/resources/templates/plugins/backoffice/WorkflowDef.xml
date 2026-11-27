@@ -7,6 +7,7 @@
             <l:column qualifier="id" search="true" />
             <l:column qualifier="name" search="true" />
             <l:column qualifier="version" search="true" />
+            <l:column qualifier="plugin" widget="manytoone" />
             <l:column qualifier="executable" widget="switch" search="true"/>
             <l:column qualifier="template"  search="true" />
             <l:column qualifier="createdAt" widget="datetime-local" />
@@ -21,6 +22,7 @@
                         <a:field qualifier="id" />
                         <a:field qualifier="name" />
                         <a:field qualifier="version" />
+                        <a:field qualifier="plugin" widget="manytoone" />
                         <a:field qualifier="executable" widget="switch" />
                         <a:field qualifier="template" />
                         <a:field qualifier="createdAt" widget="datetime-local" />

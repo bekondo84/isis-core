@@ -1,5 +1,6 @@
 package com.teratech.model.definition;
 
+import com.teratech.model.PluginModel;
 import com.teratech.model.generic.AbstractItem;
 import jakarta.persistence.*;
 
@@ -13,6 +14,12 @@ public  class WorkflowDefModel extends AbstractItem
 	protected String version;
 	protected boolean executable;
 	protected String template;
+	@ManyToOne
+	@JoinColumns({
+			@JoinColumn(name = "plugin_id", referencedColumnName = "id"),
+			@JoinColumn(name = "version_id", referencedColumnName = "version")
+	})
+	protected PluginModel plugin;
 
 	public WorkflowDefModel() {
 	}
@@ -59,6 +66,15 @@ public  class WorkflowDefModel extends AbstractItem
 
 	public WorkflowDefModel setTemplate(String template) {
 		this.template = template;
+		return this;
+	}
+
+	public PluginModel getPlugin() {
+		return plugin;
+	}
+
+	public WorkflowDefModel setPlugin(PluginModel plugin) {
+		this.plugin = plugin;
 		return this;
 	}
 

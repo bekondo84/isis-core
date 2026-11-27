@@ -49,7 +49,7 @@
         <ac:actions>
             <ac:action code="plugin.reload.action" action="pluginAction" method="reload" type="execute" icon="RefreshCcw" position="workflow"/>
         </ac:actions>
-        <st:states>
+        <st:states field="state.code">
             <st:state code="AVAILABLE" />
             <st:state code="UNINSTALL" />
             <st:state code="INSTALL" />
