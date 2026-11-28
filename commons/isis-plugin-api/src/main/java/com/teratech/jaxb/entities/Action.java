@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.27 à 03:33:33 PM CET 
+// Généré le : 2026.11.28 à 01:20:18 PM CET 
 //
 
 
@@ -31,7 +31,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;attribute name="askconfirmation" type="{http://www.w3.org/2001/XMLSchema}boolean" default="false" /&gt;
  *       &lt;attribute name="operation" type="{http://www.isis.cm/config/isis-typeoperation}TypeOperation" default="none" /&gt;
  *       &lt;attribute name="position" type="{http://www.isis.cm/config/isis-positionvalue}positionValueType" default="actions" /&gt;
- *       &lt;attribute name="color" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
+ *       &lt;attribute name="color" type="{http://www.isis.cm/config/isis-color}colorType" /&gt;
  *       &lt;attribute name="typeCode" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *     &lt;/restriction&gt;
@@ -62,7 +62,7 @@ public class Action {
     @XmlAttribute(name = "position")
     protected PositionValueType position;
     @XmlAttribute(name = "color")
-    protected String color;
+    protected ColorType color;
     @XmlAttribute(name = "typeCode")
     protected String typeCode;
     @XmlAttribute(name = "visibleWhen")
@@ -281,15 +281,11 @@ public class Action {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link ColorType }
      *     
      */
-    public String getColor() {
-        if (color == null) {
-            return "";
-        } else {
-            return color;
-        }
+    public ColorType getColor() {
+        return color;
     }
 
     /**
@@ -297,10 +293,10 @@ public class Action {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link ColorType }
      *     
      */
-    public void setColor(String value) {
+    public void setColor(ColorType value) {
         this.color = value;
     }
 

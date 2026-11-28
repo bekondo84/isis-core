@@ -459,6 +459,9 @@ public class MetaDataServiceImpl implements MetaDataService {
                 shutcutData.setLabel(i18NService.getMessage(wrapper, shutcut.getCode()));
                 shutcutData.setViewMode(shutcut.getViewMode().value());
                 shutcutData.setVisibleWhen(shutcut.getVisibleWhen());
+                if (Objects.nonNull(shutcut.getColor())) {
+                    shutcutData.setColor(shutcut.getColor().value());
+                }
                 //Process of filters
                 if (Objects.nonNull(shutcut.getFilters())) {
                    final List<Filter> filters = shutcut.getFilters().getFilter().stream().filter(filter -> Objects.nonNull(filter.getNature())
@@ -626,7 +629,9 @@ public class MetaDataServiceImpl implements MetaDataService {
     private  ActionData buildActionData(PluginWrapper wrapper, Action action) {
         ActionData actionData = new ActionData(i18NService.getMessage(wrapper, action.getCode()) , action.getCode(), action.getIcon());
         actionData.setType(action.getType().value());
-        actionData.setColor(action.getColor());
+        if (Objects.nonNull(action.getColor())) {
+            actionData.setColor(action.getColor().value());
+        }
         actionData.setOpeation(action.getOperation().value());
         actionData.setPosition(action.getPosition().value());
         actionData.setAction(action.getAction());

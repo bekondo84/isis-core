@@ -9,6 +9,7 @@ public class ShutCutData implements Serializable {
     protected String code;
     protected int  counter;
     protected String icon ;
+    protected String color;
     protected String label ;
     protected String viewMode;
     protected String type ;
@@ -76,6 +77,15 @@ public class ShutCutData implements Serializable {
 
     public ShutCutData setType(String type) {
         this.type = type;
+        return this;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public ShutCutData setColor(String color) {
+        this.color = color;
         return this;
     }
 

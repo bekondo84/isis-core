@@ -3,7 +3,7 @@
         targetNamespace="http://www.isis.cm/config/isis-actions"
         xmlns:tns="http://www.isis.cm/config/isis-actions"
         xmlns:position="http://www.isis.cm/config/isis-positionvalue"
-        xmlns:color="http://www.isis.cm/config/isis-color"
+        xmlns:c="http://www.isis.cm/config/isis-color"
         xmlns:operation="http://www.isis.cm/config/isis-typeoperation"
         elementFormDefault="qualified">
     <import namespace="http://www.isis.cm/config/isis-typeoperation" schemaLocation="isis-type-operation.xsd"/>
@@ -29,7 +29,7 @@
         <attribute name="askconfirmation" type="boolean" default="false" />
         <attribute name="operation"   type="operation:TypeOperation" default="none" />
         <attribute name="position" type="position:positionValueType" default="actions" />
-        <attribute name="color" type="string" default="" />
+        <attribute name="color" type="c:colorType" />
         <!-- The code of the MetaType Associate to action, this requiered from actions of types navigate or modal-->
         <attribute name="typeCode" type="string" />
         <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->

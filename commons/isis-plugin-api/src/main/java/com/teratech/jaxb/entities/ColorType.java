@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.27 à 03:33:33 PM CET 
+// Généré le : 2026.11.28 à 01:20:18 PM CET 
 //
 
 
@@ -20,14 +20,16 @@ import jakarta.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;simpleType name="colorType"&gt;
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string"&gt;
- *     &lt;enumeration value="bg-primary"/&gt;
- *     &lt;enumeration value="bg-secondary"/&gt;
- *     &lt;enumeration value="bg-success"/&gt;
- *     &lt;enumeration value="bg-danger"/&gt;
- *     &lt;enumeration value="bg-warning"/&gt;
- *     &lt;enumeration value="bg-info"/&gt;
- *     &lt;enumeration value="bg-light"/&gt;
- *     &lt;enumeration value="bg-dark"/&gt;
+ *     &lt;enumeration value="danger"/&gt;
+ *     &lt;enumeration value="primary"/&gt;
+ *     &lt;enumeration value="green"/&gt;
+ *     &lt;enumeration value="success"/&gt;
+ *     &lt;enumeration value="blue"/&gt;
+ *     &lt;enumeration value="info"/&gt;
+ *     &lt;enumeration value="orange"/&gt;
+ *     &lt;enumeration value="warning"/&gt;
+ *     &lt;enumeration value="red"/&gt;
+ *     &lt;enumeration value="purple"/&gt;
  *   &lt;/restriction&gt;
  * &lt;/simpleType&gt;
  * </pre>
@@ -37,22 +39,26 @@ import jakarta.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ColorType {
 
-    @XmlEnumValue("bg-primary")
-    BG_PRIMARY("bg-primary"),
-    @XmlEnumValue("bg-secondary")
-    BG_SECONDARY("bg-secondary"),
-    @XmlEnumValue("bg-success")
-    BG_SUCCESS("bg-success"),
-    @XmlEnumValue("bg-danger")
-    BG_DANGER("bg-danger"),
-    @XmlEnumValue("bg-warning")
-    BG_WARNING("bg-warning"),
-    @XmlEnumValue("bg-info")
-    BG_INFO("bg-info"),
-    @XmlEnumValue("bg-light")
-    BG_LIGHT("bg-light"),
-    @XmlEnumValue("bg-dark")
-    BG_DARK("bg-dark");
+    @XmlEnumValue("danger")
+    DANGER("danger"),
+    @XmlEnumValue("primary")
+    PRIMARY("primary"),
+    @XmlEnumValue("green")
+    GREEN("green"),
+    @XmlEnumValue("success")
+    SUCCESS("success"),
+    @XmlEnumValue("blue")
+    BLUE("blue"),
+    @XmlEnumValue("info")
+    INFO("info"),
+    @XmlEnumValue("orange")
+    ORANGE("orange"),
+    @XmlEnumValue("warning")
+    WARNING("warning"),
+    @XmlEnumValue("red")
+    RED("red"),
+    @XmlEnumValue("purple")
+    PURPLE("purple");
     private final String value;
 
     ColorType(String v) {

@@ -36,4 +36,5 @@
             <xs:enumeration value="long" />
         </xs:restriction>
     </xs:simpleType>
+
 </xs:schema>

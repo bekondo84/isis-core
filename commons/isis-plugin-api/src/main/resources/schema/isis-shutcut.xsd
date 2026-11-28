@@ -2,8 +2,10 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
         targetNamespace="http://www.isis.cm/config/isis-shutcut"
         xmlns:tns="http://www.isis.cm/config/isis-shutcut"
+        xmlns:c="http://www.isis.cm/config/isis-color"
         xmlns:utils="http://www.isis.cm/config/isis-utils"
         elementFormDefault="qualified">
+    <import namespace="http://www.isis.cm/config/isis-color" schemaLocation="isis-color.xsd" />
     <import namespace="http://www.isis.cm/config/isis-utils" schemaLocation="isis-utils.xsd" />
 
     <element name="shutcuts" type="tns:shutcuts" />
@@ -21,6 +23,7 @@
 
         <attribute name="code" type="string" />
         <attribute name="icon" type="string" default="" />
+        <attribute name="color" type="c:colorType" />
         <attribute name="type" type="string" />
         <attribute name="viewMode" type="utils:viewModeType" default="list,view" />
         <!--Show this when the conditions are filled  [{field: "01", criteria: "eq", value:"value01"},{field: "01", criteria: "neq", value:"value02"}] -->

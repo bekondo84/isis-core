@@ -2,7 +2,7 @@
 // Ce fichier a été généré par Eclipse Implementation of JAXB, v3.0.2 
 // Voir https://eclipse-ee4j.github.io/jaxb-ri 
 // Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
-// Généré le : 2026.11.27 à 03:33:33 PM CET 
+// Généré le : 2026.11.28 à 01:20:18 PM CET 
 //
 
 
@@ -28,6 +28,7 @@ import jakarta.xml.bind.annotation.XmlType;
  *       &lt;/sequence&gt;
  *       &lt;attribute name="code" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="icon" type="{http://www.w3.org/2001/XMLSchema}string" default="" /&gt;
+ *       &lt;attribute name="color" type="{http://www.isis.cm/config/isis-color}colorType" /&gt;
  *       &lt;attribute name="type" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
  *       &lt;attribute name="viewMode" type="{http://www.isis.cm/config/isis-utils}viewModeType" default="list,view" /&gt;
  *       &lt;attribute name="visibleWhen" type="{http://www.w3.org/2001/XMLSchema}string" /&gt;
@@ -49,6 +50,8 @@ public class Shutcut {
     protected String code;
     @XmlAttribute(name = "icon")
     protected String icon;
+    @XmlAttribute(name = "color")
+    protected ColorType color;
     @XmlAttribute(name = "type")
     protected String type;
     @XmlAttribute(name = "viewMode")
@@ -130,6 +133,30 @@ public class Shutcut {
      */
     public void setIcon(String value) {
         this.icon = value;
+    }
+
+    /**
+     * Obtient la valeur de la propriété color.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ColorType }
+     *     
+     */
+    public ColorType getColor() {
+        return color;
+    }
+
+    /**
+     * Définit la valeur de la propriété color.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ColorType }
+     *     
+     */
+    public void setColor(ColorType value) {
+        this.color = value;
     }
 
     /**
